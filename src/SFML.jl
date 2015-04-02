@@ -4,12 +4,14 @@ function __init__()
 	if VERSION < v"0.4.0-dev"
 		println("You must have at least julia 0.4 to use this package")
 		println("You currently have ", VERSION)
+		exit(1)
 	end
 
 	try
 		Libdl.dlopen("libcsfml-graphics")
 	catch Exception
 		println("Something has gone wrong with the csfml installation. Please reinstall this package")
+		exit(1)
 	end
 
 	try
@@ -17,6 +19,7 @@ function __init__()
 	catch Exception
 		println("You must have the C++ library SFML installed to use this package")
 		println("Please install it")
+		exit(1)
 	end
 end
 
