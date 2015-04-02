@@ -4,13 +4,13 @@ window = RenderWindow("Sprite Example", 800, 600)
 set_framerate_limit(window, 60)
 event = Event()
 
-black = Color(0, 0, 0)
+white = Color(255, 255, 255)
 
 sprite = Sprite()
 texture = Texture("greenTank.png")
 
 set_texture(sprite, texture)
-set_position(sprite, Vector2f(50.0, 50.0))
+set_position(sprite, Vector2f(200.0, 300.0))
 
 while isopen(window)
 	while pollevent(window, event)
@@ -19,7 +19,9 @@ while isopen(window)
 		end
 	end
 
-	clear(window, black)
+	rotate(sprite, 2)
+
+	clear(window, white)
 	draw(window, sprite)
 	display(window)
 end
