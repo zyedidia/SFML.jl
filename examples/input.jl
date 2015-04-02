@@ -1,6 +1,6 @@
 using SFML
 
-window = RenderWindow("Example", 800, 600)
+window = RenderWindow("Input Example", 800, 600)
 set_framerate_limit(window, 60)
 event = Event()
 

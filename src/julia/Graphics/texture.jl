@@ -3,7 +3,7 @@ type Texture
 end
 
 function Texture(filename::ASCIIString)
-	return Texture(ccall((:sfTexture_createFromFile, "libcsfml-graphics"), Ptr{Void}, (Ptr{Cchar}, Ptr{Void},), filename, C_NULL))
+	return Texture(ccall((:sfTexture_createFromFile, "libcsfml-graphics"), Ptr{Void}, (Ptr{Cchar}, Ptr{Void},), pointer(filename), C_NULL))
 end
 
 export Texture

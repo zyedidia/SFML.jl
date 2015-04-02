@@ -5,7 +5,7 @@ It also has audio libraries and networking libraries.
 
 This is very much a work in progress right now and should be used at your own risk (I really mean it). It also only works on Mac OS X (for now).
 
-Take a look at `examples/game.jl` to see the latest example.
+Take a look at the `examples` folder to see some usage examples.
 
 #Installation
 Currently, only Mac OS X is supported

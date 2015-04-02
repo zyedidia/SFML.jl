@@ -30,6 +30,11 @@ function draw(window::RenderWindow, object::RectangleShape)
 	ccall((:sfRenderWindow_drawRectangleShape, "libcsfml-graphics"), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), window.ptr, object.ptr, C_NULL)
 end
 
+function draw(window::RenderWindow, object::Sprite)
+	ccall((:sfRenderWindow_drawSprite, "libcsfml-graphics"), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), window.ptr, object.ptr, C_NULL)
+end
+
+
 function clear(window::RenderWindow, color::Color)
 	ccall((:sfRenderWindow_clear, "libcsfml-graphics"), Void, (Ptr{Void}, Color,), window.ptr, color)
 end
