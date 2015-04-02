@@ -1,11 +1,11 @@
 module SFML
 
-# function __init__()
-# 	if !contains(VERSION, "0.4")
-# 		println("You must have julia 0.4 to use this package")
-# 		println("You currently have ", VERSION)
-# 	end
-# end
+function __init__()
+	if VERSION < v"0.4.0-dev"
+		println("You must have at least julia 0.4 to use this package")
+		println("You currently have ", VERSION)
+	end
+end
 
 include("julia/Window/keyboard.jl")
 include("julia/System/vector.jl")
