@@ -9,8 +9,15 @@ black = Color(0, 0, 0)
 circle = CircleShape()
 set_position(circle, Vector2f(50.0, 50.0))
 set_radius(circle, 30)
-
 set_fillcolor(circle, Color(255, 0, 0))
+
+mousepos_text = Text()
+font = Font("arial.ttf")
+set_font(mousepos_text, font)
+set_position(mousepos_text, Vector2f(250.0, 300.0))
+set_string(mousepos_text, "Mouse Position: ")
+set_color(mousepos_text, Color(255, 0, 0))
+set_charactersize(mousepos_text, 25)
 
 while isopen(window)
 	while pollevent(window, event)
@@ -34,7 +41,11 @@ while isopen(window)
 
 	set_position(circle, circle_position)
 
+	mousepos = get_mousepos(window)
+	set_string(mousepos_text, "Mouse Position: $(mousepos.x) $(mousepos.y)")
+
 	clear(window, black)
 	draw(window, circle)
+	draw(window, mousepos_text)
 	display(window)
 end

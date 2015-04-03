@@ -35,6 +35,7 @@ if (loaded)
 	include("julia/Graphics/circleShape.jl")
 	include("julia/Window/event.jl")
 	include("julia/Graphics/renderWindow.jl")
+	include("julia/Window/mouse.jl")
 else
 	println("Module SFML not loaded")
 end

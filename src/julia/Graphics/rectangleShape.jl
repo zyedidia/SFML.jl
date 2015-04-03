@@ -87,4 +87,4 @@ function get_globalbounds(shape::RectangleShape)
 	return ccall((:sfRectangleShape_getGlobalBounds, "libcsfml-graphics"), FloatRect, (Ptr{Void},), shape.ptr)
 end
 
-export RectangleShape, set_position, set_size, set_fillcolor, set_outlinecolor, move, set_origin, set_origin, get_fillcolor, get_outlinecolor, get_size, get_position, set_texture, set_scale, scale, rotate, set_rotation, copy
+export RectangleShape, set_position, set_size, set_fillcolor, set_outlinecolor, move, set_origin, set_origin, get_fillcolor, get_outlinecolor, get_size, get_position, set_texture, set_scale, scale, rotate, set_rotation, copy, get_localbounds, get_globalbounds

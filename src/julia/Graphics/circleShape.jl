@@ -91,4 +91,4 @@ function get_globalbounds(shape::CircleShape)
 	return ccall((:sfCircleShape_getGlobalBounds, "libcsfml-graphics"), FloatRect, (Ptr{Void},), shape.ptr)
 end
 
-export CircleShape, set_position, set_radius, set_fillcolor, set_outlinecolor, move, get_position, get_radius, set_origin, get_origin, get_fillcolor, get_outlinecolor, rotate, scale, copy, set_scale, get_scale, set_rotation, get_rotation
+export CircleShape, set_position, set_radius, set_fillcolor, set_outlinecolor, move, get_position, get_radius, set_origin, get_origin, get_fillcolor, get_outlinecolor, rotate, scale, copy, set_scale, get_scale, set_rotation, get_rotation, get_localbounds, get_globalbounds

@@ -87,4 +87,4 @@ function get_globalbounds(text::Text)
 	return ccall((:sfText_getGlobalBounds, "libcsfml-graphics"), FloatRect, (Ptr{Void},), text.ptr)
 end
 
-export set_color, set_style, set_charactersize, set_font, set_string, scale, rotate, move, get_origin, get_scale, get_rotation, get_position, set_origin, set_scale, set_rotation, set_position, destroy, copy, Text
+export set_color, set_style, set_charactersize, set_font, set_string, scale, rotate, move, get_origin, get_scale, get_rotation, get_position, set_origin, set_scale, set_rotation, set_position, destroy, copy, Text, get_localbounds, get_globalbounds

@@ -83,21 +83,11 @@ function update(paddle::Paddle)
 	end
 end
 
-function intersects(ball::Ball, paddle::Paddle)
-	radius = get_radius(ball.shape)
-	ball_pos = get_position(ball.shape)
-	paddle_pos = get_position(paddle.shape)
-	ball_dis = Vector2f(abs(ball_pos.x - paddle_pos.x), abs(ball_pos.y - paddle_pos.y))
+function collides(ball::Ball, paddle::Paddle)
+	ballbounds = get_globalbounds(ball.shape)
+	paddlebounds = get_globalbounds(paddle.shape)
 
-	paddle_size = get_size(paddle.shape)
-
-	if ball_dis.x > (paddle_size.x + radius)
-		return false;
-	elseif ball_dis.y > (paddle_size.y + radius)
-		return false
-	else
-		return true
-	end
+	return intersects(ballbounds, paddlebounds)
 end
 
 function main()
@@ -125,13 +115,12 @@ function main()
 
 		clear(window, white)
 
-		if intersects(ball, paddle1) || intersects(ball, paddle2)
+		if collides(ball, paddle1) || collides(ball, paddle2)
 			ball.velocity.y = -ball.velocity.y
 		end
 
 		for i in 1:length(sprites)
 			update(sprites[i])
-
 			draw(window, sprites[i].shape)
 		end
 
