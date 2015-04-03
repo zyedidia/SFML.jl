@@ -8,9 +8,12 @@ event = Event()
 white = Color(255, 255, 255)
 
 text = Text()
-set_position(text, Vector2f(400.0, 600.0))
+font = Font("arial.ttf")
+set_font(text, font)
+set_position(text, Vector2f(250.0, 300.0))
 set_string(text, "SFML.jl is cool")
 set_color(text, Color(255, 0, 0))
+set_charactersize(text, 50)
 
 while isopen(window)
 	while pollevent(window, event)
