@@ -8,16 +8,9 @@ black = Color(0, 0, 0)
 
 circle = CircleShape()
 set_position(circle, Vector2f(50.0, 50.0))
-set_radius(circle, 15)
+set_radius(circle, 30)
 
-blue = Color(0, 0, 255)
-red = Color(255, 0, 0)
-set_fillcolor(circle, blue)
-
-rect = RectangleShape()
-set_position(rect, Vector2f(100.0, 50.0))
-set_size(rect, Vector2f(20.0, 20.0))
-set_fillcolor(rect, red)
+set_fillcolor(circle, Color(255, 0, 0))
 
 while isopen(window)
 	while pollevent(window, event)
@@ -43,8 +36,5 @@ while isopen(window)
 
 	clear(window, black)
 	draw(window, circle)
-	draw(window, rect)
 	display(window)
 end
-
-destroy(window)

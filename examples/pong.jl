@@ -110,7 +110,7 @@ function main()
 	push!(sprites, paddle1)
 	push!(sprites, paddle2)
 
-	window = RenderWindow("Arkanoid", window_width, window_height)
+	window = RenderWindow("Pong", window_width, window_height)
 	set_framerate_limit(window, 60)
 	set_vsync_enabled(window, true)
 
