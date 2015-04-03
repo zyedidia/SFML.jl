@@ -83,4 +83,12 @@ function rotate(shape::CircleShape, angle::Real)
 	ccall((:sfCircleShape_rotate, "libcsfml-graphics"), Void, (Ptr{Void}, Cfloat,), shape.ptr, angle)
 end
 
+function get_localbounds(shape::CircleShape)
+	return ccall((:sfCircleShape_getLocalBounds, "libcsfml-graphics"), FloatRect, (Ptr{Void},), shape.ptr)
+end
+
+function get_globalbounds(shape::CircleShape)
+	return ccall((:sfCircleShape_getGlobalBounds, "libcsfml-graphics"), FloatRect, (Ptr{Void},), shape.ptr)
+end
+
 export CircleShape, set_position, set_radius, set_fillcolor, set_outlinecolor, move, get_position, get_radius, set_origin, get_origin, get_fillcolor, get_outlinecolor, rotate, scale, copy, set_scale, get_scale, set_rotation, get_rotation

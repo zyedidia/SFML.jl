@@ -79,4 +79,12 @@ function scale(shape::RectangleShape, factors::Vector2f)
 	ccall((:sfRectangleShape_scale, "libcsfml-graphics", Void, (Ptr{Void}, Vector2f,), shape.ptr, factors))
 end
 
+function get_localbounds(shape::RectangleShape)
+	return ccall((:sfRectangleShape_getLocalBounds, "libcsfml-graphics"), FloatRect, (Ptr{Void},), shape.ptr)
+end
+
+function get_globalbounds(shape::RectangleShape)
+	return ccall((:sfRectangleShape_getGlobalBounds, "libcsfml-graphics"), FloatRect, (Ptr{Void},), shape.ptr)
+end
+
 export RectangleShape, set_position, set_size, set_fillcolor, set_outlinecolor, move, set_origin, set_origin, get_fillcolor, get_outlinecolor, get_size, get_position, set_texture, set_scale, scale, rotate, set_rotation, copy

@@ -71,4 +71,12 @@ function get_color(sprite::Sprite)
 	return ccall((:sfSprite_getColor, "libcsfml-graphics"), Color, (Ptr{Void},), sprite.ptr)
 end
 
+function get_localbounds(sprite::Sprite)
+	return ccall((:sfSprite_getLocalBounds, "libcsfml-graphics"), FloatRect, (Ptr{Void},), sprite.ptr)
+end
+
+function get_globalbounds(sprite::Sprite)
+	return ccall((:sfSprite_getGlobalBounds, "libcsfml-graphics"), FloatRect, (Ptr{Void},), sprite.ptr)
+end
+
 export get_color, get_texture, set_texture, scale, rotate, move, get_origin, get_rotation, get_position, set_origin, set_scale, set_rotation, set_position, copy, Sprite, destroy
