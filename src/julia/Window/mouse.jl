@@ -18,4 +18,4 @@ function set_mousepos(position::Vector2i, window::RenderWindow)
 	ccall((:sfMouse_setPosition, "libcsfml-window"), Void, (Vector2i, Ptr{Void},), position, window.ptr)
 end
 
-export MouseButton, get_mousepos, set_mousepos
+export MouseButton, get_mousepos, set_mousepos, is_mouse_pressed
