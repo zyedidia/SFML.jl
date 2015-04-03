@@ -41,6 +41,13 @@ while isopen(window)
 
 	set_position(circle, circle_position)
 
+	if (is_mouse_pressed(MouseButton.LEFT))
+		println("Left mouse button")
+	end
+	if (is_mouse_pressed(MouseButton.RIGHT))
+		println("Right mouse button")
+	end
+
 	mousepos = get_mousepos(window)
 	set_string(mousepos_text, "Mouse Position: $(mousepos.x) $(mousepos.y)")
 

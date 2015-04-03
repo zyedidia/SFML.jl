@@ -23,12 +23,16 @@ catch Exception
 end
 
 if (loaded)
+	include("julia/Network/socketStatus.jl")
+	include("julia/Network/tcpListener.jl")
+	include("julia/Network/tcpSocket.jl")
 	include("julia/Window/keyboard.jl")
 	include("julia/System/vector.jl")
 	include("julia/Graphics/color.jl")
 	include("julia/Graphics/font.jl")
 	include("julia/Graphics/text.jl")
 	include("julia/Graphics/rect.jl")
+	include("julia/Graphics/view.jl")
 	include("julia/Graphics/texture.jl")
 	include("julia/Graphics/sprite.jl")
 	include("julia/Graphics/rectangleShape.jl")
