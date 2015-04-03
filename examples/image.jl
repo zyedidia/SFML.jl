@@ -8,9 +8,11 @@ white = Color(255, 255, 255)
 
 sprite = Sprite()
 texture = Texture("greenTank.png")
+texture_size = get_size(texture)
 
 set_texture(sprite, texture)
 set_position(sprite, Vector2f(200.0, 300.0))
+set_origin(sprite, Vector2f(texture_size.x / 2, texture_size.y / 2))
 
 while isopen(window)
 	while pollevent(window, event)

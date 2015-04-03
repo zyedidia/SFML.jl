@@ -12,16 +12,16 @@ type Vector2f <: Vector2
 	y::Cfloat
 end
 
-function toVec2u(vec::Vector2)
+function to_vec2u(vec::Vector2)
 	return Vector2u(Uint32(vec.x), Uint32(vec.y))
 end
 
-function toVec2f(vec::Vector2)
+function to_vec2f(vec::Vector2)
 	return Vector2f(Float32(vec.x), Float32(vec.y))
 end
 
-function toVec2i(vec::Vector2)
+function to_vec2i(vec::Vector2)
 	return Vector2i(Int32(vec.x), Int32(vec.y))
 end
 
-export Vector2i, Vector2f, Vector2u, toVec2u, toVec2f, toVec2i
+export Vector2i, Vector2f, Vector2u, to_vec2u, to_vec2f, to_vec2i
