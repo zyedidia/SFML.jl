@@ -55,4 +55,8 @@ function destroy(window::RenderWindow)
 	window = nothing
 end
 
-export RenderWindow, set_framerate_limit, isopen, pollevent, draw, clear, display, close, destroy, set_vsync_enabled
+function capture(window::RenderWindow)
+	return Image(ccall((:sfRenderWindow_capture, "libcsfml-graphics"), Ptr{Void}, (Ptr{Void},), window.ptr))
+end
+
+export RenderWindow, set_framerate_limit, isopen, pollevent, draw, clear, display, close, destroy, set_vsync_enabled, capture

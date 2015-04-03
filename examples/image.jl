@@ -6,13 +6,13 @@ event = Event()
 
 white = Color(255, 255, 255)
 
-sprite = Sprite()
+tank = Sprite()
 texture = Texture("greenTank.png")
 texture_size = get_size(texture)
 
-set_texture(sprite, texture)
-set_position(sprite, Vector2f(200.0, 300.0))
-set_origin(sprite, Vector2f(texture_size.x / 2, texture_size.y / 2))
+set_texture(tank, texture)
+set_position(tank, Vector2f(200.0, 300.0))
+set_origin(tank, Vector2f(texture_size.x / 2, texture_size.y / 2))
 
 while isopen(window)
 	while pollevent(window, event)
@@ -21,9 +21,9 @@ while isopen(window)
 		end
 	end
 
-	rotate(sprite, 2)
+	rotate(tank, 2)
 
 	clear(window, white)
-	draw(window, sprite)
+	draw(window, tank)
 	display(window)
 end
