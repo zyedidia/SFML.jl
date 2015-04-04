@@ -3,19 +3,20 @@ type TcpSocket
 end
 
 function TcpSocket()
-	return TcpSocket(ccall((:sfTcpSocket_create, "libcsfml-network"), Ptr{Void}, ()))
+	return TcpSocket(ccall(dlsym(libcsfml_network, :sfTcpSocket_create), Ptr{Void}, ()))
 end
 
 function destroy(socket::TcpSocket)
-	ccall((:sfTcpSocket_destroy, "libcsfml-network"), Void, (Ptr{Void},), socket.ptr)
+	ccall(dlsym(libcsfml_network, :sfTcpSocket_destroy), Void, (Ptr{Void},), socket.ptr)
 	socket = nothing
 end
 
 function set_blocking(socket::TcpSocket, blocking::Bool)
-	ccall((:sfTcpSocket_isBlocking, "libcsfml-network"), Void, (Ptr{Void}, Int32,), socket.ptr, blocking)
+	ccall(dlsym(libcsfml_network, :sfTcpSocket_isBlocking), Void, (Ptr{Void}, Int32,), socket.ptr, blocking)
 end
 
 function is_blocking(socket::TcpSocket)
-	return ccall((:sfTcpSocket_getBlocking, "libcsfml-network"), Int32, (Ptr{Void},), socket.ptr) == 1
+	return ccall(dlsym(libcsfml_network, :sfTcpSocket_getBlocking), Int32, (Ptr{Void},), socket.ptr) == 1
 end
 
+export is_blocking, set_blocking, destroy, TcpSocket

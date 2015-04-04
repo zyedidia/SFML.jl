@@ -8,11 +8,11 @@ baremodule EventType
 end
 
 function Event()
-	return Event(ccall((:new_sjEvent, "libjuliasfml"), Ptr{Void}, ()))
+	return Event(ccall(dlsym(libjuliasfml, :new_sjEvent), Ptr{Void}, ()))
 end
 
 function get_type(event::Event)
-	eType = ccall((:sjEvent_eventType, "libjuliasfml"), Int32, (Ptr{Void},), event.ptr)
+	eType = ccall(dlsym(libjuliasfml, :sjEvent_eventType), Int32, (Ptr{Void},), event.ptr)
 
 	return eType
 end

@@ -3,60 +3,60 @@ type RenderWindow
 end
 
 function RenderWindow(title::ASCIIString, width::Int, height::Int)
-	return RenderWindow(ccall((:new_sjRenderWindow, "libjuliasfml"), Ptr{Void}, (Ptr{Cchar}, Int32, Int32,), pointer(title), width, height))
+	return RenderWindow(ccall(dlsym(libjuliasfml, :new_sjRenderWindow), Ptr{Void}, (Ptr{Cchar}, Int32, Int32,), pointer(title), width, height))
 end
 
 function set_framerate_limit(window::RenderWindow, limit::Int)
-	ccall((:sfRenderWindow_setFramerateLimit, "libcsfml-graphics"), Void, (Ptr{Void}, Uint,), window.ptr, limit)
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_setFramerateLimit), Void, (Ptr{Void}, Uint,), window.ptr, limit)
 end
 
 function set_vsync_enabled(window::RenderWindow, enabled::Bool)
-	ccall((:sfRenderWindow_setVerticalSyncEnabled, "libcsfml-graphics"), Void, (Ptr{Void}, Int32,), window.ptr, Int32(enabled))
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_setVerticalSyncEnabled), Void, (Ptr{Void}, Int32,), window.ptr, Int32(enabled))
 end
 
 function isopen(window::RenderWindow)
-	return (ccall((:sfRenderWindow_isOpen, "libcsfml-graphics"), Int32, (Ptr{Void},), window.ptr)) == 1
+	return ccall(dlsym(libcsfml_graphics, :sfRenderWindow_isOpen), Int32, (Ptr{Void},), window.ptr) == 1
 end
 
 function pollevent(window::RenderWindow, event::Event)
-	return ccall((:sfRenderWindow_pollEvent, "libcsfml-graphics"), Int32, (Ptr{Void}, Ptr{Void},), window.ptr, event.ptr) == 1
+	return ccall(dlsym(libcsfml_graphics, :sfRenderWindow_pollEvent), Int32, (Ptr{Void}, Ptr{Void},), window.ptr, event.ptr) == 1
 end
 
 function draw(window::RenderWindow, object::CircleShape)
-	ccall((:sfRenderWindow_drawCircleShape, "libcsfml-graphics"), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), window.ptr, object.ptr, C_NULL)
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_drawCircleShape), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), window.ptr, object.ptr, C_NULL)
 end
 
 function draw(window::RenderWindow, object::RectangleShape)
-	ccall((:sfRenderWindow_drawRectangleShape, "libcsfml-graphics"), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), window.ptr, object.ptr, C_NULL)
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_drawRectangleShape), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), window.ptr, object.ptr, C_NULL)
 end
 
 function draw(window::RenderWindow, object::Sprite)
-	ccall((:sfRenderWindow_drawSprite, "libcsfml-graphics"), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), window.ptr, object.ptr, C_NULL)
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_drawSprite), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), window.ptr, object.ptr, C_NULL)
 end
 
 function draw(window::RenderWindow, object::Text)
-	ccall((:sfRenderWindow_drawText, "libcsfml-graphics"), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), window.ptr, object.ptr, C_NULL)
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_drawText), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), window.ptr, object.ptr, C_NULL)
 end
 
 function clear(window::RenderWindow, color::Color)
-	ccall((:sfRenderWindow_clear, "libcsfml-graphics"), Void, (Ptr{Void}, Color,), window.ptr, color)
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_clear), Void, (Ptr{Void}, Color,), window.ptr, color)
 end
 
 function display(window::RenderWindow)
-	ccall((:sfRenderWindow_display, "libcsfml-graphics"), Void, (Ptr{Void},), window.ptr)
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_display), Void, (Ptr{Void},), window.ptr)
 end
 
 function close(window::RenderWindow)
-	ccall((:sfRenderWindow_close, "libcsfml-graphics"), Void, (Ptr{Void},), window.ptr)
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_close), Void, (Ptr{Void},), window.ptr)
 end
 
 function destroy(window::RenderWindow)
-	ccall((:sfRenderWindow_destroy, "libcsfml-graphics"), Void, (Ptr{Void},), window.ptr)
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_destroy), Void, (Ptr{Void},), window.ptr)
 	window = nothing
 end
 
 function capture(window::RenderWindow)
-	return Image(ccall((:sfRenderWindow_capture, "libcsfml-graphics"), Ptr{Void}, (Ptr{Void},), window.ptr))
+	return Image(ccall(dlsym(libcsfml_graphics, :sfRenderWindow_capture), Ptr{Void}, (Ptr{Void},), window.ptr))
 end
 
 export RenderWindow, set_framerate_limit, isopen, pollevent, draw, clear, display, close, destroy, set_vsync_enabled, capture

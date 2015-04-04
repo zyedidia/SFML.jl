@@ -3,15 +3,15 @@ type Texture
 end
 
 function Texture(filename::ASCIIString)
-	return Texture(ccall((:sfTexture_createFromFile, "libcsfml-graphics"), Ptr{Void}, (Ptr{Cchar}, Ptr{Void},), pointer(filename), C_NULL))
+	return Texture(ccall(dlsym(libcsfml_graphics, :sfTexture_createFromFile), Ptr{Void}, (Ptr{Cchar}, Ptr{Void},), pointer(filename), C_NULL))
 end
 
-function Texture(image::Image, area::FloatRect)
-	return Texture(ccall((:sfTexture_createFromImage, "libcsfml-graphics"), Ptr{Void}, (Ptr{Void}, FloatRect,), image.ptr, area))
+function Texture(image::Image)
+	return Texture(ccall(dlsym(libcsfml_graphics, :sfTexture_createFromImage), Ptr{Void}, (Ptr{Void}, Ptr{Void},), image.ptr, C_NULL))
 end
 
 function get_size(texture::Texture)
-	return ccall((:sfTexture_getSize, "libcsfml-graphics"), Vector2u, (Ptr{Void},), texture.ptr)
+	return ccall(dlsym(libcsfml_graphics, :sfTexture_getSize), Vector2u, (Ptr{Void},), texture.ptr)
 end
 
 export Texture

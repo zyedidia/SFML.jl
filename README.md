@@ -3,21 +3,19 @@ This is a binding of the C++ Game and Multimedia Library [SFML](http://www.sfml-
 
 It also has audio libraries and networking libraries.
 
-This is very much a work in progress right now and should be used at your own risk (I really mean it). It also only works on Mac OS X (for now).
+This is very much a work in progress right now and should be used at your own risk (I really mean it). It also only works on Mac OS X (for now, support for linux and windows coming very soon!).
 
 Take a look at the `examples` folder to see some usage examples.
 
 #Installation
-Currently, only Mac OS X is supported
+Currently, only Mac OS X is supported.
 You also need to have Julia version 0.4, which you can get [here] (http://julialang.org/downloads/) under `Nightly Builds`.
 
-First make sure you have sfml 2.2. You can install it with brew
+First make sure you have sfml 2.2. You can install it with brew, or you can download it from [here] (http://www.sfml-dev.org/download.php).
 
 ```
 $ brew install sfml
 ```
-
-Package installation instructions:
 
 Since this package is unregistered you must use `Pkg.clone(repo)` instead of `Pkg.add(name)`
 
@@ -27,12 +25,4 @@ julia> Pkg.clone("https://github.com/zyedidia/SFML.jl.git")
 
 Julia should clone and install it for you.
 
-Finally, you must set the environment variable `DYLD_LIBRARY_PATH` so that csfml gets loaded.
-
-To do that, run the following command
-```
-$ echo 'export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:~/.julia/v0.4/SFML/deps' >> ~/.bashrc
-$ source ~/.bashrc
-```
-
-You should be all set now. You can put `using SFML` at the top of your files to use the library. Take a look at `examples/game.jl` to see an example.
+You should be all set now. You can put `using SFML` at the top of your files to use the library. Take a look at the `examples` folder to get started.

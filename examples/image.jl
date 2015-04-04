@@ -1,6 +1,6 @@
 using SFML
 
-window = RenderWindow("Sprite Example", 800, 600)
+window = RenderWindow("Image and Texture Example", 800, 600)
 set_framerate_limit(window, 60)
 event = Event()
 
@@ -11,7 +11,7 @@ texture = Texture("greenTank.png")
 texture_size = get_size(texture)
 
 set_texture(tank, texture)
-set_position(tank, Vector2f(200.0, 300.0))
+set_position(tank, Vector2f(200, 300))
 set_origin(tank, Vector2f(texture_size.x / 2, texture_size.y / 2))
 
 while isopen(window)

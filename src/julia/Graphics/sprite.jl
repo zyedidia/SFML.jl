@@ -3,80 +3,80 @@ type Sprite
 end
 
 function Sprite()
-	return Sprite(ccall((:sfSprite_create, "libcsfml-graphics"), Ptr{Void}, ()))
+	return Sprite(ccall(dlsym(libcsfml_graphics, :sfSprite_create), Ptr{Void}, ()))
 end
 
 function copy(sprite::Sprite)
-	return Sprite(ccall((:sfSprite_copy, "libcsfml-graphics"), Ptr{Void}, (Ptr{Void},), sprite.ptr))
+	return Sprite(ccall(dlsym(libcsfml_graphics, :sfSprite_copy), Ptr{Void}, (Ptr{Void},), sprite.ptr))
 end
 
 function destroy(sprite::Sprite)
-	ccall((:sfSprite_destroy, "libcsfml-graphics"), Void, (Ptr{Void},), sprite.ptr)
+	ccall(dlsym(libcsfml_graphics, :sfSprite_destroy), Void, (Ptr{Void},), sprite.ptr)
 	sprite = nothing
 end
 
 function set_position(sprite::Sprite, position::Vector2f)
-	ccall((:sfSprite_setPosition, "libcsfml-graphics"), Void, (Ptr{Void}, Vector2f,), sprite.ptr, position)
+	ccall(dlsym(libcsfml_graphics, :sfSprite_setPosition), Void, (Ptr{Void}, Vector2f,), sprite.ptr, position)
 end
 
 function set_rotation(sprite::Sprite, angle::Real)
-	ccall((:sfSprite_setRotation, "libcsfml-graphics"), Void, (Ptr{Void}, Cfloat,), sprite.ptr, angle)
+	ccall(dlsym(libcsfml_graphics, :sfSprite_setRotation), Void, (Ptr{Void}, Cfloat,), sprite.ptr, angle)
 end
 
 function set_scale(sprite::Sprite, scale::Vector2f)
-	ccall((:sfSprite_setScale, "libcsfml-graphics"), Void, (Ptr{Void}, Vector2f,), sprite.ptr, scale)
+	ccall(dlsym(libcsfml_graphics, :sfSprite_setScale), Void, (Ptr{Void}, Vector2f,), sprite.ptr, scale)
 end
 
 function set_origin(sprite::Sprite, origin::Vector2f)
-	ccall((:sfSprite_setOrigin, "libcsfml-graphics"), Void, (Ptr{Void}, Vector2f,), sprite.ptr, origin)
+	ccall(dlsym(libcsfml_graphics, :sfSprite_setOrigin), Void, (Ptr{Void}, Vector2f,), sprite.ptr, origin)
 end
 
 function get_position(sprite::Sprite)
-	return ccall((:sfSprite_getPosition, "libcsfml-graphics"), Vector2f, (Ptr{Void},), sprite.ptr)
+	return ccall(dlsym(libcsfml_graphics, :sfSprite_getPosition), Vector2f, (Ptr{Void},), sprite.ptr)
 end
 
 function get_rotation(sprite::Sprite)
-	return Real(ccall((:sfSprite_getRotation, "libcsfml-graphics"), Cfloat, (Ptr{Void},), sprite.ptr))
+	return Real(ccall(dlsym(libcsfml_graphics, :sfSprite_getRotation), Cfloat, (Ptr{Void},), sprite.ptr))
 end
 
 function get_origin(sprite::Sprite)
-	return ccall((:sfSprite_getOrigin, "libcsfml-graphics"), Vector2f, (Ptr{Void},), sprite.ptr)
+	return ccall(dlsym(libcsfml_graphics, :sfSprite_getOrigin), Vector2f, (Ptr{Void},), sprite.ptr)
 end
 
 function move(sprite::Sprite, offset::Vector2f)
-	ccall((:sfSprite_move, "libcsfml-graphics"), Void, (Ptr{Void}, Vector2f,), sprite.ptr, offset)
+	ccall(dlsym(libcsfml_graphics, :sfSprite_move), Void, (Ptr{Void}, Vector2f,), sprite.ptr, offset)
 end
 
 function rotate(sprite::Sprite, angle::Real)
-	ccall((:sfSprite_rotate, "libcsfml-graphics"), Void, (Ptr{Void}, Cfloat,), sprite.ptr, angle)
+	ccall(dlsym(libcsfml_graphics, :sfSprite_rotate), Void, (Ptr{Void}, Cfloat,), sprite.ptr, angle)
 end
 
 function scale(sprite::Sprite, factors::Vector2f)
-	ccall((:sfSprite_scale, "libcsfml-graphics"), Void, (Ptr{Void}, Vector2f,), sprite.ptr, factors)
+	ccall(dlsym(libcsfml_graphics, :sfSprite_scale), Void, (Ptr{Void}, Vector2f,), sprite.ptr, factors)
 end
 
 function set_texture(sprite::Sprite, texture::Texture)
-	ccall((:sfSprite_setTexture, "libcsfml-graphics"), Void, (Ptr{Void}, Ptr{Void}, Int32,), sprite.ptr, texture.ptr, 1)
+	ccall(dlsym(libcsfml_graphics, :sfSprite_setTexture), Void, (Ptr{Void}, Ptr{Void}, Int32,), sprite.ptr, texture.ptr, 1)
 end
 
 function set_color(sprite::Sprite, color::Color)
-	ccall((:sfSprite_setColor, "libcsfml-graphics"), Void, (Ptr{Void}, Color,), sprite.ptr, color)
+	ccall(dlsym(libcsfml_graphics, :sfSprite_setColor), Void, (Ptr{Void}, Color,), sprite.ptr, color)
 end
 
 function get_texture(sprite::Sprite)
-	return Texture(ccall((sfSprite_getTexture, "libcsfml-graphics"), Ptr{Void}, (Ptr{Void},), sprite.ptr))
+	return Texture(ccall(dlsym(sfSprite_getTexture, libcsfml_graphics), Ptr{Void}, (Ptr{Void},), sprite.ptr))
 end
 
 function get_color(sprite::Sprite)
-	return ccall((:sfSprite_getColor, "libcsfml-graphics"), Color, (Ptr{Void},), sprite.ptr)
+	return ccall(dlsym(libcsfml_graphics, :sfSprite_getColor), Color, (Ptr{Void},), sprite.ptr)
 end
 
 function get_localbounds(sprite::Sprite)
-	return ccall((:sfSprite_getLocalBounds, "libcsfml-graphics"), FloatRect, (Ptr{Void},), sprite.ptr)
+	return ccall(dlsym(libcsfml_graphics, :sfSprite_getLocalBounds), FloatRect, (Ptr{Void},), sprite.ptr)
 end
 
 function get_globalbounds(sprite::Sprite)
-	return ccall((:sfSprite_getGlobalBounds, "libcsfml-graphics"), FloatRect, (Ptr{Void},), sprite.ptr)
+	return ccall(dlsym(libcsfml_graphics, :sfSprite_getGlobalBounds), FloatRect, (Ptr{Void},), sprite.ptr)
 end
 
 export get_color, get_texture, set_texture, scale, rotate, move, get_origin, get_rotation, get_position, set_origin, set_scale, set_rotation, set_position, copy, Sprite, destroy, get_localbounds, get_globalbounds
