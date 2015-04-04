@@ -18,18 +18,20 @@ if (loaded)
 		loaded = false
 	end
 
-	cd("$(Pkg.dir("SFML"))/deps") do
+	cd("$(Pkg.dir("SFML"))/deps/CSFML-2.2-osx/") do
 		try
-			global const libcsfml_graphics = Libdl.dlopen("libcsfml-graphics")
-			global const libcsfml_window = Libdl.dlopen("libcsfml-window")
-			global const libcsfml_network = Libdl.dlopen("libcsfml-network")
-			global const libcsfml_system = Libdl.dlopen("libcsfml-system")
-			global const libcsfml_audio = Libdl.dlopen("libcsfml-audio")
-			global const libjuliasfml = Libdl.dlopen("libjuliasfml")
+			global const libcsfml_graphics = Libdl.dlopen("libcsfml-graphics.2.2")
+			global const libcsfml_window = Libdl.dlopen("libcsfml-window.2.2")
+			global const libcsfml_network = Libdl.dlopen("libcsfml-network.2.2")
+			global const libcsfml_system = Libdl.dlopen("libcsfml-system.2.2")
+			global const libcsfml_audio = Libdl.dlopen("libcsfml-audio.2.2")
 		catch Exception
 			println("Something has gone wrong with the csfml installation. Please reinstall this package.")
 			loaded = false
 		end
+	end
+	cd("$(Pkg.dir("SFML"))/deps/") do
+		global const libjuliasfml = Libdl.dlopen("libjuliasfml")
 	end
 end
 
