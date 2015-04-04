@@ -19,4 +19,14 @@ function is_blocking(socket::TcpSocket)
 	return ccall(dlsym(libcsfml_network, :sfTcpSocket_getBlocking), Int32, (Ptr{Void},), socket.ptr) == 1
 end
 
-export is_blocking, set_blocking, destroy, TcpSocket
+function get_localport(socket::TcpSocket)
+	return Int(ccall(dlsym(libcsfml_network, :sfTcpSocket_getLocalPort), Uint16, (Ptr{Void},), socket.ptr))
+end
+
+function connect(socket::TcpSocket, host::ASCIIString, port::Int, timeoutlen::Int64)
+	timeout = Time(timeoutlen)
+	hostIp = IpAddress(host)
+	return ccall(dlsym(libcsfml_network, :sfTcpSocket_connect), Int32, (Ptr{Void}, IpAddress, Uint16, Time,), socket.ptr, hostIp, port, timeout)
+end
+
+export is_blocking, set_blocking, destroy, TcpSocket, connect, get_localport
