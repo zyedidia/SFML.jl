@@ -17,6 +17,8 @@ set_charactersize(text, 50)
 text_size = get_globalbounds(text)
 set_origin(text, Vector2f(text_size.width / 2, text_size.height / 2))
 
+println(get_string(text))
+
 while isopen(window)
 	while pollevent(window, event)
 		if get_type(event) == EventType.CLOSE

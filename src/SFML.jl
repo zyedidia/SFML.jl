@@ -36,6 +36,8 @@ if (loaded)
 end
 
 if (loaded)
+	include("julia/System/time.jl")
+	include("julia/Network/ipAddress.jl")
 	include("julia/Network/socketStatus.jl")
 	include("julia/Network/tcpSocket.jl")
 	include("julia/Network/tcpListener.jl")

@@ -79,6 +79,26 @@ function set_color(text::Text, color::Color)
 	ccall(dlsym(libcsfml_graphics, :sfText_setColor), Void, (Ptr{Void}, Color,), text.ptr, color)
 end
 
+function get_string(text::Text)
+	return bytestring(ccall(dlsym(libcsfml_graphics, :sfText_getString), Ptr{Cchar}, (Ptr{Void},), text.ptr))
+end
+
+function get_font(text::Text)
+	return Font(ccall(dlsym(libcsfml_graphics, :sfText_getFont), Ptr{Void}, (Ptr{Void},), text.ptr))
+end
+
+function get_charactersize(text::Text)
+	return Int(ccall(dlsym(libcsfml_graphics, :sfText_getCharacterSize), Uint32, (Ptr{Void},), text.ptr))
+end
+
+function get_style(text::Text)
+	return Int(ccall(dlsym(libcsfml_graphics, :sfText_getStyle), Uint32, (Ptr{Void},), text.ptr))
+end
+
+function get_color(text::Text)
+	return ccall(dlsym(libcsfml_graphics, :sfText_getColor), Color, (Ptr{Void},), text.ptr)
+end
+
 function get_localbounds(text::Text)
 	return ccall(dlsym(libcsfml_graphics, :sfText_getLocalBounds), FloatRect, (Ptr{Void},), text.ptr)
 end
@@ -87,4 +107,4 @@ function get_globalbounds(text::Text)
 	return ccall(dlsym(libcsfml_graphics, :sfText_getGlobalBounds), FloatRect, (Ptr{Void},), text.ptr)
 end
 
-export set_color, set_style, set_charactersize, set_font, set_string, scale, rotate, move, get_origin, get_scale, get_rotation, get_position, set_origin, set_scale, set_rotation, set_position, destroy, copy, Text, get_localbounds, get_globalbounds
+export set_color, set_style, set_charactersize, set_font, set_string, scale, rotate, move, get_origin, get_scale, get_rotation, get_position, set_origin, set_scale, set_rotation, set_position, destroy, copy, Text, get_localbounds, get_globalbounds, get_style, get_string, get_font, get_charactersize, get_color
