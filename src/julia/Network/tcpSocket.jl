@@ -37,8 +37,10 @@ function send_packet(socket::TcpSocket, packet::Packet)
 	ccall(dlsym(libcsfml_network, :sfTcpSocket_sendPacket), Int32, (Ptr{Void}, Ptr{Void},), socket.ptr, packet.ptr)
 end
 
-function receive_packet(socket::TcpSocket, packet::Packet)
+function receive_packet(socket::TcpSocket)
+	packet = Packet()
 	packet.ptr = ccall(dlsym(libjuliasfml, :sjTcpSocket_receivePacket), Ptr{Void}, (Ptr{Void}, Ptr{Void},), socket.ptr, packet.ptr)
+	return packet
 end
 
 export is_blocking, set_blocking, destroy, TcpSocket, connect, get_localport, receive_packet, send_packet
