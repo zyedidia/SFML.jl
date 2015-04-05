@@ -25,8 +25,20 @@ end
 
 function connect(socket::TcpSocket, host::ASCIIString, port::Int, timeoutlen::Int64)
 	timeout = Time(timeoutlen)
-	hostIp = IpAddress(host)
-	return ccall(dlsym(libcsfml_network, :sfTcpSocket_connect), Int32, (Ptr{Void}, IpAddress, Uint16, Time,), socket.ptr, hostIp, port, timeout)
+	host_ip = IpAddress(host)
+	return ccall(dlsym(libcsfml_network, :sfTcpSocket_connect), Int32, (Ptr{Void}, IpAddress, Uint16, Time,), socket.ptr, host_ip, port, timeout)
 end
 
-export is_blocking, set_blocking, destroy, TcpSocket, connect, get_localport
+function disconnect(socket::TcpSocket)
+	ccall(dlsym(libcsfml_network, :sfTcpSocket_disconnect), Void, (Ptr{Void},), socket.ptr)
+end
+
+function send_packet(socket::TcpSocket, packet::Packet)
+	ccall(dlsym(libcsfml_network, :sfTcpSocket_sendPacket), Int32, (Ptr{Void}, Ptr{Void},), socket.ptr, packet.ptr)
+end
+
+function receive_packet(socket::TcpSocket, packet::Packet)
+	packet.ptr = ccall(dlsym(libjuliasfml, :sjTcpSocket_receivePacket), Ptr{Void}, (Ptr{Void}, Ptr{Void},), socket.ptr, packet.ptr)
+end
+
+export is_blocking, set_blocking, destroy, TcpSocket, connect, get_localport, receive_packet, send_packet
