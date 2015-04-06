@@ -25,16 +25,20 @@ end
 
 function send_messages()
 	while true
-		println("Ready to receive input")
-		msg = strip(readline(STDIN), '\n')
+		println("Ready to receive input\n")
+		x = readline(STDIN)
+		println("Received input")
+		msg = strip(x, '\n')
 		packet = Packet()
 		write_string(packet, name * ": " * msg)
 		send_packet(socket, packet)
+		println("Sent packet")
 
 		destroy(packet)
 	end
 end
 
-get_messages_task = Task(get_messages)
-schedule(get_messages_task)
+# get_messages_task = Task(get_messages)
+# schedule(get_messages_task)
 send_messages()
+Thread(get_messages)
