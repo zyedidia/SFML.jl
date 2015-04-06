@@ -1,7 +1,8 @@
 using SFML
 
-function receive_msg(client)
+function receive_msg()
 	while true
+		println("Ready to receive packet")
 		packet = receive_packet(client)
 		msg = read_string(packet)
 		println(msg)
@@ -12,7 +13,28 @@ function receive_msg(client)
 	end
 end
 
+function receive_connections()
+	while connections < max_connections
+		# println("Ready to receive client")
+		client = accept(server)
+		# println(client)
+		if (client.ptr != Ptr{Void}(0))
+			push!(clients, client)
+
+			packet = receive_packet(client)
+			name = read_string(packet)
+			destroy(packet)
+			println("$name connected")
+
+			t = Task(receive_msg)
+			schedule(t)
+		end
+	end
+end
+
+
 server = TcpListener()
+set_blocking(server, false)
 
 max_connections = 10
 connections = 0
@@ -22,23 +44,9 @@ println("Listening on port 53000")
 
 clients = TcpSocket[]
 
+t = Task(receive_connections)
+schedule(t)
 
-while connections < max_connections
-	println("Ready to receive client")
-	client = accept(server)
-	push!(clients, client)
-
-	receive_msg_task = @async begin
-		while true
-			receive_msg(client)
-		end
-	end
-
-	packet = receive_packet(client)
-	name = read_string(packet)
-	destroy(packet)
-	println("$name connected")
-
-	consume(receive_msg_task)
-end
-
+println("Hello")
+sleep(5)
+println("Goodbye")
