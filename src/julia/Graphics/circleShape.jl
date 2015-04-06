@@ -43,6 +43,10 @@ function set_outlinecolor(shape::CircleShape, color::Color)
 	ccall(dlsym(libcsfml_graphics, :sfCircleShape_setOutlineColor), Void, (Ptr{Void}, Color,), shape.ptr, color)
 end
 
+function set_outline_thickness(shape::CircleShape, thickness::Real)
+	ccall(dlsym(libcsfml_graphics, :sfCircleShape_setOutlineThickness), Void, (Ptr{Void}, Cfloat,), shape.ptr, thickness)
+end
+
 function get_origin(shape::CircleShape)
 	return ccall(dlsym(libcsfml_graphics, :sfCircleShape_getOrigin)), Vector2f, (Ptr{Void},), shape.ptr
 end
@@ -71,6 +75,10 @@ function get_outlinecolor(shape::CircleShape)
 	return ccall(dlsym(libcsfml_graphics, :sfCircleShape_getOutlineColor), Color, (Ptr{Void},), shape.ptr)
 end
 
+function get_outline_thickness(shape::CircleShape)
+	return Real(ccall(dlsym(libcsfml_graphics, :sfCircleShape_getOutlineThickness), Cfloat, (Ptr{Void},), shape.ptr))
+end
+
 function move(shape::CircleShape, offset::Vector2f)
 	ccall(dlsym(libcsfml_graphics, :sfCircleShape_move), Void, (Ptr{Void}, Vector2f,), shape.ptr, offset)
 end
@@ -91,4 +99,4 @@ function get_globalbounds(shape::CircleShape)
 	return ccall(dlsym(libcsfml_graphics, :sfCircleShape_getGlobalBounds), FloatRect, (Ptr{Void},), shape.ptr)
 end
 
-export CircleShape, set_position, set_radius, set_fillcolor, set_outlinecolor, move, get_position, get_radius, set_origin, get_origin, get_fillcolor, get_outlinecolor, rotate, scale, copy, set_scale, get_scale, set_rotation, get_rotation, get_localbounds, get_globalbounds
+export CircleShape, set_position, set_radius, set_fillcolor, set_outlinecolor, move, get_position, get_radius, set_origin, get_origin, get_fillcolor, get_outlinecolor, rotate, scale, copy, set_scale, get_scale, set_rotation, get_rotation, get_localbounds, get_globalbounds, set_outline_thickness, get_outline_thickness

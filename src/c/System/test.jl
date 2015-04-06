@@ -1,25 +1,35 @@
 using SFML
 
-function callback(arg)
+function thread1()
 	while true
-		println("On other thread")
+		println("On thread1")
 		sleep(1)
 	end
 
 	return Void
 end
 
-# t = Thread(callback)
-# launch(t)
+function thread2()
+	while true
+		println("On thread2")
+		sleep(1)
+	end
+end
 
-const callback_c = Base.SingleAsyncWork(data -> callback())
-ccall(:uv_async_send, Cint, (Ptr{Void},), callback_c.handle)
-# println(x)
-# ccall((:runFunction, "libjuliasfml"), Void, (Ptr{Void},), x)
-println(typeof(callback_c.cb))
-ccall((:runFunction, "libjuliasfml"), Void, (Ptr{Void}, Ptr{Void},), callback_c, C_NULL)
+t = Thread(thread1)
+println(t)
+
+t2 = Thread(thread2)
+println(t2)
+
+sleep(5)
+println("Cancelling thread1")
+terminate(t)
+sleep(5)
+println("Cancelling thread2")
+terminate(t2)
 
 while true
-	println("On main thread")
+	println("Main thread")
 	sleep(1)
 end

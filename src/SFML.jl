@@ -36,7 +36,6 @@ if (loaded)
 end
 
 if (loaded)
-
 	include("julia/Network/packet.jl")
 	include("julia/Network/ipAddress.jl")
 	include("julia/Network/socketStatus.jl")
@@ -59,6 +58,7 @@ if (loaded)
 	include("julia/Graphics/circleShape.jl")
 
 	include("julia/Window/event.jl")
+
 	include("julia/Graphics/renderWindow.jl")
 
 	include("julia/Window/mouse.jl")

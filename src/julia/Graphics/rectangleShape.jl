@@ -47,6 +47,10 @@ function set_outlinecolor(shape::RectangleShape, color::Color)
 	ccall(dlsym(libcsfml_graphics, :sfRectangleShape_setOutlineColor), Void, (Ptr{Void}, Color,), shape.ptr, color)
 end
 
+function set_outline_thickness(shape::RectangleShape, thickness::Real)
+	ccall(dlsym(libcsfml_graphics, :sfRectangleShape_setOutlineThickness), Void, (Ptr{Void}, Cfloat,), shape.ptr, thickness)
+end
+
 function get_position(shape::RectangleShape)
 	return ccall(dlsym(libcsfml_graphics, :sfRectangleShape_getPosition), Vector2f, (Ptr{Void},), shape.ptr)
 end
@@ -65,6 +69,10 @@ end
 
 function get_outlinecolor(shape::RectangleShape)
 	return ccall(dlsym(libcsfml_graphics, :sfRectangleShape_getOutlineColor), Color, (Ptr{Void},), shape.ptr)
+end
+
+function get_outline_thickness(shape::RectangleShape)
+	return Real(ccall(dlsym(libcsfml_graphics, :sfRectangleShape_getOutlineThickness), Cfloat, (Ptr{Void},), shape.ptr))
 end
 
 function move(shape::RectangleShape, offset::Vector2f)
@@ -87,4 +95,4 @@ function get_globalbounds(shape::RectangleShape)
 	return ccall(dlsym(libcsfml_graphics, :sfRectangleShape_getGlobalBounds), FloatRect, (Ptr{Void},), shape.ptr)
 end
 
-export RectangleShape, set_position, set_size, set_fillcolor, set_outlinecolor, move, set_origin, set_origin, get_fillcolor, get_outlinecolor, get_size, get_position, set_texture, set_scale, scale, rotate, set_rotation, copy, get_localbounds, get_globalbounds
+export RectangleShape, set_position, set_size, set_fillcolor, set_outlinecolor, move, set_origin, set_origin, get_fillcolor, get_outlinecolor, get_size, get_position, set_texture, set_scale, scale, rotate, set_rotation, copy, get_localbounds, get_globalbounds, set_outline_thickness, get_outline_thickness
