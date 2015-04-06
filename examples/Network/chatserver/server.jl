@@ -1,6 +1,6 @@
 using SFML
 
-function receive_messages(client)
+function receive_msg(client)
 	while true
 		packet = receive_packet(client)
 		msg = read_string(packet)
@@ -22,17 +22,23 @@ println("Listening on port 53000")
 
 clients = TcpSocket[]
 
+
 while connections < max_connections
 	println("Ready to receive client")
 	client = accept(server)
 	push!(clients, client)
+
+	receive_msg_task = @async begin
+		while true
+			receive_msg(client)
+		end
+	end
 
 	packet = receive_packet(client)
 	name = read_string(packet)
 	destroy(packet)
 	println("$name connected")
 
-	r = remotecall(1, receive_messages, client)
-	fetch(r)
+	consume(receive_msg_task)
 end
 

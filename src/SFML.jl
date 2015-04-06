@@ -36,14 +36,17 @@ if (loaded)
 end
 
 if (loaded)
-	include("julia/System/time.jl")
+
 	include("julia/Network/packet.jl")
 	include("julia/Network/ipAddress.jl")
 	include("julia/Network/socketStatus.jl")
 	include("julia/Network/tcpSocket.jl")
 	include("julia/Network/tcpListener.jl")
-	include("julia/Window/keyboard.jl")
+
 	include("julia/System/vector.jl")
+	include("julia/System/time.jl")
+	include("julia/System/thread.jl")
+
 	include("julia/Graphics/image.jl")
 	include("julia/Graphics/color.jl")
 	include("julia/Graphics/font.jl")
@@ -54,9 +57,12 @@ if (loaded)
 	include("julia/Graphics/sprite.jl")
 	include("julia/Graphics/rectangleShape.jl")
 	include("julia/Graphics/circleShape.jl")
+
 	include("julia/Window/event.jl")
 	include("julia/Graphics/renderWindow.jl")
+
 	include("julia/Window/mouse.jl")
+	include("julia/Window/keyboard.jl")
 else
 	println("Module SFML not loaded")
 end
