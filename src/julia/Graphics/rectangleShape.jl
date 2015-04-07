@@ -43,6 +43,14 @@ function set_fillcolor(shape::RectangleShape, color::Color)
 	ccall(dlsym(libcsfml_graphics, :sfRectangleShape_setFillColor), Void, (Ptr{Void}, Color,), shape.ptr, color)
 end
 
+function set_texture(shape::RectangleShape, texture::Texture)
+	ccall(dlsym(libcsfml_graphics, :sfRectangleShape_setTexture), Void, (Ptr{Void}, Ptr{Void}, Int32,), shape.ptr, texture.ptr, false)
+end
+
+function set_texture_rect(shape::RectangleShape, rect::IntRect)
+	ccall(dlsym(libcsfml_graphics, :sfRectangleShape_setTextureRect), Void, (Ptr{Void}, IntRect,), shape.ptr, rect)
+end
+
 function set_outlinecolor(shape::RectangleShape, color::Color)
 	ccall(dlsym(libcsfml_graphics, :sfRectangleShape_setOutlineColor), Void, (Ptr{Void}, Color,), shape.ptr, color)
 end
@@ -87,6 +95,14 @@ function scale(shape::RectangleShape, factors::Vector2f)
 	ccall(dlsym(libcsfml_graphics, :sfRectangleShape_scale), Void, (Ptr{Void}, Vector2f,), shape.ptr, factors)
 end
 
+function get_texture(shape::RectangleShape)
+	return Texture(ccall(dlsym(libcsfml_graphics, :sfRectangleShape_getTexture), Ptr{Void}, (Ptr{Void},), shape.ptr))
+end
+
+function get_texture_rect(shape::RectangleShape)
+	return ccall(dlsym(libcsfml_graphics, :sfRectangleShape_getTextureRect), IntRect, (Ptr{Void},), shape.ptr)
+end
+
 function get_localbounds(shape::RectangleShape)
 	return ccall(dlsym(libcsfml_graphics, :sfRectangleShape_getLocalBounds), FloatRect, (Ptr{Void},), shape.ptr)
 end
@@ -95,4 +111,7 @@ function get_globalbounds(shape::RectangleShape)
 	return ccall(dlsym(libcsfml_graphics, :sfRectangleShape_getGlobalBounds), FloatRect, (Ptr{Void},), shape.ptr)
 end
 
-export RectangleShape, set_position, set_size, set_fillcolor, set_outlinecolor, move, set_origin, set_origin, get_fillcolor, get_outlinecolor, get_size, get_position, set_texture, set_scale, scale, rotate, set_rotation, copy, get_localbounds, get_globalbounds, set_outline_thickness, get_outline_thickness
+export RectangleShape, set_position, set_size, set_fillcolor, set_outlinecolor, move, set_origin, 
+set_origin, get_fillcolor, get_outlinecolor, get_size, get_position, set_texture, set_scale, scale,
+rotate, set_rotation, copy, get_localbounds, get_globalbounds, set_outline_thickness, 
+get_outline_thickness, set_texture, set_texture_rect, get_texture_rect, get_texture

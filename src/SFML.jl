@@ -54,6 +54,7 @@ if (loaded)
 	include("julia/Graphics/view.jl")
 	include("julia/Graphics/texture.jl")
 	include("julia/Graphics/sprite.jl")
+	include("julia/Graphics/convexShape.jl")
 	include("julia/Graphics/rectangleShape.jl")
 	include("julia/Graphics/circleShape.jl")
 

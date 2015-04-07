@@ -79,4 +79,5 @@ function get_globalbounds(sprite::Sprite)
 	return ccall(dlsym(libcsfml_graphics, :sfSprite_getGlobalBounds), FloatRect, (Ptr{Void},), sprite.ptr)
 end
 
-export get_color, get_texture, set_texture, scale, rotate, move, get_origin, get_rotation, get_position, set_origin, set_scale, set_rotation, set_position, copy, Sprite, destroy, get_localbounds, get_globalbounds
+export get_color, get_texture, set_texture, scale, rotate, move, get_origin, get_rotation, get_position, set_origin,
+set_scale, set_rotation, set_position, copy, Sprite, destroy, get_localbounds, get_globalbounds

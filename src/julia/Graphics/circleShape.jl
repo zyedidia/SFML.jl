@@ -67,6 +67,10 @@ function get_radius(shape::CircleShape)
 	return real(ccall(dlsym(libcsfml_graphics, :sfCircleShape_getRadius), Cfloat, (Ptr{Void},), shape.ptr))
 end
 
+function set_pointcount(shape::CircleShape, count::Int)
+	ccall(dlsym(libcsfml_graphics, :sfCircleShape_setPointCount), Void, (Ptr{Void}, Uint32,), shape.ptr, count)
+end
+
 function get_fillcolor(shape::CircleShape)
 	return ccall(dlsym(libcsfml_graphics, :sfCircleShape_getFillColor), Color, (Ptr{Void},), shape.ptr)
 end
@@ -77,6 +81,10 @@ end
 
 function get_outline_thickness(shape::CircleShape)
 	return Real(ccall(dlsym(libcsfml_graphics, :sfCircleShape_getOutlineThickness), Cfloat, (Ptr{Void},), shape.ptr))
+end
+
+function get_pointcount(shape::CircleShape)
+	return Int(ccall(dlsym(libcsfml_graphics, :sfCircleShape_getPointCount), Uint32, (Ptr{Void},), shape.ptr))
 end
 
 function move(shape::CircleShape, offset::Vector2f)
@@ -91,6 +99,22 @@ function rotate(shape::CircleShape, angle::Real)
 	ccall(dlsym(libcsfml_graphics, :sfCircleShape_rotate), Void, (Ptr{Void}, Cfloat,), shape.ptr, angle)
 end
 
+function set_texture(shape::CircleShape, texture::Texture)
+	ccall(dlsym(libcsfml_graphics, :sfCircleShape_setTexture), Void, (Ptr{Void}, Ptr{Void}, Int32,), shape.ptr, texture.ptr, false)
+end
+
+function set_texture_rect(shape::CircleShape, rect::IntRect)
+	ccall(dlsym(libcsfml_graphics, :sfCircleShape_setTextureRect), Void, (Ptr{Void}, IntRect,), shape.ptr, rect)
+end
+
+function get_texture(shape::CircleShape)
+	return Texture(call(dlsym(libcsfml_graphics, :sfCircleShape_getTexture), Ptr{Void}, (Ptr{Void},), shape.ptr))
+end
+
+function get_texture_rect(shape::CircleShape)
+	return ccall(dlsym(libcsfml_graphics, :sfCircleShape_getTextureRect), IntRect, (Ptr{Void},), shape.ptr)
+end
+
 function get_localbounds(shape::CircleShape)
 	return ccall(dlsym(libcsfml_graphics, :sfCircleShape_getLocalBounds), FloatRect, (Ptr{Void},), shape.ptr)
 end
@@ -99,4 +123,7 @@ function get_globalbounds(shape::CircleShape)
 	return ccall(dlsym(libcsfml_graphics, :sfCircleShape_getGlobalBounds), FloatRect, (Ptr{Void},), shape.ptr)
 end
 
-export CircleShape, set_position, set_radius, set_fillcolor, set_outlinecolor, move, get_position, get_radius, set_origin, get_origin, get_fillcolor, get_outlinecolor, rotate, scale, copy, set_scale, get_scale, set_rotation, get_rotation, get_localbounds, get_globalbounds, set_outline_thickness, get_outline_thickness
+export CircleShape, set_position, set_radius, set_fillcolor, set_outlinecolor, move, get_position,
+get_radius, set_origin, get_origin, get_fillcolor, get_outlinecolor, rotate, scale, copy, set_scale,
+get_scale, set_rotation, get_rotation, get_localbounds, get_globalbounds, set_outline_thickness,
+get_outline_thickness, get_pointcount, set_pointcount, get_texture_rect, get_texture, set_texture_rect, set_texture

@@ -21,7 +21,7 @@ end
 # end
 
 function wait(thread::Thread)
-	ccall(dlsym(libcsfml_system, :sfThread_wait), Void, (Ptr{Void},), thread.ptr)
+	ccall(:pthread_join, Cint, (Uint64, Ptr{Void},), thread.ptr, C_NULL)
 end
 
 function terminate(thread::Thread)
