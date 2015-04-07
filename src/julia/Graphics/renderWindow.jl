@@ -38,6 +38,10 @@ function draw(window::RenderWindow, object::Text)
 	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_drawText), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), window.ptr, object.ptr, C_NULL)
 end
 
+function draw(window::RenderWindow, object::ConvexShape)
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_drawConvexShape), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), window.ptr, object.ptr, C_NULL)
+end
+
 function clear(window::RenderWindow, color::Color)
 	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_clear), Void, (Ptr{Void}, Color,), window.ptr, color)
 end
