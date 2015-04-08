@@ -1,14 +1,10 @@
 type Thread
-	ptr::Uint64
+	ptr::Ptr{Void}
 end
 
 function Thread(callback::Function)
-	threads = Uint64[0]
-	const callback_c = Base.SingleAsyncWork(data -> callback())
-	async_send_pthread(func::Ptr{Void}) = (ccall(:uv_async_send, Cint, (Ptr{Void},), func); C_NULL)
-	const c_async_send_pthread = cfunction(async_send_pthread, Ptr{Void}, (Ptr{Void},))
-	ccall(:pthread_create, Cint, (Ptr{Void}, Ptr{Void}, Ptr{Void}, Ptr{Void},), threads, C_NULL, c_async_send_pthread, callback_c.handle)
-	return Thread(threads[1])
+	callback_c = cfunction(callback, Void, ())
+	ccall(dlsym(libjuliasfml, :runFunction), Void, (Ptr{Void}, Ptr{Void}, Int32,), callback_c, C_NULL, sizeof(callback_c))
 end
 
 # function destroy(thread::Thread)

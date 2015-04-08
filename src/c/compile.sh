@@ -1,1 +1,1 @@
-gcc -I/usr/local/include -I../../deps/CSFML-2.2-include -L/usr/local/lib -L../../deps/CSFML-2.2-osx -lsfml-graphics -lsfml-system -lsfml-window -lsfml-network -lcsfml-network.2.2 -lcsfml-graphics.2.2 -lcsfml-system.2.2 -lcsfml-window.2.2 -o $1 $1.c
+gcc -I/usr/local/include -I../../deps/CSFML-2.2-include -L/usr/local/lib -L../../deps/CSFML-2.2-osx -lsfml-graphics -lsfml-system -lsfml-window -lsfml-network -lsfml-audio -lcsfml-network.2.2 -lcsfml-graphics.2.2 -lcsfml-system.2.2 -lcsfml-window.2.2 -lcsfml-audio.2.2 -o $1 $1.c

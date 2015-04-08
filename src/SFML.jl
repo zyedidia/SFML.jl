@@ -36,6 +36,9 @@ if (loaded)
 end
 
 if (loaded)
+	include("julia/Audio/soundBuffer.jl")
+	include("julia/Audio/sound.jl")
+
 	include("julia/Network/packet.jl")
 	include("julia/Network/ipAddress.jl")
 	include("julia/Network/socketStatus.jl")
