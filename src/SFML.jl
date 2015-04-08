@@ -50,6 +50,7 @@ if (loaded)
 	include("julia/System/thread.jl")
 	include("julia/System/clock.jl")
 
+	include("julia/Graphics/videoMode.jl")
 	include("julia/Graphics/image.jl")
 	include("julia/Graphics/color.jl")
 	include("julia/Graphics/font.jl")

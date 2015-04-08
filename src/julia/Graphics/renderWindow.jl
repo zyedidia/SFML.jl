@@ -1,5 +1,24 @@
+@enum WindowStyle window_none = 0 window_titlebar = 1 << 0 window_resize = 1 << 1 window_close = 1 << 2 window_fullscreen = 1 << 3 window_defaultstyle = (1 << 0) | (1 << 1) | (1 << 2)
+
+type ContextSettings
+	depth_bits::Uint32
+	stencil_bits::Uint32
+	antialiasing_level::Uint32
+	major_version::Uint32
+	minor_version::Uint32
+	attribute_flags::Uint32
+end
+
 type RenderWindow
 	ptr::Ptr{Void}
+end
+
+function RenderWindow(mode::VideoMode, title::ASCIIString, style...)
+	style_int = 0
+	for i = 1:length(style)
+		style_int |= Int(style[i])
+	end
+	return RenderWindow(ccall(dlsym(libcsfml_graphics, :sfRenderWindow_create), Ptr{Void}, (VideoMode, Ptr{Cchar}, Uint32, Ptr{Void},), mode, pointer(title), style_int, C_NULL))
 end
 
 function RenderWindow(title::ASCIIString, width::Int, height::Int)
@@ -63,4 +82,4 @@ function capture(window::RenderWindow)
 	return Image(ccall(dlsym(libcsfml_graphics, :sfRenderWindow_capture), Ptr{Void}, (Ptr{Void},), window.ptr))
 end
 
-export RenderWindow, set_framerate_limit, isopen, pollevent, draw, clear, display, close, destroy, set_vsync_enabled, capture
+export RenderWindow, set_framerate_limit, isopen, pollevent, draw, clear, display, close, destroy, set_vsync_enabled, capture, ContextSettings, WindowStyle, window_none, window_resize, window_defaultstyle, window_close, window_fullscreen
