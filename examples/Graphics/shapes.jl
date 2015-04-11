@@ -8,7 +8,7 @@ black = Color(0, 0, 0)
 texture = Texture("wood-texture.jpg")
 
 triangle = CircleShape()
-set_radius(triangle, 50)
+set_radius(triangle, 100)
 set_pointcount(triangle, 3)
 set_position(triangle, Vector2f(400, 300))
 set_texture(triangle, texture)

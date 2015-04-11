@@ -41,6 +41,18 @@ function pollevent(window::RenderWindow, event::Event)
 	return ccall(dlsym(libcsfml_graphics, :sfRenderWindow_pollEvent), Int32, (Ptr{Void}, Ptr{Void},), window.ptr, event.ptr) == 1
 end
 
+function set_view(window::RenderWindow, view::View)
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_setView), Void, (Ptr{Void}, Ptr{Void},), window.ptr, view.ptr)
+end
+
+function get_view(window::RenderWindow)
+	return View(ccall(dlsym(libcsfml_graphics, :sfRenderWindow_getView), Ptr{Void}, (Ptr{Void},), window.ptr))
+end
+
+function get_default_view(window::RenderWindow)
+	return View(ccall(dlsym(libcsfml_graphics, :sfRenderWindow_getDefaultView), Ptr{Void}, (Ptr{Void},), window.ptr))
+end
+
 function draw(window::RenderWindow, object::CircleShape)
 	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_drawCircleShape), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), window.ptr, object.ptr, C_NULL)
 end
@@ -82,4 +94,6 @@ function capture(window::RenderWindow)
 	return Image(ccall(dlsym(libcsfml_graphics, :sfRenderWindow_capture), Ptr{Void}, (Ptr{Void},), window.ptr))
 end
 
-export RenderWindow, set_framerate_limit, isopen, pollevent, draw, clear, display, close, destroy, set_vsync_enabled, capture, ContextSettings, WindowStyle, window_none, window_resize, window_defaultstyle, window_close, window_fullscreen
+export RenderWindow, set_framerate_limit, isopen, pollevent, draw, clear, display, close, destroy, set_vsync_enabled, 
+capture, ContextSettings, WindowStyle, window_none, window_resize, window_defaultstyle, window_close, window_fullscreen,
+set_view, get_view, get_default_view

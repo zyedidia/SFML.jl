@@ -7,12 +7,14 @@ void testfunction() {
 	printf("In test function\n");
 }
 
-void (*function_pointer)(void*)=NULL;
+void sjThread_terminate(sfThread* thread) {
+	sfThread_terminate(thread);
+}
 
-void runFunction(void (*function)(void*), void* userData, int functionSize) {
-	memcpy(&function_pointer, function, sizeof(function_pointer));
-	printf("%lu\n", function_pointer);
-	function_pointer(userData);
+void runFunction(void (*function)(void*), void* userData) {
+	/* memcpy(&function_pointer, function, sizeof(function_pointer)); */
+	/* printf("%lu\n", function_pointer); */
+	/* function_pointer(userData); */
 
 	/* jlFunctionType jlfunction = malloc(functionSize); */
 
@@ -21,7 +23,8 @@ void runFunction(void (*function)(void*), void* userData, int functionSize) {
 	/* printf("Size %lu\n", sizeof(jlfunction)); */
 	/* function(userData); */
 	/* jlfunction(userData); */
+	printf("Started\n");
 
-	/* sfThread* t = sfThread_create(function_pointer, userData); */
-	/* sfThread_launch(t); */
+	sfThread* t = sfThread_create(function, userData);
+	sfThread_launch(t);
 }

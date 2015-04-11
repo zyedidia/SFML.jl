@@ -3,7 +3,7 @@ type SoundBuffer
 end
 
 function SoundBuffer(filename::ASCIIString)
-	return SoundBuffer(ccall(dlsym(libjuliasfml, :sjSoundBuffer_createFromFile), Ptr{Void}, (Ptr{Cchar},), pointer(filename)))
+	return SoundBuffer(ccall(dlsym(libcsfml_audio, :sfSoundBuffer_createFromFile), Ptr{Void}, (Ptr{Cchar},), pointer(filename)))
 end
 
 export SoundBuffer
