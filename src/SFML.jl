@@ -36,9 +36,6 @@ if (loaded)
 end
 
 if (loaded)
-	include("julia/Audio/soundBuffer.jl")
-	include("julia/Audio/sound.jl")
-
 	include("julia/Network/packet.jl")
 	include("julia/Network/ipAddress.jl")
 	include("julia/Network/socketStatus.jl")
@@ -49,6 +46,10 @@ if (loaded)
 	include("julia/System/time.jl")
 	include("julia/System/thread.jl")
 	include("julia/System/clock.jl")
+
+	include("julia/Audio/music.jl")
+	include("julia/Audio/soundBuffer.jl")
+	include("julia/Audio/sound.jl")
 
 	include("julia/Graphics/videoMode.jl")
 	include("julia/Graphics/image.jl")

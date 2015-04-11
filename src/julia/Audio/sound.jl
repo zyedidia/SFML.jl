@@ -16,7 +16,7 @@ function destroy(sound::Sound)
 end
 
 function play(sound::Sound)
-	ccall(dlsym(libjuliasfml, :sjSound_play), Void, (Ptr{Void},), sound.ptr)
+	ccall(dlsym(libcsfml_audio, :sfSound_play), Void, (Ptr{Void},), sound.ptr)
 end
 
 function pause(sound::Sound)
