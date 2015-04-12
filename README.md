@@ -23,6 +23,7 @@ Since this package is unregistered you must use `Pkg.clone(repo)` instead of `Pk
 
 ```
 julia> Pkg.clone("https://github.com/zyedidia/SFML.jl.git")
+julia> Pkg.build()
 ```
 
 Julia should clone and install it for you.
