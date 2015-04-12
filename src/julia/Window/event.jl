@@ -4,7 +4,7 @@ end
 
 baremodule EventType
 	const NONE = 0
-	const CLOSE = 1
+	const CLOSED = 1
 end
 
 function Event()

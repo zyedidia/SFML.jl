@@ -16,7 +16,7 @@ set_origin(tank, Vector2f(texture_size.x / 2, texture_size.y / 2))
 
 while isopen(window)
 	while pollevent(window, event)
-		if get_type(event) == EventType.CLOSE
+		if get_type(event) == EventType.CLOSED
 			close(window)
 		end
 	end

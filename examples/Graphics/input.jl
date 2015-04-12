@@ -21,7 +21,7 @@ set_charactersize(mousepos_text, 25)
 
 while isopen(window)
 	while pollevent(window, event)
-		if get_type(event) == EventType.CLOSE
+		if get_type(event) == EventType.CLOSED
 			close(window)
 		end
 	end

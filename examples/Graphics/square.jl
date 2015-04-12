@@ -17,7 +17,7 @@ set_outline_thickness(square, 2)
 
 while isopen(window)
 	while pollevent(window, event)
-		if get_type(event) == EventType.CLOSE
+		if get_type(event) == EventType.CLOSED
 			close(window)
 		end
 	end
