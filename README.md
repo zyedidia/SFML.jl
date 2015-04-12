@@ -22,8 +22,9 @@ $ brew install sfml
 Since this package is unregistered you must use `Pkg.clone(repo)` instead of `Pkg.add(name)`
 
 ```
-julia> Pkg.clone("https://github.com/zyedidia/SFML.jl.git")
-julia> Pkg.build()
+julia> Pkg.update()
+julia> Pkg.clone("SFML")
+julia> Pkg.build("SFML")
 ```
 
 Julia should clone and install it for you.
