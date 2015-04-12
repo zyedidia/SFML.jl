@@ -22,9 +22,6 @@ while isopen(window)
 		end
 	end
 
-	velocity = Vector2f(ge)
-	move(square, velocity)
-
 	clear(window, black)
 	draw(window, square)
 	display(window)
