@@ -18,7 +18,7 @@ if (loaded)
 		loaded = false
 	end
 
-	cd("$(Pkg.dir("SFML"))/deps/CSFML-2.2-osx/") do
+	function load_libs()
 		try
 			global const libcsfml_graphics = Libdl.dlopen("libcsfml-graphics.2.2")
 			global const libcsfml_window = Libdl.dlopen("libcsfml-window.2.2")
@@ -30,6 +30,16 @@ if (loaded)
 			loaded = false
 		end
 	end
+	
+
+	@osx_only cd("$(Pkg.dir("SFML"))/deps/CSFML-2.2-osx/") do
+		load_libs()
+	end
+
+	@linux_only cd("$(Pkg.dir("SFML"))/deps/CSFML-2.2-linux") do
+		load_libs()
+	end
+
 	cd("$(Pkg.dir("SFML"))/deps/") do
 		global const libjuliasfml = Libdl.dlopen("libjuliasfml")
 	end
