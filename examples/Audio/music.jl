@@ -6,6 +6,8 @@ set_loop(music, true)
 play(music)
 playing = true
 
+println("Music is $(as_seconds(get_duration(music))) seconds long")
+
 println("Press 'p' to pause and resume")
 println("Press escape to quit")
 
