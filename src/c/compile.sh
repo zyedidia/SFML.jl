@@ -1,0 +1,1 @@
+gcc -I/usr/local/include -I../../deps/CSFML-2.2-osx-clang-universal/include -L/usr/local/lib -L../../deps/CSFML-2.2-osx-clang-universal/lib -lsfml-graphics -lsfml-system -lsfml-window -lcsfml-graphics.2.2.0 -lcsfml-system.2.2.0 -lcsfml-window.2.2.0 -o game game.c
