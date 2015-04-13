@@ -1,4 +1,10 @@
-@enum WindowStyle window_none = 0 window_titlebar = 1 << 0 window_resize = 1 << 1 window_close = 1 << 2 window_fullscreen = 1 << 3 window_defaultstyle = (1 << 0) | (1 << 1) | (1 << 2)
+@enum(WindowStyle, 
+window_none = 0, 
+window_titlebar = 1 << 0, 
+window_resize = 1 << 1, 
+window_close = 1 << 2, 
+window_fullscreen = 1 << 3, 
+window_defaultstyle = (1 << 0) | (1 << 1) | (1 << 2))
 
 type ContextSettings
 	depth_bits::Uint32
