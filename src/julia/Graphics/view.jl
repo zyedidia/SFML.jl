@@ -35,7 +35,7 @@ function set_viewport(view::View, rect::FloatRect)
 	ccall(dlsym(libcsfml_graphics, :sfView_setViewport), Void, (Ptr{Void}, FloatRect,), view.ptr)
 end
 
-function reset(view::View, rect::FloatRect)
+function reset_view(view::View, rect::FloatRect)
 	ccall(dlsym(libcsfml_graphics, :sfView_reset), Void, (Ptr{Void}, FloatRect,), view.ptr)
 end
 
