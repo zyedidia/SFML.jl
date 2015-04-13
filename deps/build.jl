@@ -1,9 +1,9 @@
 cd("$(Pkg.dir("SFML"))/src/c")
-@osx_only run(`./createlib.sh libjuliasfml.dylib`)
-@linux_only do
+@osx_only run(`julia createlib.jl`)
+@linux_only begin
 	old_ldpath = ENV["LD_LIBRARY_PATH"]
 	ENV["LD_LIBRARY_PATH"] = ".:$(old_ldpath)"
-	run(`./createlib.sh libjuliasfml.so`)
+	run(`julia createlib.jl`)
 	ENV["LD_LIBRARY_PATH"] = old_ldpath
 end
 

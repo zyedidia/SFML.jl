@@ -5,7 +5,7 @@ It also has audio libraries and networking libraries.
 
 This is very much a work in progress right now. There is currently almost complete support for graphics and limited support for audio and network.
 
-SFML.jl only works on Mac OS X (for now).
+SFML.jl only works on Mac OS X (linux support currently in progress).
 
 Take a look at the `examples` folder to see some usage examples.
 
