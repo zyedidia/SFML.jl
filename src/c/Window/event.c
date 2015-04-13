@@ -7,9 +7,5 @@ sfEvent* new_sjEvent() {
 }
 
 int sjEvent_eventType(sfEvent* pEvent) {
-	if (pEvent->type == sfEvtClosed) {
-		return 1;
-	}
-
-	return 0;
+	return pEvent->type;
 }
