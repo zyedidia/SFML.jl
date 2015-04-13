@@ -37,7 +37,10 @@ if (loaded)
 	end
 
 	@linux_only cd("$(Pkg.dir("SFML"))/deps/CSFML-2.2-linux") do
+		old_ldpath = ENV["LD_LIBRARY_PATH"]
+		ENV["LD_LIBRARY_PATH"] = ".:$(old_ldpath)"
 		load_libs()
+		ENV["LD_LIBRARY_PATH"] = old_ldpath
 	end
 
 	cd("$(Pkg.dir("SFML"))/deps/") do
