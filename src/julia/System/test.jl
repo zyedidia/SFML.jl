@@ -1,16 +1,9 @@
 using SFML
 
-i = 0
-
 function callback()
 	while true
 		println("In callback")
 		sleep(1)
-
-		if (i == 2)
-			println("Done")
-			return nothing
-		end
 	end
 end
 
@@ -29,12 +22,21 @@ end
 t = Thread(callback)
 launch(t)
 
+wait(t)
+
 # t2 = Thread(thread2)
 # launch(t2)
+
+i = 0
 
 while true
 	println("test")
 	sleep(1)
+
+	if (i == 3)
+		println("terminate")
+		terminate(t)
+	end
 
 	i += 1
 end

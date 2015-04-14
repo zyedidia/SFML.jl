@@ -1,5 +1,5 @@
 #SFML.jl
-This is a binding of the C++ Game and Multimedia Library [SFML](http://www.sfml-dev.org/) (Simple and Fast Multimedia Library), developed by Laurent Golima, for Julia. SFML is often used for game development but it can be used for anything graphics-related.
+This is a binding of the C++ game and multimedia library [SFML](http://www.sfml-dev.org/) (Simple and Fast Multimedia Library), developed by Laurent Golima, for Julia. SFML is often used for game development but it can be used for anything graphics-related.
 
 It also has audio libraries and networking libraries.
 

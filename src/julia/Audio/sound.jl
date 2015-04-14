@@ -47,8 +47,17 @@ function set_pitch(sound::Sound, pitch::Real)
 	ccall(dlsym(libcsfml_audio, :sfSound_setPitch), Void, (Ptr{Void}, Cfloat,), sound.ptr, pitch)
 end
 
+function get_pitch(sound::Sound)
+	return Real(ccall(dlsym(libcsfml_audio, :sfSound_getPitch), Cfloat, (Ptr{Void},), sound.ptr))
+end
+
 function set_volume(sound::Sound, volume::Real)
 	ccall(dlsym(libcsfml_audio, :sfSound_setVolume), Void, (Ptr{Void}, Cfloat,), sound.ptr, volume)
 end
 
-export Sound, copy, desoytr, play, pause, stop, set_buffer, set_loop, get_loop, set_pitch, set_volume
+function get_volume(sound::Sound)
+	return Real(ccall(dlsym(libcsfml_audio, :sfSound_getVolume), Cfloat, (Ptr{Void},), sound.ptr))
+end
+
+export Sound, copy, desoytr, play, pause, stop, set_buffer, set_loop, get_loop, set_pitch, set_volume, 
+get_pitch, get_volume
