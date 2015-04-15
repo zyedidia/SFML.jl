@@ -11,8 +11,8 @@ sfThread* runThread(void (*function)(void*), void* userData) {
 	sfThread* t = sfThread_create(function, userData);
 	sfThread_launch(t);
 
-	sfThread* t2 = sfThread_create(&testfunction, NULL);
-	sfThread_launch(t2);
+	/* sfThread* t2 = sfThread_create(&testfunction, NULL); */
+	/* sfThread_launch(t2); */
 
 	return t;
 }
