@@ -2,7 +2,7 @@ type Music
 	ptr::Ptr{Void}
 end
 
-function Music(filename::ASCIIString)
+function Music(filename::String)
 	return Music(ccall(dlsym(libcsfml_audio, :sfMusic_createFromFile), Ptr{Void}, (Ptr{Cchar},), pointer(filename)))
 end
 

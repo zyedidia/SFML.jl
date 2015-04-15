@@ -2,7 +2,7 @@ type SoundBuffer
 	ptr::Ptr{Void}
 end
 
-function SoundBuffer(filename::ASCIIString)
+function SoundBuffer(filename::String)
 	return SoundBuffer(ccall(dlsym(libcsfml_audio, :sfSoundBuffer_createFromFile), Ptr{Void}, (Ptr{Cchar},), pointer(filename)))
 end
 
@@ -15,7 +15,7 @@ function destroy(buffer::SoundBuffer)
 	buffer = nothing
 end
 
-function save_to_file(buffer::SoundBuffer, filename::ASCIIString)
+function save_to_file(buffer::SoundBuffer, filename::String)
 	ccall(dlsym(libcsfml_audio, :sfSoundBuffer_saveToFile), Void, (Ptr{Void}, Ptr{Cchar},), buffer.ptr, pointer(filename))
 end
 

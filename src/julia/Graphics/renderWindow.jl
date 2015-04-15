@@ -19,7 +19,7 @@ type RenderWindow
 	ptr::Ptr{Void}
 end
 
-function RenderWindow(mode::VideoMode, title::ASCIIString, style...)
+function RenderWindow(mode::VideoMode, title::String, style...)
 	style_int = 0
 	for i = 1:length(style)
 		style_int |= Int(style[i])
@@ -27,7 +27,7 @@ function RenderWindow(mode::VideoMode, title::ASCIIString, style...)
 	return RenderWindow(ccall(dlsym(libcsfml_graphics, :sfRenderWindow_create), Ptr{Void}, (VideoMode, Ptr{Cchar}, Uint32, Ptr{Void},), mode, pointer(title), style_int, C_NULL))
 end
 
-function RenderWindow(title::ASCIIString, width::Int, height::Int)
+function RenderWindow(title::String, width::Int, height::Int)
 	return RenderWindow(ccall(dlsym(libjuliasfml, :new_sjRenderWindow), Ptr{Void}, (Ptr{Cchar}, Int32, Int32,), pointer(title), width, height))
 end
 

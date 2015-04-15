@@ -17,7 +17,7 @@ type IpAddress
 	a_15::Cchar
 end
 
-function IpAddress(address::ASCIIString)
+function IpAddress(address::String)
 	return ccall(dlsym(libcsfml_network, :sfIpAddress_fromString), IpAddress, (Ptr{Cchar},), pointer(address))
 end
 

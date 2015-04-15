@@ -59,7 +59,7 @@ function scale(text::Text, factors::Vector2f)
 	ccall(dlsym(libcsfml_graphics, :sfText_scale), Void, (Ptr{Void}, Vector2f,), text.ptr, factors)
 end
 
-function set_string(text::Text, string::ASCIIString)
+function set_string(text::Text, string::String)
 	ccall(dlsym(libcsfml_graphics, :sfText_setString), Void, (Ptr{Void}, Ptr{Cchar},), text.ptr, pointer(string))
 end
 

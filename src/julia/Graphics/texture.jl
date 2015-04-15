@@ -2,7 +2,7 @@ type Texture
 	ptr::Ptr{Void}
 end
 
-function Texture(filename::ASCIIString)
+function Texture(filename::String)
 	return Texture(ccall(dlsym(libcsfml_graphics, :sfTexture_createFromFile), Ptr{Void}, (Ptr{Cchar}, Ptr{Void},), pointer(filename), C_NULL))
 end
 

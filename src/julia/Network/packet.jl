@@ -61,7 +61,7 @@ function write_double(packet::Packet, val::Cdouble)
 	ccall(dlsym(libcsfml_network, :sfPacket_writeDouble), Void, (Ptr{Void}, Cdouble,), packet.ptr, val)
 end
 
-function write_string(packet::Packet, string::ASCIIString)
+function write_string(packet::Packet, string::String)
 	ccall(dlsym(libcsfml_network, :sfPacket_writeString), Void, (Ptr{Void}, Ptr{Cchar},), packet.ptr, pointer(string))
 end
 

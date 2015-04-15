@@ -23,7 +23,7 @@ function get_localport(socket::TcpSocket)
 	return Int(ccall(dlsym(libcsfml_network, :sfTcpSocket_getLocalPort), Uint16, (Ptr{Void},), socket.ptr))
 end
 
-function connect(socket::TcpSocket, host::ASCIIString, port::Int, timeoutlen::Int64)
+function connect(socket::TcpSocket, host::String, port::Int, timeoutlen::Int64)
 	timeout = Time(timeoutlen)
 	host_ip = IpAddress(host)
 	return ccall(dlsym(libcsfml_network, :sfTcpSocket_connect), Int32, (Ptr{Void}, IpAddress, Uint16, Time,), socket.ptr, host_ip, port, timeout)
