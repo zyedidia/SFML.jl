@@ -28,7 +28,8 @@ function RenderWindow(mode::VideoMode, title::String, style...)
 end
 
 function RenderWindow(title::String, width::Int, height::Int)
-	return RenderWindow(ccall(dlsym(libjuliasfml, :new_sjRenderWindow), Ptr{Void}, (Ptr{Cchar}, Int32, Int32,), pointer(title), width, height))
+	mode = VideoMode(width, height)
+	return RenderWindow(mode, title, window_defaultstyle)
 end
 
 function set_framerate_limit(window::RenderWindow, limit::Int)

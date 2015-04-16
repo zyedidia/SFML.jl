@@ -4,28 +4,19 @@ using Base.Libdl.dlsym
 
 function load_libs()
 	try
-		global const libcsfml_graphics = Libdl.dlopen("libcsfml-graphics.2.2")
-		global const libcsfml_window = Libdl.dlopen("libcsfml-window.2.2")
-		global const libcsfml_network = Libdl.dlopen("libcsfml-network.2.2")
-		global const libcsfml_system = Libdl.dlopen("libcsfml-system.2.2")
-		global const libcsfml_audio = Libdl.dlopen("libcsfml-audio.2.2")
+		global const libcsfml_graphics = Libdl.dlopen("libcsfml-graphics")
+		global const libcsfml_window = Libdl.dlopen("libcsfml-window")
+		global const libcsfml_network = Libdl.dlopen("libcsfml-network")
+		global const libcsfml_system = Libdl.dlopen("libcsfml-system")
+		global const libcsfml_audio = Libdl.dlopen("libcsfml-audio")
 	catch Exception
-		println("Something has gone wrong with the csfml installation. Please reinstall this package.")
+		@linux_only println("You must have CSFML installed. Try sudo apt-get install csfml")
+		@osx_only println("You must have CSFML installed. Try brew install csfml")
 		loaded = false
 	end
 end
 
-
-@osx_only cd("$(Pkg.dir("SFML"))/deps/CSFML-2.2-osx/") do
-	load_libs()
-end
-
-@linux_only cd("$(Pkg.dir("SFML"))/deps/CSFML-2.2-linux") do
-	old_ldpath = ENV["LD_LIBRARY_PATH"]
-	ENV["LD_LIBRARY_PATH"] = ".:$(old_ldpath)"
-	load_libs()
-	ENV["LD_LIBRARY_PATH"] = old_ldpath
-end
+load_libs()
 
 cd("$(Pkg.dir("SFML"))/deps/") do
 	global const libjuliasfml = Libdl.dlopen("libjuliasfml")

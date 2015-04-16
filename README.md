@@ -11,12 +11,22 @@ Take a look at the `examples` folder to see some usage examples.
 
 #Installation
 Currently, only Mac OS X is supported.
-You also need to have Julia version 0.4, which you can get [here] (http://julialang.org/downloads/) under `Nightly Builds`.
+You also need to have Julia version 0.4, which you can get [here](http://julialang.org/downloads/) under `Nightly Builds`.
 
-You must have SFML 2.2 installed to use this binding (CSFML comes with the package). You can install it with brew, or you can download it from [here] (http://www.sfml-dev.org/download/sfml/2.2).
+You must have [SFML](http://www.sfml-dev.org/download.php) and [CSFML](http://www.sfml-dev.org/download/csfml/) **of the same version** installed to use this binding.
 
+## Mac OSX
+brew provides version 2.2 of sfml and csfml
 ```
 $ brew install sfml
+$ brew install csfml
+```
+
+## Linux (Debian based)
+Apt get provides version 2.1 of sfml and csfml
+```
+$ sudo apt-get install libsfml-dev
+$ sudo apt-get install csfml
 ```
 
 Since this package is untagged but registered you must use `Pkg.clone(repo)` instead of `Pkg.add(name)`
