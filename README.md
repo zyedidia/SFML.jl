@@ -10,7 +10,7 @@ SFML.jl only works on Mac OS X (linux support currently in progress).
 Take a look at the `examples` folder to see some usage examples.
 
 #Installation
-Currently, only Mac OS X is supported.
+Currently, Mac OSX and Linux are supported.
 You also need to have Julia version 0.4, which you can get [here](http://julialang.org/downloads/) under `Nightly Builds`.
 
 You must have [SFML](http://www.sfml-dev.org/download.php) and [CSFML](http://www.sfml-dev.org/download/csfml/) **of the same version** installed to use this binding.
@@ -29,7 +29,7 @@ $ sudo apt-get install libsfml-dev
 $ sudo apt-get install csfml
 ```
 
-------------------
+---
 
 Since this package is untagged but registered you must use `Pkg.clone(repo)` instead of `Pkg.add(name)`
 
