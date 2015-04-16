@@ -26,7 +26,7 @@ $ brew install csfml
 Apt get provides version 2.1 of sfml and csfml
 ```
 $ sudo apt-get install libsfml-dev
-$ sudo apt-get install csfml
+$ sudo apt-get install libcsfml-dev
 ```
 
 ---
