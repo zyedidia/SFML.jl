@@ -1,14 +1,23 @@
-#include <stdio.h>
+#include <stdlib.h>
 #include <SFML/Network.h>
 
-sfTcpSocket* sjTcpListener_accept(sfTcpListener* listener, sfTcpSocket* connected) {
-	sfTcpListener_accept(listener, &connected);
-	return connected;
+typedef struct NetworkStruct {
+	int status;
+	void* ptr;
+} NetworkStruct;
+
+NetworkStruct sjTcpListener_accept(sfTcpListener* listener, sfTcpSocket* connected) {
+	NetworkStruct* s = malloc(sizeof *s);
+	s->status = sfTcpListener_accept(listener, &connected);
+	s->ptr = connected;
+	return *s;
 }
 
-sfPacket* sjTcpSocket_receivePacket(sfTcpSocket* socket, sfPacket* packet) {
-	sfTcpSocket_receivePacket(socket, packet);
-	return packet;
+NetworkStruct sjTcpSocket_receivePacket(sfTcpSocket* socket, sfPacket* packet) {
+	NetworkStruct* s = malloc(sizeof *s);
+	s->status = sfTcpSocket_receivePacket(socket, packet);
+	s->ptr = packet;
+	return *s;
 }
 
 char* sjPacket_readString(sfPacket* packet, char* str) {

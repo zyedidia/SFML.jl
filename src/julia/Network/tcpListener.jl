@@ -27,10 +27,10 @@ function listen(listener::TcpListener, port::Int)
 	return SocketStatus(ccall(dlsym(libcsfml_network, :sfTcpListener_listen), Int32, (Ptr{Void}, Uint16,), listener.ptr, port))
 end
 
-function accept(listener::TcpListener)
-	socket = TcpSocket()
-	socket.ptr = ccall(dlsym(libjuliasfml, :sjTcpListener_accept), Ptr{Void}, (Ptr{Void}, Ptr{Void},), listener.ptr, socket.ptr)
-	return socket
+function accept(listener::TcpListener, socket::TcpSocket)
+	nstruct = ccall(dlsym(libjuliasfml, :sjTcpListener_accept), NetworkStruct, (Ptr{Void}, Ptr{Void},), listener.ptr, socket.ptr)
+	socket.ptr = nstruct.ptr
+	return SocketStatus(nstruct.status)
 end
 
 export accept, listen, get_localport, is_blocking, set_blocking, destroy, TcpListener

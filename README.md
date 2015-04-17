@@ -10,20 +10,20 @@ SFML.jl only works on Mac OS X (linux support currently in progress).
 Take a look at the `examples` folder to see some usage examples.
 
 #Installation
-Currently, Mac OSX and Linux are supported.
+Currently, Mac OS X and Linux are supported.
 You also need to have Julia version 0.4, which you can get [here](http://julialang.org/downloads/) under `Nightly Builds`.
 
 You must have [SFML](http://www.sfml-dev.org/download.php) and [CSFML](http://www.sfml-dev.org/download/csfml/) **of the same version** installed to use this binding.
 
-#### Mac OSX
-brew provides version 2.2 of sfml and csfml
+#### Mac OS X
+brew provides version 2.2 of sfml and csfml.
 ```
 $ brew install sfml
 $ brew install csfml
 ```
 
 #### Linux (Debian based)
-Apt get provides version 2.1 of sfml and csfml
+apt-get provides version 2.1 of sfml and csfml.
 ```
 $ sudo apt-get install libsfml-dev
 $ sudo apt-get install libcsfml-dev

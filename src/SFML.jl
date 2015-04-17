@@ -22,6 +22,7 @@ cd("$(Pkg.dir("SFML"))/deps/") do
 	global const libjuliasfml = Libdl.dlopen("libjuliasfml")
 end
 
+include("julia/Network/networkStruct.jl")
 include("julia/Network/packet.jl")
 include("julia/Network/ipAddress.jl")
 include("julia/Network/socketStatus.jl")

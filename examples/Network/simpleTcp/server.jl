@@ -5,10 +5,11 @@ server = TcpListener()
 listen(server, 53000)
 println("Listening on port 53000")
 
-client = accept(server)
-println("Client connected")
+client = TcpSocket()
+println(accept(server, client))
 
-packet = receive_packet(client)
+packet = Packet()
+receive_packet(client, packet)
 
 println(read_string(packet))
 println(read_string(packet))
