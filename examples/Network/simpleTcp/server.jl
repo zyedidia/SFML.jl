@@ -1,15 +1,17 @@
 using SFML
 
 server = TcpListener()
+set_blocking(server, false)
 
 listen(server, 53000)
 println("Listening on port 53000")
 
 client = TcpSocket()
-println(accept(server, client))
+while accept(server, client) != SOCKET_DONE
+end
 
 packet = Packet()
-receive_packet(client, packet)
+println(receive_packet(client, packet))
 
 println(read_string(packet))
 println(read_string(packet))

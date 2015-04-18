@@ -20,10 +20,10 @@ function is_blocking(listener::TcpListener)
 end
 
 function get_localport(listener::TcpListener)
-	return Int(ccall(dlsym(libcsfml_network, :sfTcpListener_getLocalPort), Uint16, (Ptr{Void},), listener.ptr))
+	return ccall(dlsym(libcsfml_network, :sfTcpListener_getLocalPort), Uint16, (Ptr{Void},), listener.ptr)
 end
 
-function listen(listener::TcpListener, port::Int)
+function listen(listener::TcpListener, port::Integer)
 	return SocketStatus(ccall(dlsym(libcsfml_network, :sfTcpListener_listen), Int32, (Ptr{Void}, Uint16,), listener.ptr, port))
 end
 

@@ -7,7 +7,7 @@ function as_seconds(time::Time)
 end
 
 function as_milliseconds(time::Time)
-	return Int(ccall(dlsym(libcsfml_system, :sfTime_asMilliseconds), Int32, (Time,), time))
+	return ccall(dlsym(libcsfml_system, :sfTime_asMilliseconds), Int32, (Time,), time)
 end
 
 function as_microseconds(time::Time)
@@ -18,7 +18,7 @@ function seconds(amount::Real)
 	return ccall(dlsym(libcsfml_system, :sfTime_sfSeconds), Time, (Cfloat,), amount)
 end
 
-function milliseconds(amount::Int)
+function milliseconds(amount::Integer)
 	return ccall(dlsym(libcsfml_system, :sfTime_sfSeconds), Time, (Int32,), amount)
 end
 

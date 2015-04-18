@@ -5,7 +5,7 @@ It also has audio libraries and networking libraries.
 
 This is very much a work in progress right now. There is currently almost complete support for graphics and limited support for audio and network.
 
-SFML.jl only works on Mac OS X (linux support currently in progress).
+SFML.jl only works on Mac OS X and Linux.
 
 Take a look at the `examples` folder to see some usage examples.
 
@@ -13,7 +13,9 @@ Take a look at the `examples` folder to see some usage examples.
 Currently, Mac OS X and Linux are supported.
 You also need to have Julia version 0.4, which you can get [here](http://julialang.org/downloads/) under `Nightly Builds`.
 
-You must have [SFML](http://www.sfml-dev.org/download.php) and [CSFML](http://www.sfml-dev.org/download/csfml/) **of the same version** installed to use this binding.
+You must have [SFML](http://www.sfml-dev.org/download.php) and [CSFML](http://www.sfml-dev.org/download/csfml/) **of the same version**, ideally 2.2, installed to use this binding.
+
+You can build these from source or use the package that your package manager provides.
 
 #### Mac OS X
 brew provides version 2.2 of sfml and csfml.
@@ -23,7 +25,7 @@ $ brew install csfml
 ```
 
 #### Linux (Debian based)
-apt-get provides version 2.1 of sfml and csfml.
+apt-get provides version 2.1 of sfml and csfml. SFML.jl supports SFML and CSFML version 2.2 but most things (if not all) things will work with 2.1.
 ```
 $ sudo apt-get install libsfml-dev
 $ sudo apt-get install libcsfml-dev

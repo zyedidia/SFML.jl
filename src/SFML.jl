@@ -10,9 +10,8 @@ function load_libs()
 		global const libcsfml_system = Libdl.dlopen("libcsfml-system")
 		global const libcsfml_audio = Libdl.dlopen("libcsfml-audio")
 	catch Exception
-		@linux_only println("You must have CSFML installed. Try sudo apt-get install csfml")
+		@linux_only println("You must have CSFML installed. Try sudo apt-get install libcsfml-dev")
 		@osx_only println("You must have CSFML installed. Try brew install csfml")
-		loaded = false
 	end
 end
 
