@@ -33,15 +33,14 @@ $ sudo apt-get install libcsfml-dev
 
 ---
 
-Since this package is untagged but registered you must use `Pkg.clone(repo)` instead of `Pkg.add(name)`
+To install the package, use `Pkg.add("SFML")`
 
 ```
 julia> Pkg.update()
-julia> Pkg.clone("SFML")
-julia> Pkg.build("SFML")
+julia> Pkg.add("SFML")
 ```
 
-Julia should clone and install it for you.
+Julia should clone and build it for you.
 
 You should be all set now. You can put `using SFML` at the top of your files to use the library. Take a look at the `examples` folder to get started.
 

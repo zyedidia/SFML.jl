@@ -27,12 +27,12 @@ function RenderWindow(mode::VideoMode, title::String, style...)
 	return RenderWindow(ccall(dlsym(libcsfml_graphics, :sfRenderWindow_create), Ptr{Void}, (VideoMode, Ptr{Cchar}, Uint32, Ptr{Void},), mode, pointer(title), style_int, C_NULL))
 end
 
-function RenderWindow(title::String, width::Int, height::Int)
+function RenderWindow(title::String, width::Integer, height::Integer)
 	mode = VideoMode(width, height)
 	return RenderWindow(mode, title, window_defaultstyle)
 end
 
-function set_framerate_limit(window::RenderWindow, limit::Int)
+function set_framerate_limit(window::RenderWindow, limit::Integer)
 	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_setFramerateLimit), Void, (Ptr{Void}, Uint,), window.ptr, limit)
 end
 
@@ -103,4 +103,4 @@ end
 
 export RenderWindow, set_framerate_limit, isopen, pollevent, draw, clear, display, close, destroy, set_vsync_enabled, 
 capture, ContextSettings, WindowStyle, window_none, window_resize, window_defaultstyle, window_close, window_fullscreen,
-set_view, get_view, get_default_view
+set_view, get_view, get_default_view, ContextSettings
