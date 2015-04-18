@@ -25,7 +25,7 @@ $ brew install csfml
 ```
 
 #### Linux (Debian based)
-apt-get provides version 2.1 of sfml and csfml. SFML.jl supports SFML and CSFML version 2.2 but most things (if not all) things will work with 2.1.
+apt-get provides version 2.1 of sfml and csfml. SFML.jl supports SFML and CSFML version 2.2 but most (if not all) things will work with 2.1.
 ```
 $ sudo apt-get install libsfml-dev
 $ sudo apt-get install libcsfml-dev
