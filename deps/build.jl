@@ -21,7 +21,7 @@ run(`julia createlib.jl`)
 
 cd("../../deps")
 if isfile("libjuliasfml.dylib") || isfile("libjuliasfml.so")
-	println("Successfully built sfml.jl!")
+	println("Successfully built SFML.jl!")
 else
-	println("Building sfml.jl failed!")
+	println("Building SFML.jl failed!")
 end

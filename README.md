@@ -1,9 +1,10 @@
-#SFML.jl
+![SFML.jl](./assets/sfmljl_logo.png)
+---
 This is a binding of the C++ game and multimedia library [SFML](http://www.sfml-dev.org/) (Simple and Fast Multimedia Library), developed by Laurent Golima, for Julia. SFML is often used for game development but it can be used for anything graphics-related.
 
 It also has audio libraries and networking libraries.
 
-This is very much a work in progress right now. There is currently almost complete support for graphics and limited support for audio and network.
+This is a work in progress. There is currently almost complete support for graphics and limited support for audio and network.
 
 SFML.jl only works on Mac OS X and Linux.
 
@@ -18,14 +19,14 @@ You must have [SFML](http://www.sfml-dev.org/download.php) and [CSFML](http://ww
 You can build these from source or use the package that your package manager provides.
 
 #### Mac OS X
-brew provides version 2.2 of sfml and csfml.
+brew provides version 2.2 of SFML and CSFML.
 ```
 $ brew install sfml
 $ brew install csfml
 ```
 
 #### Linux (Debian based)
-apt-get provides version 2.1 of sfml and csfml. SFML.jl supports SFML and CSFML version 2.2 but most (if not all) things will work with 2.1.
+apt-get provides version 2.1 of SFML and CSFML. SFML.jl supports SFML and CSFML version 2.2 but most (if not all) things will work with 2.1.
 ```
 $ sudo apt-get install libsfml-dev
 $ sudo apt-get install libcsfml-dev
@@ -48,4 +49,4 @@ You should be all set now. You can put `using SFML` at the top of your files to 
 
 This software is a binding of the SFML library created by Laurent Gomila, which is provided under the Zlib/png license.
 
-This software is provided under the same license than the SFML, the Zlib/png license.
+This software is provided under the same license as SFML, the Zlib/png license.
