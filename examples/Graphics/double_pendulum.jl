@@ -2,12 +2,13 @@
 # Use HEAD for antialiasing
 using SFML
 
-t = 4*pi/4.
-a = 0*pi/8.
+t = 4*pi/4
+a = 0*pi/8
 td = 0.1 * rand()
 ad = 0.2 * rand()
 g = 9.8
 delta = 1/60
+torque = 0
 
 settings = ContextSettings()
 settings.antialiasing_level = 10
@@ -41,11 +42,20 @@ while isopen(window)
 		if get_type(event) == EventType.CLOSED
 			close(window)
 		end
+		if get_type(event) == EventType.KEY_PRESSED
+			if get_key(event).key_code == KeyCode.LEFT
+				torque = -1
+			elseif get_key(event).key_code == KeyCode.RIGHT
+				torque = 1
+			end
+		else
+			torque = 0
+		end
 	end
 	cycles = 2000
 	for i = 1:cycles
-		tdd = (1. / (2. - cos(a)*cos(a))) * (td*td*sin(a)*(1.+cos(a)) + (2.*td+ad)*ad*sin(a) + g*(cos(a)*sin(t+a)-2*sin(t)))
-		add = -tdd - tdd*cos(a) - td*td*sin(a) - g*sin(t+a)
+		tdd = (1 / (2 - cos(a)*cos(a))) * (td*td*sin(a)*(1+cos(a)) + (2*td+ad)*ad*sin(a) + g*(cos(a)*sin(t+a)-2*sin(t)) - torque*(1 + cos(a)))
+		add = -tdd - tdd*cos(a) - td*td*sin(a) - g*sin(t+a) + torque
 		td += delta * tdd / cycles
 		ad += delta * add / cycles
 		t += delta * td / cycles
