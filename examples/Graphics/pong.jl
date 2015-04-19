@@ -14,8 +14,8 @@ red = Color(255, 0, 0)
 white = Color(255, 255, 255)
 
 type Score
-	ball1::Int
-	ball2::Int
+	paddle1::Int
+	paddle2::Int
 end
 
 type Ball
@@ -55,12 +55,12 @@ function update(ball::Ball, score::Score)
 	end
 
 	if y - radius < 0
-		score.ball2 += 1
+		score.paddle2 += 1
 		# reset(ball)
 		# sleep(1)
 		ball.velocity.y = ballmaxvelocity;
 	elseif y + radius > window_height
-		score.ball1 += 1
+		score.paddle1 += 1
 		# reset(ball)
 		# sleep(1)
 		ball.velocity.y = -ballmaxvelocity;
@@ -113,7 +113,7 @@ function main()
 	arial = Font("arial.ttf")
 	score_text = Text()
 	set_font(score_text, arial)
-	set_string(score_text, "$(score.ball1)\n\n\n$(score.ball2)")
+	set_string(score_text, "$(score.paddle1)\n\n\n$(score.paddle2)")
 	set_color(score_text, Color(255, 0, 0))
 	set_position(score_text, Vector2f(60, window_height / 4))
 	set_charactersize(score_text, 50)
@@ -139,7 +139,7 @@ function main()
 			end
 		end
 
-		set_string(score_text, "$(score.ball1)\n\n\n$(score.ball2)")
+		set_string(score_text, "$(score.paddle1)\n\n\n$(score.paddle2)")
 
 		clear(window, white)
 

@@ -103,15 +103,15 @@ function get_pointcount(shape::ConvexShape)
 	return Int(ccall(dlsym(libcsfml_graphics, :sfConvexShape_getPointCount), Uint32, (Ptr{Void},), shape.ptr))
 end
 
-function get_point(shape::ConvexShape, index::Int)
+function get_point(shape::ConvexShape, index::Integer)
 	return ccall(dlsym(libcsfml_graphics, :sfConvexShape_getPoint), Vector2f, (Ptr{Void}, Uint32,), shape.ptr, index)
 end
 
-function set_pointcount(shape::ConvexShape, count::Int)
+function set_pointcount(shape::ConvexShape, count::Integer)
 	ccall(dlsym(libcsfml_graphics, :sfConvexShape_setPointCount), Void, (Ptr{Void}, Uint32,), shape.ptr, count)
 end
 
-function set_point(shape::ConvexShape, index::Int, point::Vector2f)
+function set_point(shape::ConvexShape, index::Integer, point::Vector2f)
 	ccall(dlsym(libcsfml_graphics, :sfConvexShape_setPoint), Void, (Ptr{Void}, Uint32, Vector2f,), shape.ptr, index, point)
 end
 

@@ -13,18 +13,30 @@ type ContextSettings
 	major_version::Uint32
 	minor_version::Uint32
 	attribute_flags::Uint32
+
+	function ContextSettings(depth_bits::Integer, stencil_bits::Integer, antialiasing_level::Integer, major_version::Integer, minor_version::Integer)
+		new(depth_bits, stencil_bits, antialiasing_level, major_version, minor_version, 0)
+	end
+	function ContextSettings()
+		new(0, 0, 0, 2, 2, 0)
+	end
 end
 
 type RenderWindow
 	ptr::Ptr{Void}
 end
 
-function RenderWindow(mode::VideoMode, title::String, style...)
+function RenderWindow(mode::VideoMode, title::String, settings::ContextSettings, style::WindowStyle...)
 	style_int = 0
 	for i = 1:length(style)
 		style_int |= Int(style[i])
 	end
-	return RenderWindow(ccall(dlsym(libcsfml_graphics, :sfRenderWindow_create), Ptr{Void}, (VideoMode, Ptr{Cchar}, Uint32, Ptr{Void},), mode, pointer(title), style_int, C_NULL))
+	settings_ptr = pointer_from_objref(settings)
+	return RenderWindow(ccall(dlsym(libcsfml_graphics, :sfRenderWindow_create), Ptr{Void}, (VideoMode, Ptr{Cchar}, Uint32, Ptr{Void},), mode, pointer(title), style_int, settings_ptr))
+end
+
+function RenderWindow(mode::VideoMode, title::String, style::WindowStyle...)
+	return RenderWindow(mode, title, ContextSettings(), style[1])
 end
 
 function RenderWindow(title::String, width::Integer, height::Integer)
@@ -37,7 +49,7 @@ function set_framerate_limit(window::RenderWindow, limit::Integer)
 end
 
 function set_vsync_enabled(window::RenderWindow, enabled::Bool)
-	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_setVerticalSyncEnabled), Void, (Ptr{Void}, Int32,), window.ptr, Int32(enabled))
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_setVerticalSyncEnabled), Void, (Ptr{Void}, Int32,), window.ptr, enabled)
 end
 
 function isopen(window::RenderWindow)
@@ -45,7 +57,7 @@ function isopen(window::RenderWindow)
 end
 
 function pollevent(window::RenderWindow, event::Event)
-	return ccall(dlsym(libcsfml_graphics, :sfRenderWindow_pollEvent), Int32, (Ptr{Void}, Ptr{Void},), window.ptr, event.ptr) == 1
+	return Bool(ccall(dlsym(libcsfml_graphics, :sfRenderWindow_pollEvent), Int32, (Ptr{Void}, Ptr{Void},), window.ptr, event.ptr))
 end
 
 function set_view(window::RenderWindow, view::View)

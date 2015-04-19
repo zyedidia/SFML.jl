@@ -36,6 +36,7 @@ include("julia/System/clock.jl")
 include("julia/Audio/music.jl")
 include("julia/Audio/soundBuffer.jl")
 include("julia/Audio/sound.jl")
+include("julia/Audio/soundBufferRecorder.jl")
 
 include("julia/Graphics/videoMode.jl")
 include("julia/Graphics/image.jl")
