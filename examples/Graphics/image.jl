@@ -1,3 +1,4 @@
+# Works on v0.0.1
 using SFML
 
 window = RenderWindow("Image and Texture Example", 800, 600)

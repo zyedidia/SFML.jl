@@ -33,6 +33,7 @@ include("julia/System/time.jl")
 include("julia/System/thread.jl")
 include("julia/System/clock.jl")
 
+include("julia/Audio/soundStatus.jl")
 include("julia/Audio/music.jl")
 include("julia/Audio/soundBuffer.jl")
 include("julia/Audio/sound.jl")

@@ -1,3 +1,4 @@
+# Works on v0.0.1
 using SFML
 
 window = RenderWindow(VideoMode(800, 600), "Square", window_defaultstyle)

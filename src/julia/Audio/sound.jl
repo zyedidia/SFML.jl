@@ -6,6 +6,12 @@ function Sound()
 	return Sound(ccall(dlsym(libcsfml_audio, :sfSound_create), Ptr{Void}, ()))
 end
 
+function Sound(buffer::SoundBuffer)
+	s = Sound()
+	set_buffer(s, buffer)
+	return s
+end
+
 function copy(sound::Sound)
 	return Sound(ccall(dlsym(libcsfml_audio, :sfSound_copy), Ptr{Void}, (Ptr{Void},), sound.ptr))
 end
@@ -25,6 +31,10 @@ end
 
 function stop(sound::Sound)
 	ccall(dlsym(libcsfml_audio, :sfSound_stop), Void, (Ptr{Void},), sound.ptr)
+end
+
+function get_status(sound::Sound)
+	ccall(dlsym(libcsfml_audio, :sfSound_getStatus), Int32, (Ptr{Void},), sound.ptr)
 end
 
 function set_buffer(sound::Sound, sound_buffer::SoundBuffer)
@@ -60,4 +70,4 @@ function get_volume(sound::Sound)
 end
 
 export Sound, copy, desoytr, play, pause, stop, set_buffer, set_loop, get_loop, set_pitch, set_volume, 
-get_pitch, get_volume
+get_pitch, get_volume, get_status

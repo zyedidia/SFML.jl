@@ -65,4 +65,5 @@ function write_string(packet::Packet, string::String)
 	ccall(dlsym(libcsfml_network, :sfPacket_writeString), Void, (Ptr{Void}, Ptr{Cchar},), packet.ptr, pointer(string))
 end
 
-export Packet, copy, destroy, clear, get_data_size, read_bool, read_string, write_bool, write_string, read_double, read_float, read_int, write_int, write_float, write_double
+export Packet, copy, destroy, clear, get_data_size, read_bool, read_string, write_bool, write_string, read_double, 
+read_float, read_int, write_int, write_float, write_double

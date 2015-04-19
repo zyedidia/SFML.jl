@@ -1,3 +1,4 @@
+
 type Music
 	ptr::Ptr{Void}
 end
@@ -59,5 +60,9 @@ function get_volume(music::Music)
 	return Real(ccall(dlsym(libcsfml_audio, :sfMusic_getVolume), Cfloat, (Ptr{Void},), music.ptr))
 end
 
+function get_status(music::Music)
+	return ccall(dlsym(libcsfml_audio, :sfMusic_getStatus), Int32, (Ptr{Void},), music.ptr)
+end
+
 export Music, destroy, set_loop, get_duration, get_loop, play, pause, stop, get_channelcount, get_samplerate, 
-set_pitch, set_volume, get_pitch, get_volume
+set_pitch, set_volume, get_pitch, get_volume, get_status

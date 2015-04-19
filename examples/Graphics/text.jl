@@ -1,3 +1,4 @@
+# Works on v0.0.1
 using SFML
 
 window = RenderWindow("Text example", 800, 600)

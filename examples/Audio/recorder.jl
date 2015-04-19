@@ -9,11 +9,9 @@ sleep(4)
 
 stop(recorder)
 println("Done recording")
-buffer = get_buffer(recorder)
-sound = Sound()
-set_buffer(sound, buffer)
+sound = Sound(get_buffer(recorder))
 play(sound)
 println("Playing")
 
-while true
+while get_status(sound) == SoundStatus.PLAYING
 end
