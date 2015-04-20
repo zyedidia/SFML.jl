@@ -1,6 +1,6 @@
 ![SFML.jl](./assets/sfmljl_logo.png)
 ---
-This is a binding of the C++ game and multimedia library [SFML](http://www.sfml-dev.org/) (Simple and Fast Multimedia Library), developed by Laurent Golima, for Julia. SFML is often used for game development but it can be used for anything graphics-related.
+This is a binding of the C++ game and multimedia library [SFML](http://www.sfml-dev.org/) (Simple and Fast Multimedia Library), developed by Laurent Gomila, for Julia. SFML is often used for game development but it can be used for anything graphics-related.
 
 It also has audio libraries and networking libraries.
 
@@ -35,7 +35,7 @@ $ sudo apt-get install libcsfml-dev
 On Linux, you also need to tell ld to look in the current directory for any shared libraries.
 
 ```
-$ echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.' >> ~/.bashrc
+$ echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.' > ~/.bashrc
 $ source ~/.bashrc
 ```
 

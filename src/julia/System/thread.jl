@@ -23,6 +23,7 @@ function launch(thread::Thread)
 end
 
 function wait(thread::Thread)
+	println("Wait")
 	ccall(dlsym(libcsfml_system, :sfThread_wait), Void, (Ptr{Void},), thread.ptr)
 end
 

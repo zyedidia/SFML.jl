@@ -2,7 +2,7 @@ module SFML
 
 using Base.Libdl.dlsym
 
-function load_libs()
+function __init__()
 	try
 		global const libcsfml_graphics = Libdl.dlopen("libcsfml-graphics")
 		global const libcsfml_window = Libdl.dlopen("libcsfml-window")
@@ -13,12 +13,10 @@ function load_libs()
 		@linux_only println("You must have CSFML installed. Try sudo apt-get install libcsfml-dev")
 		@osx_only println("You must have CSFML installed. Try brew install csfml")
 	end
-end
 
-load_libs()
-
-cd("$(Pkg.dir("SFML"))/deps/") do
-	global const libjuliasfml = Libdl.dlopen("libjuliasfml")
+	cd("$(Pkg.dir("SFML"))/deps/") do
+		global const libjuliasfml = Libdl.dlopen("libjuliasfml")
+	end
 end
 
 include("julia/Network/networkStruct.jl")
