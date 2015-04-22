@@ -1,4 +1,3 @@
-# Works on v0.0.1
 using SFML
 
 server = TcpListener()
