@@ -1,5 +1,3 @@
-# Works on v0.0.1 without using ContextSettings (see lines 14 and 15)
-# Use HEAD for antialiasing
 using SFML
 
 t = 4*pi/4
@@ -13,8 +11,7 @@ torque = 0
 settings = ContextSettings()
 settings.antialiasing_level = 10
 window = RenderWindow(VideoMode(800, 600), "Double Pendulum", settings, window_defaultstyle)
-# 0.0.1 (no antialiasing) 
-# window = RenderWindow(VideoMode(800, 600), "Double Pendulum", window_defaultstyle)
+
 set_framerate_limit(window, 60)
 event = Event()
 circles = CircleShape[]
