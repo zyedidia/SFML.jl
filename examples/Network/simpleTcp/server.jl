@@ -12,7 +12,7 @@ while accept(server, client) != SOCKET_DONE
 end
 
 packet = Packet()
-println(receive_packet(client, packet))
+println(receive(client, packet))
 
 println(read_string(packet))
 println(read_string(packet))

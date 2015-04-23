@@ -33,14 +33,14 @@ function disconnect(socket::TcpSocket)
 	ccall(dlsym(libcsfml_network, :sfTcpSocket_disconnect), Void, (Ptr{Void},), socket.ptr)
 end
 
-function send_packet(socket::TcpSocket, packet::Packet)
+function send(socket::TcpSocket, packet::Packet)
 	ccall(dlsym(libcsfml_network, :sfTcpSocket_sendPacket), Int32, (Ptr{Void}, Ptr{Void},), socket.ptr, packet.ptr)
 end
 
-function receive_packet(socket::TcpSocket, packet::Packet)
+function receive(socket::TcpSocket, packet::Packet)
 	nstruct = ccall(dlsym(libjuliasfml, :sjTcpSocket_receivePacket), NetworkStruct, (Ptr{Void}, Ptr{Void},), socket.ptr, packet.ptr)
 	packet.ptr = nstruct.ptr
 	return SocketStatus(nstruct.status)
 end
 
-export is_blocking, set_blocking, destroy, TcpSocket, connect, get_localport, receive_packet, send_packet
+export is_blocking, set_blocking, destroy, TcpSocket, connect, get_localport, receive, send
