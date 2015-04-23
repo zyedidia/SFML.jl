@@ -35,7 +35,7 @@ $ sudo apt-get install libcsfml-dev
 On Linux, you also need to tell ld to look in the current directory for any shared libraries.
 
 ```
-$ echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.' > ~/.bashrc
+$ echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.' >> ~/.bashrc
 $ source ~/.bashrc
 ```
 
