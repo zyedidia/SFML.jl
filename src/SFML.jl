@@ -48,6 +48,7 @@ include("julia/Graphics/texture.jl")
 include("julia/Graphics/sprite.jl")
 include("julia/Graphics/convexShape.jl")
 include("julia/Graphics/rectangleShape.jl")
+include("julia/Graphics/line.jl")
 include("julia/Graphics/circleShape.jl")
 
 include("julia/Window/event.jl")

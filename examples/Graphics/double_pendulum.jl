@@ -9,7 +9,7 @@ delta = 1/60
 torque = 0
 
 settings = ContextSettings()
-settings.antialiasing_level = 10
+settings.antialiasing_level = 3
 window = RenderWindow(VideoMode(800, 600), "Double Pendulum", settings, window_defaultstyle)
 
 set_framerate_limit(window, 60)
