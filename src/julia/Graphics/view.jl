@@ -10,6 +10,13 @@ function View(rect::FloatRect)
 	return View(ccall(dlsym(libcsfml_graphics, :sfView_createFromRect), Ptr{Void}, (FloatRect,), rect))
 end
 
+function View(center::Vector2f, size::Vector2f)
+	v = View()
+	set_center(v, center)
+	set_size(v, size)
+	return v
+end
+
 function copy(view::View)
 	return View(ccall(dlsym(libcsfml_graphics, :sfView_copy), Ptr{Void}, (Ptr{Void},), view.ptr))
 end

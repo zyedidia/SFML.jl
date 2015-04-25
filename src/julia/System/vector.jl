@@ -13,15 +13,27 @@ type Vector2f <: Vector2
 end
 
 function to_vec2u(vec::Vector2)
-	return Vector2u(Uint32(vec.x), Uint32(vec.y))
+	if typeof(vec) != Vector2u
+		return Vector2u(Uint32(vec.x), Uint32(vec.y))
+	else
+		vec
+	end
 end
 
 function to_vec2f(vec::Vector2)
-	return Vector2f(Float32(vec.x), Float32(vec.y))
+	if typeof(vec) != Vector2f
+		return Vector2f(Float32(vec.x), Float32(vec.y))
+	else
+		vec
+	end
 end
 
 function to_vec2i(vec::Vector2)
-	return Vector2i(Int32(vec.x), Int32(vec.y))
+	if typeof(vec) != Vector2i
+		return Vector2i(Int32(vec.x), Int32(vec.y))
+	else
+		vec
+	end
 end
 
 function distance(vec1::Vector2, vec2::Vector2)

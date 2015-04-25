@@ -60,6 +60,56 @@ function pollevent(window::RenderWindow, event::Event)
 	return Bool(ccall(dlsym(libcsfml_graphics, :sfRenderWindow_pollEvent), Int32, (Ptr{Void}, Ptr{Void},), window.ptr, event.ptr))
 end
 
+function waitevent(window::RenderWindow, event::Event)
+	return Bool(ccall(dlsym(libcsfml_graphics, :sfRenderWindow_waitEvent), Int32, (Ptr{Void}, Ptr{Void},), window.ptr, event.ptr))
+end
+
+function set_position(window::RenderWindow, pos::Vector2)
+	pos = to_vec2i(pos)
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_setPosition), Void, (Ptr{Void}, Vector2i,), window.ptr, pos)
+end
+
+function get_position(window::RenderWindow)
+	return ccall(dlsym(libcsfml_graphics, :sfRenderWindow_getPosition), Vector2i, (Ptr{Void},), window.ptr)
+end
+
+function set_size(window::RenderWindow, size::Vector2)
+	size = to_vec2u(size)
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_setSize), Void, (Ptr{Void}, Vector2u), window.ptr, size)
+end
+
+function get_size(window::RenderWindow)
+	return to_vec2i(ccall(dlsym(libcsfml_graphics, :sfRenderWindow_getSize), Vector2u, (Ptr{Void},), window.ptr))
+end
+
+function set_title(window::RenderWindow, title::String)
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_setTitle), Void, (Ptr{Void}, Ptr{Cchar},), window.ptr, pointer(title))
+end
+
+function set_visible(window::RenderWindow, visible::Bool)
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_setVisible), Void, (Ptr{Void}, Int32,), window.ptr, visible)
+end
+
+function set_mousecursor_visible(window::RenderWindow, visible::Bool)
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_setMouseCursorVisible), Void, (Ptr{Void}, Int32,), window.ptr, visible)
+end
+
+function set_keyrepeat_enabled(window::RenderWindow, enabled::Bool)
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_setKeyRepeatEnabled), Void, (Ptr{Void}, Int32,), window.ptr, enabled)
+end
+
+function set_active(window::RenderWindow, active::Bool)
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_setActive), Void, (Ptr{Void}, Int32,), window.ptr, active)
+end
+
+function requestfocus(window::RenderWindow)
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_requestFocus), Void, (Ptr{Void},), window.ptr)
+end
+
+function hasfocus(window::RenderWindow)
+	return Bool(ccall(dlsym(libcsfml_graphics, :sfRenderWindow_hasFocus), Int32, (Ptr{Void},), window.ptr))
+end
+
 function set_view(window::RenderWindow, view::View)
 	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_setView), Void, (Ptr{Void}, Ptr{Void},), window.ptr, view.ptr)
 end
@@ -70,6 +120,10 @@ end
 
 function get_default_view(window::RenderWindow)
 	return View(ccall(dlsym(libcsfml_graphics, :sfRenderWindow_getDefaultView), Ptr{Void}, (Ptr{Void},), window.ptr))
+end
+
+function get_viewport(window::RenderWindow)
+	return ccall(dlsym(libcsfml_graphics, :sfRenderWindow_getViewport), IntRect, (Ptr{Void},), window.ptr)
 end
 
 function draw(window::RenderWindow, object::CircleShape)
@@ -117,6 +171,18 @@ function capture(window::RenderWindow)
 	return Image(ccall(dlsym(libcsfml_graphics, :sfRenderWindow_capture), Ptr{Void}, (Ptr{Void},), window.ptr))
 end
 
+function pixel2coords(window::RenderWindow, point::Vector2, targetview::View)
+	point = to_vec2i(point)
+	return ccall(dlsym(libcsfml_graphics, :sfRenderWindow_mapPixelToCoords), Vector2f, (Ptr{Void}, Vector2i, Ptr{Void},), window.ptr, point, targetview.ptr)
+end
+
+function coords2pixel(window::RenderWindow, point::Vector2, targetview::View)
+	point = to_vec2f(point)
+	return ccall(dlsym(libcsfml_graphics, :sfRenderWindow_mapCoordsToPixel), Vector2i, (Ptr{Void}, Vector2f, Ptr{Void},), window.ptr, point, targetview.ptr)
+end
+
 export RenderWindow, set_framerate_limit, isopen, pollevent, draw, clear, display, close, destroy, set_vsync_enabled, 
 capture, ContextSettings, WindowStyle, window_none, window_resize, window_defaultstyle, window_close, window_fullscreen,
-set_view, get_view, get_default_view, ContextSettings
+set_view, get_view, get_default_view, ContextSettings, set_position, get_position, set_size, get_size, set_title,
+waitevent, set_visible, set_mousecursor_visible, set_keyrepeat_enabled, set_active, requestfocus, hasfocus,
+pixel2coords, coords2pixel
