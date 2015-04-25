@@ -146,6 +146,10 @@ function draw(window::RenderWindow, object::ConvexShape)
 	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_drawConvexShape), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), window.ptr, object.ptr, C_NULL)
 end
 
+function draw(window::RenderWindow, object::VertexArray)
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_drawVertexArray), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), window.ptr, object.ptr, C_NULL)
+end
+
 function draw(window::RenderWindow, object::Line)
 	draw(window, object.rect)
 end

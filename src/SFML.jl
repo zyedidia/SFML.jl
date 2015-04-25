@@ -1,6 +1,6 @@
 module SFML
 
-import Base: display, isopen, close, reset, copy
+import Base: display, isopen, close, reset, copy, launch
 dlsym = Base.Libdl.dlsym
 
 function __init__()
@@ -49,6 +49,7 @@ include("julia/Graphics/texture.jl")
 include("julia/Graphics/sprite.jl")
 include("julia/Graphics/convexShape.jl")
 include("julia/Graphics/rectangleShape.jl")
+include("julia/Graphics/vertexArray.jl")
 include("julia/Graphics/line.jl")
 include("julia/Graphics/circleShape.jl")
 
