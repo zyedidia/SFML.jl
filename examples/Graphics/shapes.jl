@@ -3,8 +3,6 @@ using SFML
 window = RenderWindow("Shapes", 800, 600)
 event = Event()
 
-black = Color(0, 0, 0)
-
 texture = Texture("wood-texture.jpg")
 
 triangle = CircleShape()
@@ -22,8 +20,8 @@ set_point(convex_shape, 3, Vector2f(30, 100))
 set_point(convex_shape, 4, Vector2f(0, 50))
 
 set_position(convex_shape, Vector2f(100.0, 400.0))
-set_fillcolor(convex_shape, Color(0, 255, 0))
-set_outlinecolor(convex_shape, Color(255, 0, 0))
+set_fillcolor(convex_shape, SFML.green)
+set_outlinecolor(convex_shape, SFML.red)
 set_outline_thickness(convex_shape, 5)
 
 more_points = true
@@ -52,7 +50,7 @@ while isopen(window)
 		restart(clock)
 	end
 
-	clear(window, black)
+	clear(window, SFML.black)
 	draw(window, triangle)
 	draw(window, convex_shape)
 	display(window)

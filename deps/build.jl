@@ -1,17 +1,15 @@
 println("Checking dependencies")
 
 if VERSION < v"0.4.0-dev"
-	warn("You must have at least julia 0.4 to use this package.\nYou currently have version $VERSION")
-else
-	using Base.Libdl
+	error("You must have at least julia 0.4 to use this package.\nYou currently have version $VERSION")
 end
 
-if find_library(["libsfml-graphics"]) == ""
+if Libdl.find_library(["libsfml-graphics"]) == ""
 	@osx_only warn("You do not have sfml installed. Try 'brew install sfml'")
 	@linux_only warn("You do not have sfml installed. Try 'sudo apt-get install libsfml-dev'")
 end
 
-if find_library(["libcsfml-graphics"]) == ""
+if Libdl.find_library(["libcsfml-graphics"]) == ""
 	@osx_only warn("You do not have csfml installed. Try 'brew install csfml'")
 	@linux_only warn("You do not have csfml installed. Try 'sudo apt-get install libcsfml-dev'")
 end

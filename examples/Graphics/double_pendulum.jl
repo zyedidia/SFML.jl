@@ -19,7 +19,7 @@ circles = CircleShape[]
 for i = 1:3
 	circle = CircleShape()
 	set_radius(circle, 10)
-	set_fillcolor(circle, Color(255, 0, 0))
+	set_fillcolor(circle, SFML.red)
 	set_origin(circle, Vector2f(10, 10))
 	push!(circles, circle)
 end
@@ -28,7 +28,7 @@ rectangles = RectangleShape[]
 for i = 1:2
 	rect = RectangleShape()
 	set_size(rect, Vector2f(10, 100))
-	set_fillcolor(rect, Color(0, 0, 255))
+	set_fillcolor(rect, SFML.blue)
 	set_origin(rect, Vector2f(5, 0))
 	push!(rectangles, rect)
 end
@@ -75,7 +75,7 @@ while isopen(window)
 	# E = T+V
 	# println(E)
 
-	clear(window, Color(0, 0, 0))
+	clear(window, SFML.black)
 	for i = 1:length(rectangles)
 		draw(window, rectangles[i])
 	end

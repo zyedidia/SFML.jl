@@ -71,6 +71,11 @@ function Event()
 	return Event(ccall(dlsym(libjuliasfml, :new_sjEvent), Ptr{Void}, ()))
 end
 
+function destroy(event::Event)
+	ccall(dlsym(libjuliasfml, :sjEvent_destroy), Void, (Ptr{Void},), event.ptr)
+	event = nothing
+end
+
 function get_type(event::Event)
 	return ccall(dlsym(libjuliasfml, :sjEvent_eventType), Int32, (Ptr{Void},), event.ptr)
 end
@@ -99,4 +104,5 @@ function get_mousewheel(event::Event)
 	return ccall(dlsym(libjuliasfml, :sjEvent_eventMouseWheel), MouseWheelEvent, (Ptr{Void},), event.ptr)
 end
 
-export Event, EventType, get_type, KeyEvent, TextEvent, MouseButtonEvent, MouseMoveEvent, MouseWheelEvent, SizeEvent, get_size, get_key, get_text, get_mousebutton, get_mousemove, get_mousewheel
+export Event, EventType, get_type, KeyEvent, TextEvent, MouseButtonEvent, MouseMoveEvent, MouseWheelEvent,
+SizeEvent, get_size, get_key, get_text, get_mousebutton, get_mousemove, get_mousewheel, destroy

@@ -4,19 +4,17 @@ window = RenderWindow("Input Example", 800, 600)
 set_framerate_limit(window, 60)
 event = Event()
 
-black = Color(0, 0, 0)
-
 circle = CircleShape()
 set_position(circle, Vector2f(50.0, 50.0))
 set_radius(circle, 30)
-set_fillcolor(circle, Color(255, 0, 0))
+set_fillcolor(circle, SFML.red)
 
-mousepos_text = Text()
+mousepos_text = RenderText()
 font = Font("arial.ttf")
 set_font(mousepos_text, font)
 set_position(mousepos_text, Vector2f(250.0, 300.0))
 set_string(mousepos_text, "Mouse Position: ")
-set_color(mousepos_text, Color(255, 0, 0))
+set_color(mousepos_text, SFML.red)
 set_charactersize(mousepos_text, 25)
 
 while isopen(window)
@@ -41,17 +39,17 @@ while isopen(window)
 
 	set_position(circle, circle_position)
 
-	if (is_mouse_pressed(MouseButton.LEFT))
-		println("Left mouse button")
-	end
-	if (is_mouse_pressed(MouseButton.RIGHT))
-		println("Right mouse button")
-	end
-
 	mousepos = get_mousepos(window)
 	set_string(mousepos_text, "Mouse Position: $(mousepos.x) $(mousepos.y)")
 
-	clear(window, black)
+	if (is_mouse_pressed(MouseButton.LEFT))
+		set_string(mousepos_text, "Left click")
+	end
+	if (is_mouse_pressed(MouseButton.RIGHT))
+		set_string(mousepos_text, "Right click")
+	end
+
+	clear(window, SFML.black)
 	draw(window, circle)
 	draw(window, mousepos_text)
 	display(window)

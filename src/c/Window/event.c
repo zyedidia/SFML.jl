@@ -6,6 +6,10 @@ sfEvent* new_sjEvent() {
 	return malloc(sizeof* pEvent);
 }
 
+void sjEvent_destroy(sfEvent* pEvent) {
+	free(pEvent);
+}
+
 int sjEvent_eventType(sfEvent* pEvent) {
 	return pEvent->type;
 }

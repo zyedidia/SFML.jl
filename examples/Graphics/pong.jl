@@ -10,9 +10,6 @@ paddle_velocity = 6.0
 window_width = 800
 window_height = 600
 
-red = Color(255, 0, 0)
-white = Color(255, 255, 255)
-
 type Score
 	paddle1::Int
 	paddle2::Int
@@ -29,7 +26,7 @@ function Ball(x, y)
 
 	set_position(ball.shape, ball.starting_pos)
 	set_radius(ball.shape, ball_radius)
-	set_fillcolor(ball.shape, red)
+	set_fillcolor(ball.shape, SFML.red)
 	set_origin(ball.shape, Vector2f(ball_radius, ball_radius))
 
 	return ball
@@ -79,7 +76,7 @@ function Paddle(x, y, left, right)
 
 	set_position(paddle.shape, Vector2f(x, y))
 	set_size(paddle.shape, Vector2f(paddle_width, paddle_height))
-	set_fillcolor(paddle.shape, red)
+	set_fillcolor(paddle.shape, SFML.red)
 	set_origin(paddle.shape, Vector2f(paddle_width / 2, paddle_height / 2))
 
 	return paddle
@@ -111,7 +108,7 @@ function main()
 	score = Score(0, 0)
 
 	arial = Font("arial.ttf")
-	score_text = Text()
+	score_text = RenderText()
 	set_font(score_text, arial)
 	set_string(score_text, "$(score.paddle1)\n\n\n$(score.paddle2)")
 	set_color(score_text, Color(255, 0, 0))
@@ -141,7 +138,7 @@ function main()
 
 		set_string(score_text, "$(score.paddle1)\n\n\n$(score.paddle2)")
 
-		clear(window, white)
+		clear(window, SFML.white)
 
 		if collides(ball, paddle1) || collides(ball, paddle2)
 			ball.velocity.y = -ball.velocity.y

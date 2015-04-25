@@ -15,14 +15,14 @@ type Color
 	end
 end
 
-const BLACK = Color(0, 0, 0)
-const WHITE = Color(255, 255, 255)
-const RED = Color(255, 0, 0)
-const GREEN = Color(0, 255, 0)
-const BLUE = Color(0, 0, 255)
-const YELLOW = Color(255, 255, 0)
-const MAGENTA = Color(255, 0, 255)
-const CYAN = Color(0, 255, 255)
-const TRANSPARENT = Color(0, 0, 0, 0)
+const black = Color(0, 0, 0)
+const white = Color(255, 255, 255)
+const red = Color(255, 0, 0)
+const green = Color(0, 255, 0)
+const blue = Color(0, 0, 255)
+const yellow = Color(255, 255, 0)
+const magenta = Color(255, 0, 255)
+const cyan = Color(0, 255, 255)
+const transparent = Color(0, 0, 0, 0)
 
 export Color

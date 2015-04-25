@@ -138,7 +138,7 @@ function draw(window::RenderWindow, object::Sprite)
 	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_drawSprite), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), window.ptr, object.ptr, C_NULL)
 end
 
-function draw(window::RenderWindow, object::Text)
+function draw(window::RenderWindow, object::RenderText)
 	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_drawText), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), window.ptr, object.ptr, C_NULL)
 end
 

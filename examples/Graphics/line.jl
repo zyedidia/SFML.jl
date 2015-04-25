@@ -7,7 +7,7 @@ p1 = Vector2f(400, 300)
 p2 = Vector2f(5, 5)
 
 line = Line(p1, p2, 10)
-set_fillcolor(line, Color(255, 0, 0))
+set_fillcolor(line, SFML.yellow)
 
 while isopen(window)
 	while pollevent(window, event)
@@ -16,7 +16,7 @@ while isopen(window)
 		end
 	end
 
-	clear(window, Color(255, 255, 255))
+	clear(window, SFML.black)
 	draw(window, line)
 	display(window)
 end
