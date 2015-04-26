@@ -36,8 +36,12 @@ function to_vec2i(vec::Vector2)
 	end
 end
 
-function distance(vec1::Vector2, vec2::Vector2)
-	return sqrt((vec2.x - vec1.x)^2 + (vec2.y - vec1.y)^2)
+function distance_squared(vec1::Vector2, vec2::Vector2)
+	return (vec2.x - vec1.x)^2 + (vec2.y - vec1.y)^2
 end
 
-export Vector2i, Vector2f, Vector2u, to_vec2u, to_vec2f, to_vec2i, distance
+function distance(vec1::Vector2, vec2::Vector2)
+	return sqrt(distance_squared(vec1, vec2))
+end
+
+export Vector2i, Vector2f, Vector2u, to_vec2u, to_vec2f, to_vec2i, distance, distance_squared
