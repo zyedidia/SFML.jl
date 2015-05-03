@@ -86,6 +86,10 @@ function set_title(window::RenderWindow, title::String)
 	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_setTitle), Void, (Ptr{Void}, Ptr{Cchar},), window.ptr, pointer(title))
 end
 
+function set_icon(window::RenderWindow, pixels::Array{Uint8}, width=32, height=32)
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_setIcon), Void, (Ptr{Void}, Uint32, Uint32, Ptr{Uint8},), window.ptr, width, height, pointer(pixels))
+end
+
 function set_visible(window::RenderWindow, visible::Bool)
 	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_setVisible), Void, (Ptr{Void}, Int32,), window.ptr, visible)
 end
@@ -189,4 +193,4 @@ export RenderWindow, set_framerate_limit, isopen, pollevent, draw, clear, displa
 capture, ContextSettings, WindowStyle, window_none, window_resize, window_defaultstyle, window_close, window_fullscreen,
 set_view, get_view, get_default_view, ContextSettings, set_position, get_position, set_size, get_size, set_title,
 waitevent, set_visible, set_mousecursor_visible, set_keyrepeat_enabled, set_active, requestfocus, hasfocus,
-pixel2coords, coords2pixel
+pixel2coords, coords2pixel, set_icon
