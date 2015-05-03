@@ -5,8 +5,6 @@ set_framerate_limit(window, 60)
 
 event = Event()
 
-black = Color(0, 0, 0)
-
 square = RectangleShape()
 set_size(square, Vector2f(40, 40))
 set_position(square, Vector2f(400, 300))
@@ -22,7 +20,7 @@ while isopen(window)
 		end
 	end
 
-	clear(window, black)
+	clear(window, SFML.black)
 	draw(window, square)
 	display(window)
 end

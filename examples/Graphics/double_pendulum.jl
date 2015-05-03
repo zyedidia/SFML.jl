@@ -1,4 +1,5 @@
 using SFML
+using AnimatedPlots
 
 t = 4*pi/4
 a = 0*pi/8
@@ -35,6 +36,7 @@ end
 set_position(rectangles[1], Vector2f(400, 300))
 
 while isopen(window)
+	sleep(0)
 	while pollevent(window, event)
 		if get_type(event) == EventType.CLOSED
 			close(window)

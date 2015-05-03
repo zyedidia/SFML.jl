@@ -39,11 +39,11 @@ function set_rotation(view::View, angle::Real)
 end
 
 function set_viewport(view::View, rect::FloatRect)
-	ccall(dlsym(libcsfml_graphics, :sfView_setViewport), Void, (Ptr{Void}, FloatRect,), view.ptr)
+	ccall(dlsym(libcsfml_graphics, :sfView_setViewport), Void, (Ptr{Void}, FloatRect,), view.ptr, rect)
 end
 
 function reset(view::View, rect::FloatRect)
-	ccall(dlsym(libcsfml_graphics, :sfView_reset), Void, (Ptr{Void}, FloatRect,), view.ptr)
+	ccall(dlsym(libcsfml_graphics, :sfView_reset), Void, (Ptr{Void}, FloatRect,), view.ptr, rect)
 end
 
 function get_center(view::View)

@@ -15,6 +15,15 @@ function Line(p1::Vector2, p2::Vector2, thickness::Real)
 	return Line(rect, p1, p2, thickness)
 end
 
+function copy(l::Line)
+	Line(l.p1, l.p2, l.thickness)
+end
+
+function destroy(l::Line)
+	destroy(l.rect)
+	l = nothing
+end
+
 function set_fillcolor(l::Line, c::Color)
 	set_fillcolor(l.rect, c)
 end

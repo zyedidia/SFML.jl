@@ -4,8 +4,6 @@ window = RenderWindow("Image and Texture Example", 800, 600)
 set_framerate_limit(window, 60)
 event = Event()
 
-white = Color(255, 255, 255)
-
 tank = Sprite()
 texture = Texture("greenTank.png")
 texture_size = get_size(texture)
@@ -23,7 +21,7 @@ while isopen(window)
 
 	rotate(tank, 2)
 
-	clear(window, white)
+	clear(window, SFML.white)
 	draw(window, tank)
 	display(window)
 end
