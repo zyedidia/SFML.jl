@@ -32,7 +32,10 @@ function RenderWindow(mode::VideoMode, title::String, settings::ContextSettings,
 		style_int |= Int(style[i])
 	end
 	settings_ptr = pointer_from_objref(settings)
-	return RenderWindow(ccall(dlsym(libcsfml_graphics, :sfRenderWindow_create), Ptr{Void}, (VideoMode, Ptr{Cchar}, Uint32, Ptr{Void},), mode, pointer(title), style_int, settings_ptr))
+	icon = Image("$(Pkg.dir("SFML"))/assets/sfmljl_icon.png")
+	window = RenderWindow(ccall(dlsym(libcsfml_graphics, :sfRenderWindow_create), Ptr{Void}, (VideoMode, Ptr{Cchar}, Uint32, Ptr{Void},), mode, pointer(title), style_int, settings_ptr))
+	set_icon(window, icon, 64, 64)
+	return window
 end
 
 function RenderWindow(mode::VideoMode, title::String, style::WindowStyle...)
@@ -86,8 +89,12 @@ function set_title(window::RenderWindow, title::String)
 	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_setTitle), Void, (Ptr{Void}, Ptr{Cchar},), window.ptr, pointer(title))
 end
 
-function set_icon(window::RenderWindow, pixels::Array{Uint8}, width=32, height=32)
+function set_icon(window::RenderWindow, pixels::Array{Uint8}, width=64, height=64)
 	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_setIcon), Void, (Ptr{Void}, Uint32, Uint32, Ptr{Uint8},), window.ptr, width, height, pointer(pixels))
+end
+
+function set_icon(window::RenderWindow, image::Image, width=64, height=64)
+	set_icon(window, get_pixels(image), width, height)
 end
 
 function set_visible(window::RenderWindow, visible::Bool)
