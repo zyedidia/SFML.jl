@@ -22,10 +22,6 @@ type ContextSettings
 	end
 end
 
-type RenderWindow
-	ptr::Ptr{Void}
-end
-
 function RenderWindow(mode::VideoMode, title::String, settings::ContextSettings, style::WindowStyle...)
 	style_int = 0
 	for i = 1:length(style)
