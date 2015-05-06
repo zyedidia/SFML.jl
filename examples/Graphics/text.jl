@@ -6,8 +6,6 @@ set_framerate_limit(window, 60)
 event = Event()
 
 text = RenderText()
-font = Font("arial.ttf")
-set_font(text, font)
 set_position(text, Vector2f(400.0, 300.0))
 set_string(text, "SFML.jl is cool")
 set_color(text, SFML.cyan)
