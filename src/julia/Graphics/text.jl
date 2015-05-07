@@ -9,7 +9,9 @@ type RenderText
 end
 
 function RenderText()
-	RenderText(ccall(dlsym(libcsfml_graphics, :sfText_create), Ptr{Void}, ()))
+	r = RenderText(ccall(dlsym(libcsfml_graphics, :sfText_create), Ptr{Void}, ()))
+	set_font(r, Font("$(Pkg.dir("SFML"))/assets/arial.ttf"))
+	r
 end
 
 function copy(text::RenderText)
