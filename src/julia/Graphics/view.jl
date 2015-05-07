@@ -1,20 +1,26 @@
 type View
 	ptr::Ptr{Void}
+
+	function View(ptr::Ptr{Void})
+		v = new(ptr)
+		finalizer(v, destroy)
+		v
+	end
 end
 
 function View()
-	return View(ccall(dlsym(libcsfml_graphics, :sfView_create), Ptr{Void}, ()))
+	View(ccall(dlsym(libcsfml_graphics, :sfView_create), Ptr{Void}, ()))
 end
 
 function View(rect::FloatRect)
-	return View(ccall(dlsym(libcsfml_graphics, :sfView_createFromRect), Ptr{Void}, (FloatRect,), rect))
+	View(ccall(dlsym(libcsfml_graphics, :sfView_createFromRect), Ptr{Void}, (FloatRect,), rect))
 end
 
 function View(center::Vector2f, size::Vector2f)
 	v = View()
 	set_center(v, center)
 	set_size(v, size)
-	return v
+	v
 end
 
 function copy(view::View)
@@ -23,7 +29,6 @@ end
 
 function destroy(view::View)
 	ccall(dlsym(libcsfml_graphics, :sfView_destroy), Void, (Ptr{Void},), view.ptr)
-	view = nothing
 end
 
 function set_center(view::View, pos::Vector2f)
@@ -75,4 +80,4 @@ function zoom(view::View, factor::Real)
 end
 
 export zoom, rotate, move, get_viewport, get_rotation, get_size, get_center, reset, set_viewport,
-set_rotation, set_size, set_center, destroy, copy, View
+set_rotation, set_size, set_center, copy, View

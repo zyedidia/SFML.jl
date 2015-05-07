@@ -1,9 +1,15 @@
 type Packet
 	ptr::Ptr{Void}
+
+	function Packet(ptr::Ptr{Void})
+		p = new(ptr)
+		finalizer(p, destroy)
+		p
+	end
 end
 
 function Packet()
-	return Packet(ccall(dlsym(libcsfml_network, :sfPacket_create), Ptr{Void}, ()))
+	Packet(ccall(dlsym(libcsfml_network, :sfPacket_create), Ptr{Void}, ()))
 end
 
 function copy(packet::Packet)
@@ -12,7 +18,6 @@ end
 
 function destroy(packet::Packet)
 	ccall(dlsym(libcsfml_network, :sfPacket_destroy), Void, (Ptr{Void},), packet.ptr)
-	packet = nothing
 end
 
 function clear(packet::Packet)
@@ -65,5 +70,5 @@ function write(packet::Packet, string::String)
 	ccall(dlsym(libcsfml_network, :sfPacket_writeString), Void, (Ptr{Void}, Ptr{Cchar},), packet.ptr, pointer(string))
 end
 
-export Packet, copy, destroy, clear, get_data_size, read_bool, read_string, read_double, write
+export Packet, copy, clear, get_data_size, read_bool, read_string, read_double, write
 read_float, read_int

@@ -1,9 +1,15 @@
 type Sprite
 	ptr::Ptr{Void}
+
+	function Sprite(ptr::Ptr{Void})
+		s = new(ptr)
+		finalizer(s, destroy)
+		s
+	end
 end
 
 function Sprite()
-	return Sprite(ccall(dlsym(libcsfml_graphics, :sfSprite_create), Ptr{Void}, ()))
+	Sprite(ccall(dlsym(libcsfml_graphics, :sfSprite_create), Ptr{Void}, ()))
 end
 
 function copy(sprite::Sprite)
@@ -12,7 +18,6 @@ end
 
 function destroy(sprite::Sprite)
 	ccall(dlsym(libcsfml_graphics, :sfSprite_destroy), Void, (Ptr{Void},), sprite.ptr)
-	sprite = nothing
 end
 
 function set_position(sprite::Sprite, position::Vector2f)
@@ -80,4 +85,4 @@ function get_globalbounds(sprite::Sprite)
 end
 
 export get_color, get_texture, set_texture, scale, rotate, move, get_origin, get_rotation, get_position, set_origin,
-set_scale, set_rotation, set_position, copy, Sprite, destroy, get_localbounds, get_globalbounds
+set_scale, set_rotation, set_position, copy, Sprite, get_localbounds, get_globalbounds

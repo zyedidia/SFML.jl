@@ -1,15 +1,19 @@
-
 type Music
 	ptr::Ptr{Void}
+
+	function Music(ptr::Ptr{Void})
+		m = new(ptr)
+		finalizer(m, destroy)
+		m
+	end
 end
 
 function Music(filename::String)
-	return Music(ccall(dlsym(libcsfml_audio, :sfMusic_createFromFile), Ptr{Void}, (Ptr{Cchar},), pointer(filename)))
+	Music(ccall(dlsym(libcsfml_audio, :sfMusic_createFromFile), Ptr{Void}, (Ptr{Cchar},), pointer(filename)))
 end
 
 function destroy(music::Music)
 	ccall(dlsym(libcsfml_audio, :sfMusic_destroy), Void, (Ptr{Void},), music.ptr)
-	music = nothing
 end
 
 function set_loop(music::Music, loop::Bool)
@@ -64,5 +68,5 @@ function get_status(music::Music)
 	return ccall(dlsym(libcsfml_audio, :sfMusic_getStatus), Int32, (Ptr{Void},), music.ptr)
 end
 
-export Music, destroy, set_loop, get_duration, get_loop, play, pause, stop, get_channelcount, get_samplerate, 
+export Music, set_loop, get_duration, get_loop, play, pause, stop, get_channelcount, get_samplerate, 
 set_pitch, set_volume, get_pitch, get_volume, get_status

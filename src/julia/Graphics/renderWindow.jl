@@ -175,7 +175,6 @@ end
 
 function destroy(window::RenderWindow)
 	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_destroy), Void, (Ptr{Void},), window.ptr)
-	window = nothing
 end
 
 function capture(window::RenderWindow)
@@ -192,7 +191,7 @@ function coords2pixel(window::RenderWindow, point::Vector2, targetview::View)
 	return ccall(dlsym(libcsfml_graphics, :sfRenderWindow_mapCoordsToPixel), Vector2i, (Ptr{Void}, Vector2f, Ptr{Void},), window.ptr, point, targetview.ptr)
 end
 
-export RenderWindow, set_framerate_limit, isopen, pollevent, draw, clear, display, close, destroy, set_vsync_enabled, 
+export RenderWindow, set_framerate_limit, isopen, pollevent, draw, clear, display, close, set_vsync_enabled, 
 capture, ContextSettings, WindowStyle, window_none, window_resize, window_defaultstyle, window_close, window_fullscreen,
 set_view, get_view, get_default_view, ContextSettings, set_position, get_position, set_size, get_size, set_title,
 waitevent, set_visible, set_mousecursor_visible, set_keyrepeat_enabled, set_active, requestfocus, hasfocus,

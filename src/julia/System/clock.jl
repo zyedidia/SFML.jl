@@ -1,9 +1,15 @@
 type Clock
 	ptr::Ptr{Void}
+
+	function Clock(ptr::Ptr{Void})
+		c = new(ptr)
+		finalizer(c, destroy)
+		c
+	end
 end
 
 function Clock()
-	return Clock(ccall(dlsym(libcsfml_system, :sfClock_create), Ptr{Void}, ()))
+	Clock(ccall(dlsym(libcsfml_system, :sfClock_create), Ptr{Void}, ()))
 end
 
 function copy(clock::Clock)
@@ -12,7 +18,6 @@ end
 
 function destroy(clock::Clock)
 	ccall(dlsym(libcsfml_system, :sfClock_destroy), Void, (Ptr{Void},), clock.ptr)
-	clock = nothing
 end
 
 function get_elapsed_time(clock::Clock)
@@ -23,4 +28,4 @@ function restart(clock::Clock)
 	return ccall(dlsym(libcsfml_system, :sfClock_restart), Time, (Ptr{Void},), clock.ptr)
 end
 
-export Clock, copy, destroy, get_elapsed_time, restart
+export Clock, copy, get_elapsed_time, restart

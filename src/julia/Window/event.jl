@@ -1,5 +1,11 @@
 type Event
 	ptr::Ptr{Void}
+
+	function Event(ptr::Ptr{Void})
+		event = new(ptr)
+		finalizer(event, destroy)
+		event
+	end
 end
 
 type KeyEvent
@@ -68,12 +74,11 @@ baremodule EventType
 end
 
 function Event()
-	return Event(ccall(dlsym(libjuliasfml, :new_sjEvent), Ptr{Void}, ()))
+	Event(ccall(dlsym(libjuliasfml, :new_sjEvent), Ptr{Void}, ()))
 end
 
 function destroy(event::Event)
 	ccall(dlsym(libjuliasfml, :sjEvent_destroy), Void, (Ptr{Void},), event.ptr)
-	event = nothing
 end
 
 function get_type(event::Event)
@@ -105,4 +110,4 @@ function get_mousewheel(event::Event)
 end
 
 export Event, EventType, get_type, KeyEvent, TextEvent, MouseButtonEvent, MouseMoveEvent, MouseWheelEvent,
-SizeEvent, get_size, get_key, get_text, get_mousebutton, get_mousemove, get_mousewheel, destroy
+SizeEvent, get_size, get_key, get_text, get_mousebutton, get_mousemove, get_mousewheel

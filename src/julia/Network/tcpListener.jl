@@ -1,14 +1,19 @@
 type TcpListener
 	ptr::Ptr{Void}
+
+	function TcpListener(ptr::Ptr{Void})
+		t = new(ptr)
+		finalizer(t, destroy)
+		t
+	end
 end
 
 function TcpListener()
-	return TcpListener(ccall(dlsym(libcsfml_network, :sfTcpListener_create), Ptr{Void}, ()))
+	TcpListener(ccall(dlsym(libcsfml_network, :sfTcpListener_create), Ptr{Void}, ()))
 end
 
 function destroy(listener::TcpListener)
 	ccall(dlsym(libcsfml_network, :sfTcpListener_destroy), Void, (Ptr{Void},), listener.ptr)
-	listener = nothing
 end
 
 function set_blocking(listener::TcpListener, blocking::Bool)
@@ -33,4 +38,4 @@ function accept(listener::TcpListener, socket::TcpSocket)
 	return SocketStatus(nstruct.status)
 end
 
-export accept, listen, get_localport, is_blocking, set_blocking, destroy, TcpListener
+export accept, listen, get_localport, is_blocking, set_blocking, TcpListener

@@ -16,7 +16,6 @@ while true
 	
 	if is_key_pressed(KeyCode.ESCAPE)
 		stop(music)
-		destroy(music)
 		exit(0)
 	end
 

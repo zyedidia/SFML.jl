@@ -1,9 +1,15 @@
 type Image
 	ptr::Ptr{Void}
+
+	function Image(ptr::Ptr{Void})
+		i = new(ptr)
+		finalizer(i, destroy)
+		i
+	end
 end
 
 function Image(filename::String)
-	return Image(ccall(dlsym(libcsfml_graphics, :sfImage_createFromFile), Ptr{Void}, (Ptr{Cchar},), pointer(filename)))
+	Image(ccall(dlsym(libcsfml_graphics, :sfImage_createFromFile), Ptr{Void}, (Ptr{Cchar},), pointer(filename)))
 end
 
 function copy(image::Image)
@@ -12,7 +18,6 @@ end
 
 function destroy(image::Image)
 	ccall(dlsym(libcsfml_graphics, :sfImage_destroy), Void, (Ptr{Void},), image.ptr)
-	image = nothing
 end
 
 function save_to_file(image::Image, filename::String)
@@ -44,5 +49,5 @@ function flip_vertically(image::Image)
 	ccall(dlsym(libcsfml_graphics, :sfImage_flipVertically), Void, (Ptr{Void},), image.ptr)
 end
 
-export Image, save_to_file, destroy, get_size, set_pixel, get_pixel, get_pixels,
-flip_vertically, flip_horizontally
+export Image, save_to_file, get_size, set_pixel, get_pixel, get_pixels,
+flip_vertically, flip_horizontally, copy

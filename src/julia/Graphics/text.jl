@@ -1,9 +1,15 @@
 type RenderText
 	ptr::Ptr{Void}
+
+	function RenderText(ptr::Ptr{Void})
+		t = new(ptr)
+		finalizer(t, destroy)
+		t
+	end
 end
 
 function RenderText()
-	return RenderText(ccall(dlsym(libcsfml_graphics, :sfText_create), Ptr{Void}, ()))
+	RenderText(ccall(dlsym(libcsfml_graphics, :sfText_create), Ptr{Void}, ()))
 end
 
 function copy(text::RenderText)
@@ -12,7 +18,6 @@ end
 
 function destroy(text::RenderText)
 	ccall(dlsym(libcsfml_graphics, :sfText_destroy), Void, (Ptr{Void},), text.ptr)
-	text = nothing
 end
 
 function set_position(text::RenderText, pos::Vector2f)
@@ -108,5 +113,5 @@ function get_globalbounds(text::RenderText)
 end
 
 export set_color, set_style, set_charactersize, set_font, set_string, scale, rotate, move, get_origin,
-get_scale, get_rotation, get_position, set_origin, set_scale, set_rotation, set_position, destroy, copy,
+get_scale, get_rotation, get_position, set_origin, set_scale, set_rotation, set_position, copy,
 RenderText, get_localbounds, get_globalbounds, get_style, get_string, get_font, get_charactersize, get_color

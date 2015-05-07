@@ -1,9 +1,15 @@
 type ConvexShape
 	ptr::Ptr{Void}
+
+	function ConvexShape(ptr::Ptr{Void})
+		c = new(ptr)
+		finalizer(c, destroy)
+		c
+	end
 end
 
 function ConvexShape()
-	return ConvexShape(ccall(dlsym(libcsfml_graphics, :sfConvexShape_create), Ptr{Void}, ()))
+	ConvexShape(ccall(dlsym(libcsfml_graphics, :sfConvexShape_create), Ptr{Void}, ()))
 end
 
 function copy(shape::ConvexShape)
@@ -12,7 +18,6 @@ end
 
 function destroy(shape::ConvexShape)
 	ccall(dlsym(libcsfml_graphics, :sfConvexShape_destroy), Void, (Ptr{Void},), shape.ptr)
-	shape = nothing
 end
 
 function set_position(shape::ConvexShape, pos::Vector2f)
@@ -125,5 +130,5 @@ end
 
 export get_globalbounds, get_localbounds, set_point, set_pointcount, get_outline_thickness, get_outlinecolor, 
 get_fillcolor, get_texture_rect, get_texture, set_outlinecolor, set_fillcolor, set_position, get_position, set_rotation,
-get_rotation, set_scale, get_scale, move, scale, rotate, set_texture_rect, set_texture, set_origin, get_origin, destroy,
+get_rotation, set_scale, get_scale, move, scale, rotate, set_texture_rect, set_texture, set_origin, get_origin,
 copy, ConvexShape, get_point, get_pointcount

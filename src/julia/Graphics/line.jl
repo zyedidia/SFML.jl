@@ -12,16 +12,11 @@ function Line(p1::Vector2, p2::Vector2, thickness::Real)
 	set_rotation(rect, rad2deg(atan2(p2.y - p1.y, p2.x - p1.x)))
 	set_origin(rect, Vector2f(0, thickness / 2))
 
-	return Line(rect, p1, p2, thickness)
+	Line(rect, p1, p2, thickness)
 end
 
 function copy(l::Line)
 	Line(l.p1, l.p2, l.thickness)
-end
-
-function destroy(l::Line)
-	destroy(l.rect)
-	l = nothing
 end
 
 function set_fillcolor(l::Line, c::Color)
@@ -49,4 +44,4 @@ function get_outline_thickness(l::Line)
 end
 
 export Line, set_fillcolor, get_fillcolor, set_outlinecolor, get_outlinecolor,
-set_outline_thickness, get_outline_thickness
+set_outline_thickness, get_outline_thickness, copy

@@ -1,14 +1,19 @@
 type TcpSocket
 	ptr::Ptr{Void}
+
+	function TcpSocket(ptr::Ptr{Void})
+		t = new(ptr)
+		finalizer(t, destroy)
+		t
+	end
 end
 
 function TcpSocket()
-	return TcpSocket(ccall(dlsym(libcsfml_network, :sfTcpSocket_create), Ptr{Void}, ()))
+	TcpSocket(ccall(dlsym(libcsfml_network, :sfTcpSocket_create), Ptr{Void}, ()))
 end
 
 function destroy(socket::TcpSocket)
 	ccall(dlsym(libcsfml_network, :sfTcpSocket_destroy), Void, (Ptr{Void},), socket.ptr)
-	socket = nothing
 end
 
 function set_blocking(socket::TcpSocket, blocking::Bool)
@@ -43,4 +48,4 @@ function receive(socket::TcpSocket, packet::Packet)
 	return SocketStatus(nstruct.status)
 end
 
-export is_blocking, set_blocking, destroy, TcpSocket, connect, get_localport, receive, send
+export is_blocking, set_blocking, TcpSocket, connect, get_localport, receive, send

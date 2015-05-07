@@ -1,9 +1,15 @@
 type CircleShape
 	ptr::Ptr{Void}
+
+	function CircleShape(ptr::Ptr{Void})
+		c = new(ptr)
+		finalizer(c, destroy)
+		c
+	end
 end
 
 function CircleShape()
-	return CircleShape(ccall(dlsym(libcsfml_graphics, :sfCircleShape_create), Ptr{Void}, ()))
+	CircleShape(ccall(dlsym(libcsfml_graphics, :sfCircleShape_create), Ptr{Void}, ()))
 end
 
 function copy(shape::CircleShape)
@@ -12,7 +18,6 @@ end
 
 function destroy(shape::CircleShape)
 	ccall(dlsym(libcsfml_graphics, :sfCircleShape_destroy), Void, (Ptr{Void},), shape.ptr)
-	shape = nothing
 end
 
 function set_origin(shape::CircleShape, origin::Vector2f)

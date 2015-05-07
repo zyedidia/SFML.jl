@@ -15,10 +15,16 @@ end
 
 type VertexArray
 	ptr::Ptr{Void}
+
+	function VertexArray(ptr::Ptr{Void})
+		v = new(ptr)
+		finalizer(v, destroy)
+		v
+	end
 end
 
 function VertexArray()
-	return VertexArray(ccall(dlsym(libcsfml_graphics, :sfVertexArray_create), Ptr{Void}, ()))
+	VertexArray(ccall(dlsym(libcsfml_graphics, :sfVertexArray_create), Ptr{Void}, ()))
 end
 
 function copy(arr::VertexArray)
@@ -62,5 +68,5 @@ function getbounds(arr::VertexArray)
 	return ccall(dlsym(libcsfml_graphics, :sfVertexArray_getBounds), FloatRect, (Ptr{Void},), arr.ptr)
 end
 
-export PrimitiveType, VertexArray, Vertex, copy, destroy, get_vertexcount, get_vertex, clear, resize, append,
+export PrimitiveType, VertexArray, Vertex, copy, get_vertexcount, get_vertex, clear, resize, append,
 set_primitive_type, get_primitive_type, getbounds

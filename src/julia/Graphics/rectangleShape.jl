@@ -1,9 +1,15 @@
 type RectangleShape
 	ptr::Ptr{Void}
+
+	function RectangleShape(ptr::Ptr{Void})
+		r = new(ptr)
+		finalizer(r, destroy)
+		r
+	end
 end
 
 function RectangleShape()
-	return RectangleShape(ccall(dlsym(libcsfml_graphics, :sfRectangleShape_create), Ptr{Void}, ()))
+	RectangleShape(ccall(dlsym(libcsfml_graphics, :sfRectangleShape_create), Ptr{Void}, ()))
 end
 
 function copy(shape::RectangleShape)
@@ -12,7 +18,6 @@ end
 
 function destroy(shape::RectangleShape)
 	ccall(dlsym(libcsfml_graphics, :sfRectangleShape_destroy), Void, (Ptr{Void},), shape.ptr)
-	shape = nothing
 end
 
 function set_position(shape::RectangleShape, position::Vector2f)

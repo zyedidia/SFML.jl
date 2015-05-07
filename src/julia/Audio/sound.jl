@@ -1,15 +1,21 @@
 type Sound
 	ptr::Ptr{Void}
+
+	function Sound(ptr::Ptr{Void})
+		s = new(ptr)
+		finalizer(s, destroy)
+		s
+	end
 end
 
 function Sound()
-	return Sound(ccall(dlsym(libcsfml_audio, :sfSound_create), Ptr{Void}, ()))
+	Sound(ccall(dlsym(libcsfml_audio, :sfSound_create), Ptr{Void}, ()))
 end
 
 function Sound(buffer::SoundBuffer)
 	s = Sound()
 	set_buffer(s, buffer)
-	return s
+	s
 end
 
 function copy(sound::Sound)
@@ -18,7 +24,6 @@ end
 
 function destroy(sound::Sound)
 	ccall(dlsym(libcsfml_audio, :sfSound_destroy), Void, (Ptr{Void},), sound.ptr)
-	sound = nothing
 end
 
 function play(sound::Sound)
@@ -69,5 +74,5 @@ function get_volume(sound::Sound)
 	return Real(ccall(dlsym(libcsfml_audio, :sfSound_getVolume), Cfloat, (Ptr{Void},), sound.ptr))
 end
 
-export Sound, copy, desoytr, play, pause, stop, set_buffer, set_loop, get_loop, set_pitch, set_volume, 
+export Sound, copy, play, pause, stop, set_buffer, set_loop, get_loop, set_pitch, set_volume, 
 get_pitch, get_volume, get_status

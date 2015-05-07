@@ -1,14 +1,19 @@
 type SoundBufferRecorder
 	ptr::Ptr{Void}
+
+	function SoundBufferRecorder(ptr::Ptr{Void})
+		s = new(ptr)
+		finalizer(s, destroy)
+		s
+	end
 end
 
 function SoundBufferRecorder()
-	return SoundBufferRecorder(ccall(dlsym(libcsfml_audio, :sfSoundBufferRecorder_create), Ptr{Void}, ()))
+	SoundBufferRecorder(ccall(dlsym(libcsfml_audio, :sfSoundBufferRecorder_create), Ptr{Void}, ()))
 end
 
 function destroy(recorder::SoundBufferRecorder)
 	ccall(dlsym(libcsfml_audio, :sfSoundBufferRecorder_destroy), Void, (Ptr{Void},), recorder.ptr)
-	recorder = nothing
 end
 
 function start(recorder::SoundBufferRecorder, sample_rate::Integer = 44100)
@@ -27,4 +32,4 @@ function get_buffer(recorder::SoundBufferRecorder)
 	return SoundBuffer(ccall(dlsym(libcsfml_audio, :sfSoundBufferRecorder_getBuffer), Ptr{Void}, (Ptr{Void},), recorder.ptr))
 end
 
-export SoundBufferRecorder, destroy, start, stop, get_sample_rate, get_buffer
+export SoundBufferRecorder, start, stop, get_sample_rate, get_buffer
