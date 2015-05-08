@@ -3,8 +3,8 @@ type Font
 
 	function Font(ptr::Ptr{Void})
 		f = new(ptr)
-		finalizer(f, destroy)
-		f
+		# finalizer(f, destroy)
+		# f
 	end
 end
 

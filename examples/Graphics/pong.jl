@@ -107,9 +107,7 @@ end
 function main()
 	score = Score(0, 0)
 
-	arial = Font("arial.ttf")
 	score_text = RenderText()
-	set_font(score_text, arial)
 	set_string(score_text, "$(score.paddle1)\n\n\n$(score.paddle2)")
 	set_color(score_text, Color(255, 0, 0))
 	set_position(score_text, Vector2f(60, window_height / 4))

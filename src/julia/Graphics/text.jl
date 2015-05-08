@@ -3,8 +3,8 @@ type RenderText
 
 	function RenderText(ptr::Ptr{Void})
 		t = new(ptr)
-		finalizer(t, destroy)
-		t
+		# finalizer(t, destroy)
+		# t
 	end
 end
 
@@ -111,7 +111,7 @@ function get_localbounds(text::RenderText)
 end
 
 function get_globalbounds(text::RenderText)
-	return ccall(dlsym(libcsfml_graphics, :sfText_getGlobalBounds), FloatRect, (Ptr{Void},), text.ptr)
+	ccall(dlsym(libcsfml_graphics, :sfText_getGlobalBounds), FloatRect, (Ptr{Void},), text.ptr)
 end
 
 export set_color, set_style, set_charactersize, set_font, set_string, scale, rotate, move, get_origin,
