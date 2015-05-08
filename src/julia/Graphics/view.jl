@@ -3,8 +3,8 @@ type View
 
 	function View(ptr::Ptr{Void})
 		v = new(ptr)
-		finalizer(v, destroy)
-		v
+		# finalizer(v, destroy)
+		# v
 	end
 end
 
