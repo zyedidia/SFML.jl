@@ -8,6 +8,10 @@ type Texture
 	end
 end
 
+function Texture(width::Integer, height::Integer)
+	Texture(ccall(dlsym(libcsfml_graphics, :sfTexture_create), Ptr{Void}, (Uint32, Uint32,), width, height))
+end
+
 function Texture(filename::String)
 	Texture(ccall(dlsym(libcsfml_graphics, :sfTexture_createFromFile), Ptr{Void}, (Ptr{Cchar}, Ptr{Void},), pointer(filename), C_NULL))
 end
@@ -36,8 +40,12 @@ function copy_to_image(texture::Texture)
 	return Image(ccall(dlsym(libcsfml_graphics, :sfTexture_copyToImage), Ptr{Void}, (Ptr{Void},), texture.ptr))
 end
 
-function update_from_window(texture::Texture, window::RenderWindow, width=0, height=0)
+function update(texture::Texture, window::RenderWindow, width::Integer=0, height::Integer=0)
 	ccall(dlsym(libcsfml_graphics, :sfTexture_updateFromWindow), Void, (Ptr{Void}, Ptr{Void}, Uint32, Uint32,), texture.ptr, window.ptr, width, height)
+end
+
+function update(texture::Texture, image::Image, x_off::Integer=0, y_off::Integer=0)
+	ccall(dlsym(libcsfml_graphics, :sfTexture_updateFromImage), Void, (Ptr{Void}, Ptr{Void}, Uint32, Uint32,), texture.ptr, image.ptr, x_off, y_off)
 end
 
 function set_smooth(texture::Texture, smooth::Bool)

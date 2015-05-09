@@ -1,8 +1,9 @@
 type Sound
 	ptr::Ptr{Void}
+	buffer
 
 	function Sound(ptr::Ptr{Void})
-		s = new(ptr)
+		s = new(ptr, nothing)
 		finalizer(s, destroy)
 		s
 	end
@@ -44,6 +45,7 @@ end
 
 function set_buffer(sound::Sound, sound_buffer::SoundBuffer)
 	ccall(dlsym(libcsfml_audio, :sfSound_setBuffer), Void, (Ptr{Void}, Ptr{Void},), sound.ptr, sound_buffer.ptr)
+	sound.buffer = sound_buffer
 end
 
 function get_buffer(sound::Sound)

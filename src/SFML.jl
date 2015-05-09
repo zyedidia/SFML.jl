@@ -1,6 +1,6 @@
 module SFML
 
-import Base: display, isopen, close, reset, copy, launch
+import Base: display, isopen, close, reset, copy, launch, start
 dlsym = Base.Libdl.dlsym
 
 function __init__()

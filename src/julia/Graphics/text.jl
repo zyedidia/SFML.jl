@@ -1,10 +1,11 @@
 type RenderText
 	ptr::Ptr{Void}
+	font
 
 	function RenderText(ptr::Ptr{Void})
-		t = new(ptr)
-		# finalizer(t, destroy)
-		# t
+		t = new(ptr, nothing)
+		finalizer(t, destroy)
+		t
 	end
 end
 
@@ -72,6 +73,7 @@ end
 
 function set_font(text::RenderText, font::Font)
 	ccall(dlsym(libcsfml_graphics, :sfText_setFont), Void, (Ptr{Void}, Ptr{Void},), text.ptr, font.ptr)
+	text.font = font
 end
 
 function set_charactersize(text::RenderText, size::Int)

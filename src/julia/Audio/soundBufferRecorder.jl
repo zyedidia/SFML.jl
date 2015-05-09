@@ -3,8 +3,8 @@ type SoundBufferRecorder
 
 	function SoundBufferRecorder(ptr::Ptr{Void})
 		s = new(ptr)
-		finalizer(s, destroy)
-		s
+		# finalizer(s, destroy)
+		# s
 	end
 end
 
@@ -13,6 +13,7 @@ function SoundBufferRecorder()
 end
 
 function destroy(recorder::SoundBufferRecorder)
+	println("Destroy")
 	ccall(dlsym(libcsfml_audio, :sfSoundBufferRecorder_destroy), Void, (Ptr{Void},), recorder.ptr)
 end
 

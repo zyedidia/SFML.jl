@@ -12,6 +12,10 @@ function Image(filename::String)
 	Image(ccall(dlsym(libcsfml_graphics, :sfImage_createFromFile), Ptr{Void}, (Ptr{Cchar},), pointer(filename)))
 end
 
+function Image(width::Integer, height::Integer, color::Color = SFML.black)
+	Image(ccall(dlsym(libcsfml_graphics, :sfImage_create), Ptr{Void}, (Uint32, Uint32, Color,), width, height, color))
+end
+
 function copy(image::Image)
 	return Image(ccall(dlsym(libcsfml_graphics, :sfImage_copy), Ptr{Void}, (Ptr{Void},), image.ptr))
 end
@@ -25,7 +29,7 @@ function save_to_file(image::Image, filename::String)
 end
 
 function set_pixel(image::Image, x::Integer, y::Integer, color::Color)
-	ccall(dlsym(libcsfml_graphics, :sfImage_setPixel), Void, (Ptr{Void}, Uint32, Uint32, Color), image.ptr, x, y, color)
+	ccall(dlsym(libcsfml_graphics, :sfImage_setPixel), Void, (Ptr{Void}, Uint32, Uint32, Color,), image.ptr, x, y, color)
 end
 
 function get_pixel(image::Image, x::Integer, y::Integer)

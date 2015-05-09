@@ -22,7 +22,7 @@ end
 t = Thread(callback)
 launch(t)
 
-# wait(t)
+SFML.wait(t)
 
 # t2 = Thread(thread2)
 # launch(t2)

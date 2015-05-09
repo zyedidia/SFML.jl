@@ -3,11 +3,11 @@ type VideoMode
 	height::Uint32
 	bits_per_pixel::Uint32
 
-	function VideoMode(width::Int, height::Int, bits_per_pixel::Int)
+	function VideoMode(width::Integer, height::Integer, bits_per_pixel::Integer)
 		return new(width, height, bits_per_pixel)
 	end
 	
-	function VideoMode(width::Int, height::Int)
+	function VideoMode(width::Integer, height::Integer)
 		return new(width, height, 32)
 	end
 end
