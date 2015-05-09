@@ -10,8 +10,6 @@ set_radius(circle, 30)
 set_fillcolor(circle, SFML.red)
 
 mousepos_text = RenderText()
-font = Font("arial.ttf")
-set_font(mousepos_text, font)
 set_position(mousepos_text, Vector2f(250.0, 300.0))
 set_string(mousepos_text, "Mouse Position: ")
 set_color(mousepos_text, SFML.red)

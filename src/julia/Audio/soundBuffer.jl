@@ -3,8 +3,8 @@ type SoundBuffer
 
 	function SoundBuffer(ptr::Ptr{Void})
 		s = new(ptr)
-		finalizer(s, destroy)
-		s
+		# finalizer(s, destroy)
+		# s
 	end
 end
 
