@@ -1,5 +1,6 @@
 type CircleShape
 	ptr::Ptr{Void}
+	_texture::Texture
 
 	function CircleShape(ptr::Ptr{Void})
 		c = new(ptr)
@@ -106,6 +107,7 @@ end
 
 function set_texture(shape::CircleShape, texture::Texture)
 	ccall(dlsym(libcsfml_graphics, :sfCircleShape_setTexture), Void, (Ptr{Void}, Ptr{Void}, Int32,), shape.ptr, texture.ptr, false)
+	shape._texture = texture
 end
 
 function set_texture_rect(shape::CircleShape, rect::IntRect)

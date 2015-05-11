@@ -1,5 +1,6 @@
 type Sprite
 	ptr::Ptr{Void}
+	_texture::Texture
 
 	function Sprite(ptr::Ptr{Void})
 		s = new(ptr)
@@ -62,6 +63,7 @@ end
 
 function set_texture(sprite::Sprite, texture::Texture)
 	ccall(dlsym(libcsfml_graphics, :sfSprite_setTexture), Void, (Ptr{Void}, Ptr{Void}, Int32,), sprite.ptr, texture.ptr, 1)
+	sprite._texture = texture
 end
 
 function set_color(sprite::Sprite, color::Color)

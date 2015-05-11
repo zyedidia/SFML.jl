@@ -3,8 +3,8 @@ type Texture
 
 	function Texture(ptr::Ptr{Void})
 		t = new(ptr)
-		# finalizer(t, destroy)
-		# t
+		finalizer(t, destroy)
+		t
 	end
 end
 

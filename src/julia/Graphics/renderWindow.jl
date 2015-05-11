@@ -119,6 +119,7 @@ end
 
 function set_view(window::RenderWindow, view::View)
 	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_setView), Void, (Ptr{Void}, Ptr{Void},), window.ptr, view.ptr)
+	window._view = view
 end
 
 function get_view(window::RenderWindow)

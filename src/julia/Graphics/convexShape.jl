@@ -1,5 +1,6 @@
 type ConvexShape
 	ptr::Ptr{Void}
+	_texture::Texture
 
 	function ConvexShape(ptr::Ptr{Void})
 		c = new(ptr)
@@ -66,6 +67,7 @@ end
 
 function set_texture(shape::ConvexShape, texture::Texture)
 	ccall(dlsym(libcsfml_graphics, :sfConvexShape_setTexture), Void, (Ptr{Void}, Ptr{Void},), shape.ptr, texture.ptr)
+	shape._texture = texture
 end
 
 function set_texture_rect(shape::ConvexShape, rect::IntRect)

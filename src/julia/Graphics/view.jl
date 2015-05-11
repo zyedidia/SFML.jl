@@ -2,6 +2,7 @@ type View
 	ptr::Ptr{Void}
 
 	function View(ptr::Ptr{Void})
+		println("Created view")
 		v = new(ptr)
 		# finalizer(v, destroy)
 		# v
@@ -28,6 +29,7 @@ function copy(view::View)
 end
 
 function destroy(view::View)
+	println("destroyed view")
 	ccall(dlsym(libcsfml_graphics, :sfView_destroy), Void, (Ptr{Void},), view.ptr)
 end
 

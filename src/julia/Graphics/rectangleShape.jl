@@ -1,5 +1,6 @@
 type RectangleShape
 	ptr::Ptr{Void}
+	_texture::Texture
 
 	function RectangleShape(ptr::Ptr{Void})
 		r = new(ptr)
@@ -50,6 +51,7 @@ end
 
 function set_texture(shape::RectangleShape, texture::Texture)
 	ccall(dlsym(libcsfml_graphics, :sfRectangleShape_setTexture), Void, (Ptr{Void}, Ptr{Void}, Int32,), shape.ptr, texture.ptr, false)
+	shape._texture = texture
 end
 
 function set_texture_rect(shape::RectangleShape, rect::IntRect)
