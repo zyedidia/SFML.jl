@@ -182,12 +182,12 @@ function capture(window::RenderWindow)
 	return Image(ccall(dlsym(libcsfml_graphics, :sfRenderWindow_capture), Ptr{Void}, (Ptr{Void},), window.ptr))
 end
 
-function pixel2coords(window::RenderWindow, point::Vector2, targetview::View)
+function pixel2coords(window::RenderWindow, point::Vector2, targetview::View=get_view(window))
 	point = to_vec2i(point)
 	return ccall(dlsym(libcsfml_graphics, :sfRenderWindow_mapPixelToCoords), Vector2f, (Ptr{Void}, Vector2i, Ptr{Void},), window.ptr, point, targetview.ptr)
 end
 
-function coords2pixel(window::RenderWindow, point::Vector2, targetview::View)
+function coords2pixel(window::RenderWindow, point::Vector2, targetview::View=get_view(window))
 	point = to_vec2f(point)
 	return ccall(dlsym(libcsfml_graphics, :sfRenderWindow_mapCoordsToPixel), Vector2i, (Ptr{Void}, Vector2f, Ptr{Void},), window.ptr, point, targetview.ptr)
 end
