@@ -1,5 +1,6 @@
 type RenderTexture
 	ptr::Ptr{Void}
+	_view::View
 
 	function RenderTexture(ptr::Ptr{Void})
 		r = new(ptr)
@@ -35,6 +36,7 @@ end
 
 function set_view(texture::RenderTexture, view::View)
 	ccall(dlsym(libcsfml_graphics, :sfRenderTexture_setView), Void, (Ptr{Void}, Ptr{Void},), texture.ptr, view.ptr)
+	texture._view = view
 end
 
 function get_view(texture::RenderTexture)
