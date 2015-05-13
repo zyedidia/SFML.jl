@@ -1,6 +1,6 @@
 module SFML
 
-import Base: display, isopen, close, reset, copy, launch, start, listen, accept, connect, write, send
+import Base: display, isopen, close, reset, copy, launch, start, listen, accept, connect, write, send, bind
 dlsym = Base.Libdl.dlsym
 
 function __init__()
@@ -38,6 +38,7 @@ include("julia/Audio/soundBuffer.jl")
 include("julia/Audio/sound.jl")
 include("julia/Audio/soundBufferRecorder.jl")
 
+include("julia/Graphics/transform.jl")
 include("julia/Graphics/videoMode.jl")
 include("julia/Graphics/color.jl")
 include("julia/Graphics/image.jl")

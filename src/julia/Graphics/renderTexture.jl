@@ -62,27 +62,27 @@ function coords2pixel(texture::RenderTexture, point::Vector2, targetview=get_vie
 end
 
 function draw(texture::RenderTexture, object::Sprite)
-	ccall(dlsym(libcsfml_graphics, :sfRenderTexture_drawSprite), Void, (Ptr{Void}, Ptr{Void},), texture.ptr, object.ptr)
+	ccall(dlsym(libcsfml_graphics, :sfRenderTexture_drawSprite), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), texture.ptr, object.ptr, C_NULL)
 end
 
 function draw(texture::RenderTexture, object::RenderText)
-	ccall(dlsym(libcsfml_graphics, :sfRenderTexture_drawText), Void, (Ptr{Void}, Ptr{Void},), texture.ptr, object.ptr)
+	ccall(dlsym(libcsfml_graphics, :sfRenderTexture_drawText), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), texture.ptr, object.ptr, C_NULL)
 end
 
 function draw(texture::RenderTexture, object::CircleShape)
-	ccall(dlsym(libcsfml_graphics, :sfRenderTexture_drawCircleShape), Void, (Ptr{Void}, Ptr{Void},), texture.ptr, object.ptr)
+	ccall(dlsym(libcsfml_graphics, :sfRenderTexture_drawCircleShape), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), texture.ptr, object.ptr, C_NULL)
 end
 
 function draw(texture::RenderTexture, object::ConvexShape)
-	ccall(dlsym(libcsfml_graphics, :sfRenderTexture_drawConvexShape), Void, (Ptr{Void}, Ptr{Void},), texture.ptr, object.ptr)
+	ccall(dlsym(libcsfml_graphics, :sfRenderTexture_drawConvexShape), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), texture.ptr, object.ptr, C_NULL)
 end
 
 function draw(texture::RenderTexture, object::RectangleShape)
-	ccall(dlsym(libcsfml_graphics, :sfRenderTexture_drawRectangleShape), Void, (Ptr{Void}, Ptr{Void},), texture.ptr, object.ptr)
+	ccall(dlsym(libcsfml_graphics, :sfRenderTexture_drawRectangleShape), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), texture.ptr, object.ptr, C_NULL)
 end
 
 function draw(texture::RenderTexture, object::VertexArray)
-	ccall(dlsym(libcsfml_graphics, :sfRenderTexture_drawVertexArray), Void, (Ptr{Void}, Ptr{Void},), texture.ptr, object.ptr)
+	ccall(dlsym(libcsfml_graphics, :sfRenderTexture_drawVertexArray), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), texture.ptr, object.ptr, C_NULL)
 end
 
 function get_texture(texture::RenderTexture)

@@ -9,20 +9,18 @@ type Shader
 end
 
 function Shader(vertex_shader::String, frag_shader::String)
-	vert = isempty(vertex_shader) ? C_NULL : vertex_shader
-	frag = isempty(frag_shader) ? C_NULL : frag_shader
-	Shader(ccall(dlsym(libcsfml_graphics, :sfShader_create), Ptr{Void}, (Ptr{Cchar}, Ptr{Cchar},), pointer(vert), pointer(frag)))
+	vert = isempty(vertex_shader) ? C_NULL : pointer(vertex_shader)
+	frag = isempty(frag_shader) ? C_NULL : pointer(frag_shader)
+	Shader(ccall(dlsym(libcsfml_graphics, :sfShader_createFromFile), Ptr{Void}, (Ptr{Cchar}, Ptr{Cchar},), vert, frag))
 end
 
-function Shader(shader_filename::String, shader_type::String = shader_filename[search(shader_filename, ".")+1:end])
-	if shader_type == "vert"
-		Shader(shader_filename, "")
-	elseif shader_type == "frag"
-		Shader("", shader_filename)
-	else
-		println("Invalid shader type $shader_type")
-	end
-end
+# function Shader(shader_filename::String, shader_type::String)
+# 	if shader_type == "vert"
+# 		return Shader(shader_filename, "")
+# 	else shader_type == "frag"
+# 		return Shader("", shader_filename)
+# 	end
+# end
 
 function destroy(shader::Shader)
 	ccall(dlsym(libcsfml_graphics, :sfShader_destroy), Void, (Ptr{Void},), shader.ptr)
@@ -58,6 +56,14 @@ end
 
 function set_parameter(shader::Shader, name::String)
 	ccall(dlsym(libcsfml_graphics, :sfShader_setCurrentTextureParameter), Void, (Ptr{Void}, Ptr{Cchar},), shader.ptr, pointer(name))
+end
+
+function bind(shader::Shader)
+	ccall(dlsym(libcsfml_graphics, :sfShader_bind), Void, (Ptr{Void},), shader.ptr)
+end
+
+function unbind()
+	ccall(dlsym(libcsfml_graphics, :sfShader_bind), Void, (Ptr{Void},), C_NULL)
 end
 
 function shader_is_available()
