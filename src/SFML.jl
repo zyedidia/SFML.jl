@@ -39,6 +39,8 @@ include("julia/Audio/sound.jl")
 include("julia/Audio/soundBufferRecorder.jl")
 
 include("julia/Graphics/transform.jl")
+include("julia/Graphics/blendMode.jl")
+include("julia/Graphics/renderStates.jl")
 include("julia/Graphics/videoMode.jl")
 include("julia/Graphics/color.jl")
 include("julia/Graphics/image.jl")
