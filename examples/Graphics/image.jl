@@ -6,6 +6,7 @@ event = Event()
 
 tank = Sprite()
 texture = Texture("greenTank.png")
+set_smooth(texture, true)
 texture_size = get_size(texture)
 
 set_texture(tank, texture)
