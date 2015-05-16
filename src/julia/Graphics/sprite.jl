@@ -1,4 +1,4 @@
-type Sprite
+type Sprite <: Drawable
 	ptr::Ptr{Void}
 	_texture::Texture
 
@@ -62,8 +62,8 @@ function scale(sprite::Sprite, factors::Vector2f)
 end
 
 function set_texture(sprite::Sprite, texture::Texture)
-	ccall(dlsym(libcsfml_graphics, :sfSprite_setTexture), Void, (Ptr{Void}, Ptr{Void}, Int32,), sprite.ptr, texture.ptr, 1)
 	sprite._texture = texture
+	ccall(dlsym(libcsfml_graphics, :sfSprite_setTexture), Void, (Ptr{Void}, Ptr{Void}, Int32,), sprite.ptr, texture.ptr, 1)
 end
 
 function set_color(sprite::Sprite, color::Color)

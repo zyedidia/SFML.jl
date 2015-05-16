@@ -13,7 +13,7 @@ type Vertex
 	texCoords::Vector2f
 end
 
-type VertexArray
+type VertexArray <: Drawable
 	ptr::Ptr{Void}
 
 	function VertexArray(ptr::Ptr{Void})

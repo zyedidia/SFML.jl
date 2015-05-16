@@ -43,5 +43,13 @@ function get_outline_thickness(l::Line)
 	return get_outline_thickness(l.rect)
 end
 
+function draw(window::RenderWindow, object::Line)
+	draw(window, object.rect)
+end
+
+function draw(texture::RenderTexture, object::Line)
+	draw(texture, object.rect)
+end
+
 export Line, set_fillcolor, get_fillcolor, set_outlinecolor, get_outlinecolor,
-set_outline_thickness, get_outline_thickness, copy
+set_outline_thickness, get_outline_thickness, copy, draw

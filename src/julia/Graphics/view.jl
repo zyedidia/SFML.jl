@@ -2,7 +2,6 @@ type View
 	ptr::Ptr{Void}
 
 	function View(ptr::Ptr{Void})
-		println("Created view")
 		v = new(ptr)
 		# finalizer(v, destroy)
 		# v

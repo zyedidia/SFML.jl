@@ -52,7 +52,7 @@ function set_vsync_enabled(window::RenderWindow, enabled::Bool)
 end
 
 function isopen(window::RenderWindow)
-	return ccall(dlsym(libcsfml_graphics, :sfRenderWindow_isOpen), Int32, (Ptr{Void},), window.ptr) == 1
+	return Bool(ccall(dlsym(libcsfml_graphics, :sfRenderWindow_isOpen), Int32, (Ptr{Void},), window.ptr))
 end
 
 function pollevent(window::RenderWindow, event::Event)
@@ -134,32 +134,37 @@ function get_viewport(window::RenderWindow)
 	return ccall(dlsym(libcsfml_graphics, :sfRenderWindow_getViewport), IntRect, (Ptr{Void},), window.ptr)
 end
 
-function draw(window::RenderWindow, object::CircleShape)
-	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_drawCircleShape), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), window.ptr, object.ptr, C_NULL)
+function draw(window::RenderWindow, object::Drawable, renderStates::RenderStates)
+	ptr = pointer_from_objref(renderStates)
+	draw(window, object, ptr)
 end
 
-function draw(window::RenderWindow, object::RectangleShape)
-	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_drawRectangleShape), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), window.ptr, object.ptr, C_NULL)
+function draw(window::RenderWindow, object::Drawable)
+	draw(window, object, C_NULL)
 end
 
-function draw(window::RenderWindow, object::Sprite)
-	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_drawSprite), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), window.ptr, object.ptr, C_NULL)
+function draw(window::RenderWindow, object::CircleShape, renderStates::Ptr{Void})
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_drawCircleShape), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), window.ptr, object.ptr, renderStates)
 end
 
-function draw(window::RenderWindow, object::RenderText)
-	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_drawText), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), window.ptr, object.ptr, C_NULL)
+function draw(window::RenderWindow, object::RectangleShape, renderStates::Ptr{Void})
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_drawRectangleShape), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), window.ptr, object.ptr, renderStates)
 end
 
-function draw(window::RenderWindow, object::ConvexShape)
-	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_drawConvexShape), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), window.ptr, object.ptr, C_NULL)
+function draw(window::RenderWindow, object::Sprite, renderStates::Ptr{Void})
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_drawSprite), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), window.ptr, object.ptr, renderStates)
 end
 
-function draw(window::RenderWindow, object::VertexArray)
-	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_drawVertexArray), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), window.ptr, object.ptr, C_NULL)
+function draw(window::RenderWindow, object::RenderText, renderStates::Ptr{Void})
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_drawText), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), window.ptr, object.ptr, renderStates)
 end
 
-function draw(window::RenderWindow, object::Line)
-	draw(window, object.rect)
+function draw(window::RenderWindow, object::ConvexShape, renderStates::Ptr{Void})
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_drawConvexShape), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), window.ptr, object.ptr, renderStates)
+end
+
+function draw(window::RenderWindow, object::VertexArray, renderStates::Ptr{Void})
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_drawVertexArray), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), window.ptr, object.ptr, renderStates)
 end
 
 function clear(window::RenderWindow, color::Color)

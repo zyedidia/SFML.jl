@@ -3,8 +3,8 @@ type Texture
 
 	function Texture(ptr::Ptr{Void})
 		t = new(ptr)
-		finalizer(t, destroy)
-		t
+		# finalizer(t, destroy)
+		# t
 	end
 end
 
@@ -29,6 +29,7 @@ function copy(texture::Texture)
 end
 
 function destroy(texture::Texture)
+	# println("Destroy $(texture.ptr)")
 	ccall(dlsym(libcsfml_graphics, :sfTexture_destroy), Void, (Ptr{Void},), texture.ptr)
 end
 
@@ -57,4 +58,4 @@ function is_smooth(texture::Texture)
 end
 
 export Texture, copy, get_size, copy_to_image, set_smooth, is_smooth,
-update_from_window
+update

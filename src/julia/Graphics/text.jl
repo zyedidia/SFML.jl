@@ -1,4 +1,4 @@
-type RenderText
+type RenderText <: Drawable
 	ptr::Ptr{Void}
 	_font::Font
 

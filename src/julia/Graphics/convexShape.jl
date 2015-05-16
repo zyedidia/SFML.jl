@@ -1,4 +1,4 @@
-type ConvexShape
+type ConvexShape <: Drawable
 	ptr::Ptr{Void}
 	_texture::Texture
 

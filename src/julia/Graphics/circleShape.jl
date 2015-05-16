@@ -1,4 +1,4 @@
-type CircleShape
+type CircleShape <: Drawable
 	ptr::Ptr{Void}
 	_texture::Texture
 

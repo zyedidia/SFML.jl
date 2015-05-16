@@ -1,4 +1,4 @@
-type RectangleShape
+type RectangleShape <: Drawable
 	ptr::Ptr{Void}
 	_texture::Texture
 
