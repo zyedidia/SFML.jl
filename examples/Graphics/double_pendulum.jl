@@ -1,5 +1,4 @@
 using SFML
-using AnimatedPlots
 
 t = 4*pi/4
 a = 0*pi/8
