@@ -29,10 +29,10 @@ function get_localport(listener::TcpListener)
 end
 
 function listen(listener::TcpListener, port::Integer)
-	return SocketStatus(ccall(dlsym(libcsfml_network, :sfTcpListener_listen), Int32, (Ptr{Void}, Uint16,), listener.ptr, port))
+	SocketStatus(ccall(dlsym(libcsfml_network, :sfTcpListener_listen), Int32, (Ptr{Void}, Uint16,), listener.ptr, port))
 end
 
-function accept(listener::TcpListener, socket::TcpSocket)
+function accept(listener::TcpListener, socket::SocketTCP)
 	nstruct = ccall(dlsym(libjuliasfml, :sjTcpListener_accept), NetworkStruct, (Ptr{Void}, Ptr{Void},), listener.ptr, socket.ptr)
 	socket.ptr = nstruct.ptr
 	return SocketStatus(nstruct.status)

@@ -1,6 +1,6 @@
 using SFML
 
-socket = TcpSocket()
+socket = SocketTCP()
 
 connect(socket, "127.0.0.1", 53000, 10000)
 println("Connected")

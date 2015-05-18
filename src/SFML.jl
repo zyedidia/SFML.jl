@@ -24,6 +24,7 @@ include("julia/Network/networkStruct.jl")
 include("julia/Network/packet.jl")
 include("julia/Network/ipAddress.jl")
 include("julia/Network/socketStatus.jl")
+include("julia/Network/udpSocket.jl")
 include("julia/Network/tcpSocket.jl")
 include("julia/Network/tcpListener.jl")
 
