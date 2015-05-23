@@ -15,10 +15,10 @@ function __init__()
 		@windows_only begin
 			deps = Pkg.dir("SFML")*"\\deps"
 			global const libcsfml_graphics = Libdl.dlopen("$deps\\csfml-graphics-2")
-			global const libcsfml_graphics = Libdl.dlopen("$deps\\csfml-window-2")
-			global const libcsfml_graphics = Libdl.dlopen("$deps\\csfml-network-2")
-			global const libcsfml_graphics = Libdl.dlopen("$deps\\csfml-system-2")
-			global const libcsfml_graphics = Libdl.dlopen("$deps\\csfml-audio-2")
+			global const libcsfml_window = Libdl.dlopen("$deps\\csfml-window-2")
+			global const libcsfml_network = Libdl.dlopen("$deps\\csfml-network-2")
+			global const libcsfml_system = Libdl.dlopen("$deps\\csfml-system-2")
+			global const libcsfml_audio = Libdl.dlopen("$deps\\csfml-audio-2")
 		end
 	catch Exception
 		@linux_only println("You must have CSFML installed. Try sudo apt-get install libcsfml-dev")
