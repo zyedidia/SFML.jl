@@ -29,8 +29,14 @@ end
 		warn("Please place the SFML binaries in $deps")
 	end
 
-	run(`copy $deps\\CSFML\\bin\\*`, deps)
-	run(`copy $deps\\CSFML\\bin\\*`, deps)
+	files = readdir("$deps\\CSFML\\bin")
+	for i = 1:length(files)
+		cp("$deps\\CSFML\\bin\\$(files[i])", "$deps\\$(files[i])")
+	end
+	files = readdir("$deps\\SFML\\bin")
+	for i = 1:length(files)
+		cp("$deps\\SFML\\bin\\$(files[i])", "$deps\\$(files[i])")
+	end
 end
 
 cd("$(Pkg.dir("SFML"))/src/c")
