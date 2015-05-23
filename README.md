@@ -54,8 +54,8 @@ julia> Pkg.clone("SFML")
 ```
 
 Then, you must download the correct [SFML] (http://www.sfml-dev.org/download/sfml/2.2/) and [CSFML] (http://www.sfml-dev.org/download/csfml/) binaries. Make sure to download the one marked `GCC 4.9.2 MinGW` with either 32 bit or 64 bit.
-Place the folders in C:\Users\YourName\.julia\SFML\deps and rename them to SFML and CSFML (not SFML-2.2 and CSFML-2.2).
-Make sure that they have no inner SFML-2.2 folder or CSFML-2.2. The directory structure should be deps/SFML/lotsOfThingsHere
+Place the folders in `C:\Users\YourName\.julia\SFML\deps` and rename them to SFML and CSFML (not SFML-2.2 and CSFML-2.2).
+Make sure that they have no inner `SFML-2.2` folder or `CSFML-2.2`. The directory structure should be `deps/SFML/lotsOfThingsHere`
 Once you are done with all that, you can build the package:
 
 ```
