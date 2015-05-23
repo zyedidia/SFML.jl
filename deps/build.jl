@@ -29,8 +29,8 @@ end
 		warn("Please place the SFML binaries in $deps")
 	end
 
-	cp("$deps\\CSFML\\bin\\", deps)
-	cp("$deps\\SFML\\bin\\", deps)
+	run(`copy $deps\\CSFML\\bin\\*`, deps)
+	run(`copy $deps\\CSFML\\bin\\*`, deps)
 end
 
 cd("$(Pkg.dir("SFML"))/src/c")
