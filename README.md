@@ -4,17 +4,17 @@ This is a binding of the C++ game and multimedia library [SFML](http://www.sfml-
 
 It also has audio libraries and networking libraries.
 
-This is a work in progress. There is currently almost complete support for graphics, good support for audio, and limited support for network.
+This is a work in progress. There is currently almost complete support for graphics, good support for audio, and decent support for network.
 
-SFML.jl only works on Mac OS X and Linux.
+SFML.jl works on Mac OS X, Linux, and Windows.
 
 Take a look at the `examples` folder to see some usage examples.
 
 #Installation
-Currently, Mac OS X and Linux are supported.
-You also need to have Julia version 0.4, which you can get [here](http://julialang.org/downloads/) under `Nightly Builds`.
+You need to have Julia version 0.4, which you can get [here](http://julialang.org/downloads/) under `Nightly Builds`.
 
-You must have [SFML](http://www.sfml-dev.org/download.php) and [CSFML](http://www.sfml-dev.org/download/csfml/) **of the same version**, ideally 2.2, installed to use this binding.
+If you are using Mac OS X or Linux, you must have [SFML](http://www.sfml-dev.org/download.php) and [CSFML](http://www.sfml-dev.org/download/csfml/) **of the same version**, ideally 2.2, installed to use this binding.
+For Windows users, please see the `Windows` section further down the page.
 
 You can build these from source or use the package that your package manager provides.
 
@@ -39,18 +39,30 @@ $ echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.' >> ~/.bashrc
 $ source ~/.bashrc
 ```
 
----
-
-To install the package, use `Pkg.add("SFML")`
+#### Windows
+To use this package on Windows, you must first install the [WinRPM] (https://github.com/JuliaLang/WinRPM.jl) package, and install gcc with it:
 
 ```
-julia> Pkg.update()
-julia> Pkg.add("SFML")
+julia> Pkg.add("WinRPM")
+julia> using WinRPM
+julia> WinRPM.install("gcc")
 ```
 
-Julia should clone and build it for you.
+You should then clone the SFML package.
+```
+julia> Pkg.clone("SFML")
+```
 
-You should be all set now. You can put `using SFML` at the top of your files to use the library. Take a look at the `examples` folder to get started.
+Then, you must download the correct [SFML] (http://www.sfml-dev.org/download/sfml/2.2/) and [CSFML] (http://www.sfml-dev.org/download/csfml/) binaries. Make sure to download the one marked `GCC 4.9.2 MinGW` with either 32 bit or 64 bit.
+Place the folders in `C:\Users\YourName\.julia\SFML\deps` and rename them to SFML and CSFML (not SFML-2.2 and CSFML-2.2).
+Make sure that they have no inner `SFML-2.2` folder or `CSFML-2.2`. The directory structure should be `deps/SFML/lotsOfThingsHere`
+Once you are done with all that, you can build the package:
+
+```
+julia> Pkg.build("SFML")
+```
+
+I hope to be able to automate this process in the future.
 
 #License
 
