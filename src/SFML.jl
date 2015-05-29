@@ -26,10 +26,7 @@ function __init__()
 	end
 
 	cd("$(Pkg.dir("SFML"))/deps/") do
-		global const libjuliasfml = Libdl.dlopen_e("libjuliasfml")
-		@linux_only begin
-			global const libjuliasfml = Libdl.dlopen("./libjuliasfml.so")
-		end
+		global const libjuliasfml = Libdl.dlopen_e("./libjuliasfml")
 	end
 end
 
