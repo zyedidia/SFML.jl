@@ -107,10 +107,12 @@ end
 	println("Downloading SFML...")
 	download(sfml, "sfml.zip")
 	println("Downloading CSFML...")
-	download(sfml, "csfml.zip")
+	download(csfml, "csfml.zip")
 
-	run(`expand sfml.zip`)
-	run(`expand csfml.zip`)
+	run(`"C:\Program Files\7-Zip\7z.exe" x sfml.zip`)
+	mv("SFML-2.2", "sfml")
+	run(`"C:\Program Files\7-Zip\7z.exe" x csfml.zip`)
+	mv("CSFML-2.2", "csfml")
 
 	rm("sfml.zip")
 	rm("csfml.zip")
