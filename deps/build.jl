@@ -67,7 +67,7 @@ end
 	csfml = "http://www.sfml-dev.org/files/CSFML-2.2-linux-gcc-$bitsize-bit.tar.bz2"
 
 	println("Downloading SFML...")
-	download(sfml, "sfml.tar.bz2")
+	download(sfml, "sfml.tar.gz")
 	println("Downloading CSFML...")
 	download(csfml, "csfml.tar.bz2")
 
@@ -77,13 +77,13 @@ end
 	if !isdir("csfml")
 		mkdir("csfml")
 	end
-	run(`tar -xzf sfml.tar.bz2 -C sfml --strip-components=1`)
-	run(`tar -xzf csfml.tar.bz2 -C csfml --strip-components=1`)
+	run(`tar -xzf sfml.tar.gz -C sfml --strip-components=1`)
+	run(`tar -xjf csfml.tar.bz2 -C csfml --strip-components=1`)
 
-	run(`rm sfml.tar.bz2`)
+	run(`rm sfml.tar.gz`)
 	run(`rm csfml.tar.bz2`)
 
-	symlink_files("$deps/csfml/lib", ".so.2.2.0")
+	symlink_files("$deps/csfml/lib", "so.2.2.0")
 
 	copy_libs("$deps/sfml/lib", deps)
 	copy_libs("$deps/csfml/lib", deps)
