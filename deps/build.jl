@@ -109,9 +109,14 @@ end
 	println("Downloading CSFML...")
 	download(csfml, "csfml.zip")
 
-	run(`"C:\Program Files\7-Zip\7z.exe" x sfml.zip`)
+	if bitsize == 32
+		run(`"C:\Program Files (x86)\7-Zip\7z.exe" x sfml.zip`)
+		run(`"C:\Program Files\7-Zip (x86)\7z.exe" x csfml.zip`)
+	else
+		run(`"C:\Program Files\7-Zip\7z.exe" x sfml.zip`)
+		run(`"C:\Program Files\7-Zip\7z.exe" x csfml.zip`)
+	end
 	mv("SFML-2.2", "sfml")
-	run(`"C:\Program Files\7-Zip\7z.exe" x csfml.zip`)
 	mv("CSFML-2.2", "csfml")
 
 	rm("sfml.zip")

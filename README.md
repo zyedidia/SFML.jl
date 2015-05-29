@@ -12,28 +12,12 @@ Take a look at the `examples` folder to see some usage examples.
 
 #Installation
 You need to have Julia version 0.4, which you can get [here](http://julialang.org/downloads/) under `Nightly Builds`.
+Make sure that your version 0.4 is fairly recent. If building fails because `follow_symlinks` is not found, update your version of Julia 0.4.
 
-If you are using Mac OS X or Linux, you must have [SFML](http://www.sfml-dev.org/download.php) and [CSFML](http://www.sfml-dev.org/download/csfml/) **of the same version**, ideally 2.2, installed to use this binding.
-For Windows users, please see the `Windows` section further down the page.
+### Windows
+Some additional things are necessary for building on Windows.
 
-You can build these from source or use the package that your package manager provides.
-
-#### Mac OS X
-brew provides version 2.2 of SFML and CSFML.
-```
-$ brew install sfml
-$ brew install csfml
-```
-
-#### Linux (Debian based)
-apt-get provides version 2.1 of SFML and CSFML. SFML.jl supports SFML and CSFML version 2.2 but most (if not all) things will work with 2.1.
-```
-$ sudo apt-get install libsfml-dev
-$ sudo apt-get install libcsfml-dev
-```
-
-#### Windows
-To use this package on Windows, you must first install the [WinRPM] (https://github.com/JuliaLang/WinRPM.jl) package, and install gcc with it:
+First, install [WinRPM.jl] (https://github.com/JuliaLang/WinRPM.jl) and `gcc` with it.
 
 ```
 julia> Pkg.add("WinRPM")
@@ -41,21 +25,11 @@ julia> using WinRPM
 julia> WinRPM.install("gcc")
 ```
 
-You should then clone the SFML package.
-```
-julia> Pkg.clone("SFML")
-```
+You also need to have [7-Zip] (http://www.7-zip.org/download.html) installed so that Julia can unzip files.
 
-Then, you must download the correct [SFML] (http://www.sfml-dev.org/download/sfml/2.2/) and [CSFML] (http://www.sfml-dev.org/download/csfml/) binaries. Make sure to download the one marked `GCC 4.9.2 MinGW` with either 32 bit or 64 bit.
-Place the folders in `C:\Users\YourName\.julia\SFML\deps` and rename them to SFML and CSFML (not SFML-2.2 and CSFML-2.2).
-Make sure that they have no inner `SFML-2.2` folder or `CSFML-2.2`. The directory structure should be `deps/SFML/lotsOfThingsHere`
-Once you are done with all that, you can build the package:
+---
 
-```
-julia> Pkg.build("SFML")
-```
-
-I hope to be able to automate this process in the future.
+To install just `Pkg.add("SFML")`.
 
 #License
 
