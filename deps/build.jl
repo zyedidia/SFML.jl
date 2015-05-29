@@ -1,48 +1,128 @@
-println("Checking dependencies")
+function copy_libs(src, dst)
+	files = readdir(src)
 
-if VERSION < v"0.4.0-dev"
-	error("You must have at least julia 0.4 to use this package.\nYou currently have version $VERSION")
+	for i = 1:length(files)
+		file = files[i]
+		if ismatch(r"\w*?-\w*?(-.)?.(so|dylib|dll)$", file)
+			cp("$src/$file", "$dst/$file", follow_symlinks=true, remove_destination=true)
+		end
+	end
 end
 
-@unix_only begin
-	if Libdl.find_library(["libsfml-graphics"]) == ""
-		@osx_only warn("You do not have sfml installed. Try 'brew install sfml'")
-		@linux_only warn("You do not have sfml installed. Try 'sudo apt-get install libsfml-dev'")
+function symlink_files(dir, ext)
+	cd(dir)
+	files = readdir(dir)
+	for i = 1:length(files)
+		file = files[i]
+		filename = file[1:search(file, '.') - 1]
+		if ismatch(r"\w*?-\w*?.(so|dylib|dll)$", file)
+			run(`ln -sf $filename.$ext $file`)
+		end
 	end
+end
 
-	if Libdl.find_library(["libcsfml-graphics"]) == ""
-		@osx_only warn("You do not have csfml installed. Try 'brew install csfml'")
-		@linux_only warn("You do not have csfml installed. Try 'sudo apt-get install libcsfml-dev'")
+bitsize = Int == Int64 ? 64 : 32
+
+deps = Pkg.dir("SFML")*"/deps"
+cd(deps)
+
+@osx_only begin
+	sfml = "http://www.sfml-dev.org/files/SFML-2.2-osx-clang-universal.tar.gz"
+	csfml = "http://www.sfml-dev.org/files/CSFML-2.2-osx-clang-universal.tar.gz"
+
+	println("Downloading SFML...")
+	download(sfml, "sfml.tar.gz")
+	println("Downloading CSFML...")
+	download(csfml, "csfml.tar.gz")
+
+	if !isdir("sfml")
+		mkdir("sfml")
+	end
+	if !isdir("csfml")
+		mkdir("csfml")
+	end
+	run(`tar -xzf sfml.tar.gz -C sfml --strip-components=1`)
+	run(`tar -xzf csfml.tar.gz -C csfml --strip-components=1`)
+
+	run(`rm sfml.tar.gz`)
+	run(`rm csfml.tar.gz`)
+
+	symlink_files("$deps/csfml/lib", "2.2.0.dylib")
+
+	copy_libs("$deps/sfml/lib", deps)
+	copy_libs("$deps/csfml/lib", deps)
+
+	cp("$deps/sfml/extlibs/freetype.framework", "$deps/freetype.framework")
+	cp("$deps/sfml/extlibs/sndfile.framework", "$deps/sndfile.framework")
+
+	cd(deps)
+	modules = ["system", "network", "audio", "window", "graphics"]
+	for i = 1:length(modules)
+		run(`ln -sf libcsfml-$(modules[i]).dylib libcsfml-$(modules[i]).2.2.dylib`)
+	end
+end
+
+@linux_only begin
+	sfml = "http://www.sfml-dev.org/files/SFML-2.2-linux-gcc-$bitsize-bit.tar.gz"
+	csfml = "http://www.sfml-dev.org/files/CSFML-2.2-linux-gcc-$bitsize-bit.tar.bz2"
+
+	println("Downloading SFML...")
+	download(sfml, "sfml.tar.bz2")
+	println("Downloading CSFML...")
+	download(csfml, "csfml.tar.bz2")
+
+	if !isdir("sfml")
+		mkdir("sfml")
+	end
+	if !isdir("csfml")
+		mkdir("csfml")
+	end
+	run(`tar -xzf sfml.tar.bz2 -C sfml --strip-components=1`)
+	run(`tar -xzf csfml.tar.bz2 -C csfml --strip-components=1`)
+
+	run(`rm sfml.tar.bz2`)
+	run(`rm csfml.tar.bz2`)
+
+	symlink_files("$deps/csfml/lib", ".so.2.2.0")
+
+	copy_libs("$deps/sfml/lib", deps)
+	copy_libs("$deps/csfml/lib", deps)
+
+	cd(deps)
+	modules = ["system", "network", "audio", "window", "graphics"]
+	for i = 1:length(modules)
+		run(`ln -sf libcsfml-$(modules[i]).so libcsfml-$(modules[i]).so.2.2`)
 	end
 end
 
 @windows_only begin
 	if !isdir(Pkg.dir("WinRPM"))
-		warn("Please install WinRPM and gcc with it.")
+		println("Please install WinRPM.jl and gcc with it.")
+		return
 	end
 
-	deps = Pkg.dir("SFML")*"\\deps"
-	if !isdir("$deps\\CSFML")
-		warn("Please place the CSFML binaries in $deps")
-	end
-	if !isdir("$deps\\SFML")
-		warn("Please place the SFML binaries in $deps")
-	end
+	sfml = "http://www.sfml-dev.org/files/SFML-2.2-windows-gcc-4.9.2-mingw-$bitsize-bit.zip"
+	csfml = "http://www.sfml-dev.org/files/CSFML-2.2-windows-$bitsize-bit.zip"
 
-	files = readdir("$deps\\CSFML\\bin")
-	for i = 1:length(files)
-		cp("$deps\\CSFML\\bin\\$(files[i])", "$deps\\$(files[i])")
-	end
-	files = readdir("$deps\\SFML\\bin")
-	for i = 1:length(files)
-		cp("$deps\\SFML\\bin\\$(files[i])", "$deps\\$(files[i])")
-	end
+	println("Downloading SFML...")
+	download(sfml, "sfml.zip")
+	println("Downloading CSFML...")
+	download(sfml, "csfml.zip")
+
+	run(`expand sfml.zip`)
+	run(`expand csfml.zip`)
+
+	rm("sfml.zip")
+	rm("csfml.zip")
+
+	copy_libs("$deps/sfml/bin", deps)
+	copy_libs("$deps/csfml/bin", deps)
 end
 
 cd("$(Pkg.dir("SFML"))/src/c")
 run(`julia createlib.jl`)
 
-cd("../../deps")
+cd(deps)
 if isfile("libjuliasfml.dylib") || isfile("libjuliasfml.so") || isfile("libjuliasfml.dll")
 	println("Successfully built SFML.jl!")
 else

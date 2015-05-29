@@ -4,29 +4,38 @@ import Base: display, isopen, close, reset, copy, launch, start, listen, accept,
 dlsym = Base.Libdl.dlsym
 
 function __init__()
+	deps = Pkg.dir("SFML")*"/deps"
 	try
 		@unix_only begin
-			global const libcsfml_graphics = Libdl.dlopen("libcsfml-graphics", Libdl.RTLD_GLOBAL)
-			global const libcsfml_window = Libdl.dlopen("libcsfml-window", Libdl.RTLD_GLOBAL)
-			global const libcsfml_network = Libdl.dlopen("libcsfml-network", Libdl.RTLD_GLOBAL)
-			global const libcsfml_system = Libdl.dlopen("libcsfml-system", Libdl.RTLD_GLOBAL)
-			global const libcsfml_audio = Libdl.dlopen("libcsfml-audio", Libdl.RTLD_GLOBAL)
+			cd(deps)
+			@osx_only begin
+				Libdl.dlopen("$deps/freetype.framework/freetype")
+				Libdl.dlopen("$deps/sndfile.framework/sndfile")
+			end
+			Libdl.dlopen("$deps/libsfml-system", Libdl.RTLD_GLOBAL)
+			Libdl.dlopen("$deps/libsfml-network", Libdl.RTLD_GLOBAL)
+			Libdl.dlopen("$deps/libsfml-audio", Libdl.RTLD_GLOBAL)
+			Libdl.dlopen("$deps/libsfml-window", Libdl.RTLD_GLOBAL)
+			Libdl.dlopen("$deps/libsfml-graphics", Libdl.RTLD_GLOBAL)
+			global const libcsfml_system = Libdl.dlopen("$deps/libcsfml-system", Libdl.RTLD_GLOBAL)
+			global const libcsfml_network = Libdl.dlopen("$deps/libcsfml-network", Libdl.RTLD_GLOBAL)
+			global const libcsfml_audio = Libdl.dlopen("$deps/libcsfml-audio", Libdl.RTLD_GLOBAL)
+			global const libcsfml_window = Libdl.dlopen("$deps/libcsfml-window", Libdl.RTLD_GLOBAL)
+			global const libcsfml_graphics = Libdl.dlopen("$deps/libcsfml-graphics", Libdl.RTLD_GLOBAL)
 		end
 		@windows_only begin
-			deps = Pkg.dir("SFML")*"\\deps"
-			global const libcsfml_graphics = Libdl.dlopen("$deps\\csfml-graphics-2")
-			global const libcsfml_window = Libdl.dlopen("$deps\\csfml-window-2")
-			global const libcsfml_network = Libdl.dlopen("$deps\\csfml-network-2")
-			global const libcsfml_system = Libdl.dlopen("$deps\\csfml-system-2")
-			global const libcsfml_audio = Libdl.dlopen("$deps\\csfml-audio-2")
+			global const libcsfml_system = Libdl.dlopen("$deps/csfml-system-2")
+			global const libcsfml_network = Libdl.dlopen("$deps/csfml-network-2")
+			global const libcsfml_audio = Libdl.dlopen("$deps/csfml-audio-2")
+			global const libcsfml_window = Libdl.dlopen("$deps/csfml-window-2")
+			global const libcsfml_graphics = Libdl.dlopen("$deps/csfml-graphics-2")
 		end
-	catch Exception
+		global const libjuliasfml = Libdl.dlopen("$deps/libjuliasfml")
+	catch exception
 		@linux_only println("You must have CSFML installed. Try sudo apt-get install libcsfml-dev")
 		@osx_only println("You must have CSFML installed. Try brew install csfml")
-	end
-
-	cd("$(Pkg.dir("SFML"))/deps/") do
-		global const libjuliasfml = Libdl.dlopen_e("./libjuliasfml")
+		println(exception)
+		exit(1)
 	end
 end
 

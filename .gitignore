@@ -1,4 +1,6 @@
 *.jl.cov
 *.jl.mem
 .DS_Store
-libjuliasfml.*
+
+deps/*
+!deps/build.jl

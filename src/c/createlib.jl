@@ -1,11 +1,13 @@
 ext = ""
 
+deps = Pkg.dir("SFML")*"/deps"
+
 @unix_only begin 
 	@linux_only ext = "so"
 	@osx_only ext = "dylib"
 
-	run(`gcc -fPIC -I/usr/local/include -c Window/event.c Network/Network.c Graphics/shader.c`)
-	run(`gcc -I/usr/local/include -L/usr/local/lib -lcsfml-system -lcsfml-graphics -lcsfml-window -lcsfml-audio -lcsfml-network -shared -o $(Pkg.dir("SFML"))/deps/libjuliasfml.$ext event.o Network.o shader.o`)
+	run(`gcc -fPIC -I$deps/csfml/include -c Window/event.c Network/Network.c Graphics/shader.c`)
+	run(`gcc -L$deps -lcsfml-system -lcsfml-graphics -lcsfml-window -lcsfml-audio -lcsfml-network -shared -o $deps/libjuliasfml.$ext event.o Network.o shader.o`)
 	run(`rm event.o shader.o Network.o`)
 end
 
