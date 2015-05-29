@@ -6,11 +6,11 @@ dlsym = Base.Libdl.dlsym
 function __init__()
 	try
 		@unix_only begin
-			global const libcsfml_graphics = Libdl.dlopen("libcsfml-graphics")
-			global const libcsfml_window = Libdl.dlopen("libcsfml-window")
-			global const libcsfml_network = Libdl.dlopen("libcsfml-network")
-			global const libcsfml_system = Libdl.dlopen("libcsfml-system")
-			global const libcsfml_audio = Libdl.dlopen("libcsfml-audio")
+			global const libcsfml_graphics = Libdl.dlopen("libcsfml-graphics", Libdl.RTLD_GLOBAL)
+			global const libcsfml_window = Libdl.dlopen("libcsfml-window", Libdl.RTLD_GLOBAL)
+			global const libcsfml_network = Libdl.dlopen("libcsfml-network", Libdl.RTLD_GLOBAL)
+			global const libcsfml_system = Libdl.dlopen("libcsfml-system", Libdl.RTLD_GLOBAL)
+			global const libcsfml_audio = Libdl.dlopen("libcsfml-audio", Libdl.RTLD_GLOBAL)
 		end
 		@windows_only begin
 			deps = Pkg.dir("SFML")*"\\deps"
@@ -26,7 +26,10 @@ function __init__()
 	end
 
 	cd("$(Pkg.dir("SFML"))/deps/") do
-		global const libjuliasfml = Libdl.dlopen("libjuliasfml")
+		global const libjuliasfml = Libdl.dlopen_e("libjuliasfml")
+		@linux_only begin
+			global const libjuliasfml = Libdl.dlopen("./libjuliasfml.so")
+		end
 	end
 end
 

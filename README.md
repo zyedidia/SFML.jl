@@ -32,13 +32,6 @@ $ sudo apt-get install libsfml-dev
 $ sudo apt-get install libcsfml-dev
 ```
 
-On Linux, you also need to tell ld to look in the current directory for any shared libraries.
-
-```
-$ echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.' >> ~/.bashrc
-$ source ~/.bashrc
-```
-
 #### Windows
 To use this package on Windows, you must first install the [WinRPM] (https://github.com/JuliaLang/WinRPM.jl) package, and install gcc with it:
 
