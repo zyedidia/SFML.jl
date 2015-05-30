@@ -32,20 +32,20 @@ cd(deps)
 	sfml = "http://www.sfml-dev.org/files/SFML-2.2-osx-clang-universal.tar.gz"
 	csfml = "http://www.sfml-dev.org/files/CSFML-2.2-osx-clang-universal.tar.gz"
 
-	if !isdir("sfml")
+	if !isfile("sfml.tar.gz")
 		println("Downloading SFML...")
 		download(sfml, "sfml.tar.gz")
-		mkdir("sfml")
-		run(`tar -xzf sfml.tar.gz -C sfml --strip-components=1`)
-		run(`rm sfml.tar.gz`)
 	end
-	if !isdir("csfml")
+	if !isfile("csfml.tar.gz")
 		println("Downloading CSFML...")
 		download(csfml, "csfml.tar.gz")
-		mkdir("csfml")
-		run(`tar -xzf csfml.tar.gz -C csfml --strip-components=1`)
-		run(`rm csfml.tar.gz`)
 	end
+
+	mkdir("sfml")
+	run(`tar -xzf sfml.tar.gz -C sfml --strip-components=1`)
+
+	mkdir("csfml")
+	run(`tar -xzf csfml.tar.gz -C csfml --strip-components=1`)
 
 	symlink_files("$deps/csfml/lib", "2.2.0.dylib")
 
@@ -60,26 +60,29 @@ cd(deps)
 	for i = 1:length(modules)
 		run(`ln -sf libcsfml-$(modules[i]).dylib libcsfml-$(modules[i]).2.2.dylib`)
 	end
+
+	rm("sfml", recursive=true)
+	rm("csfml", recursive=true)
 end
 
 @linux_only begin
 	sfml = "http://www.sfml-dev.org/files/SFML-2.2-linux-gcc-$bitsize-bit.tar.gz"
 	csfml = "http://www.sfml-dev.org/files/CSFML-2.2-linux-gcc-$bitsize-bit.tar.bz2"
 
-	if !isdir("sfml")
+	if !isfile("sfml.tar.gz")
 		println("Downloading SFML...")
 		download(sfml, "sfml.tar.gz")
-		mkdir("sfml")
-		run(`tar -xzf sfml.tar.gz -C sfml --strip-components=1`)
-		run(`rm sfml.tar.gz`)
 	end
-	if !isdir("csfml")
+	if !isfile("csfml.tar.bz2")
 		println("Downloading CSFML...")
 		download(csfml, "csfml.tar.bz2")
-		mkdir("csfml")
-		run(`tar -xjf csfml.tar.bz2 -C csfml --strip-components=1`)
-		run(`rm csfml.tar.bz2`)
 	end
+
+	mkdir("sfml")
+	run(`tar -xzf sfml.tar.gz -C sfml --strip-components=1`)
+
+	mkdir("csfml")
+	run(`tar -xjf csfml.tar.bz2 -C csfml --strip-components=1`)
 
 	symlink_files("$deps/csfml/lib", "so.2.2.0")
 
@@ -91,6 +94,9 @@ end
 	for i = 1:length(modules)
 		run(`ln -sf libcsfml-$(modules[i]).so libcsfml-$(modules[i]).so.2.2`)
 	end
+
+	rm("sfml", recursive=true)
+	rm("csfml", recursive=true)
 end
 
 @windows_only begin
