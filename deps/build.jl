@@ -1,3 +1,5 @@
+@windows_only using WinRPM
+
 function copy_libs(src, dst)
 	files = readdir(src)
 
@@ -24,6 +26,7 @@ end
 bitsize = Int == Int64 ? 64 : 32
 
 deps = Pkg.dir("SFML")*"/deps"
+cd(deps)
 
 @osx_only begin
 	sfml = "http://www.sfml-dev.org/files/SFML-2.2-osx-clang-universal.tar.gz"
@@ -91,9 +94,10 @@ end
 end
 
 @windows_only begin
-	if !isdir(Pkg.dir("WinRPM"))
-		println("Please install WinRPM.jl and gcc with it.")
-		return
+	RPMbindir = Pkg.dir("WinRPM","deps","usr","$(Sys.ARCH)-w64-mingw32","sys-root","mingw","bin")
+	if !isdir(RPMbindir)
+		println("Installing gcc...")
+		WinRPM.install("gcc")
 	end
 
 	cd(deps)
