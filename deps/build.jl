@@ -26,6 +26,15 @@ bitsize = Int == Int64 ? 64 : 32
 deps = Pkg.dir("SFML")*"/deps"
 cd(deps)
 
+deps_files = readdir(deps)
+
+for i = 1:length(deps_files)
+	file = deps_files[i]
+	if file != "build.jl"
+		rm(file, recursive=true)
+	end
+end
+
 @osx_only begin
 	sfml = "http://www.sfml-dev.org/files/SFML-2.2-osx-clang-universal.tar.gz"
 	csfml = "http://www.sfml-dev.org/files/CSFML-2.2-osx-clang-universal.tar.gz"
@@ -52,8 +61,8 @@ cd(deps)
 	copy_libs("$deps/sfml/lib", deps)
 	copy_libs("$deps/csfml/lib", deps)
 
-	cp("$deps/sfml/extlibs/freetype.framework", "$deps/freetype.framework")
-	cp("$deps/sfml/extlibs/sndfile.framework", "$deps/sndfile.framework")
+	cp("$deps/sfml/extlibs/freetype.framework", "$deps/freetype.framework", remove_destination=true)
+	cp("$deps/sfml/extlibs/sndfile.framework", "$deps/sndfile.framework", remove_destination=true)
 
 	cd(deps)
 	modules = ["system", "network", "audio", "window", "graphics"]

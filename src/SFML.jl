@@ -4,6 +4,7 @@ import Base: display, isopen, close, reset, copy, launch, start, listen, accept,
 dlsym = Base.Libdl.dlsym
 
 function __init__()
+	old = pwd()
 	deps = Pkg.dir("SFML")*"/deps"
 	try
 		@unix_only begin
@@ -31,11 +32,9 @@ function __init__()
 			global const libcsfml_graphics = Libdl.dlopen("$deps\\csfml-graphics-2")
 		end
 		global const libjuliasfml = Libdl.dlopen("$deps/libjuliasfml")
+		cd(old)
 	catch exception
-		@linux_only println("You must have CSFML installed. Try sudo apt-get install libcsfml-dev")
-		@osx_only println("You must have CSFML installed. Try brew install csfml")
-		println(exception)
-		exit(1)
+		println("Something has gone wrong with the installation. Please rebuild.")
 	end
 end
 

@@ -29,7 +29,14 @@ You also need to have [7-Zip] (http://www.7-zip.org/download.html) installed so 
 
 ---
 
-To install just `Pkg.add("SFML")`.
+I recommend that you use the most up to date version of the package instead of the most recently tagged version.
+
+To install use
+
+```
+julia> Pkg.clone("SFML")
+julia> Pkg.build("SFML")
+```
 
 #License
 
