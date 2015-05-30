@@ -24,37 +24,25 @@ end
 bitsize = Int == Int64 ? 64 : 32
 
 deps = Pkg.dir("SFML")*"/deps"
-cd(deps)
-
-deps_files = readdir(deps)
-
-for i = 1:length(deps_files)
-	file = deps_files[i]
-	if file != "build.jl"
-		rm(file, recursive=true)
-	end
-end
 
 @osx_only begin
 	sfml = "http://www.sfml-dev.org/files/SFML-2.2-osx-clang-universal.tar.gz"
 	csfml = "http://www.sfml-dev.org/files/CSFML-2.2-osx-clang-universal.tar.gz"
 
-	println("Downloading SFML...")
-	download(sfml, "sfml.tar.gz")
-	println("Downloading CSFML...")
-	download(csfml, "csfml.tar.gz")
-
 	if !isdir("sfml")
+		println("Downloading SFML...")
+		download(sfml, "sfml.tar.gz")
 		mkdir("sfml")
+		run(`tar -xzf sfml.tar.gz -C sfml --strip-components=1`)
+		run(`rm sfml.tar.gz`)
 	end
 	if !isdir("csfml")
+		println("Downloading CSFML...")
+		download(csfml, "csfml.tar.gz")
 		mkdir("csfml")
+		run(`tar -xzf csfml.tar.gz -C csfml --strip-components=1`)
+		run(`rm csfml.tar.gz`)
 	end
-	run(`tar -xzf sfml.tar.gz -C sfml --strip-components=1`)
-	run(`tar -xzf csfml.tar.gz -C csfml --strip-components=1`)
-
-	run(`rm sfml.tar.gz`)
-	run(`rm csfml.tar.gz`)
 
 	symlink_files("$deps/csfml/lib", "2.2.0.dylib")
 
@@ -75,22 +63,20 @@ end
 	sfml = "http://www.sfml-dev.org/files/SFML-2.2-linux-gcc-$bitsize-bit.tar.gz"
 	csfml = "http://www.sfml-dev.org/files/CSFML-2.2-linux-gcc-$bitsize-bit.tar.bz2"
 
-	println("Downloading SFML...")
-	download(sfml, "sfml.tar.gz")
-	println("Downloading CSFML...")
-	download(csfml, "csfml.tar.bz2")
-
 	if !isdir("sfml")
+		println("Downloading SFML...")
+		download(sfml, "sfml.tar.gz")
 		mkdir("sfml")
+		run(`tar -xzf sfml.tar.gz -C sfml --strip-components=1`)
+		run(`rm sfml.tar.gz`)
 	end
 	if !isdir("csfml")
+		println("Downloading CSFML...")
+		download(csfml, "csfml.tar.bz2")
 		mkdir("csfml")
+		run(`tar -xjf csfml.tar.bz2 -C csfml --strip-components=1`)
+		run(`rm csfml.tar.bz2`)
 	end
-	run(`tar -xzf sfml.tar.gz -C sfml --strip-components=1`)
-	run(`tar -xjf csfml.tar.bz2 -C csfml --strip-components=1`)
-
-	run(`rm sfml.tar.gz`)
-	run(`rm csfml.tar.bz2`)
 
 	symlink_files("$deps/csfml/lib", "so.2.2.0")
 
@@ -108,6 +94,16 @@ end
 	if !isdir(Pkg.dir("WinRPM"))
 		println("Please install WinRPM.jl and gcc with it.")
 		return
+	end
+
+	cd(deps)
+	deps_files = readdir(deps)
+
+	for i = 1:length(deps_files)
+		file = deps_files[i]
+		if file != "build.jl"
+			rm(file, recursive=true)
+		end
 	end
 
 	sfml = "http://www.sfml-dev.org/files/SFML-2.2-windows-gcc-4.9.2-mingw-$bitsize-bit.zip"
