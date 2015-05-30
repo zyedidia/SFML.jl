@@ -35,7 +35,6 @@ end
 set_position(rectangles[1], Vector2f(400, 300))
 
 while isopen(window)
-	sleep(0)
 	while pollevent(window, event)
 		if get_type(event) == EventType.CLOSED
 			close(window)
