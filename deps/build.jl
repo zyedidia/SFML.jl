@@ -60,9 +60,6 @@ cd(deps)
 	for i = 1:length(modules)
 		run(`ln -sf libcsfml-$(modules[i]).dylib libcsfml-$(modules[i]).2.2.dylib`)
 	end
-
-	rm("sfml", recursive=true)
-	rm("csfml", recursive=true)
 end
 
 @linux_only begin
@@ -94,9 +91,6 @@ end
 	for i = 1:length(modules)
 		run(`ln -sf libcsfml-$(modules[i]).so libcsfml-$(modules[i]).so.2.2`)
 	end
-
-	rm("sfml", recursive=true)
-	rm("csfml", recursive=true)
 end
 
 @windows_only begin
@@ -145,6 +139,10 @@ cd("$(Pkg.dir("SFML"))/src/c")
 run(`julia createlib.jl`)
 
 cd(deps)
+
+rm("sfml", recursive=true)
+rm("csfml", recursive=true)
+
 if isfile("libjuliasfml.dylib") || isfile("libjuliasfml.so") || isfile("libjuliasfml.dll")
 	println("Successfully built SFML.jl!")
 else
