@@ -5,7 +5,7 @@ type Line
 	thickness::Real
 end
 
-function Line(p1::Vector2, p2::Vector2, thickness::Real)
+function Line(p1::Vector2, p2::Vector2, thickness::Real=2)
 	rect = RectangleShape()
 	set_position(rect, to_vec2f(p1))
 	set_size(rect, Vector2f(distance(p1, p2), thickness))
@@ -17,6 +17,19 @@ end
 
 function copy(l::Line)
 	Line(l.p1, l.p2, l.thickness)
+end
+
+function set_points(l::Line, p1::Vector2, p2::Vector2)
+	l.p1 = p1
+	l.p2 = p2
+	set_position(l.rect, to_vec2f(p1))
+	set_rotation(l.rect, rad2deg(atan2(p2.y - p1.y, p2.x - p1.x)))
+end
+
+function set_thickness(l::Line, thickness::Real)
+	l.thickness = thickness
+	set_size(l.rect, Vector2f(distance(l.p1, l.p2), thickness))
+	set_origin(l.rect, Vector2f(0, thickness / 2))
 end
 
 function set_fillcolor(l::Line, c::Color)
@@ -52,4 +65,4 @@ function draw(texture::RenderTexture, object::Line)
 end
 
 export Line, set_fillcolor, get_fillcolor, set_outlinecolor, get_outlinecolor,
-set_outline_thickness, get_outline_thickness, copy, draw
+set_outline_thickness, get_outline_thickness, copy, draw, set_points, set_thickness
