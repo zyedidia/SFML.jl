@@ -21,20 +21,20 @@ function destroy(shape::CircleShape)
 	ccall(dlsym(libcsfml_graphics, :sfCircleShape_destroy), Void, (Ptr{Void},), shape.ptr)
 end
 
-function set_origin(shape::CircleShape, origin::Vector2f)
-	ccall(dlsym(libcsfml_graphics, :sfCircleShape_setOrigin), Void, (Ptr{Void}, Vector2f,), shape.ptr, origin)
-end
-
-function set_scale(shape::CircleShape, scale::Vector2f)
-	ccall(dlsym(libcsfml_graphics, :sfCircleShape_setScale), Void, (Ptr{Void}, Vector2f,), shape.ptr, scale)
+function set_position(shape::CircleShape, position::Vector2f)
+	ccall(dlsym(libcsfml_graphics, :sfCircleShape_setPosition), Void, (Ptr{Void}, Vector2f,), shape.ptr, position)
 end
 
 function set_rotation(shape::CircleShape, angle::Real)
 	ccall(dlsym(libcsfml_graphics, :sfCircleShape_setRotation), Void, (Ptr{Void}, Cfloat,), shape.ptr, angle)
 end
 
-function set_position(shape::CircleShape, position::Vector2f)
-	ccall(dlsym(libcsfml_graphics, :sfCircleShape_setPosition), Void, (Ptr{Void}, Vector2f,), shape.ptr, position)
+function set_scale(shape::CircleShape, scale::Vector2f)
+	ccall(dlsym(libcsfml_graphics, :sfCircleShape_setScale), Void, (Ptr{Void}, Vector2f,), shape.ptr, scale)
+end
+
+function set_origin(shape::CircleShape, origin::Vector2f)
+	ccall(dlsym(libcsfml_graphics, :sfCircleShape_setOrigin), Void, (Ptr{Void}, Vector2f,), shape.ptr, origin)
 end
 
 function set_radius(shape::CircleShape, radius::Real)
@@ -90,7 +90,11 @@ function get_outline_thickness(shape::CircleShape)
 end
 
 function get_pointcount(shape::CircleShape)
-	return Int(ccall(dlsym(libcsfml_graphics, :sfCircleShape_getPointCount), Uint32, (Ptr{Void},), shape.ptr))
+	return Int(ccall(dlsym(libcsfml_graphics, :sfCircleShape_getPointCount), Csize_t, (Ptr{Void},), shape.ptr))
+end
+
+function get_point(shape::CircleShape, index::Integer)
+	ccall(dlsym(libcsfml_graphics, :sfCircleShape_getPoint), Vector2f, (Ptr{Void}, Csize_t), index)
 end
 
 function move(shape::CircleShape, offset::Vector2f)
@@ -133,4 +137,5 @@ end
 export CircleShape, set_position, set_radius, set_fillcolor, set_outlinecolor, move, get_position,
 get_radius, set_origin, get_origin, get_fillcolor, get_outlinecolor, rotate, scale, copy, set_scale,
 get_scale, set_rotation, get_rotation, get_localbounds, get_globalbounds, set_outline_thickness,
-get_outline_thickness, get_pointcount, set_pointcount, get_texture_rect, get_texture, set_texture_rect, set_texture
+get_outline_thickness, get_pointcount, set_pointcount, get_texture_rect, get_texture, set_texture_rect, set_texture,
+get_point

@@ -17,7 +17,7 @@ function get_desktop_mode()
 end
 
 function is_valid(mode::VideoMode)
-	return Bool(ccall(dlsym(libcsfml_window, :sfVideoMode_isValid), Int32, (VideoMode,), mode))
+	return ccall(dlsym(libcsfml_window, :sfVideoMode_isValid), Bool, (VideoMode,), mode)
 end
 
 export VideoMode, get_desktop_mode, is_valid
