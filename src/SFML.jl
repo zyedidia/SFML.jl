@@ -1,6 +1,6 @@
 module SFML
 
-import Base: display, isopen, close, reset, copy, launch, start, listen, accept, connect, write, send, bind
+import Base: display, isopen, close, reset, copy, launch, start, listen, accept, connect, write, send, bind, download
 dlsym = Base.Libdl.dlsym
 
 function __init__()
@@ -38,6 +38,11 @@ function __init__()
 	end
 end
 
+include("julia/System/vector.jl")
+include("julia/System/time.jl")
+include("julia/System/thread.jl")
+include("julia/System/clock.jl")
+
 include("julia/Network/networkStruct.jl")
 include("julia/Network/packet.jl")
 include("julia/Network/ipAddress.jl")
@@ -45,11 +50,8 @@ include("julia/Network/socketStatus.jl")
 include("julia/Network/udpSocket.jl")
 include("julia/Network/tcpSocket.jl")
 include("julia/Network/tcpListener.jl")
-
-include("julia/System/vector.jl")
-include("julia/System/time.jl")
-include("julia/System/thread.jl")
-include("julia/System/clock.jl")
+include("julia/Network/http.jl")
+include("julia/Network/ftp.jl")
 
 include("julia/Audio/soundStatus.jl")
 include("julia/Audio/music.jl")
