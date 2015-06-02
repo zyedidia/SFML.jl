@@ -4,7 +4,7 @@ This is a binding of the C++ game and multimedia library [SFML](http://www.sfml-
 
 It also has audio libraries and networking libraries.
 
-This is a work in progress. There is currently almost complete support for graphics, good support for audio, and decent support for network.
+This is a work in progress. There is currently almost complete support for graphics, good support for audio, and complete support for network.
 
 SFML.jl works on Mac OS X, Linux, and Windows.
 

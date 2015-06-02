@@ -110,26 +110,11 @@ end
 		end
 	end
 
-	sfml = "http://www.sfml-dev.org/files/SFML-2.2-windows-gcc-4.9.2-mingw-$bitsize-bit.zip"
-	csfml = "http://www.sfml-dev.org/files/CSFML-2.2-windows-$bitsize-bit.zip"
+	println("Downloading SFML and CSFML")
+	run(`git clone https://github.com/zyedidia/sfml-binaries.git`)
 
-	println("Downloading SFML...")
-	download(sfml, "sfml.zip")
-	println("Downloading CSFML...")
-	download(csfml, "csfml.zip")
-
-	if bitsize == 32
-		run(`"C:\Program Files (x86)\7-Zip\7z.exe" x sfml.zip`)
-		run(`"C:\Program Files\7-Zip (x86)\7z.exe" x csfml.zip`)
-	else
-		run(`"C:\Program Files\7-Zip\7z.exe" x sfml.zip`)
-		run(`"C:\Program Files\7-Zip\7z.exe" x csfml.zip`)
-	end
-	mv("SFML-2.2", "sfml")
-	mv("CSFML-2.2", "csfml")
-
-	rm("sfml.zip")
-	rm("csfml.zip")
+	mv("sfml-binaries/sfml/sfml-$bitsize", "sfml")
+	mv("sfml-binaries/csfml-csfml-$bitsize", "csfml")
 
 	copy_libs("$deps/sfml/bin", deps)
 	copy_libs("$deps/csfml/bin", deps)
