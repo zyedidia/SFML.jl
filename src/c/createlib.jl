@@ -18,7 +18,7 @@ end
 
 		mingw_include = Pkg.dir("WinRPM", "deps", "usr", "$(Sys.ARCH)-w64-mingw32", "sys-root", "mingw", "include")
 		deps_dir = Pkg.dir("SFML")*"\\deps"
-		run(`gcc -I$mingw_include -ISFML\\include -I$deps_dir\\csfml\\include -c Window\\event.c Network\\Network.c Graphics\\shader.c`)
+		run(`gcc -I$mingw_include -I$deps_dir\\sfml-binaries\\csfml\\include -c Window\\event.c Network\\Network.c Graphics\\shader.c`)
 		run(`gcc -L$deps_dir\\csfml\\bin -lcsfml-network-2 -lcsfml-window-2 -lcsfml-graphics-2 -shared -o $(Pkg.dir("SFML"))\\deps\\libjuliasfml.dll event.o shader.o Network.o`)
 		rm("event.o"); rm("shader.o"); rm("Network.o")
 	else
