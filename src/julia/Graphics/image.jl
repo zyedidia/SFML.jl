@@ -13,7 +13,7 @@ function Image(filename::String)
 end
 
 function Image(width::Integer, height::Integer, color::Color = SFML.black)
-	Image(ccall(dlsym(libcsfml_graphics, :sfImage_create), Ptr{Void}, (Uint32, Uint32, Color,), width, height, color))
+	Image(ccall(dlsym(libcsfml_graphics, :sfImage_createFromColor), Ptr{Void}, (Uint32, Uint32, Color,), width, height, color))
 end
 
 function copy(image::Image)

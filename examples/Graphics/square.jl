@@ -13,8 +13,6 @@ set_fillcolor(square, SFML.magenta)
 set_outlinecolor(square, Color(4, 200, 127))
 set_outline_thickness(square, 2)
 
-texture = RenderTexture(800, 600)
-
 while isopen(window)
 	while pollevent(window, event)
 		if get_type(event) == EventType.CLOSED

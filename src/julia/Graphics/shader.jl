@@ -3,8 +3,8 @@ type Shader
 
 	function Shader(ptr::Ptr{Void})
 		s = new(ptr)
-		finalizer(s, destroy)
-		s
+		# finalizer(s, destroy)
+		# s
 	end
 end
 
@@ -12,6 +12,13 @@ function Shader(vertex_shader::String, frag_shader::String)
 	vert = isempty(vertex_shader) ? C_NULL : vertex_shader
 	frag = isempty(frag_shader) ? C_NULL : frag_shader
 	Shader(ccall(dlsym(libcsfml_graphics, :sfShader_createFromFile), Ptr{Void}, (Ptr{Cchar}, Ptr{Cchar},), vert, frag))
+end
+
+function ShaderFromMemory(vertex_shader::String, frag_shader::String)
+	vert = isempty(vertex_shader) ? C_NULL : vertex_shader
+	frag = isempty(frag_shader) ? C_NULL : frag_shader
+	println("$vert $frag")
+	Shader(ccall(dlsym(libcsfml_graphics, :sfShader_createFromMemory), Ptr{Void}, (Ptr{Cchar}, Ptr{Cchar},), vert, frag))
 end
 
 # function Shader(shader_filename::String, shader_type::String)
@@ -70,4 +77,4 @@ function shader_is_available()
 	Bool(ccall(dlsym(libcsfml_graphics, :sfShader_isAvailable), Int32, ()))
 end
 
-export Shader, destroy, set_parameter, shader_is_available
+export Shader, destroy, set_parameter, shader_is_available, ShaderFromMemory
