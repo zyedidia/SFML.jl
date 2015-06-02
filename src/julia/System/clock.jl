@@ -9,23 +9,23 @@ type Clock
 end
 
 function Clock()
-	Clock(ccall(dlsym(libcsfml_system, :sfClock_create), Ptr{Void}, ()))
+	Clock(ccall((:sfClock_create, "libcsfml-system"), Ptr{Void}, ()))
 end
 
 function copy(clock::Clock)
-	return Clock(ccall(dlsym(libcsfml_system, :sfClock_copy), Ptr{Void}, (Ptr{Void},), clock.ptr))
+	return Clock(ccall((:sfClock_copy, "libcsfml-system"), Ptr{Void}, (Ptr{Void},), clock.ptr))
 end
 
 function destroy(clock::Clock)
-	ccall(dlsym(libcsfml_system, :sfClock_destroy), Void, (Ptr{Void},), clock.ptr)
+	ccall((:sfClock_destroy, "libcsfml-system"), Void, (Ptr{Void},), clock.ptr)
 end
 
 function get_elapsed_time(clock::Clock)
-	return ccall(dlsym(libcsfml_system, :sfClock_getElapsedTime), Time, (Ptr{Void},), clock.ptr)
+	return ccall((:sfClock_getElapsedTime, "libcsfml-system"), Time, (Ptr{Void},), clock.ptr)
 end
 
 function restart(clock::Clock)
-	return ccall(dlsym(libcsfml_system, :sfClock_restart), Time, (Ptr{Void},), clock.ptr)
+	return ccall((:sfClock_restart, "libcsfml-system"), Time, (Ptr{Void},), clock.ptr)
 end
 
 export Clock, copy, get_elapsed_time, restart

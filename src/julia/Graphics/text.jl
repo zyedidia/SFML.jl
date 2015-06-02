@@ -10,110 +10,110 @@ type RenderText <: Drawable
 end
 
 function RenderText()
-	r = RenderText(ccall(dlsym(libcsfml_graphics, :sfText_create), Ptr{Void}, ()))
+	r = RenderText(ccall((:sfText_create, "libcsfml-graphics"), Ptr{Void}, ()))
 	set_font(r, Font("$(Pkg.dir("SFML"))/assets/arial.ttf"))
 	r
 end
 
 function copy(text::RenderText)
-	return RenderText(ccall(dlsym(libcsfml_graphics, :sfText_copy), Ptr{Void}, (Ptr{Void},), text.ptr))
+	return RenderText(ccall((:sfText_copy, "libcsfml-graphics"), Ptr{Void}, (Ptr{Void},), text.ptr))
 end
 
 function destroy(text::RenderText)
-	ccall(dlsym(libcsfml_graphics, :sfText_destroy), Void, (Ptr{Void},), text.ptr)
+	ccall((:sfText_destroy, "libcsfml-graphics"), Void, (Ptr{Void},), text.ptr)
 end
 
 function set_position(text::RenderText, pos::Vector2f)
-	ccall(dlsym(libcsfml_graphics, :sfText_setPosition), Void, (Ptr{Void}, Vector2f,), text.ptr, pos)
+	ccall((:sfText_setPosition, "libcsfml-graphics"), Void, (Ptr{Void}, Vector2f,), text.ptr, pos)
 end
 
 function set_rotation(text::RenderText, angle::Real)
-	ccall(dlsym(libcsfml_graphics, :sfText_setRotation), Void, (Ptr{Void}, Cfloat,), text.ptr, angle)
+	ccall((:sfText_setRotation, "libcsfml-graphics"), Void, (Ptr{Void}, Cfloat,), text.ptr, angle)
 end
 
 function set_scale(text::RenderText, scale::Vector2f)
-	ccall(dlsym(libcsfml_graphics, :sfText_setScale), Void, (Ptr{Void}, Vector2f), text.ptr, scale)
+	ccall((:sfText_setScale, "libcsfml-graphics"), Void, (Ptr{Void}, Vector2f), text.ptr, scale)
 end
 
 function set_origin(text::RenderText, origin::Vector2f)
-	ccall(dlsym(libcsfml_graphics, :sfText_setOrigin), Void, (Ptr{Void}, Vector2f,), text.ptr, origin)
+	ccall((:sfText_setOrigin, "libcsfml-graphics"), Void, (Ptr{Void}, Vector2f,), text.ptr, origin)
 end
 
 function get_position(text::RenderText)
-	return ccall(dlsym(libcsfml_graphics, :sfText_getPosition), Vector2f, (Ptr{Void},), text.ptr)
+	return ccall((:sfText_getPosition, "libcsfml-graphics"), Vector2f, (Ptr{Void},), text.ptr)
 end
 
 function get_rotation(text::RenderText)
-	return Real(ccall(dlsym(libcsfml_graphics, :sfText_getRotation), Cfloat, (Ptr{Void},), text.ptr))
+	return Real(ccall((:sfText_getRotation, "libcsfml-graphics"), Cfloat, (Ptr{Void},), text.ptr))
 end
 
 function get_scale(text::RenderText)
-	return ccall(dlsym(libcsfml_graphics, :sfText_getScale), Vector2f, (Ptr{Void},), text.ptr)
+	return ccall((:sfText_getScale, "libcsfml-graphics"), Vector2f, (Ptr{Void},), text.ptr)
 end
 
 function get_origin(text::RenderText)
-	return ccall(dlsym(libcsfml_graphics, :sfText_getOrigin), Vector2f, (Ptr{Void},), text.ptr)
+	return ccall((:sfText_getOrigin, "libcsfml-graphics"), Vector2f, (Ptr{Void},), text.ptr)
 end
 
 function move(text::RenderText, offsets::Vector2f)
-	ccall(dlsym(libcsfml_graphics, :sfText_move), Void, (Ptr{Void}, Vector2f,), text.ptr, offsets)
+	ccall((:sfText_move, "libcsfml-graphics"), Void, (Ptr{Void}, Vector2f,), text.ptr, offsets)
 end
 
 function rotate(text::RenderText, angle::Real)
-	ccall(dlsym(libcsfml_graphics, :sfText_rotate), Void, (Ptr{Void}, Cfloat,), text.ptr, angle)
+	ccall((:sfText_rotate, "libcsfml-graphics"), Void, (Ptr{Void}, Cfloat,), text.ptr, angle)
 end
 
 function scale(text::RenderText, factors::Vector2f)
-	ccall(dlsym(libcsfml_graphics, :sfText_scale), Void, (Ptr{Void}, Vector2f,), text.ptr, factors)
+	ccall((:sfText_scale, "libcsfml-graphics"), Void, (Ptr{Void}, Vector2f,), text.ptr, factors)
 end
 
 function set_string(text::RenderText, string::String)
-	ccall(dlsym(libcsfml_graphics, :sfText_setString), Void, (Ptr{Void}, Ptr{Cchar},), text.ptr, string)
+	ccall((:sfText_setString, "libcsfml-graphics"), Void, (Ptr{Void}, Ptr{Cchar},), text.ptr, string)
 end
 
 function set_font(text::RenderText, font::Font)
-	ccall(dlsym(libcsfml_graphics, :sfText_setFont), Void, (Ptr{Void}, Ptr{Void},), text.ptr, font.ptr)
+	ccall((:sfText_setFont, "libcsfml-graphics"), Void, (Ptr{Void}, Ptr{Void},), text.ptr, font.ptr)
 	text._font = font
 end
 
 function set_charactersize(text::RenderText, size::Int)
-	ccall(dlsym(libcsfml_graphics, :sfText_setCharacterSize), Void, (Ptr{Void}, Uint32,), text.ptr, size)
+	ccall((:sfText_setCharacterSize, "libcsfml-graphics"), Void, (Ptr{Void}, Uint32,), text.ptr, size)
 end
 
 function set_style(text::RenderText, style::Int)
-	ccall(dlsym(libcsfml_graphics, :sfText_setStyle), Void, (Ptr{Void}, Uint32,), text.ptr, style)
+	ccall((:sfText_setStyle, "libcsfml-graphics"), Void, (Ptr{Void}, Uint32,), text.ptr, style)
 end
 
 function set_color(text::RenderText, color::Color)
-	ccall(dlsym(libcsfml_graphics, :sfText_setColor), Void, (Ptr{Void}, Color,), text.ptr, color)
+	ccall((:sfText_setColor, "libcsfml-graphics"), Void, (Ptr{Void}, Color,), text.ptr, color)
 end
 
 function get_string(text::RenderText)
-	return bytestring(ccall(dlsym(libcsfml_graphics, :sfText_getString), Ptr{Cchar}, (Ptr{Void},), text.ptr))
+	return bytestring(ccall((:sfText_getString, "libcsfml-graphics"), Ptr{Cchar}, (Ptr{Void},), text.ptr))
 end
 
 function get_font(text::RenderText)
-	return Font(ccall(dlsym(libcsfml_graphics, :sfText_getFont), Ptr{Void}, (Ptr{Void},), text.ptr))
+	return Font(ccall((:sfText_getFont, "libcsfml-graphics"), Ptr{Void}, (Ptr{Void},), text.ptr))
 end
 
 function get_charactersize(text::RenderText)
-	return Int(ccall(dlsym(libcsfml_graphics, :sfText_getCharacterSize), Uint32, (Ptr{Void},), text.ptr))
+	return Int(ccall((:sfText_getCharacterSize, "libcsfml-graphics"), Uint32, (Ptr{Void},), text.ptr))
 end
 
 function get_style(text::RenderText)
-	return Int(ccall(dlsym(libcsfml_graphics, :sfText_getStyle), Uint32, (Ptr{Void},), text.ptr))
+	return Int(ccall((:sfText_getStyle, "libcsfml-graphics"), Uint32, (Ptr{Void},), text.ptr))
 end
 
 function get_color(text::RenderText)
-	return ccall(dlsym(libcsfml_graphics, :sfText_getColor), Color, (Ptr{Void},), text.ptr)
+	return ccall((:sfText_getColor, "libcsfml-graphics"), Color, (Ptr{Void},), text.ptr)
 end
 
 function get_localbounds(text::RenderText)
-	return ccall(dlsym(libcsfml_graphics, :sfText_getLocalBounds), FloatRect, (Ptr{Void},), text.ptr)
+	return ccall((:sfText_getLocalBounds, "libcsfml-graphics"), FloatRect, (Ptr{Void},), text.ptr)
 end
 
 function get_globalbounds(text::RenderText)
-	ccall(dlsym(libcsfml_graphics, :sfText_getGlobalBounds), FloatRect, (Ptr{Void},), text.ptr)
+	ccall((:sfText_getGlobalBounds, "libcsfml-graphics"), FloatRect, (Ptr{Void},), text.ptr)
 end
 
 export set_color, set_style, set_charactersize, set_font, set_string, scale, rotate, move, get_origin,

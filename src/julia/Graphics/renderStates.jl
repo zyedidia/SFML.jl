@@ -10,7 +10,7 @@ function RenderStates(shader::Shader)
 	# blendAlpha = unsafe_load(cglobal(dlsym(libcsfml_graphics, :sfBlendAlpha), BlendMode))
 	# identity = unsafe_load(cglobal(dlsym(libcsfml_graphics, :sfTransform_Identity), Transform))
 	# RenderStates(blendAlpha, identity, C_NULL, shader.ptr)
-	RenderStates(ccall(dlsym(libjuliasfml, :sjShader_setShader), Ptr{Void}, (Ptr{Void},), shader.ptr))
+	RenderStates(ccall((:sjShader_setShader, "libjuliasfml"), Ptr{Void}, (Ptr{Void},), shader.ptr))
 end
 
 export RenderStates

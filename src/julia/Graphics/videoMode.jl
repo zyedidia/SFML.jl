@@ -13,11 +13,11 @@ type VideoMode
 end
 
 function get_desktop_mode()
-	return ccall(dlsym(libcsfml_window, :sfVideoMode_getDesktopMode), VideoMode, ())
+	return ccall((:sfVideoMode_getDesktopMode, "libcsfml-window"), VideoMode, ())
 end
 
 function is_valid(mode::VideoMode)
-	return ccall(dlsym(libcsfml_window, :sfVideoMode_isValid), Bool, (VideoMode,), mode)
+	return ccall((:sfVideoMode_isValid, "libcsfml-window"), Bool, (VideoMode,), mode)
 end
 
 export VideoMode, get_desktop_mode, is_valid

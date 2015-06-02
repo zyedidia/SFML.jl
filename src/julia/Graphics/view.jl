@@ -9,11 +9,11 @@ type View
 end
 
 function View()
-	View(ccall(dlsym(libcsfml_graphics, :sfView_create), Ptr{Void}, ()))
+	View(ccall((:sfView_create, "libcsfml-graphics"), Ptr{Void}, ()))
 end
 
 function View(rect::FloatRect)
-	View(ccall(dlsym(libcsfml_graphics, :sfView_createFromRect), Ptr{Void}, (FloatRect,), rect))
+	View(ccall((:sfView_createFromRect, "libcsfml-graphics"), Ptr{Void}, (FloatRect,), rect))
 end
 
 function View(center::Vector2f, size::Vector2f)
@@ -24,60 +24,60 @@ function View(center::Vector2f, size::Vector2f)
 end
 
 function copy(view::View)
-	return View(ccall(dlsym(libcsfml_graphics, :sfView_copy), Ptr{Void}, (Ptr{Void},), view.ptr))
+	return View(ccall((:sfView_copy, "libcsfml-graphics"), Ptr{Void}, (Ptr{Void},), view.ptr))
 end
 
 function destroy(view::View)
 	println("destroyed view")
-	ccall(dlsym(libcsfml_graphics, :sfView_destroy), Void, (Ptr{Void},), view.ptr)
+	ccall((:sfView_destroy, "libcsfml-graphics"), Void, (Ptr{Void},), view.ptr)
 end
 
 function set_center(view::View, pos::Vector2f)
-	ccall(dlsym(libcsfml_graphics, :sfView_setCenter), Void, (Ptr{Void}, Vector2f,), view.ptr, pos)
+	ccall((:sfView_setCenter, "libcsfml-graphics"), Void, (Ptr{Void}, Vector2f,), view.ptr, pos)
 end
 
 function set_size(view::View, size::Vector2f)
-	ccall(dlsym(libcsfml_graphics, :sfView_setSize), Void, (Ptr{Void}, Vector2f,), view.ptr, size)
+	ccall((:sfView_setSize, "libcsfml-graphics"), Void, (Ptr{Void}, Vector2f,), view.ptr, size)
 end
 
 function set_rotation(view::View, angle::Real)
-	ccall(dlsym(libcsfml_graphics, :sfView_setRotation), Void, (Ptr{Void}, Cfloat,), view.ptr, angle)
+	ccall((:sfView_setRotation, "libcsfml-graphics"), Void, (Ptr{Void}, Cfloat,), view.ptr, angle)
 end
 
 function set_viewport(view::View, rect::FloatRect)
-	ccall(dlsym(libcsfml_graphics, :sfView_setViewport), Void, (Ptr{Void}, FloatRect,), view.ptr, rect)
+	ccall((:sfView_setViewport, "libcsfml-graphics"), Void, (Ptr{Void}, FloatRect,), view.ptr, rect)
 end
 
 function reset(view::View, rect::FloatRect)
-	ccall(dlsym(libcsfml_graphics, :sfView_reset), Void, (Ptr{Void}, FloatRect,), view.ptr, rect)
+	ccall((:sfView_reset, "libcsfml-graphics"), Void, (Ptr{Void}, FloatRect,), view.ptr, rect)
 end
 
 function get_center(view::View)
-	return ccall(dlsym(libcsfml_graphics, :sfView_getCenter), Vector2f, (Ptr{Void},), view.ptr)
+	return ccall((:sfView_getCenter, "libcsfml-graphics"), Vector2f, (Ptr{Void},), view.ptr)
 end
 
 function get_size(view::View)
-	return ccall(dlsym(libcsfml_graphics, :sfView_getSize), Vector2f, (Ptr{Void},), view.ptr)
+	return ccall((:sfView_getSize, "libcsfml-graphics"), Vector2f, (Ptr{Void},), view.ptr)
 end
 
 function get_rotation(view::View)
-	return Real(ccall(dlsym(libcsfml_graphics, :sfView_getRotation), Cfloat, (Ptr{Void},), view.ptr))
+	return Real(ccall((:sfView_getRotation, "libcsfml-graphics"), Cfloat, (Ptr{Void},), view.ptr))
 end
 
 function get_viewport(view::View)
-	return ccall(dlsym(libcsfml_graphics, :sfView_getViewport), FloatRect, (Ptr{Void},), view.ptr)
+	return ccall((:sfView_getViewport, "libcsfml-graphics"), FloatRect, (Ptr{Void},), view.ptr)
 end
 
 function move(view::View, offset::Vector2f)
-	ccall(dlsym(libcsfml_graphics, :sfView_move), Void, (Ptr{Void}, Vector2f,), view.ptr, offset)
+	ccall((:sfView_move, "libcsfml-graphics"), Void, (Ptr{Void}, Vector2f,), view.ptr, offset)
 end
 
 function rotate(view::View, angle::Real)
-	ccall(dlsym(libcsfml_graphics, :sfView_rotate), Void, (Ptr{Void}, Cfloat,), view.ptr, angle)
+	ccall((:sfView_rotate, "libcsfml-graphics"), Void, (Ptr{Void}, Cfloat,), view.ptr, angle)
 end
 
 function zoom(view::View, factor::Real)
-	ccall(dlsym(libcsfml_graphics, :sfView_zoom), Void, (Ptr{Void}, Cfloat,), view.ptr, factor)
+	ccall((:sfView_zoom, "libcsfml-graphics"), Void, (Ptr{Void}, Cfloat,), view.ptr, factor)
 end
 
 export zoom, rotate, move, get_viewport, get_rotation, get_size, get_center, reset, set_viewport,

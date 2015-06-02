@@ -74,39 +74,39 @@ baremodule EventType
 end
 
 function Event()
-	Event(ccall(dlsym(libjuliasfml, :new_sjEvent), Ptr{Void}, ()))
+	Event(ccall((:new_sjEvent, "libjuliasfml"), Ptr{Void}, ()))
 end
 
 function destroy(event::Event)
-	ccall(dlsym(libjuliasfml, :sjEvent_destroy), Void, (Ptr{Void},), event.ptr)
+	ccall((:sjEvent_destroy, "libjuliasfml"), Void, (Ptr{Void},), event.ptr)
 end
 
 function get_type(event::Event)
-	return ccall(dlsym(libjuliasfml, :sjEvent_eventType), Int32, (Ptr{Void},), event.ptr)
+	return ccall((:sjEvent_eventType, "libjuliasfml"), Int32, (Ptr{Void},), event.ptr)
 end
 
 function get_size(event::Event)
-	return ccall(dlsym(libjuliasfml, :sjEvent_eventSize), SizeEvent, (Ptr{Void},), event.ptr)
+	return ccall((:sjEvent_eventSize, "libjuliasfml"), SizeEvent, (Ptr{Void},), event.ptr)
 end
 
 function get_key(event::Event)
-	return ccall(dlsym(libjuliasfml, :sjEvent_eventKey), KeyEvent, (Ptr{Void},), event.ptr)
+	return ccall((:sjEvent_eventKey, "libjuliasfml"), KeyEvent, (Ptr{Void},), event.ptr)
 end
 
 function get_text(event::Event)
-	return ccall(dlsym(libjuliasfml, :sjEvent_eventText), TextEvent, (Ptr{Void},), event.ptr)
+	return ccall((:sjEvent_eventText, "libjuliasfml"), TextEvent, (Ptr{Void},), event.ptr)
 end
 
 function get_mousebutton(event::Event)
-	return ccall(dlsym(libjuliasfml, :sjEvent_eventMouseButton), MouseButtonEvent, (Ptr{Void},), event.ptr)
+	return ccall((:sjEvent_eventMouseButton, "libjuliasfml"), MouseButtonEvent, (Ptr{Void},), event.ptr)
 end
 
 function get_mousemove(event::Event)
-	return ccall(dlsym(libjuliasfml, :sjEvent_eventMouseMove), MouseMoveEvent, (Ptr{Void},), event.ptr)
+	return ccall((:sjEvent_eventMouseMove, "libjuliasfml"), MouseMoveEvent, (Ptr{Void},), event.ptr)
 end
 
 function get_mousewheel(event::Event)
-	return ccall(dlsym(libjuliasfml, :sjEvent_eventMouseWheel), MouseWheelEvent, (Ptr{Void},), event.ptr)
+	return ccall((:sjEvent_eventMouseWheel, "libjuliasfml"), MouseWheelEvent, (Ptr{Void},), event.ptr)
 end
 
 export Event, EventType, get_type, KeyEvent, TextEvent, MouseButtonEvent, MouseMoveEvent, MouseWheelEvent,

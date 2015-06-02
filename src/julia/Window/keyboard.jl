@@ -1,5 +1,5 @@
 function is_key_pressed(key::Int)
-	return ccall(dlsym(libcsfml_window, :sfKeyboard_isKeyPressed), Int32, (Int32,), key) == 1
+	return ccall((:sfKeyboard_isKeyPressed, "libcsfml-window"), Int32, (Int32,), key) == 1
 end
 
 baremodule KeyCode

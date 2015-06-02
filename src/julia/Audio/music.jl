@@ -9,63 +9,63 @@ type Music
 end
 
 function Music(filename::String)
-	Music(ccall(dlsym(libcsfml_audio, :sfMusic_createFromFile), Ptr{Void}, (Ptr{Cchar},), filename))
+	Music(ccall((:sfMusic_createFromFile, "libcsfml-audio"), Ptr{Void}, (Ptr{Cchar},), filename))
 end
 
 function destroy(music::Music)
-	ccall(dlsym(libcsfml_audio, :sfMusic_destroy), Void, (Ptr{Void},), music.ptr)
+	ccall((:sfMusic_destroy, "libcsfml-audio"), Void, (Ptr{Void},), music.ptr)
 end
 
 function set_loop(music::Music, loop::Bool)
-	ccall(dlsym(libcsfml_audio, :sfMusic_setLoop), Void, (Ptr{Void}, Int32,), music.ptr, loop)
+	ccall((:sfMusic_setLoop, "libcsfml-audio"), Void, (Ptr{Void}, Int32,), music.ptr, loop)
 end
 
 function get_loop(music::Music)
-	return Bool(ccall(dlsym(libcsfml_audio, :sfMusic_getLoop), Int32, (Ptr{Void},), music.ptr))
+	return Bool(ccall((:sfMusic_getLoop, "libcsfml-audio"), Int32, (Ptr{Void},), music.ptr))
 end
 
 function play(music::Music)
-	ccall(dlsym(libcsfml_audio, :sfMusic_play), Void, (Ptr{Void},), music.ptr)
+	ccall((:sfMusic_play, "libcsfml-audio"), Void, (Ptr{Void},), music.ptr)
 end
 
 function pause(music::Music)
-	ccall(dlsym(libcsfml_audio, :sfMusic_pause), Void, (Ptr{Void},), music.ptr)
+	ccall((:sfMusic_pause, "libcsfml-audio"), Void, (Ptr{Void},), music.ptr)
 end
 
 function stop(music::Music)
-	ccall(dlsym(libcsfml_audio, :sfMusic_pause), Void, (Ptr{Void},), music.ptr)
+	ccall((:sfMusic_pause, "libcsfml-audio"), Void, (Ptr{Void},), music.ptr)
 end
 
 function get_duration(music::Music)
-	return ccall(dlsym(libcsfml_audio, :sfMusic_getDuration), Time, (Ptr{Void},), music.ptr)
+	return ccall((:sfMusic_getDuration, "libcsfml-audio"), Time, (Ptr{Void},), music.ptr)
 end
 
 function get_channelcount(music::Music)
-	return Real(ccall(dlsym(libcsfml_audio, :sfMusic_getChannelCount), Uint32, (Ptr{Void},), music.ptr))
+	return Real(ccall((:sfMusic_getChannelCount, "libcsfml-audio"), Uint32, (Ptr{Void},), music.ptr))
 end
 
 function get_samplerate(music::Music)
-	return Real(ccall(dlsym(libcsfml_audio, :sfMusic_getSampleRate), Uint32, (Ptr{Void},), music.ptr))
+	return Real(ccall((:sfMusic_getSampleRate, "libcsfml-audio"), Uint32, (Ptr{Void},), music.ptr))
 end
 
 function set_pitch(music::Music, pitch::Real)
-	ccall(dlsym(libcsfml_audio, :sfMusic_setPitch), Void, (Ptr{Void}, Cfloat,), music.ptr, pitch)
+	ccall((:sfMusic_setPitch, "libcsfml-audio"), Void, (Ptr{Void}, Cfloat,), music.ptr, pitch)
 end
 
 function set_volume(music::Music, volume::Real)
-	ccall(dlsym(libcsfml_audio, :sfMusic_setVolume), Void, (Ptr{Void}, Cfloat,), music.ptr, volume)
+	ccall((:sfMusic_setVolume, "libcsfml-audio"), Void, (Ptr{Void}, Cfloat,), music.ptr, volume)
 end
 
 function get_pitch(music::Music)
-	return Real(ccall(dlsym(libcsfml_audio, :sfMusic_getPitch), Cfloat, (Ptr{Void},), music.ptr))
+	return Real(ccall((:sfMusic_getPitch, "libcsfml-audio"), Cfloat, (Ptr{Void},), music.ptr))
 end
 
 function get_volume(music::Music)
-	return Real(ccall(dlsym(libcsfml_audio, :sfMusic_getVolume), Cfloat, (Ptr{Void},), music.ptr))
+	return Real(ccall((:sfMusic_getVolume, "libcsfml-audio"), Cfloat, (Ptr{Void},), music.ptr))
 end
 
 function get_status(music::Music)
-	return ccall(dlsym(libcsfml_audio, :sfMusic_getStatus), Int32, (Ptr{Void},), music.ptr)
+	return ccall((:sfMusic_getStatus, "libcsfml-audio"), Int32, (Ptr{Void},), music.ptr)
 end
 
 export Music, set_loop, get_duration, get_loop, play, pause, stop, get_channelcount, get_samplerate, 

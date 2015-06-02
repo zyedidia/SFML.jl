@@ -6,6 +6,7 @@ dlsym = Base.Libdl.dlsym
 function __init__()
 	old = pwd()
 	deps = Pkg.dir("SFML")*"/deps"
+	push!(Libdl.DL_LOAD_PATH, deps)
 	try
 		@unix_only begin
 			cd(deps)
