@@ -114,7 +114,7 @@ end
 	run(`git clone https://github.com/zyedidia/sfml-binaries.git`)
 
 	mv("sfml-binaries/sfml/sfml-$bitsize", "sfml")
-	mv("sfml-binaries/csfml-csfml-$bitsize", "csfml")
+	mv("sfml-binaries/csfml/csfml-$bitsize", "csfml")
 
 	copy_libs("$deps/sfml/bin", deps)
 	copy_libs("$deps/csfml/bin", deps)
