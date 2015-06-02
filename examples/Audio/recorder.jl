@@ -15,3 +15,5 @@ println("Playing")
 
 while get_status(sound) == SoundStatus.PLAYING
 end
+
+println("Done")
