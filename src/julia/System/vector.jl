@@ -1,3 +1,9 @@
+type Vector3f
+	x::Cfloat
+	y::Cfloat
+	z::Cfloat
+end
+
 abstract Vector2
 type Vector2i <: Vector2
 	x::Cint
@@ -44,4 +50,4 @@ function distance(vec1::Vector2, vec2::Vector2)
 	return sqrt(distance_squared(vec1, vec2))
 end
 
-export Vector2i, Vector2f, Vector2u, to_vec2u, to_vec2f, to_vec2i, distance, distance_squared
+export Vector2i, Vector2f, Vector2u, to_vec2u, to_vec2f, to_vec2i, distance, distance_squared, Vector3f
