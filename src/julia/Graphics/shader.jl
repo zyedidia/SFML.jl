@@ -17,7 +17,6 @@ end
 function ShaderFromMemory(vertex_shader::String, frag_shader::String)
 	vert = isempty(vertex_shader) ? C_NULL : vertex_shader
 	frag = isempty(frag_shader) ? C_NULL : frag_shader
-	println("$vert $frag")
 	Shader(ccall(dlsym(libcsfml_graphics, :sfShader_createFromMemory), Ptr{Void}, (Ptr{Cchar}, Ptr{Cchar},), vert, frag))
 end
 

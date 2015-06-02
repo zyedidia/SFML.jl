@@ -135,9 +135,12 @@ function get_viewport(window::RenderWindow)
 end
 
 function draw(window::RenderWindow, object::Drawable, shader::Shader)
-	# ptr = pointer_from_objref(renderStates)
-	ptr = ccall(dlsym(libjuliasfml, :sjShader_setShader), Ptr{Void}, (Ptr{Void},), shader.ptr)
-	draw(window, object, ptr)
+	state = RenderStates(shader)
+	draw(window, object, state)
+end
+
+function draw(window::RenderWindow, object::Drawable, state::RenderStates)
+	draw(window, object, state.ptr)
 end
 
 function draw(window::RenderWindow, object::Drawable)

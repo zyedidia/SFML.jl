@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <SFML/Graphics.h>
 
 sfRenderStates* sjShader_setShader(sfShader* shader) {
@@ -5,7 +6,7 @@ sfRenderStates* sjShader_setShader(sfShader* shader) {
 	states->shader = shader;
 	states->blendMode = sfBlendAlpha;
 	states->transform = sfTransform_Identity;
-	states->texture = NULL
+	states->texture = NULL;
 
 	return states;
 }
