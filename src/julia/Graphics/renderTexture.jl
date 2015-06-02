@@ -7,7 +7,6 @@ type RenderTexture
 		finalizer(r, destroy)
 		r
 	end
-	
 end
 
 function RenderTexture(width::Integer, height::Integer, depth_buffer::Bool=false)
@@ -61,28 +60,41 @@ function coords2pixel(texture::RenderTexture, point::Vector2, targetview=get_vie
 	ccall(dlsym(libcsfml_graphics, :sfRenderTexture_mapCoordsToPixel), Vector2i, (ptr{Void}, Vector2f, Ptr{Void},), texture.ptr, point, targetview.ptr)
 end
 
-function draw(texture::RenderTexture, object::Sprite)
-	ccall(dlsym(libcsfml_graphics, :sfRenderTexture_drawSprite), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), texture.ptr, object.ptr, C_NULL)
+function draw(texture::RenderTexture, object::Drawable, shader::Shader)
+	state = RenderStates(shader)
+	draw(texture, object, state)
 end
 
-function draw(texture::RenderTexture, object::RenderText)
-	ccall(dlsym(libcsfml_graphics, :sfRenderTexture_drawText), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), texture.ptr, object.ptr, C_NULL)
+function draw(texture::RenderTexture, object::Drawable, state::RenderStates)
+	draw(texture, object, state.ptr)
 end
 
-function draw(texture::RenderTexture, object::CircleShape)
-	ccall(dlsym(libcsfml_graphics, :sfRenderTexture_drawCircleShape), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), texture.ptr, object.ptr, C_NULL)
+function draw(texture::RenderTexture, object::Drawable)
+	draw(texture, object, C_NULL)
 end
 
-function draw(texture::RenderTexture, object::ConvexShape)
-	ccall(dlsym(libcsfml_graphics, :sfRenderTexture_drawConvexShape), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), texture.ptr, object.ptr, C_NULL)
+function draw(texture::RenderTexture, object::CircleShape, renderStates::Ptr{Void})
+	ccall(dlsym(libcsfml_graphics, :sfRenderTexture_drawCircleShape), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), texture.ptr, object.ptr, renderStates)
 end
 
-function draw(texture::RenderTexture, object::RectangleShape)
-	ccall(dlsym(libcsfml_graphics, :sfRenderTexture_drawRectangleShape), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), texture.ptr, object.ptr, C_NULL)
+function draw(texture::RenderTexture, object::RectangleShape, renderStates::Ptr{Void})
+	ccall(dlsym(libcsfml_graphics, :sfRenderTexture_drawRectangleShape), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), texture.ptr, object.ptr, renderStates)
 end
 
-function draw(texture::RenderTexture, object::VertexArray)
-	ccall(dlsym(libcsfml_graphics, :sfRenderTexture_drawVertexArray), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), texture.ptr, object.ptr, C_NULL)
+function draw(texture::RenderTexture, object::Sprite, renderStates::Ptr{Void})
+	ccall(dlsym(libcsfml_graphics, :sfRenderTexture_drawSprite), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), texture.ptr, object.ptr, renderStates)
+end
+
+function draw(texture::RenderTexture, object::RenderText, renderStates::Ptr{Void})
+	ccall(dlsym(libcsfml_graphics, :sfRenderTexture_drawText), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), texture.ptr, object.ptr, renderStates)
+end
+
+function draw(texture::RenderTexture, object::ConvexShape, renderStates::Ptr{Void})
+	ccall(dlsym(libcsfml_graphics, :sfRenderTexture_drawConvexShape), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), texture.ptr, object.ptr, renderStates)
+end
+
+function draw(texture::RenderTexture, object::VertexArray, renderStates::Ptr{Void})
+	ccall(dlsym(libcsfml_graphics, :sfRenderTexture_drawVertexArray), Void, (Ptr{Void}, Ptr{Void}, Ptr{Void},), texture.ptr, object.ptr, renderStates)
 end
 
 function get_texture(texture::RenderTexture)
