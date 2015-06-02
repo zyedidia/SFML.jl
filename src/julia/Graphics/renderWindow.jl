@@ -27,9 +27,9 @@ function RenderWindow(mode::VideoMode, title::String, settings::ContextSettings,
 	for i = 1:length(style)
 		style_int |= Int(style[i])
 	end
-	settings_ptr = pointer_from_objref(settings)
+	settings_ptr = Ref(settings)
 	icon = Image("$(Pkg.dir("SFML"))/assets/sfmljl_icon.png")
-	window = RenderWindow(ccall(dlsym(libcsfml_graphics, :sfRenderWindow_create), Ptr{Void}, (VideoMode, Ptr{Cchar}, Uint32, Ptr{Void},), mode, pointer(title), style_int, settings_ptr))
+	window = RenderWindow(ccall(dlsym(libcsfml_graphics, :sfRenderWindow_create), Ptr{Void}, (VideoMode, Ptr{Cchar}, Uint32, Ref{ContextSettings},), mode, title, style_int, settings_ptr))
 	set_icon(window, icon, 64, 64)
 	return window
 end
@@ -82,7 +82,7 @@ function get_size(window::RenderWindow)
 end
 
 function set_title(window::RenderWindow, title::String)
-	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_setTitle), Void, (Ptr{Void}, Ptr{Cchar},), window.ptr, pointer(title))
+	ccall(dlsym(libcsfml_graphics, :sfRenderWindow_setTitle), Void, (Ptr{Void}, Ptr{Cchar},), window.ptr, title)
 end
 
 function set_icon(window::RenderWindow, pixels::Array{Uint8}, width=64, height=64)
@@ -135,7 +135,7 @@ function get_viewport(window::RenderWindow)
 end
 
 function draw(window::RenderWindow, object::Drawable, renderStates::RenderStates)
-	ptr = pointer_from_objref(renderStates)
+	ptr = Ref(renderStates)
 	draw(window, object, ptr)
 end
 

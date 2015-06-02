@@ -13,7 +13,7 @@ function Texture(width::Integer, height::Integer)
 end
 
 function Texture(filename::String)
-	Texture(ccall(dlsym(libcsfml_graphics, :sfTexture_createFromFile), Ptr{Void}, (Ptr{Cchar}, Ptr{Void},), pointer(filename), C_NULL))
+	Texture(ccall(dlsym(libcsfml_graphics, :sfTexture_createFromFile), Ptr{Void}, (Ptr{Cchar}, Ptr{Void},), filename, C_NULL))
 end
 
 function Texture(image::Image)

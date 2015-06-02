@@ -59,7 +59,7 @@ function destroy(request::HttpRequest)
 end
 
 function set_field(request::HttpRequest, field::String, value::String)
-	ccall(dlsym(libcsfml_network, :sfHttpRequest_setField), Void, (Ptr{Void}, Ptr{Cchar}, Ptr{Cchar},), request.ptr, pointer(field), pointer(value))
+	ccall(dlsym(libcsfml_network, :sfHttpRequest_setField), Void, (Ptr{Void}, Ptr{Cchar}, Ptr{Cchar},), request.ptr, field, value)
 end
 
 function set_method(request::HttpRequest, method::HttpMethod)
@@ -67,7 +67,7 @@ function set_method(request::HttpRequest, method::HttpMethod)
 end
 
 function set_uri(request::HttpRequest, uri::String)
-	ccall(dlsym(libcsfml_network, :sfHttpRequest_setUri), Void, (Ptr{Void}, Ptr{Cchar},), request.ptr, pointer(uri))
+	ccall(dlsym(libcsfml_network, :sfHttpRequest_setUri), Void, (Ptr{Void}, Ptr{Cchar},), request.ptr, uri)
 end
 
 function set_http_version(request::HttpRequest, major::Integer, minor::Integer)
@@ -75,7 +75,7 @@ function set_http_version(request::HttpRequest, major::Integer, minor::Integer)
 end
 
 function set_body(request::HttpRequest, body::String)
-	ccall(dlsym(libcsfml_network, :sfHttpRequest_setBody), Void, (Ptr{Void}, Ptr{Cchar},), request.ptr, pointer(body))
+	ccall(dlsym(libcsfml_network, :sfHttpRequest_setBody), Void, (Ptr{Void}, Ptr{Cchar},), request.ptr, body)
 end
 
 type HttpResponse
@@ -93,7 +93,7 @@ function destroy(response::HttpResponse)
 end
 
 function get_field(response::HttpResponse, field::String)
-	bytestring(ccall(dlsym(libcsfml_network, :sfHttpResponse_getField), Ptr{Cchar}, (Ptr{Void}, Ptr{Cchar},), response.ptr, pointer(field)))
+	bytestring(ccall(dlsym(libcsfml_network, :sfHttpResponse_getField), Ptr{Cchar}, (Ptr{Void}, Ptr{Cchar},), response.ptr, field))
 end
 
 function get_status(response::HttpResponse)
@@ -131,7 +131,7 @@ function destroy(http::Http)
 end
 
 function set_host(http::Http, host::String, port::Integer=0)
-	ccall(dlsym(libcsfml_network, :sfHttp_setHost), Void, (Ptr{Void}, Ptr{Cchar}, Uint16), http.ptr, pointer(host), port)
+	ccall(dlsym(libcsfml_network, :sfHttp_setHost), Void, (Ptr{Void}, Ptr{Cchar}, Uint16), http.ptr, host, port)
 end
 
 function send_request(http::Http, request::HttpRequest, timeout::Time=Time(0))

@@ -9,7 +9,7 @@ type SoundBuffer
 end
 
 function SoundBuffer(filename::String)
-	SoundBuffer(ccall(dlsym(libcsfml_audio, :sfSoundBuffer_createFromFile), Ptr{Void}, (Ptr{Cchar},), pointer(filename)))
+	SoundBuffer(ccall(dlsym(libcsfml_audio, :sfSoundBuffer_createFromFile), Ptr{Void}, (Ptr{Cchar},), filename))
 end
 
 function copy(buffer::SoundBuffer)
@@ -21,7 +21,7 @@ function destroy(buffer::SoundBuffer)
 end
 
 function save_to_file(buffer::SoundBuffer, filename::String)
-	ccall(dlsym(libcsfml_audio, :sfSoundBuffer_saveToFile), Void, (Ptr{Void}, Ptr{Cchar},), buffer.ptr, pointer(filename))
+	ccall(dlsym(libcsfml_audio, :sfSoundBuffer_saveToFile), Void, (Ptr{Void}, Ptr{Cchar},), buffer.ptr, filename)
 end
 
 function get_duration(buffer::SoundBuffer)

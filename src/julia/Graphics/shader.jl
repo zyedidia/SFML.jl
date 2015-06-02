@@ -9,8 +9,8 @@ type Shader
 end
 
 function Shader(vertex_shader::String, frag_shader::String)
-	vert = isempty(vertex_shader) ? C_NULL : pointer(vertex_shader)
-	frag = isempty(frag_shader) ? C_NULL : pointer(frag_shader)
+	vert = isempty(vertex_shader) ? C_NULL : vertex_shader
+	frag = isempty(frag_shader) ? C_NULL : frag_shader
 	Shader(ccall(dlsym(libcsfml_graphics, :sfShader_createFromFile), Ptr{Void}, (Ptr{Cchar}, Ptr{Cchar},), vert, frag))
 end
 
@@ -27,35 +27,35 @@ function destroy(shader::Shader)
 end
 
 function set_parameter(shader::Shader, name::String, x::Real)
-	ccall(dlsym(libcsfml_graphics, :sfShader_setFloatParameter), Void, (Ptr{Void}, Ptr{Cchar}, Cfloat,), shader.ptr, pointer(name), x)
+	ccall(dlsym(libcsfml_graphics, :sfShader_setFloatParameter), Void, (Ptr{Void}, Ptr{Cchar}, Cfloat,), shader.ptr, name, x)
 end
 
 function set_parameter(shader::Shader, name::String, x::Real, y::Real)
-	ccall(dlsym(libcsfml_graphics, :sfShader_setFloat2Parameter), Void, (Ptr{Void}, Ptr{Cchar}, Cfloat, Cfloat,), shader.ptr, pointer(name), x, y)
+	ccall(dlsym(libcsfml_graphics, :sfShader_setFloat2Parameter), Void, (Ptr{Void}, Ptr{Cchar}, Cfloat, Cfloat,), shader.ptr, name, x, y)
 end
 
 function set_parameter(shader::Shader, name::String, x::Real, y::Real, z::Real)
-	ccall(dlsym(libcsfml_graphics, :sfShader_setFloat3Parameter), Void, (Ptr{Void}, Ptr{Cchar}, Cfloat, Cfloat, Cfloat,), shaper.ptr, pointer(name), x, y, z)
+	ccall(dlsym(libcsfml_graphics, :sfShader_setFloat3Parameter), Void, (Ptr{Void}, Ptr{Cchar}, Cfloat, Cfloat, Cfloat,), shaper.ptr, name, x, y, z)
 end
 
 function set_parameter(shader::Shader, name::String, x::Real, y::Real, z::Real, w::Real)
-	ccall(dlsym(libcsfml_graphics, :sfShader_setFloat4Parameter), Void, (Ptr{Void}, Ptr{Cchar}, Cfloat, Cfloat, Cfloat, Cfloat), shaper.ptr, pointer(name), x, y, z, w)
+	ccall(dlsym(libcsfml_graphics, :sfShader_setFloat4Parameter), Void, (Ptr{Void}, Ptr{Cchar}, Cfloat, Cfloat, Cfloat, Cfloat), shaper.ptr, name, x, y, z, w)
 end
 
 function set_parameter(shader::Shader, name::String, vector::Vector2f)
-	ccall(dlsym(libcsfml_graphics, :sfShader_setVector2Parameter), Void, (Ptr{Void}, Ptr{Cchar}, Vector2f,), shader.ptr, pointer(name), vector)
+	ccall(dlsym(libcsfml_graphics, :sfShader_setVector2Parameter), Void, (Ptr{Void}, Ptr{Cchar}, Vector2f,), shader.ptr, name, vector)
 end
 
 function set_parameter(shader::Shader, name::String, color::Color)
-	ccall(dlsym(libcsfml_graphics, :sfShader_setColorParameter), Void, (Ptr{Void}, Ptr{Cchar}, Color), shader.ptr, pointer(name), color)
+	ccall(dlsym(libcsfml_graphics, :sfShader_setColorParameter), Void, (Ptr{Void}, Ptr{Cchar}, Color), shader.ptr, name, color)
 end
 
 function set_parameter(shader::Shader, name::String, texture::Texture)
-	ccall(dlsym(libcsfml_graphics, :sfShader_setTextureParameter), Void, (Ptr{Void}, Ptr{Cchar}, Ptr{Void},), shader.ptr, pointer(name), texture.ptr)
+	ccall(dlsym(libcsfml_graphics, :sfShader_setTextureParameter), Void, (Ptr{Void}, Ptr{Cchar}, Ptr{Void},), shader.ptr, name, texture.ptr)
 end
 
 function set_parameter(shader::Shader, name::String)
-	ccall(dlsym(libcsfml_graphics, :sfShader_setCurrentTextureParameter), Void, (Ptr{Void}, Ptr{Cchar},), shader.ptr, pointer(name))
+	ccall(dlsym(libcsfml_graphics, :sfShader_setCurrentTextureParameter), Void, (Ptr{Void}, Ptr{Cchar},), shader.ptr, name)
 end
 
 function bind(shader::Shader)

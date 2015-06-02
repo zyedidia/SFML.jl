@@ -181,7 +181,7 @@ function login_anonymous(ftp::Ftp)
 end
 
 function login(ftp::Ftp, username::String, password::String)
-	FtpResponse(ccall(dlsym(libcsfml_network, :sfFtp_login), Ptr{Void}, (Ptr{Void}, Ptr{Cchar}, Ptr{Cchar}), ftp.ptr, pointer(username), pointer(password)))
+	FtpResponse(ccall(dlsym(libcsfml_network, :sfFtp_login), Ptr{Void}, (Ptr{Void}, Ptr{Cchar}, Ptr{Cchar}), ftp.ptr, username, password))
 end
 
 function disconnect(ftp::Ftp)
@@ -197,11 +197,11 @@ function get_working_directory(ftp::Ftp)
 end
 
 function get_directory_listing(ftp::Ftp, directory::String)
-	FtpListingResponse(ccall(dlsym(libcsfml_network, :sfFtp_getDirectoryListing), Ptr{Void}, (Ptr{Void}, Ptr{Cchar}), ftp.ptr, pointer(directory)))
+	FtpListingResponse(ccall(dlsym(libcsfml_network, :sfFtp_getDirectoryListing), Ptr{Void}, (Ptr{Void}, Ptr{Cchar}), ftp.ptr, directory))
 end
 
 function change_directory(ftp::Ftp, dir::String)
-	FtpResponse(ccall(dlsym(libcsfml_network, :sfFtp_changeDirectory), Ptr{Void}, (Ptr{Void}, Ptr{Cchar},), ftp.ptr, pointer(dir)))
+	FtpResponse(ccall(dlsym(libcsfml_network, :sfFtp_changeDirectory), Ptr{Void}, (Ptr{Void}, Ptr{Cchar},), ftp.ptr, dir))
 end
 
 # Go to the parent directory
@@ -210,27 +210,27 @@ function parent_directory(ftp::Ftp)
 end
 
 function create_directory(ftp::Ftp, name::String)
-	FtpResponse(ccall(dlsym(libcsfml_network, :sfFtp_createDirectory), Ptr{Void}, (Ptr{Void}, Ptr{Cchar},), ftp.ptr, pointer(name)))
+	FtpResponse(ccall(dlsym(libcsfml_network, :sfFtp_createDirectory), Ptr{Void}, (Ptr{Void}, Ptr{Cchar},), ftp.ptr, name))
 end
 
 function delete_directory(ftp::Ftp, name::String)
-	FtpResponse(ccall(dlsym(libcsfml_network, :sfFtp_deleteDirectory), Ptr{Void}, (Ptr{Void}, Ptr{Cchar},), ftp.ptr, pointer(name)))
+	FtpResponse(ccall(dlsym(libcsfml_network, :sfFtp_deleteDirectory), Ptr{Void}, (Ptr{Void}, Ptr{Cchar},), ftp.ptr, name))
 end
 
 function rename_file(ftp::Ftp, file::String, newname::String)
-	FtpResponse(ccall(dlsym(libcsfml_network, :sfFtp_renameFile), Ptr{Void}, (Ptr{Void}, Ptr{Cchar}, Ptr{Cchar}), ftp.ptr, pointer(file), pointer(newname)))
+	FtpResponse(ccall(dlsym(libcsfml_network, :sfFtp_renameFile), Ptr{Void}, (Ptr{Void}, Ptr{Cchar}, Ptr{Cchar}), ftp.ptr, file, newname))
 end
 
 function delete_file(ftp::Ftp, name::String)
-	FtpResponse(ccall(dlsym(libcsfml_network, :sfFtp_deleteFile), Ptr{Void}, (Ptr{Void}, Ptr{Cchar},), ftp.ptr, pointer(name)))
+	FtpResponse(ccall(dlsym(libcsfml_network, :sfFtp_deleteFile), Ptr{Void}, (Ptr{Void}, Ptr{Cchar},), ftp.ptr, name))
 end
 
 function download(ftp::Ftp, distantfile::String, destpath::String, mode::FtpTransferMode)
-	FtpResponse(ccall(dlsym(libcsfml_network, :sfFtp_download), Ptr{Void}, (Ptr{Void}, Ptr{Cchar}, Ptr{Cchar}, Int32), ftp.ptr, pointer(distantfile), pointer(destpath), Int32(mode)))
+	FtpResponse(ccall(dlsym(libcsfml_network, :sfFtp_download), Ptr{Void}, (Ptr{Void}, Ptr{Cchar}, Ptr{Cchar}, Int32), ftp.ptr, distantfile, destpath, Int32(mode)))
 end
 
 function upload(ftp::Ftp, localfile::String, destpath::String, mode::FtpTransferMode)
-	FtpResponse(ccall(dlsym(libcsfml_network, :sfFtp_upload), Ptr{Void}, (Ptr{Void}, Ptr{Cchar}, Ptr{Cchar}, Int32), ftp.ptr, pointer(localfile), pointer(destpath), Int32(mode)))
+	FtpResponse(ccall(dlsym(libcsfml_network, :sfFtp_upload), Ptr{Void}, (Ptr{Void}, Ptr{Cchar}, Ptr{Cchar}, Int32), ftp.ptr, localfile, destpath, Int32(mode)))
 end
 
 export upload, download, delete_file, rename_file, delete_directory, create_directory, parent_directory, change_directory,

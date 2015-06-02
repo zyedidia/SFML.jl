@@ -34,7 +34,7 @@ end
 
 function read_string(packet::Packet)
 	string = ""
-	string = bytestring(ccall(dlsym(libjuliasfml, :sjPacket_readString), Ptr{Cchar}, (Ptr{Void}, Ptr{Cchar},), packet.ptr, pointer(string)))
+	string = bytestring(ccall(dlsym(libjuliasfml, :sjPacket_readString), Ptr{Cchar}, (Ptr{Void}, Ptr{Cchar},), packet.ptr, string))
 	return string
 end
 
@@ -67,7 +67,7 @@ function write(packet::Packet, val::Cdouble)
 end
 
 function write(packet::Packet, string::String)
-	ccall(dlsym(libcsfml_network, :sfPacket_writeString), Void, (Ptr{Void}, Ptr{Cchar},), packet.ptr, pointer(string))
+	ccall(dlsym(libcsfml_network, :sfPacket_writeString), Void, (Ptr{Void}, Ptr{Cchar},), packet.ptr, string)
 end
 
 export Packet, copy, clear, get_data_size, read_bool, read_string, read_double, write

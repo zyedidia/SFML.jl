@@ -40,7 +40,7 @@ while true
 	response = get_working_directory(ftp)
 	check(response)
 	print_with_color(:blue, "$(get_directory(response))> ")
-	command = split(readline(STDIN) |> strip, " ")
+	command = split(readline(STDIN) |> strip, r"\s+")
 
 	if command[1] == "ls"
 		if length(command) > 1

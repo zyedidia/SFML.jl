@@ -9,7 +9,7 @@ type Image
 end
 
 function Image(filename::String)
-	Image(ccall(dlsym(libcsfml_graphics, :sfImage_createFromFile), Ptr{Void}, (Ptr{Cchar},), pointer(filename)))
+	Image(ccall(dlsym(libcsfml_graphics, :sfImage_createFromFile), Ptr{Void}, (Ptr{Cchar},), filename))
 end
 
 function Image(width::Integer, height::Integer, color::Color = SFML.black)
@@ -17,7 +17,7 @@ function Image(width::Integer, height::Integer, color::Color = SFML.black)
 end
 
 function copy(image::Image)
-	return Image(ccall(dlsym(libcsfml_graphics, :sfImage_copy), Ptr{Void}, (Ptr{Void},), image.ptr))
+	Image(ccall(dlsym(libcsfml_graphics, :sfImage_copy), Ptr{Void}, (Ptr{Void},), image.ptr))
 end
 
 function destroy(image::Image)
@@ -25,7 +25,7 @@ function destroy(image::Image)
 end
 
 function save_to_file(image::Image, filename::String)
-	return ccall(dlsym(libcsfml_graphics, :sfImage_saveToFile), Int32, (Ptr{Void}, Ptr{Cchar},), image.ptr, pointer(filename)) == 1
+	ccall(dlsym(libcsfml_graphics, :sfImage_saveToFile), Bool, (Ptr{Void}, Ptr{Cchar},), image.ptr, filename)
 end
 
 function set_pixel(image::Image, x::Integer, y::Integer, color::Color)
@@ -33,16 +33,16 @@ function set_pixel(image::Image, x::Integer, y::Integer, color::Color)
 end
 
 function get_pixel(image::Image, x::Integer, y::Integer)
-	return ccall(dlsym(libcsfml_graphics, :sfImage_getPixel), Color, (Ptr{Void}, Uint32, Uint32,), image.ptr, x, y)
+	ccall(dlsym(libcsfml_graphics, :sfImage_getPixel), Color, (Ptr{Void}, Uint32, Uint32,), image.ptr, x, y)
 end
 
 function get_pixels(image::Image)
 	imgsize = get_size(image)
-	return pointer_to_array(ccall(dlsym(libcsfml_graphics, :sfImage_getPixelsPtr), Ptr{Uint8}, (Ptr{Void},), image.ptr), imgsize.x * imgsize.y)
+	pointer_to_array(ccall(dlsym(libcsfml_graphics, :sfImage_getPixelsPtr), Ptr{Uint8}, (Ptr{Void},), image.ptr), imgsize.x * imgsize.y)
 end
 
 function get_size(image::Image)
-	return ccall(dlsym(libcsfml_graphics, :sfImage_getSize), Vector2u, (Ptr{Void},), image.ptr)
+	ccall(dlsym(libcsfml_graphics, :sfImage_getSize), Vector2u, (Ptr{Void},), image.ptr)
 end
 
 function flip_horizontally(image::Image)

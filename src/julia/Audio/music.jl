@@ -9,7 +9,7 @@ type Music
 end
 
 function Music(filename::String)
-	Music(ccall(dlsym(libcsfml_audio, :sfMusic_createFromFile), Ptr{Void}, (Ptr{Cchar},), pointer(filename)))
+	Music(ccall(dlsym(libcsfml_audio, :sfMusic_createFromFile), Ptr{Void}, (Ptr{Cchar},), filename))
 end
 
 function destroy(music::Music)

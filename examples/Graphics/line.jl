@@ -1,6 +1,6 @@
 using SFML
 
-window = RenderWindow("Test", 800, 600)
+window = RenderWindow("Line", 800, 600)
 event = Event()
 
 p1 = Vector2f(400, 300)

@@ -68,7 +68,7 @@ function scale(text::RenderText, factors::Vector2f)
 end
 
 function set_string(text::RenderText, string::String)
-	ccall(dlsym(libcsfml_graphics, :sfText_setString), Void, (Ptr{Void}, Ptr{Cchar},), text.ptr, pointer(string))
+	ccall(dlsym(libcsfml_graphics, :sfText_setString), Void, (Ptr{Void}, Ptr{Cchar},), text.ptr, string)
 end
 
 function set_font(text::RenderText, font::Font)
