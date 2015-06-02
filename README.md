@@ -29,14 +29,15 @@ The Linux binaries don't come with any of the dependencies so you have to instal
 
 On Debian you can install the package `libsfml-dev` which will also install all dependencies. You can also run the commands [here] (https://gist.github.com/NoobsArePeople2/8086528)
 
-### Windows
-You need to have [7-Zip] (http://www.7-zip.org/download.html) installed so that Julia can unzip files.
-
 ---
 
-I recommend that you use the most up to date version of the package instead of the most recently tagged version.
+To install, run:
 
-To install use
+```
+julia> Pkg.add("SFML")
+```
+
+If you want to install the master version use:
 
 ```
 julia> Pkg.clone("SFML")
