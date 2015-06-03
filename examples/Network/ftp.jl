@@ -12,8 +12,12 @@ host = readline(STDIN) |> chomp
 print("Please enter your username: ")
 username = readline(STDIN) |> chomp
 
+# Don't echo the password in the terminal
 print("Please enter your password: ")
+@unix_only run(`stty -echo`)
+@windows_only print("(Your password will be shown) ")
 password = readline(STDIN) |> chomp
+@unix_only run(`stty echo`)
 
 println("Connecting...")
 
