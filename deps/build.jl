@@ -23,6 +23,12 @@ function symlink_files(dir, ext)
 	end
 end
 
+function mkdir_if_necessary(dir)
+	if !isdir(dir)
+		mkdir(dir)
+	end
+end
+
 bitsize = Int == Int64 ? 64 : 32
 
 deps = Pkg.dir("SFML")*"/deps"
@@ -41,10 +47,10 @@ cd(deps)
 		download(csfml, "csfml.tar.gz")
 	end
 
-	mkdir("sfml")
+	mkdir_if_necessary("sfml")
 	run(`tar -xzf sfml.tar.gz -C sfml --strip-components=1`)
 
-	mkdir("csfml")
+	mkdir_if_necessary("csfml")
 	run(`tar -xzf csfml.tar.gz -C csfml --strip-components=1`)
 
 	symlink_files("$deps/csfml/lib", "2.2.0.dylib")
@@ -75,10 +81,10 @@ end
 		download(csfml, "csfml.tar.bz2")
 	end
 
-	mkdir("sfml")
+	mkdir_if_necessary("sfml")
 	run(`tar -xzf sfml.tar.gz -C sfml --strip-components=1`)
 
-	mkdir("csfml")
+	mkdir_if_necessary("csfml")
 	run(`tar -xjf csfml.tar.bz2 -C csfml --strip-components=1`)
 
 	symlink_files("$deps/csfml/lib", "so.2.2.0")
