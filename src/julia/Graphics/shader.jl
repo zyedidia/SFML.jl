@@ -52,6 +52,10 @@ function set_parameter(shader::Shader, name::String, vector::Vector2f)
 	ccall((:sfShader_setVector2Parameter, "libcsfml-graphics"), Void, (Ptr{Void}, Ptr{Cchar}, Vector2f,), shader.ptr, name, vector)
 end
 
+function set_parameter(shader::Shader, name::String, vector::Vector3f)
+	ccall((:sfShader_setVector3Parameter, "libcsfml-graphics"), Void, (Ptr{Void}, Ptr{Cchar}, Vector3f), shader.ptr, name, vector)
+end
+
 function set_parameter(shader::Shader, name::String, color::Color)
 	ccall((:sfShader_setColorParameter, "libcsfml-graphics"), Void, (Ptr{Void}, Ptr{Cchar}, Color), shader.ptr, name, color)
 end
