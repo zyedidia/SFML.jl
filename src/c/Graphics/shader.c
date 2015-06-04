@@ -1,10 +1,10 @@
 #include <stdlib.h>
 #include <SFML/Graphics.h>
 
-sfRenderStates* sjShader_setShader(sfShader* shader) {
+sfRenderStates* sjShader_setShader(sfBlendMode blendMode, sfShader* shader) {
 	sfRenderStates* states = malloc(sizeof *states);
 	states->shader = shader;
-	states->blendMode = sfBlendAlpha;
+	states->blendMode = blendMode;
 	states->transform = sfTransform_Identity;
 	states->texture = NULL;
 

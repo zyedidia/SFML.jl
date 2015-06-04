@@ -20,13 +20,18 @@ function ShaderFromMemory(vertex_shader::String, frag_shader::String)
 	Shader(ccall((:sfShader_createFromMemory, "libcsfml-graphics"), Ptr{Void}, (Ptr{Cchar}, Ptr{Cchar},), vert, frag))
 end
 
-# function Shader(shader_filename::String, shader_type::String)
-# 	if shader_type == "vert"
-# 		return Shader(shader_filename, "")
-# 	else shader_type == "frag"
-# 		return Shader("", shader_filename)
-# 	end
-# end
+function Shader(shader::String)
+	shadername = basename(shader)
+	if shadername[search(shadername, ".")+1] == "v"
+		# This shader is a vertex shader
+		Shader(shader, "")
+	elseif shadername[search(shadername, ".") + 1] == "f"
+		# This shader is a fragment shader
+		Shader("", shader)
+	else
+		println("$shadername is not a valid shader file")
+	end
+end
 
 function destroy(shader::Shader)
 	ccall((:sfShader_destroy, "libcsfml-graphics"), Void, (Ptr{Void},), shader.ptr)
