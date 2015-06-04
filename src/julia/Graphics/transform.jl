@@ -9,4 +9,3 @@ type Transform
 	a_8::Cfloat
 	a_9::Cfloat
 end
-
