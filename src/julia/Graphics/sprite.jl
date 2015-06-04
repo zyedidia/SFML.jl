@@ -71,7 +71,7 @@ function set_color(sprite::Sprite, color::Color)
 end
 
 function get_texture(sprite::Sprite)
-	return Texture(ccall((libcsfml_graphics, "sfSprite-getTexture"), Ptr{Void}, (Ptr{Void},), sprite.ptr))
+	return Texture(ccall((:sfSprite_getTexture, "libcsfml-graphics"), Ptr{Void}, (Ptr{Void},), sprite.ptr))
 end
 
 function get_color(sprite::Sprite)
