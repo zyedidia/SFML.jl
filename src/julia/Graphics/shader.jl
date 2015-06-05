@@ -82,7 +82,7 @@ function unbind()
 end
 
 function shader_is_available()
-	Bool(ccall((:sfShader_isAvailable, "libcsfml-graphics"), Int32, ()))
+	ccall((:sfShader_isAvailable, "libcsfml-graphics"), Bool, ())
 end
 
 export Shader, destroy, set_parameter, shader_is_available, ShaderFromMemory
