@@ -54,8 +54,16 @@ function set_smooth(texture::Texture, smooth::Bool)
 end
 
 function is_smooth(texture::Texture)
-	return Bool(ccall((:sfTexture_isSmooth, "libcsfml-graphics"), Int32, (Ptr{Void},), texture.ptr))
+	ccall((:sfTexture_isSmooth, "libcsfml-graphics"), Bool, (Ptr{Void},), texture.ptr)
+end
+
+function set_repeated(texture::Texture, repeated::Bool)
+	ccall((:sfTexture_setRepeated, "libcsfml-graphics"), Void, (Ptr{Void}, Int32), texture.ptr, repeated)
+end
+
+function is_repeated(texture::Texture)
+	ccall((:sfTexture_isRepeated, "libcsfml-graphics"), Bool, (Ptr{Void},), texture.ptr)
 end
 
 export Texture, copy, get_size, copy_to_image, set_smooth, is_smooth,
-update
+update, set_repeated, is_repeated
