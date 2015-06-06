@@ -49,6 +49,10 @@ function get_origin(sprite::Sprite)
 	return ccall((:sfSprite_getOrigin, "libcsfml-graphics"), Vector2f, (Ptr{Void},), sprite.ptr)
 end
 
+function get_scale(sprite::Sprite)
+	ccall((:sfSprite_getScale, "libcsfml-graphics"), Vector2f, (Ptr{Void},), sprite.ptr)
+end
+
 function move(sprite::Sprite, offset::Vector2f)
 	ccall((:sfSprite_move, "libcsfml-graphics"), Void, (Ptr{Void}, Vector2f,), sprite.ptr, offset)
 end
@@ -87,4 +91,4 @@ function get_globalbounds(sprite::Sprite)
 end
 
 export get_color, get_texture, set_texture, scale, rotate, move, get_origin, get_rotation, get_position, set_origin,
-set_scale, set_rotation, set_position, copy, Sprite, get_localbounds, get_globalbounds
+set_scale, set_rotation, set_position, copy, Sprite, get_localbounds, get_globalbounds, get_scale
