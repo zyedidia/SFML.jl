@@ -10,6 +10,8 @@ SFML.jl works on Mac OS X, Linux, and Windows.
 
 Take a look at the `examples` folder to see some usage examples.
 
+For much larger examples (games) see these two examples: [Jumping Game] (https://github.com/zyedidia/julia-jump-game) and [Space Shooter] (https://github.com/zyedidia/SpaceShooter.jl) (this one is more complex).
+
 #Installation
 You need to have Julia version 0.4, which you can get [here](http://julialang.org/downloads/) under `Nightly Builds`.
 Make sure that your version 0.4 is fairly recent. If building fails because `follow_symlinks` is not found, update your version of Julia 0.4.
