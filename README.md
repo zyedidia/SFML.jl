@@ -46,7 +46,21 @@ julia> Pkg.clone("SFML")
 julia> Pkg.build("SFML")
 ```
 
-#License
+# Screenshots and Gifs
+
+It is very simple to take a screen shot using SFML. Just use `screenshot(window, filename)`. 
+
+You can also take a screenshot and store it in an `Image` object without saving the image using `image = capture(window)`
+
+---
+
+Making gifs is only slightly more complicated. You can use the `make_gif(window, width, height, duration, filename, delay)` function (duration and delay are in seconds). 
+
+When you run the program, it will asynchronously create the gif and will give you constant feedback in the console. If you don't see anything in the console, add a `sleep(0)` declaration at the start of the animation loop to allow Julia time to switch between the processes.
+
+The gif creation is done when it says `Created gif XXX.gif`.
+
+# License
 
 This software is a binding of the SFML library created by Laurent Gomila, which is provided under the Zlib/png license.
 

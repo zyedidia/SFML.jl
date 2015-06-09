@@ -89,7 +89,7 @@ include("julia/Graphics/line.jl")
 include("julia/Window/mouse.jl")
 include("julia/Window/keyboard.jl")
 
-function make_gif(window::RenderWindow, width, height, duration, filename="plot.gif", delay=0.06)
+function make_gif(window::RenderWindow, width, height, duration, filename="sfmlgif.gif", delay=0.06)
 	textures = Texture[]
 	duration_clock = Clock()
 	delay_clock = Clock()
@@ -142,6 +142,11 @@ function make_gif(images::Array{Image}, width, height, filename="plot.gif", dela
 	println("Created gif $filename")
 end
 
-export make_gif
+function screenshot(window::RenderWindow, filename::String)
+	screenshot = capture(window)
+	save_to_file(screenshot, filename)
+end
+
+export make_gif, screenshot
 
 end
