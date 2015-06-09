@@ -138,7 +138,7 @@ function make_gif(images::Array{Image}, width, height, filename="plot.gif", dela
 	args = reduce(vcat, [[joinpath("$dir", "$name$i.png"), "-delay", "$(delay * 100)", "-alpha", "remove"] for i in 1:length(images)])
 	imagemagick_cmd = `convert $args $filename`
 	run(imagemagick_cmd)
-	run(`rm -rf $dir`)
+	rm(dir)
 	println("Created gif $filename")
 end
 
