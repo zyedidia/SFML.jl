@@ -54,6 +54,8 @@ You can also take a screenshot and store it in an `Image` object without saving 
 
 ---
 
+To create a gif, you must have [imagemagick] (http://www.imagemagick.org/script/index.php) installed.
+
 Making gifs is only slightly more complicated. You can use the `make_gif(window, width, height, duration, filename, delay)` function (duration and delay are in seconds). 
 
 When you run the program, it will asynchronously create the gif and will give you constant feedback in the console. If you don't see anything in the console, add a `sleep(0)` declaration at the start of the animation loop to allow Julia time to switch between the processes.
