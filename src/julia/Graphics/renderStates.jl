@@ -1,17 +1,22 @@
 type RenderStates
-	# blend_mode::BlendMode
-	# transform::Transform
-	# texture::Ptr{Void}
-	# shader::Ptr{Void}
 	ptr::Ptr{Void}
+
+	function RenderStates(ptr::Ptr{Void})
+		self = new(ptr)
+		finalizer(self, destroy)
+		self
+	end
 end
 
 function RenderStates(shader::Shader)
-	blendAlpha = unsafe_load(cglobal(dlsym(libcsfml_graphics, :sfBlendAlpha), BlendMode))
-	RenderStates(ccall((:sjShader_setShader, "libjuliasfml"), Ptr{Void}, (BlendMode, Ptr{Void},), blendAlpha, shader.ptr))
+	RenderStates(ccall((:sjRenderStates_create, "libjuliasfml"), Ptr{Void}, (BlendMode, Ptr{Void},), blend_alpha, shader.ptr))
 end
 function RenderStates(blendmode::BlendMode, shader::Shader)
-	RenderStates(ccall((:sjShader_setShader, "libjuliasfml"), Ptr{Void}, (BlendMode, Ptr{Void},), blendmode, shader.ptr))
+	RenderStates(ccall((:sjRenderStates_create, "libjuliasfml"), Ptr{Void}, (BlendMode, Ptr{Void},), blendmode, shader.ptr))
+end
+
+function destroy(states::RenderStates)
+	ccall((:sjRenderStates_destroy, "libjuliasfml"), Void, (Ptr{Void},), states.ptr)
 end
 
 export RenderStates
