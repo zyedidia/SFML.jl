@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <SFML/Graphics.h>
 
-sfRenderStates* sjShader_setShader(sfBlendMode blendMode, sfShader* shader) {
+sfRenderStates* sjRenderStates_create(sfBlendMode blendMode, sfShader* shader) {
 	sfRenderStates* states = malloc(sizeof *states);
 	states->shader = shader;
 	states->blendMode = blendMode;
@@ -9,4 +9,8 @@ sfRenderStates* sjShader_setShader(sfBlendMode blendMode, sfShader* shader) {
 	states->texture = NULL;
 
 	return states;
+}
+
+void sjRenderStates_destroy(sfRenderStates* states) {
+	free(states);
 }
