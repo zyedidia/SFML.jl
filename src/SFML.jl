@@ -1,6 +1,8 @@
 module SFML
 
-import Base: display, isopen, close, reset, copy, launch, start, listen, accept, connect, write, send, bind, download, scale
+import Base: display, isopen, close, reset, copy, launch, start, listen,
+	   accept, connect, write, send, bind, download, scale, contains
+
 dlsym = Base.Libdl.dlsym
 
 function __init__()
@@ -135,7 +137,9 @@ function make_gif(images::Array{Image}, width, height, filename="plot.gif", dela
 		print("$(round(i/length(images)*100))% done\r")
 	end
 	println("Assembling gif (this may take awhile)")
-	args = reduce(vcat, [[joinpath("$dir", "$name$i.png"), "-delay", "$(delay * 100)", "-alpha", "remove"] for i in 1:length(images)])
+	args = reduce(vcat, [[joinpath("$dir", "$name$i.png"), "-delay",
+	       "$(delay * 100)", "-alpha", "remove"] for i in 1:length(images)])
+
 	imagemagick_cmd = `convert $args $filename`
 	run(imagemagick_cmd)
 	rm(dir)
