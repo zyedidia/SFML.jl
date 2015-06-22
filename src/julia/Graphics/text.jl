@@ -9,6 +9,12 @@ type RenderText <: Drawable
 	end
 end
 
+const TextRegular = 0
+const TextBold = 1 << 0
+const TextItalic = 1 << 1
+const TextUnderlined = 1 << 2
+const TextStrikeThrough = 1 << 3
+
 function RenderText()
 	r = RenderText(ccall((:sfText_create, "libcsfml-graphics"), Ptr{Void}, ()))
 	set_font(r, Font("$(Pkg.dir("SFML"))/assets/arial.ttf"))
@@ -44,15 +50,15 @@ function get_position(text::RenderText)
 end
 
 function get_rotation(text::RenderText)
-	return Real(ccall((:sfText_getRotation, "libcsfml-graphics"), Cfloat, (Ptr{Void},), text.ptr))
+	ccall((:sfText_getRotation, "libcsfml-graphics"), Cfloat, (Ptr{Void},), text.ptr)
 end
 
 function get_scale(text::RenderText)
-	return ccall((:sfText_getScale, "libcsfml-graphics"), Vector2f, (Ptr{Void},), text.ptr)
+	ccall((:sfText_getScale, "libcsfml-graphics"), Vector2f, (Ptr{Void},), text.ptr)
 end
 
 function get_origin(text::RenderText)
-	return ccall((:sfText_getOrigin, "libcsfml-graphics"), Vector2f, (Ptr{Void},), text.ptr)
+	ccall((:sfText_getOrigin, "libcsfml-graphics"), Vector2f, (Ptr{Void},), text.ptr)
 end
 
 function move(text::RenderText, offsets::Vector2f)
@@ -76,11 +82,11 @@ function set_font(text::RenderText, font::Font)
 	text._font = font
 end
 
-function set_charactersize(text::RenderText, size::Int)
+function set_charactersize(text::RenderText, size::Integer)
 	ccall((:sfText_setCharacterSize, "libcsfml-graphics"), Void, (Ptr{Void}, Uint32,), text.ptr, size)
 end
 
-function set_style(text::RenderText, style::Int)
+function set_style(text::RenderText, style::Integer)
 	ccall((:sfText_setStyle, "libcsfml-graphics"), Void, (Ptr{Void}, Uint32,), text.ptr, style)
 end
 
@@ -88,34 +94,45 @@ function set_color(text::RenderText, color::Color)
 	ccall((:sfText_setColor, "libcsfml-graphics"), Void, (Ptr{Void}, Color,), text.ptr, color)
 end
 
+function set_style(text::RenderText, style::Uint32)
+	ccall((:sfText_setStyle, "libcsfml-graphics"), Void, (Ptr{Void}, Uint32,), text.ptr, style)
+end
+
 function get_string(text::RenderText)
-	return bytestring(ccall((:sfText_getString, "libcsfml-graphics"), Ptr{Cchar}, (Ptr{Void},), text.ptr))
+	bytestring(ccall((:sfText_getString, "libcsfml-graphics"), Ptr{Cchar}, (Ptr{Void},), text.ptr))
 end
 
 function get_font(text::RenderText)
-	return Font(ccall((:sfText_getFont, "libcsfml-graphics"), Ptr{Void}, (Ptr{Void},), text.ptr))
+	Font(ccall((:sfText_getFont, "libcsfml-graphics"), Ptr{Void}, (Ptr{Void},), text.ptr))
 end
 
 function get_charactersize(text::RenderText)
-	return Int(ccall((:sfText_getCharacterSize, "libcsfml-graphics"), Uint32, (Ptr{Void},), text.ptr))
+	Int(ccall((:sfText_getCharacterSize, "libcsfml-graphics"), Uint32, (Ptr{Void},), text.ptr))
 end
 
 function get_style(text::RenderText)
-	return Int(ccall((:sfText_getStyle, "libcsfml-graphics"), Uint32, (Ptr{Void},), text.ptr))
+	Int(ccall((:sfText_getStyle, "libcsfml-graphics"), Uint32, (Ptr{Void},), text.ptr))
 end
 
 function get_color(text::RenderText)
-	return ccall((:sfText_getColor, "libcsfml-graphics"), Color, (Ptr{Void},), text.ptr)
+	ccall((:sfText_getColor, "libcsfml-graphics"), Color, (Ptr{Void},), text.ptr)
+end
+
+function find_character_pos(text::RenderText, index::Integer)
+	ccall((:sfText_findCharacterPos, "libcsfml-graphics"), Vector2f, (Ptr{Void}, Csize_t,), text.ptr, index)
 end
 
 function get_localbounds(text::RenderText)
-	return ccall((:sfText_getLocalBounds, "libcsfml-graphics"), FloatRect, (Ptr{Void},), text.ptr)
+	ccall((:sfText_getLocalBounds, "libcsfml-graphics"), FloatRect, (Ptr{Void},), text.ptr)
 end
 
 function get_globalbounds(text::RenderText)
 	ccall((:sfText_getGlobalBounds, "libcsfml-graphics"), FloatRect, (Ptr{Void},), text.ptr)
 end
 
-export set_color, set_style, set_charactersize, set_font, set_string, scale, rotate, move, get_origin,
-get_scale, get_rotation, get_position, set_origin, set_scale, set_rotation, set_position, copy,
-RenderText, get_localbounds, get_globalbounds, get_style, get_string, get_font, get_charactersize, get_color
+export set_color, set_style, set_charactersize, set_font, set_string, scale,
+rotate, move, get_origin, get_scale, get_rotation, get_position, set_origin,
+set_scale, set_rotation, set_position, copy, RenderText, get_localbounds,
+get_globalbounds, get_style, get_string, get_font, get_charactersize,
+get_color, TextRegular, TextBold, TextUnderlined, TextItalic, TextStrikeThrough,
+find_character_pos, set_style 
