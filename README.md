@@ -34,8 +34,9 @@ The Linux binaries don't come with any of the dependencies so you have to instal
 
 On Debian you can install the package `libsfml-dev` which will also install all dependencies. You can also run the commands [here] (https://gist.github.com/NoobsArePeople2/8086528)
 -->
+---
 
-To install, run:
+To install on any OS, run:
 
 ```
 julia> Pkg.add("SFML")
