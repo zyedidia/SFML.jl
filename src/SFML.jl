@@ -37,7 +37,8 @@ function __init__()
 		global const libjuliasfml = Libdl.dlopen("$deps/libjuliasfml")
 		cd(old)
 	catch exception
-		println("Something has gone wrong with the installation. Please rebuild.")
+		println("Something has gone wrong with the SFML installation. Please rebuild.")
+		cd(old)
 	end
 end
 
