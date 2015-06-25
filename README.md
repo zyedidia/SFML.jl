@@ -1,4 +1,5 @@
 ![SFML.jl](./assets/sfmljl_logo.png)
+[![Build Status](https://travis-ci.org/zyedidia/Test.jl.svg?branch=master)](https://travis-ci.org/zyedidia/SFML.jl)
 ---
 This is a binding of the C++ game and multimedia library [SFML](http://www.sfml-dev.org/) (Simple and Fast Multimedia Library), developed by Laurent Gomila, for Julia. SFML is often used for game development but it can be used for anything graphics-related.
 
