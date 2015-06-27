@@ -27,5 +27,3 @@ end
 function restart(clock::Clock)
 	return ccall((:sfClock_restart, "libcsfml-system"), Time, (Ptr{Void},), clock.ptr)
 end
-
-export Clock, copy, get_elapsed_time, restart

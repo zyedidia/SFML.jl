@@ -63,6 +63,3 @@ end
 function draw(texture::RenderTexture, object::Line)
 	draw(texture, object.rect)
 end
-
-export Line, set_fillcolor, get_fillcolor, set_outlinecolor, get_outlinecolor,
-set_outline_thickness, get_outline_thickness, copy, draw, set_points, set_thickness

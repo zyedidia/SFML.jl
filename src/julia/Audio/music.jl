@@ -67,6 +67,3 @@ end
 function get_status(music::Music)
 	return ccall((:sfMusic_getStatus, "libcsfml-audio"), Int32, (Ptr{Void},), music.ptr)
 end
-
-export Music, set_loop, get_duration, get_loop, play, pause, stop, get_channelcount, get_samplerate, 
-set_pitch, set_volume, get_pitch, get_volume, get_status

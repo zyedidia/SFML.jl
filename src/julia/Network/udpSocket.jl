@@ -41,13 +41,11 @@ function send(socket::SocketUDP, packet::Packet, ipaddress::IpAddress, port::Int
 end
 
 function receive(socket::SocketUDP, packet::Packet, ipaddress::IpAddress, port::Uint16)
-	ipaddress_ptr = pointer_from_objref(IpAddress)
-	status = SocketStatus(ccall((:sfUdpSocket_receivePacket, "libcsfml-network"), Int32, (Ptr{Void}, Ptr{Void}, Ptr{IpAddress}, Ptr{Uint16},), socket.ptr, packet.ptr, ipaddress_ptr, port_ptr))
+	ipaddress_ptr = pointer_from_objref(ipaddress)
+	status = SocketStatus(ccall((:sfUdpSocket_receivePacket, "libcsfml-network"), Int32, (Ptr{Void}, Ptr{Void}, Ptr{IpAddress}, Ref{Uint16},), socket.ptr, packet.ptr, ipaddress_ptr, Ref(port)))
 	status
 end
 
 function max_datagram_size()
 	ccall((:sfUdpSocket_maxDatagramSize, "libcsfml-network"), Uint32, ())
 end
-
-export SocketUDP, set_blocking, is_blocking, get_localport, bind, unbind, send, receive, max_datagram_size

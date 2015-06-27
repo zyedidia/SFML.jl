@@ -37,5 +37,3 @@ function accept(listener::TcpListener, socket::SocketTCP)
 	socket.ptr = nstruct.ptr
 	return SocketStatus(nstruct.status)
 end
-
-export accept, listen, get_localport, is_blocking, set_blocking, TcpListener

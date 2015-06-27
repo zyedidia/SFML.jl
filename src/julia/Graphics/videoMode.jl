@@ -19,5 +19,3 @@ end
 function is_valid(mode::VideoMode)
 	return ccall((:sfVideoMode_isValid, "libcsfml-window"), Bool, (VideoMode,), mode)
 end
-
-export VideoMode, get_desktop_mode, is_valid

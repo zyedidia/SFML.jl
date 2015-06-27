@@ -75,6 +75,3 @@ end
 function get_volume(sound::Sound)
 	return Real(ccall((:sfSound_getVolume, "libcsfml-audio"), Cfloat, (Ptr{Void},), sound.ptr))
 end
-
-export Sound, copy, play, pause, stop, set_buffer, set_loop, get_loop, set_pitch, set_volume, 
-get_pitch, get_volume, get_status

@@ -64,6 +64,3 @@ end
 function is_repeated(texture::Texture)
 	ccall((:sfTexture_isRepeated, "libcsfml-graphics"), Bool, (Ptr{Void},), texture.ptr)
 end
-
-export Texture, copy, get_size, copy_to_image, set_smooth, is_smooth,
-update, set_repeated, is_repeated

@@ -29,6 +29,3 @@ end
 function get_listener_upvector()
 	ccall((:sfListener_getUpVector, "libcsfml-audio"), Vector3f, ())
 end
-
-export set_listener_upvector, set_listener_direction, set_listener_position, set_global_volume,
-get_listener_upvector, get_listener_direction, get_listener_position, get_global_volume

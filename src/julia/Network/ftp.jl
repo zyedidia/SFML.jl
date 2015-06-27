@@ -232,8 +232,3 @@ end
 function upload(ftp::Ftp, localfile::String, destpath::String, mode::FtpTransferMode)
 	FtpResponse(ccall((:sfFtp_upload, "libcsfml-network"), Ptr{Void}, (Ptr{Void}, Ptr{Cchar}, Ptr{Cchar}, Int32), ftp.ptr, localfile, destpath, Int32(mode)))
 end
-
-export upload, download, delete_file, rename_file, delete_directory, create_directory, parent_directory, change_directory,
-get_directory_listing, get_working_directory, keep_alive, disconnect, login, login_anonymous, connect, destroy, Ftp,
-get_message, isok, FtpResponse, get_directory, get_message, FtpDirectoryResponse, get_name, get_count, FtpListingResponse,
-FtpTransferMode, FtpStatus, get_status

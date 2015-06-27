@@ -55,6 +55,3 @@ function receive(socket::SocketTCP, packet::Packet)
 	packet.ptr = nstruct.ptr
 	return SocketStatus(nstruct.status)
 end
-
-export is_blocking, set_blocking, SocketTCP, connect, get_localport, receive, send,
-disconnect, get_remoteaddress, get_remoteport

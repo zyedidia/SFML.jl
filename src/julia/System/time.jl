@@ -25,5 +25,3 @@ end
 function microseconds(amount::Int64)
 	return ccall((:sfTime_sfSeconds, "libcsfml-system"), Time, (Int64,), amount)
 end
-
-export Time, as_seconds, as_microseconds, as_milliseconds, seconds, milliseconds, microseconds

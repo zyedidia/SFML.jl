@@ -46,11 +46,11 @@ function set_parameter(shader::Shader, name::String, x::Real, y::Real)
 end
 
 function set_parameter(shader::Shader, name::String, x::Real, y::Real, z::Real)
-	ccall((:sfShader_setFloat3Parameter, "libcsfml-graphics"), Void, (Ptr{Void}, Ptr{Cchar}, Cfloat, Cfloat, Cfloat,), shaper.ptr, name, x, y, z)
+	ccall((:sfShader_setFloat3Parameter, "libcsfml-graphics"), Void, (Ptr{Void}, Ptr{Cchar}, Cfloat, Cfloat, Cfloat,), shader.ptr, name, x, y, z)
 end
 
 function set_parameter(shader::Shader, name::String, x::Real, y::Real, z::Real, w::Real)
-	ccall((:sfShader_setFloat4Parameter, "libcsfml-graphics"), Void, (Ptr{Void}, Ptr{Cchar}, Cfloat, Cfloat, Cfloat, Cfloat), shaper.ptr, name, x, y, z, w)
+	ccall((:sfShader_setFloat4Parameter, "libcsfml-graphics"), Void, (Ptr{Void}, Ptr{Cchar}, Cfloat, Cfloat, Cfloat, Cfloat), shader.ptr, name, x, y, z, w)
 end
 
 function set_parameter(shader::Shader, name::String, vector::Vector2f)
@@ -84,5 +84,3 @@ end
 function shader_is_available()
 	ccall((:sfShader_isAvailable, "libcsfml-graphics"), Bool, ())
 end
-
-export Shader, destroy, set_parameter, shader_is_available, ShaderFromMemory

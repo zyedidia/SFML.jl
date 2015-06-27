@@ -52,6 +52,3 @@ end
 function flip_vertically(image::Image)
 	ccall((:sfImage_flipVertically, "libcsfml-graphics"), Void, (Ptr{Void},), image.ptr)
 end
-
-export Image, save_to_file, get_size, set_pixel, get_pixel, get_pixels,
-flip_vertically, flip_horizontally, copy

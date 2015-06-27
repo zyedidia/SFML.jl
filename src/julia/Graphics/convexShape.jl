@@ -129,8 +129,3 @@ end
 function get_globalbounds(shape::ConvexShape)
 	return ccall((:sfConvexShape_getGlobalBounds, "libcsfml-graphics"), FloatRect, (Ptr{Void},), shape.ptr)
 end
-
-export get_globalbounds, get_localbounds, set_point, set_pointcount, get_outline_thickness, get_outlinecolor, 
-get_fillcolor, get_texture_rect, get_texture, set_outlinecolor, set_fillcolor, set_position, get_position, set_rotation,
-get_rotation, set_scale, get_scale, move, scale, rotate, set_texture_rect, set_texture, set_origin, get_origin,
-copy, ConvexShape, get_point, get_pointcount

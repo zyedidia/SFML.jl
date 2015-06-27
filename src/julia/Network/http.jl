@@ -137,6 +137,3 @@ end
 function send_request(http::Http, request::HttpRequest, timeout::Time=Time(0))
 	HttpResponse(ccall((:sfHttp_sendRequest, "libcsfml-network"), Ptr{Void}, (Ptr{Void}, Ptr{Void}, Time), http.ptr, request.ptr, timeout))
 end
-
-export HttpRequest, HttpResponse, HttpMethod, Http, set_host, send_request, set_body, set_http_version, set_uri, get_field, get_body,
-get_major_version, get_minor_version, set_field, set_method, HttpStatus, get_status

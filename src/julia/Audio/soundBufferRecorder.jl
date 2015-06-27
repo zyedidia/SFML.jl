@@ -32,5 +32,3 @@ end
 function get_buffer(recorder::SoundBufferRecorder)
 	return SoundBuffer(ccall((:sfSoundBufferRecorder_getBuffer, "libcsfml-audio"), Ptr{Void}, (Ptr{Void},), recorder.ptr))
 end
-
-export SoundBufferRecorder, start, stop, get_sample_rate, get_buffer

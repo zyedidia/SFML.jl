@@ -3,5 +3,3 @@ baremodule SoundStatus
 	const PAUSED = 1
 	const PLAYING = 2
 end
-
-export SoundStatus

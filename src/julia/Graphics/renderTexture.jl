@@ -116,7 +116,3 @@ end
 function is_repeated(texture::RenderTexture)
 	Bool(ccall((:sfRenderTexture_isRepeated, "libcsfml-graphics"), Int32, (Ptr{Void},), texture.ptr))
 end
-
-export RenderTexture, get_size, set_active, display, clear, set_view, get_view, get_default_view, get_viewport,
-draw, get_texture, set_smooth, is_smooth, set_repeated, is_repeated, pixel2coords,
-coords2pixel

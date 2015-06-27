@@ -18,5 +18,3 @@ end
 function destroy(states::RenderStates)
 	ccall((:sjRenderStates_destroy, "libjuliasfml"), Void, (Ptr{Void},), states.ptr)
 end
-
-export RenderStates

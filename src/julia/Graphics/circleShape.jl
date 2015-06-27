@@ -94,7 +94,7 @@ function get_pointcount(shape::CircleShape)
 end
 
 function get_point(shape::CircleShape, index::Integer)
-	ccall((:sfCircleShape_getPoint, "libcsfml-graphics"), Vector2f, (Ptr{Void}, Csize_t), index)
+	ccall((:sfCircleShape_getPoint, "libcsfml-graphics"), Vector2f, (Ptr{Void}, Csize_t), shape, index)
 end
 
 function move(shape::CircleShape, offset::Vector2f)
@@ -119,7 +119,7 @@ function set_texture_rect(shape::CircleShape, rect::IntRect)
 end
 
 function get_texture(shape::CircleShape)
-	return Texture(call(dlsym(libcsfml_graphics, :sfCircleShape_getTexture), Ptr{Void}, (Ptr{Void},), shape.ptr))
+	return Texture(call((:sfCircleShape_getTexture, "libcsfml-graphics"), Ptr{Void}, (Ptr{Void},), shape.ptr))
 end
 
 function get_texture_rect(shape::CircleShape)
@@ -133,9 +133,3 @@ end
 function get_globalbounds(shape::CircleShape)
 	return ccall((:sfCircleShape_getGlobalBounds, "libcsfml-graphics"), FloatRect, (Ptr{Void},), shape.ptr)
 end
-
-export CircleShape, set_position, set_radius, set_fillcolor, set_outlinecolor, move, get_position,
-get_radius, set_origin, get_origin, get_fillcolor, get_outlinecolor, rotate, scale, copy, set_scale,
-get_scale, set_rotation, get_rotation, get_localbounds, get_globalbounds, set_outline_thickness,
-get_outline_thickness, get_pointcount, set_pointcount, get_texture_rect, get_texture, set_texture_rect, set_texture,
-get_point

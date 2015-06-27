@@ -33,9 +33,9 @@ function read_bool(packet::Packet)
 end
 
 function read_string(packet::Packet)
-	string = ""
-	string = bytestring(ccall((:sjPacket_readString, "libjuliasfml"), Ptr{Cchar}, (Ptr{Void}, Ptr{Cchar},), packet.ptr, string))
-	return string
+	str = ""
+	str = bytestring(ccall((:sjPacket_readString, "libjuliasfml"), Ptr{Cchar}, (Ptr{Void}, Ptr{Cchar},), packet.ptr, str))
+	return str
 end
 
 function read_int(packet::Packet)
@@ -69,6 +69,3 @@ end
 function write(packet::Packet, string::String)
 	ccall((:sfPacket_writeString, "libcsfml-network"), Void, (Ptr{Void}, Ptr{Cchar},), packet.ptr, string)
 end
-
-export Packet, copy, clear, get_data_size, read_bool, read_string, read_double, write
-read_float, read_int

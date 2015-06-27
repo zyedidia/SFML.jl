@@ -33,5 +33,3 @@ function intersects(rect1::IntRect, rect2::IntRect)
 	rect2Ptr = Ref{FloatRect}(rect2)
 	return ccall((:sfIntRect_intersects, "libcsfml-graphics"), Int32, (Ref{IntRect}, Ref{IntRect}, Ptr{IntRect},), (rect1Ptr), (rect2Ptr), C_NULL) == 1
 end
-
-export FloatRect, IntRect, contains, intersects

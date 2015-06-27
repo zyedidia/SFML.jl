@@ -34,5 +34,3 @@ end
 function terminate(thread::Thread)
 	ccall((:sfThread_terminate, "libcsfml-system"), Void, (Ptr{Void},), thread.ptr)
 end
-
-export Thread, launch, wait, terminate

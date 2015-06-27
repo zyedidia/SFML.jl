@@ -3,8 +3,6 @@ module SFML
 import Base: display, isopen, close, reset, copy, launch, start, listen,
 	   accept, connect, write, send, bind, download, scale, contains
 
-dlsym = Base.Libdl.dlsym
-
 function __init__()
 	old = pwd()
 	deps = Pkg.dir("SFML")*"/deps"
@@ -36,7 +34,7 @@ function __init__()
 		end
 		global const libjuliasfml = Libdl.dlopen("$deps/libjuliasfml")
 		cd(old)
-	catch exception
+	catch
 		println("Something has gone wrong with the SFML installation. Please rebuild.")
 		cd(old)
 	end
@@ -92,6 +90,8 @@ include("julia/Graphics/line.jl")
 include("julia/Window/mouse.jl")
 include("julia/Window/keyboard.jl")
 
+include("exports.jl")
+
 function make_gif(window::RenderWindow, width, height, duration, filename="sfmlgif.gif", delay=0.06)
 	textures = Texture[]
 	duration_clock = Clock()
@@ -129,11 +129,11 @@ function make_gif(images::Array{Image}, width, height, filename="plot.gif", dela
 	println("Please wait while your gif is made... This may take awhile")
 	dir = mktempdir()
 	name = filename[1:search(filename, '.')-1]
-	size = "$width" * "x" * "$height"
+	imgsize = "$width" * "x" * "$height"
 
 	for i = 1:length(images)
 		save_to_file(images[i], "$dir/$name$i.png")
-		cmd = `convert $dir/$name$i.png -resize $size\! $dir/$name$i.png`
+		cmd = `convert $dir/$name$i.png -resize $imgsize\! $dir/$name$i.png`
 		run(cmd)
 		print("$(round(i/length(images)*100))% done\r")
 	end
@@ -148,10 +148,8 @@ function make_gif(images::Array{Image}, width, height, filename="plot.gif", dela
 end
 
 function screenshot(window::RenderWindow, filename::String)
-	screenshot = capture(window)
+	screenshot_img = capture(window)
 	save_to_file(screenshot, filename)
 end
-
-export make_gif, screenshot
 
 end

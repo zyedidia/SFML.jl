@@ -67,6 +67,3 @@ end
 function getbounds(arr::VertexArray)
 	return ccall((:sfVertexArray_getBounds, "libcsfml-graphics"), FloatRect, (Ptr{Void},), arr.ptr)
 end
-
-export PrimitiveType, VertexArray, Vertex, copy, get_vertexcount, get_vertex, clear, resize, append,
-set_primitive_type, get_primitive_type, getbounds

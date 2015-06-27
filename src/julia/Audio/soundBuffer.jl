@@ -27,5 +27,3 @@ end
 function get_duration(buffer::SoundBuffer)
 	return ccall((:sfSoundBUffer_getDuration, "libcsfml-audio"), Time, (Ptr{Void},), buffer.ptr)
 end
-
-export SoundBuffer, copy, save_to_file, get_duration

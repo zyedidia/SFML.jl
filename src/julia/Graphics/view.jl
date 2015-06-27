@@ -79,6 +79,3 @@ end
 function zoom(view::View, factor::Real)
 	ccall((:sfView_zoom, "libcsfml-graphics"), Void, (Ptr{Void}, Cfloat,), view.ptr, factor)
 end
-
-export zoom, rotate, move, get_viewport, get_rotation, get_size, get_center, reset, set_viewport,
-set_rotation, set_size, set_center, copy, View

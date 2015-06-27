@@ -108,6 +108,3 @@ end
 function get_mousewheel(event::Event)
 	return ccall((:sjEvent_eventMouseWheel, "libjuliasfml"), MouseWheelEvent, (Ptr{Void},), event.ptr)
 end
-
-export Event, EventType, get_type, KeyEvent, TextEvent, MouseButtonEvent, MouseMoveEvent, MouseWheelEvent,
-SizeEvent, get_size, get_key, get_text, get_mousebutton, get_mousemove, get_mousewheel

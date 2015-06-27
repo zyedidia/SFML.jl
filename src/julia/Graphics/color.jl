@@ -24,5 +24,3 @@ const yellow = Color(255, 255, 0)
 const magenta = Color(255, 0, 255)
 const cyan = Color(0, 255, 255)
 const transparent = Color(0, 0, 0, 0)
-
-export Color

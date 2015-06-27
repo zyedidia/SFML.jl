@@ -106,5 +106,3 @@ baremodule KeyCode
 	const F15 = 99
 	const PAUSE = 100
 end
-
-export is_key_pressed, KeyCode

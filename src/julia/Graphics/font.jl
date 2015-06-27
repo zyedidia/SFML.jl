@@ -19,5 +19,3 @@ end
 function destroy(font::Font)
 	ccall((:sfFont_destroy, "libcsfml-graphics"), Void, (Ptr{Void},), font.ptr)
 end
-
-export Font, copy

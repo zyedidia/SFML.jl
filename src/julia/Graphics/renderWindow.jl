@@ -72,9 +72,9 @@ function get_position(window::RenderWindow)
 	return ccall((:sfRenderWindow_getPosition, "libcsfml-graphics"), Vector2i, (Ptr{Void},), window.ptr)
 end
 
-function set_size(window::RenderWindow, size::Vector2)
-	size = to_vec2u(size)
-	ccall((:sfRenderWindow_setSize, "libcsfml-graphics"), Void, (Ptr{Void}, Vector2u), window.ptr, size)
+function set_size(window::RenderWindow, window_size::Vector2)
+	window_size = to_vec2u(window_size)
+	ccall((:sfRenderWindow_setSize, "libcsfml-graphics"), Void, (Ptr{Void}, Vector2u), window.ptr, window_size)
 end
 
 function get_size(window::RenderWindow)
@@ -200,9 +200,3 @@ function coords2pixel(window::RenderWindow, point::Vector2, targetview::View=get
 	point = to_vec2f(point)
 	return ccall((:sfRenderWindow_mapCoordsToPixel, "libcsfml-graphics"), Vector2i, (Ptr{Void}, Vector2f, Ptr{Void},), window.ptr, point, targetview.ptr)
 end
-
-export RenderWindow, set_framerate_limit, isopen, pollevent, draw, clear, display, close, set_vsync_enabled, 
-capture, ContextSettings, WindowStyle, window_none, window_resize, window_defaultstyle, window_close, window_fullscreen,
-set_view, get_view, get_default_view, ContextSettings, set_position, get_position, set_size, get_size, set_title,
-waitevent, set_visible, set_mousecursor_visible, set_keyrepeat_enabled, set_active, requestfocus, hasfocus,
-pixel2coords, coords2pixel, set_icon
