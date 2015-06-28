@@ -54,23 +54,23 @@ function set_outline_thickness(shape::CircleShape, thickness::Real)
 end
 
 function get_origin(shape::CircleShape)
-	return ccall((:sfCircleShape_getOrigin, "libcsfml-graphics")), Vector2f, (Ptr{Void},), shape.ptr
+	ccall((:sfCircleShape_getOrigin, "libcsfml-graphics")), Vector2f, (Ptr{Void},), shape.ptr
 end
 
 function get_scale(shape::CircleShape)
-	return ccall((:sfCircleShape_getScale, "libcsfml-graphics"), Vector2f, (Ptr{Void},), shape.ptr)
+	ccall((:sfCircleShape_getScale, "libcsfml-graphics"), Vector2f, (Ptr{Void},), shape.ptr)
 end
 
 function get_rotation(shape::CircleShape)
-	return Real(ccall((:sfCircleShape_getRotation, "libcsfml-graphics"), Cfloat, (Ptr{Void},), shape.ptr))
+	ccall((:sfCircleShape_getRotation, "libcsfml-graphics"), Cfloat, (Ptr{Void},), shape.ptr)
 end
 
 function get_position(shape::CircleShape)
-	return ccall((:sfCircleShape_getPosition, "libcsfml-graphics"), Vector2f, (Ptr{Void},), shape.ptr)
+	ccall((:sfCircleShape_getPosition, "libcsfml-graphics"), Vector2f, (Ptr{Void},), shape.ptr)
 end
 
 function get_radius(shape::CircleShape)
-	return real(ccall((:sfCircleShape_getRadius, "libcsfml-graphics"), Cfloat, (Ptr{Void},), shape.ptr))
+	ccall((:sfCircleShape_getRadius, "libcsfml-graphics"), Cfloat, (Ptr{Void},), shape.ptr)
 end
 
 function set_pointcount(shape::CircleShape, count::Int)
@@ -78,19 +78,19 @@ function set_pointcount(shape::CircleShape, count::Int)
 end
 
 function get_fillcolor(shape::CircleShape)
-	return ccall((:sfCircleShape_getFillColor, "libcsfml-graphics"), Color, (Ptr{Void},), shape.ptr)
+	ccall((:sfCircleShape_getFillColor, "libcsfml-graphics"), Color, (Ptr{Void},), shape.ptr)
 end
 
 function get_outlinecolor(shape::CircleShape)
-	return ccall((:sfCircleShape_getOutlineColor, "libcsfml-graphics"), Color, (Ptr{Void},), shape.ptr)
+	ccall((:sfCircleShape_getOutlineColor, "libcsfml-graphics"), Color, (Ptr{Void},), shape.ptr)
 end
 
 function get_outline_thickness(shape::CircleShape)
-	return Real(ccall((:sfCircleShape_getOutlineThickness, "libcsfml-graphics"), Cfloat, (Ptr{Void},), shape.ptr))
+	ccall((:sfCircleShape_getOutlineThickness, "libcsfml-graphics"), Cfloat, (Ptr{Void},), shape.ptr)
 end
 
 function get_pointcount(shape::CircleShape)
-	return Int(ccall((:sfCircleShape_getPointCount, "libcsfml-graphics"), Csize_t, (Ptr{Void},), shape.ptr))
+	Int(ccall((:sfCircleShape_getPointCount, "libcsfml-graphics"), Csize_t, (Ptr{Void},), shape.ptr))
 end
 
 function get_point(shape::CircleShape, index::Integer)
@@ -119,17 +119,17 @@ function set_texture_rect(shape::CircleShape, rect::IntRect)
 end
 
 function get_texture(shape::CircleShape)
-	return Texture(call((:sfCircleShape_getTexture, "libcsfml-graphics"), Ptr{Void}, (Ptr{Void},), shape.ptr))
+	Texture(call((:sfCircleShape_getTexture, "libcsfml-graphics"), Ptr{Void}, (Ptr{Void},), shape.ptr))
 end
 
 function get_texture_rect(shape::CircleShape)
-	return ccall((:sfCircleShape_getTextureRect, "libcsfml-graphics"), IntRect, (Ptr{Void},), shape.ptr)
+	ccall((:sfCircleShape_getTextureRect, "libcsfml-graphics"), IntRect, (Ptr{Void},), shape.ptr)
 end
 
 function get_localbounds(shape::CircleShape)
-	return ccall((:sfCircleShape_getLocalBounds, "libcsfml-graphics"), FloatRect, (Ptr{Void},), shape.ptr)
+	ccall((:sfCircleShape_getLocalBounds, "libcsfml-graphics"), FloatRect, (Ptr{Void},), shape.ptr)
 end
 
 function get_globalbounds(shape::CircleShape)
-	return ccall((:sfCircleShape_getGlobalBounds, "libcsfml-graphics"), FloatRect, (Ptr{Void},), shape.ptr)
+	ccall((:sfCircleShape_getGlobalBounds, "libcsfml-graphics"), FloatRect, (Ptr{Void},), shape.ptr)
 end

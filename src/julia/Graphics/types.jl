@@ -4,6 +4,7 @@ type RenderWindow
 
 	function RenderWindow(ptr::Ptr{Void})
 		w = new(ptr)
+		w
 		# finalizer(w, destroy)
 		# w
 	end

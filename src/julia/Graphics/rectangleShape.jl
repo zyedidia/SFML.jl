@@ -70,24 +70,32 @@ function get_position(shape::RectangleShape)
 	return ccall((:sfRectangleShape_getPosition, "libcsfml-graphics"), Vector2f, (Ptr{Void},), shape.ptr)
 end
 
+function get_origin(shape::RectangleShape)
+	ccall((:sfRectangleShape_getOrigin, "libcsfml-graphics"), Vector2f, (Ptr{Void},), shape.ptr)
+end
+
+function get_rotation(shape::RectangleShape)
+	ccall((:sfRectangleShape_getRotation, "libcsfml-graphics"), Cfloat, (Ptr{Void},), shape.ptr)
+end
+
 function get_scale(shape::RectangleShape)
-	return ccall((:sfRectangleShape_getScale, "libcsfml-graphics"), Vector2f, (Ptr{Void},), shape.ptr)
+	ccall((:sfRectangleShape_getScale, "libcsfml-graphics"), Vector2f, (Ptr{Void},), shape.ptr)
 end
 
 function get_size(shape::RectangleShape)
-	return ccall((:sfRectangleShape_getSize, "libcsfml-graphics"), Vector2f, (Ptr{Void},), shape.ptr)
+	ccall((:sfRectangleShape_getSize, "libcsfml-graphics"), Vector2f, (Ptr{Void},), shape.ptr)
 end
 
 function get_fillcolor(shape::RectangleShape)
-	return ccall((:sfRectangleShape_getFillColor, "libcsfml-graphics"), Color, (Ptr{Void},), shape.ptr)
+	ccall((:sfRectangleShape_getFillColor, "libcsfml-graphics"), Color, (Ptr{Void},), shape.ptr)
 end
 
 function get_outlinecolor(shape::RectangleShape)
-	return ccall((:sfRectangleShape_getOutlineColor, "libcsfml-graphics"), Color, (Ptr{Void},), shape.ptr)
+	ccall((:sfRectangleShape_getOutlineColor, "libcsfml-graphics"), Color, (Ptr{Void},), shape.ptr)
 end
 
 function get_outline_thickness(shape::RectangleShape)
-	return Real(ccall((:sfRectangleShape_getOutlineThickness, "libcsfml-graphics"), Cfloat, (Ptr{Void},), shape.ptr))
+	ccall((:sfRectangleShape_getOutlineThickness, "libcsfml-graphics"), Cfloat, (Ptr{Void},), shape.ptr)
 end
 
 function move(shape::RectangleShape, offset::Vector2f)
@@ -103,17 +111,17 @@ function scale(shape::RectangleShape, factors::Vector2f)
 end
 
 function get_texture(shape::RectangleShape)
-	return Texture(ccall((:sfRectangleShape_getTexture, "libcsfml-graphics"), Ptr{Void}, (Ptr{Void},), shape.ptr))
+	Texture(ccall((:sfRectangleShape_getTexture, "libcsfml-graphics"), Ptr{Void}, (Ptr{Void},), shape.ptr))
 end
 
 function get_texture_rect(shape::RectangleShape)
-	return ccall((:sfRectangleShape_getTextureRect, "libcsfml-graphics"), IntRect, (Ptr{Void},), shape.ptr)
+	ccall((:sfRectangleShape_getTextureRect, "libcsfml-graphics"), IntRect, (Ptr{Void},), shape.ptr)
 end
 
 function get_localbounds(shape::RectangleShape)
-	return ccall((:sfRectangleShape_getLocalBounds, "libcsfml-graphics"), FloatRect, (Ptr{Void},), shape.ptr)
+	ccall((:sfRectangleShape_getLocalBounds, "libcsfml-graphics"), FloatRect, (Ptr{Void},), shape.ptr)
 end
 
 function get_globalbounds(shape::RectangleShape)
-	return ccall((:sfRectangleShape_getGlobalBounds, "libcsfml-graphics"), FloatRect, (Ptr{Void},), shape.ptr)
+	ccall((:sfRectangleShape_getGlobalBounds, "libcsfml-graphics"), FloatRect, (Ptr{Void},), shape.ptr)
 end

@@ -9,6 +9,8 @@ p2 = Vector2f(5, 5)
 # Create a line from p1 to p2
 line = Line(p1, p2, 10)
 set_fillcolor(line, SFML.yellow)
+println(get_points(line))
+println(get_thickness(line))
 
 while isopen(window)
 	while pollevent(window, event)

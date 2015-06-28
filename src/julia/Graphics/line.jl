@@ -1,8 +1,5 @@
 type Line
 	rect::RectangleShape
-	p1::Vector2
-	p2::Vector2
-	thickness::Real
 end
 
 function Line(p1::Vector2, p2::Vector2, thickness::Real=2)
@@ -12,7 +9,7 @@ function Line(p1::Vector2, p2::Vector2, thickness::Real=2)
 	set_rotation(rect, rad2deg(atan2(p2.y - p1.y, p2.x - p1.x)))
 	set_origin(rect, Vector2f(0, thickness / 2))
 
-	Line(rect, p1, p2, thickness)
+	Line(rect)
 end
 
 function copy(l::Line)
@@ -20,16 +17,27 @@ function copy(l::Line)
 end
 
 function set_points(l::Line, p1::Vector2, p2::Vector2)
-	l.p1 = p1
-	l.p2 = p2
 	set_position(l.rect, to_vec2f(p1))
 	set_rotation(l.rect, rad2deg(atan2(p2.y - p1.y, p2.x - p1.x)))
 end
 
+function get_points(l::Line)
+	pos = get_position(l.rect)
+	rot = get_rotation(l.rect)
+	len = get_size(l.rect).x
+
+	p2 = Vector2f(pos.x + len*cosd(rot), pos.y + len*sind(rot))
+	pos, p2
+end
+
 function set_thickness(l::Line, thickness::Real)
-	l.thickness = thickness
-	set_size(l.rect, Vector2f(distance(l.p1, l.p2), thickness))
+	p1, p2 = get_points(l)
+	set_size(l.rect, Vector2f(distance(p1, p2), thickness))
 	set_origin(l.rect, Vector2f(0, thickness / 2))
+end
+
+function get_thickness(l::Line)
+	get_size(l.rect).y
 end
 
 function set_fillcolor(l::Line, c::Color)
@@ -37,7 +45,7 @@ function set_fillcolor(l::Line, c::Color)
 end
 
 function get_fillcolor(l::Line)
-	return get_fillcolor(l.rect)
+	get_fillcolor(l.rect)
 end
 
 function set_outlinecolor(l::Line, c::Color)
@@ -45,7 +53,7 @@ function set_outlinecolor(l::Line, c::Color)
 end
 
 function get_outlinecolor(l::Line)
-	return get_outlinecolor(l.rect)
+	get_outlinecolor(l.rect)
 end
 
 function set_outline_thickness(l::Line, thickness::Real)
@@ -53,7 +61,7 @@ function set_outline_thickness(l::Line, thickness::Real)
 end
 
 function get_outline_thickness(l::Line)
-	return get_outline_thickness(l.rect)
+	get_outline_thickness(l.rect)
 end
 
 function draw(window::RenderWindow, object::Line)

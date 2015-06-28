@@ -1,4 +1,6 @@
 export BlendMode
+export get_points
+export get_thickness
 export Sound
 export Font
 export CircleShape
@@ -283,3 +285,4 @@ export set_mousepos
 export is_mouse_pressed
 export make_gif
 export screenshot
+export Vector2
