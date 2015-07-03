@@ -5,7 +5,7 @@ This is a binding of the C++ game and multimedia library [SFML](http://www.sfml-
 
 It also has audio libraries and networking libraries.
 
-This is a work in progress. There is currently almost complete support for graphics, good support for audio, and complete support for network.
+There is currently almost complete support for graphics, great support for audio, and complete support for network.
 
 SFML.jl works on Mac OS X, Linux, and Windows.
 
@@ -65,6 +65,15 @@ Making gifs is only slightly more complicated. You can use the `make_gif(window,
 When you run the program, it will asynchronously create the gif and will give you constant feedback in the console. If you don't see anything in the console, add a `sleep(0)` declaration at the start of the animation loop to allow Julia time to switch between the processes.
 
 The gif creation is done when it says `Created gif XXX.gif`.
+
+# What has not been bound (yet)
+
+* SoundStreams
+* SoundStreamRecorders
+* SFML threads (pthreads)
+* Transforms
+
+For the first three, we will probably have to wait for Julia to support multithreading.
 
 # License
 

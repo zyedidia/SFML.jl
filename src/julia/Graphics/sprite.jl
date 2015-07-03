@@ -13,6 +13,12 @@ function Sprite()
 	Sprite(ccall((:sfSprite_create, "libcsfml-graphics"), Ptr{Void}, ()))
 end
 
+function Sprite(texture::Texture)
+	s = Sprite()
+	set_texture(sprite, texture)
+	s
+end
+
 function copy(sprite::Sprite)
 	return Sprite(ccall((:sfSprite_copy, "libcsfml-graphics"), Ptr{Void}, (Ptr{Void},), sprite.ptr))
 end

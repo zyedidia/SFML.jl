@@ -21,6 +21,12 @@ function RenderText()
 	r
 end
 
+function RenderText(value::String)
+	r = RenderText()
+	set_string(r, value)
+	r
+end
+
 function copy(text::RenderText)
 	return RenderText(ccall((:sfText_copy, "libcsfml-graphics"), Ptr{Void}, (Ptr{Void},), text.ptr))
 end
