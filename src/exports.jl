@@ -1,4 +1,6 @@
 export BlendMode
+export get_samples
+export get_samplecount
 export get_points
 export get_thickness
 export Sound
