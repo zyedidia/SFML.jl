@@ -2,38 +2,38 @@
 #include <SFML/Window/Event.h>
 
 sfEvent* new_sjEvent() {
-	sfEvent* pEvent;
-	return malloc(sizeof* pEvent);
+    sfEvent* pEvent;
+    return malloc(sizeof* pEvent);
 }
 
 void sjEvent_destroy(sfEvent* pEvent) {
-	free(pEvent);
+    free(pEvent);
 }
 
 int sjEvent_eventType(sfEvent* pEvent) {
-	return pEvent->type;
+    return pEvent->type;
 }
 
 sfSizeEvent sjEvent_eventSize(sfEvent* pEvent) {
-	return pEvent->size;
+    return pEvent->size;
 }
 
 sfKeyEvent sjEvent_eventKey(sfEvent* pEvent) {
-	return pEvent->key;
+    return pEvent->key;
 }
 
 sfTextEvent sjEvent_eventText(sfEvent* pEvent) {
-	return pEvent->text;
+    return pEvent->text;
 }
 
 sfMouseMoveEvent sjEvent_eventMouseMove(sfEvent* pEvent) {
-	return pEvent->mouseMove;
+    return pEvent->mouseMove;
 }
 
 sfMouseButtonEvent sjEvent_eventMouseButton(sfEvent* pEvent) {
-	return pEvent->mouseButton;
+    return pEvent->mouseButton;
 }
 
 sfMouseWheelEvent sjEvent_eventMouseWheel(sfEvent* pEvent) {
-	return pEvent->mouseWheel;
+    return pEvent->mouseWheel;
 }

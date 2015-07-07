@@ -65,20 +65,20 @@ state = RenderStates(shader)
 clock = Clock()
 
 while isopen(window)
-	while pollevent(window, event)
-		if get_type(event) == EventType.CLOSED
-			close(window)
-		end
-	end
+    while pollevent(window, event)
+        if get_type(event) == EventType.CLOSED
+            close(window)
+        end
+    end
 
-	x = get_mousepos(window).x / get_size(window).x
-	y = get_mousepos(window).y / get_size(window).y
+    x = get_mousepos(window).x / get_size(window).x
+    y = get_mousepos(window).y / get_size(window).y
 
-	set_parameter(shader, "blur_radius", (x + y) * 0.008)
-	set_parameter(shader, "wave_phase", get_elapsed_time(clock) |> as_seconds)
-	set_parameter(shader, "wave_amplitude", Vector2f(x * 40, y * 40))
+    set_parameter(shader, "blur_radius", (x + y) * 0.008)
+    set_parameter(shader, "wave_phase", get_elapsed_time(clock) |> as_seconds)
+    set_parameter(shader, "wave_amplitude", Vector2f(x * 40, y * 40))
 
-	clear(window, SFML.black)
-	draw(window, sprite, state)
-	display(window)
+    clear(window, SFML.black)
+    draw(window, sprite, state)
+    display(window)
 end

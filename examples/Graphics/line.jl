@@ -13,13 +13,13 @@ println(get_points(line))
 println(get_thickness(line))
 
 while isopen(window)
-	while pollevent(window, event)
-		if get_type(event) == EventType.CLOSED
-			close(window)
-		end
-	end
+    while pollevent(window, event)
+        if get_type(event) == EventType.CLOSED
+            close(window)
+        end
+    end
 
-	clear(window, SFML.black)
-	draw(window, line)
-	display(window)
+    clear(window, SFML.black)
+    draw(window, line)
+    display(window)
 end

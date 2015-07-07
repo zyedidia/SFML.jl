@@ -14,12 +14,12 @@ set_outlinecolor(square, Color(4, 200, 127))
 set_outline_thickness(square, 2)
 
 while isopen(window)
-	while pollevent(window, event)
-		if get_type(event) == EventType.CLOSED
-			close(window)
-		end
-	end
-	clear(window, SFML.white)
-	draw(window, square)
-	display(window)
+    while pollevent(window, event)
+        if get_type(event) == EventType.CLOSED
+            close(window)
+        end
+    end
+    clear(window, SFML.white)
+    draw(window, square)
+    display(window)
 end

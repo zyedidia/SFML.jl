@@ -20,43 +20,43 @@ set_color(mousepos_text, SFML.red)
 set_charactersize(mousepos_text, 25)
 
 while isopen(window)
-	# Check for any events
-	while pollevent(window, event)
-		if get_type(event) == EventType.CLOSED
-			close(window)
-		end
-	end
+    # Check for any events
+    while pollevent(window, event)
+        if get_type(event) == EventType.CLOSED
+            close(window)
+        end
+    end
 
-	circle_position = get_position(circle)
-	# Check for key input and move the circle accordingly
-	if is_key_pressed(KeyCode.UP)
-		circle_position.y -= 1
-	elseif is_key_pressed(KeyCode.DOWN)
-		circle_position.y += 1
-	end
+    circle_position = get_position(circle)
+    # Check for key input and move the circle accordingly
+    if is_key_pressed(KeyCode.UP)
+        circle_position.y -= 1
+    elseif is_key_pressed(KeyCode.DOWN)
+        circle_position.y += 1
+    end
 
-	if is_key_pressed(KeyCode.RIGHT)
-		circle_position.x += 1
-	elseif is_key_pressed(KeyCode.LEFT)
-		circle_position.x -= 1
-	end
+    if is_key_pressed(KeyCode.RIGHT)
+        circle_position.x += 1
+    elseif is_key_pressed(KeyCode.LEFT)
+        circle_position.x -= 1
+    end
 
-	set_position(circle, circle_position)
+    set_position(circle, circle_position)
 
-	# Get the mouse position and set the text
-	mousepos = get_mousepos(window)
-	set_string(mousepos_text, "Mouse Position: $(mousepos.x) $(mousepos.y)")
+    # Get the mouse position and set the text
+    mousepos = get_mousepos(window)
+    set_string(mousepos_text, "Mouse Position: $(mousepos.x) $(mousepos.y)")
 
-	if is_mouse_pressed(MouseButton.LEFT)
-		set_string(mousepos_text, "Left click")
-	end
-	if is_mouse_pressed(MouseButton.RIGHT)
-		set_string(mousepos_text, "Right click")
-	end
+    if is_mouse_pressed(MouseButton.LEFT)
+        set_string(mousepos_text, "Left click")
+    end
+    if is_mouse_pressed(MouseButton.RIGHT)
+        set_string(mousepos_text, "Right click")
+    end
 
-	# Clear and redraw the screen
-	clear(window, SFML.black)
-	draw(window, circle)
-	draw(window, mousepos_text)
-	display(window)
+    # Clear and redraw the screen
+    clear(window, SFML.black)
+    draw(window, circle)
+    draw(window, mousepos_text)
+    display(window)
 end

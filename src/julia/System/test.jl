@@ -1,17 +1,17 @@
 using SFML
 
 function thread1()
-	while true
-		println("In thread1")
-		sleep(1)
-	end
+    while true
+        println("In thread1")
+        sleep(1)
+    end
 end
 
 function thread2()
-	while true
-		println("In thread 2")
-		sleep(1)
-	end
+    while true
+        println("In thread 2")
+        sleep(1)
+    end
 end
 
 # const callback_c = Base.SingleAsyncWork(data -> thread1())
@@ -28,6 +28,6 @@ t2 = Thread(thread2)
 launch(t2)
 
 while true
-	println("Main thread")
-	sleep(1)
+    println("Main thread")
+    sleep(1)
 end

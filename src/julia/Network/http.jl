@@ -41,99 +41,99 @@ HttpDelete)
 )
 
 type HttpRequest
-	ptr::Ptr{Void}
+    ptr::Ptr{Void}
 
-	function HttpRequest(ptr::Ptr{Void})
-		self = new(ptr)
-		finalizer(self, destroy)
-		self
-	end
+    function HttpRequest(ptr::Ptr{Void})
+        self = new(ptr)
+        finalizer(self, destroy)
+        self
+    end
 end
 
 function HttpRequest()
-	HttpRequest(ccall((:sfHttpRequest_create, "libcsfml-network"), Ptr{Void}, ()))
+    HttpRequest(ccall((:sfHttpRequest_create, "libcsfml-network"), Ptr{Void}, ()))
 end
 
 function destroy(request::HttpRequest)
-	ccall((:sfHttpRequest_destroy, "libcsfml-network"), Void, (Ptr{Void},), request.ptr)
+    ccall((:sfHttpRequest_destroy, "libcsfml-network"), Void, (Ptr{Void},), request.ptr)
 end
 
 function set_field(request::HttpRequest, field::String, value::String)
-	ccall((:sfHttpRequest_setField, "libcsfml-network"), Void, (Ptr{Void}, Ptr{Cchar}, Ptr{Cchar},), request.ptr, field, value)
+    ccall((:sfHttpRequest_setField, "libcsfml-network"), Void, (Ptr{Void}, Ptr{Cchar}, Ptr{Cchar},), request.ptr, field, value)
 end
 
 function set_method(request::HttpRequest, method::HttpMethod)
-	ccall((:sfHttpRequest_setMethod, "libcsfml-network"), Void, (Ptr{Void}, Int32,), request.ptr, Int32(method))
+    ccall((:sfHttpRequest_setMethod, "libcsfml-network"), Void, (Ptr{Void}, Int32,), request.ptr, Int32(method))
 end
 
 function set_uri(request::HttpRequest, uri::String)
-	ccall((:sfHttpRequest_setUri, "libcsfml-network"), Void, (Ptr{Void}, Ptr{Cchar},), request.ptr, uri)
+    ccall((:sfHttpRequest_setUri, "libcsfml-network"), Void, (Ptr{Void}, Ptr{Cchar},), request.ptr, uri)
 end
 
 function set_http_version(request::HttpRequest, major::Integer, minor::Integer)
-	ccall((:sfHttpRequest_setHttpVersion, "libcsfml-network"), Void, (Ptr{Void}, Int32, Int32,), request.ptr, major, minor)
+    ccall((:sfHttpRequest_setHttpVersion, "libcsfml-network"), Void, (Ptr{Void}, Int32, Int32,), request.ptr, major, minor)
 end
 
 function set_body(request::HttpRequest, body::String)
-	ccall((:sfHttpRequest_setBody, "libcsfml-network"), Void, (Ptr{Void}, Ptr{Cchar},), request.ptr, body)
+    ccall((:sfHttpRequest_setBody, "libcsfml-network"), Void, (Ptr{Void}, Ptr{Cchar},), request.ptr, body)
 end
 
 type HttpResponse
-	ptr::Ptr{Void}
+    ptr::Ptr{Void}
 
-	function HttpResponse(ptr::Ptr{Void})
-		self = new(ptr)
-		finalizer(self, destroy)
-		self
-	end
+    function HttpResponse(ptr::Ptr{Void})
+        self = new(ptr)
+        finalizer(self, destroy)
+        self
+    end
 end
 
 function destroy(response::HttpResponse)
-	ccall((:sfHttpResponse_destroy, "libcsfml-network"), Void, (Ptr{Void},), response.ptr)
+    ccall((:sfHttpResponse_destroy, "libcsfml-network"), Void, (Ptr{Void},), response.ptr)
 end
 
 function get_field(response::HttpResponse, field::String)
-	bytestring(ccall((:sfHttpResponse_getField, "libcsfml-network"), Ptr{Cchar}, (Ptr{Void}, Ptr{Cchar},), response.ptr, field))
+    bytestring(ccall((:sfHttpResponse_getField, "libcsfml-network"), Ptr{Cchar}, (Ptr{Void}, Ptr{Cchar},), response.ptr, field))
 end
 
 function get_status(response::HttpResponse)
-	HttpStatus(ccall((:sfHttpResponse_getStatus, "libcsfml-network"), Int32, (Ptr{Void},), response.ptr))
+    HttpStatus(ccall((:sfHttpResponse_getStatus, "libcsfml-network"), Int32, (Ptr{Void},), response.ptr))
 end
 
 function get_major_version(response::HttpResponse)
-	ccall((:sfHttpResponse_getMajorVersion, "libcsfml-network"), Uint32, (Ptr{Void},), response.ptr)
+    ccall((:sfHttpResponse_getMajorVersion, "libcsfml-network"), Uint32, (Ptr{Void},), response.ptr)
 end
 
 function get_minor_version(response::HttpResponse)
-	ccall((:sfHttpResponse_getMinorVersion, "libcsfml-network"), Uint32, (Ptr{Void},), response.ptr)
+    ccall((:sfHttpResponse_getMinorVersion, "libcsfml-network"), Uint32, (Ptr{Void},), response.ptr)
 end
 
 function get_body(response::HttpResponse)
-	bytestring(ccall((:sfHttpResponse_getBody, "libcsfml-network"), Ptr{Cchar}, (Ptr{Void},), response.ptr))
+    bytestring(ccall((:sfHttpResponse_getBody, "libcsfml-network"), Ptr{Cchar}, (Ptr{Void},), response.ptr))
 end
 
 type Http
-	ptr::Ptr{Void}
+    ptr::Ptr{Void}
 
-	function Http(ptr::Ptr{Void})
-		self = new(ptr)
-		finalizer(self, destroy)
-		self
-	end
+    function Http(ptr::Ptr{Void})
+        self = new(ptr)
+        finalizer(self, destroy)
+        self
+    end
 end
 
 function Http()
-	Http(ccall((:sfHttp_create, "libcsfml-network"), Ptr{Void}, ()))
+    Http(ccall((:sfHttp_create, "libcsfml-network"), Ptr{Void}, ()))
 end
 
 function destroy(http::Http)
-	ccall((:sfHttp_destroy, "libcsfml-network"), Void, (Ptr{Void},), http.ptr)
+    ccall((:sfHttp_destroy, "libcsfml-network"), Void, (Ptr{Void},), http.ptr)
 end
 
 function set_host(http::Http, host::String, port::Integer=0)
-	ccall((:sfHttp_setHost, "libcsfml-network"), Void, (Ptr{Void}, Ptr{Cchar}, Uint16), http.ptr, host, port)
+    ccall((:sfHttp_setHost, "libcsfml-network"), Void, (Ptr{Void}, Ptr{Cchar}, Uint16), http.ptr, host, port)
 end
 
 function send_request(http::Http, request::HttpRequest, timeout::Time=Time(0))
-	HttpResponse(ccall((:sfHttp_sendRequest, "libcsfml-network"), Ptr{Void}, (Ptr{Void}, Ptr{Void}, Time), http.ptr, request.ptr, timeout))
+    HttpResponse(ccall((:sfHttp_sendRequest, "libcsfml-network"), Ptr{Void}, (Ptr{Void}, Ptr{Void}, Time), http.ptr, request.ptr, timeout))
 end

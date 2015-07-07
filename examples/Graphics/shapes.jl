@@ -30,29 +30,29 @@ clock = Clock()
 restart(clock)
 
 while isopen(window)
-	while pollevent(window, event)
-		if get_type(event) == EventType.CLOSED
-			close(window)
-		end
-	end
+    while pollevent(window, event)
+        if get_type(event) == EventType.CLOSED
+            close(window)
+        end
+    end
 
-	if as_seconds(get_elapsed_time(clock)) >= 0.75
-		triangle_pointcount = get_pointcount(triangle)
-		if triangle_pointcount > 8
-			more_points = false
-		elseif triangle_pointcount <= 3
-			more_points = true
-		end
+    if as_seconds(get_elapsed_time(clock)) >= 0.75
+        triangle_pointcount = get_pointcount(triangle)
+        if triangle_pointcount > 8
+            more_points = false
+        elseif triangle_pointcount <= 3
+            more_points = true
+        end
 
-		num = more_points ? 1 : -1
-		set_pointcount(triangle, get_pointcount(triangle) + num)
+        num = more_points ? 1 : -1
+        set_pointcount(triangle, get_pointcount(triangle) + num)
 
-		restart(clock)
-	end
+        restart(clock)
+    end
 
-	clear(window, SFML.black)
-	draw(window, triangle)
-	draw(window, convex_shape)
-	display(window)
+    clear(window, SFML.black)
+    draw(window, triangle)
+    draw(window, convex_shape)
+    display(window)
 end
 

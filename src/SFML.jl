@@ -1,43 +1,43 @@
 module SFML
 
 import Base: display, isopen, close, reset, copy, launch, start, listen,
-	   accept, connect, write, send, bind, download, scale, contains
+       accept, connect, write, send, bind, download, scale, contains
 
 function __init__()
-	old = pwd()
-	deps = Pkg.dir("SFML")*"/deps"
-	push!(Libdl.DL_LOAD_PATH, deps)
-	try
-		@unix_only begin
-			cd(deps)
-			@osx_only begin
-				Libdl.dlopen("$deps/freetype.framework/freetype")
-				Libdl.dlopen("$deps/sndfile.framework/sndfile")
-			end
-			Libdl.dlopen("$deps/libsfml-system", Libdl.RTLD_GLOBAL)
-			Libdl.dlopen("$deps/libsfml-network", Libdl.RTLD_GLOBAL)
-			Libdl.dlopen("$deps/libsfml-audio", Libdl.RTLD_GLOBAL)
-			Libdl.dlopen("$deps/libsfml-window", Libdl.RTLD_GLOBAL)
-			Libdl.dlopen("$deps/libsfml-graphics", Libdl.RTLD_GLOBAL)
-			global const libcsfml_system = Libdl.dlopen("$deps/libcsfml-system", Libdl.RTLD_GLOBAL)
-			global const libcsfml_network = Libdl.dlopen("$deps/libcsfml-network", Libdl.RTLD_GLOBAL)
-			global const libcsfml_audio = Libdl.dlopen("$deps/libcsfml-audio", Libdl.RTLD_GLOBAL)
-			global const libcsfml_window = Libdl.dlopen("$deps/libcsfml-window", Libdl.RTLD_GLOBAL)
-			global const libcsfml_graphics = Libdl.dlopen("$deps/libcsfml-graphics", Libdl.RTLD_GLOBAL)
-		end
-		@windows_only begin
-			global const libcsfml_system = Libdl.dlopen("$deps\\csfml-system-2")
-			global const libcsfml_network = Libdl.dlopen("$deps\\csfml-network-2")
-			global const libcsfml_audio = Libdl.dlopen("$deps\\csfml-audio-2")
-			global const libcsfml_window = Libdl.dlopen("$deps\\csfml-window-2")
-			global const libcsfml_graphics = Libdl.dlopen("$deps\\csfml-graphics-2")
-		end
-		global const libjuliasfml = Libdl.dlopen("$deps/libjuliasfml")
-		cd(old)
-	catch
-		println("Something has gone wrong with the SFML installation. Please rebuild.")
-		cd(old)
-	end
+    old = pwd()
+    deps = Pkg.dir("SFML")*"/deps"
+    push!(Libdl.DL_LOAD_PATH, deps)
+    try
+        @unix_only begin
+            cd(deps)
+            @osx_only begin
+                Libdl.dlopen("$deps/freetype.framework/freetype")
+                Libdl.dlopen("$deps/sndfile.framework/sndfile")
+            end
+            Libdl.dlopen("$deps/libsfml-system", Libdl.RTLD_GLOBAL)
+            Libdl.dlopen("$deps/libsfml-network", Libdl.RTLD_GLOBAL)
+            Libdl.dlopen("$deps/libsfml-audio", Libdl.RTLD_GLOBAL)
+            Libdl.dlopen("$deps/libsfml-window", Libdl.RTLD_GLOBAL)
+            Libdl.dlopen("$deps/libsfml-graphics", Libdl.RTLD_GLOBAL)
+            global const libcsfml_system = Libdl.dlopen("$deps/libcsfml-system", Libdl.RTLD_GLOBAL)
+            global const libcsfml_network = Libdl.dlopen("$deps/libcsfml-network", Libdl.RTLD_GLOBAL)
+            global const libcsfml_audio = Libdl.dlopen("$deps/libcsfml-audio", Libdl.RTLD_GLOBAL)
+            global const libcsfml_window = Libdl.dlopen("$deps/libcsfml-window", Libdl.RTLD_GLOBAL)
+            global const libcsfml_graphics = Libdl.dlopen("$deps/libcsfml-graphics", Libdl.RTLD_GLOBAL)
+        end
+        @windows_only begin
+            global const libcsfml_system = Libdl.dlopen("$deps\\csfml-system-2")
+            global const libcsfml_network = Libdl.dlopen("$deps\\csfml-network-2")
+            global const libcsfml_audio = Libdl.dlopen("$deps\\csfml-audio-2")
+            global const libcsfml_window = Libdl.dlopen("$deps\\csfml-window-2")
+            global const libcsfml_graphics = Libdl.dlopen("$deps\\csfml-graphics-2")
+        end
+        global const libjuliasfml = Libdl.dlopen("$deps/libjuliasfml")
+        cd(old)
+    catch
+        println("Something has gone wrong with the SFML installation. Please rebuild.")
+        cd(old)
+    end
 end
 
 include("julia/System/vector.jl")
@@ -93,63 +93,63 @@ include("julia/Window/keyboard.jl")
 include("exports.jl")
 
 function make_gif(window::RenderWindow, width, height, duration, filename="sfmlgif.gif", delay=0.06)
-	textures = Texture[]
-	duration_clock = Clock()
-	delay_clock = Clock()
+    textures = Texture[]
+    duration_clock = Clock()
+    delay_clock = Clock()
 
-	@async begin
-		println("Taking pictures")
-		while as_seconds(get_elapsed_time(duration_clock)) <= duration
-			sleep(0)
-			print("$(round(as_seconds(get_elapsed_time(duration_clock))/duration*100))% done\r")
-			if as_seconds(get_elapsed_time(delay_clock)) >= delay
-				restart(delay_clock)
-				window_size = get_size(window)
-				texture = Texture(window_size.x, window_size.y)
-				update(texture, window)
-				push!(textures, texture)
-			end
-		end
-		make_gif(textures, width, height, filename, delay)
-	end
-	nothing
+    @async begin
+        println("Taking pictures")
+        while as_seconds(get_elapsed_time(duration_clock)) <= duration
+            sleep(0)
+            print("$(round(as_seconds(get_elapsed_time(duration_clock))/duration*100))% done\r")
+            if as_seconds(get_elapsed_time(delay_clock)) >= delay
+                restart(delay_clock)
+                window_size = get_size(window)
+                texture = Texture(window_size.x, window_size.y)
+                update(texture, window)
+                push!(textures, texture)
+            end
+        end
+        make_gif(textures, width, height, filename, delay)
+    end
+    nothing
 end
 
 function make_gif(textures::Array{Texture}, width, height, filename="plot.gif", delay=0.06)
-	images = Image[]
-	for i = 1:length(textures)
-		push!(images, copy_to_image(textures[i]))
-	end
+    images = Image[]
+    for i = 1:length(textures)
+        push!(images, copy_to_image(textures[i]))
+    end
 
-	println("Done taking pictures")
-	make_gif(images, width, height, filename, delay)
+    println("Done taking pictures")
+    make_gif(images, width, height, filename, delay)
 end
 
 function make_gif(images::Array{Image}, width, height, filename="plot.gif", delay=0.06)
-	println("Please wait while your gif is made... This may take awhile")
-	dir = mktempdir()
-	name = filename[1:search(filename, '.')-1]
-	imgsize = "$width" * "x" * "$height"
+    println("Please wait while your gif is made... This may take awhile")
+    dir = mktempdir()
+    name = filename[1:search(filename, '.')-1]
+    imgsize = "$width" * "x" * "$height"
 
-	for i = 1:length(images)
-		save_to_file(images[i], "$dir/$name$i.png")
-		cmd = `convert $dir/$name$i.png -resize $imgsize\! $dir/$name$i.png`
-		run(cmd)
-		print("$(round(i/length(images)*100))% done\r")
-	end
-	println("Assembling gif (this may take awhile)")
-	args = reduce(vcat, [[joinpath("$dir", "$name$i.png"), "-delay",
-	       "$(delay * 100)", "-alpha", "remove"] for i in 1:length(images)])
+    for i = 1:length(images)
+        save_to_file(images[i], "$dir/$name$i.png")
+        cmd = `convert $dir/$name$i.png -resize $imgsize\! $dir/$name$i.png`
+        run(cmd)
+        print("$(round(i/length(images)*100))% done\r")
+    end
+    println("Assembling gif (this may take awhile)")
+    args = reduce(vcat, [[joinpath("$dir", "$name$i.png"), "-delay",
+           "$(delay * 100)", "-alpha", "remove"] for i in 1:length(images)])
 
-	imagemagick_cmd = `convert $args $filename`
-	run(imagemagick_cmd)
-	rm(dir)
-	println("Created gif $filename")
+    imagemagick_cmd = `convert $args $filename`
+    run(imagemagick_cmd)
+    rm(dir)
+    println("Created gif $filename")
 end
 
 function screenshot(window::RenderWindow, filename::String)
-	screenshot_img = capture(window)
-	save_to_file(screenshot, filename)
+    screenshot_img = capture(window)
+    save_to_file(screenshot, filename)
 end
 
 end

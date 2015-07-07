@@ -1,10 +1,10 @@
 type BlendMode
-	color_src_factor::Cint
-	color_dst_factor::Cint
-	color_equation::Cint
-	alpha_src_factor::Cint
-	alpha_dst_factor::Cint
-	alpha_equation::Cint
+    color_src_factor::Cint
+    color_dst_factor::Cint
+    color_equation::Cint
+    alpha_src_factor::Cint
+    alpha_dst_factor::Cint
+    alpha_equation::Cint
 end
 
 const blend_alpha = BlendMode(6, 7, 0, 1, 7, 0)

@@ -20,18 +20,18 @@ set_origin(logo, Vector2f(texture_size.x / 2, texture_size.y / 2))
 scale(logo, Vector2f(0.3, 0.3))
 
 while isopen(window)
-	# Check for any events
-	while pollevent(window, event)
-		if get_type(event) == EventType.CLOSED
-			close(window)
-		end
-	end
+    # Check for any events
+    while pollevent(window, event)
+        if get_type(event) == EventType.CLOSED
+            close(window)
+        end
+    end
 
-	# Rotate the sprite by 2 degrees
-	rotate(logo, 2)
+    # Rotate the sprite by 2 degrees
+    rotate(logo, 2)
 
-	# Clear the screen and redraw the sprite
-	clear(window, SFML.white)
-	draw(window, logo)
-	display(window)
+    # Clear the screen and redraw the sprite
+    clear(window, SFML.white)
+    draw(window, logo)
+    display(window)
 end
