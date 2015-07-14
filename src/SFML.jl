@@ -89,6 +89,7 @@ include("julia/Graphics/line.jl")
 
 include("julia/Window/mouse.jl")
 include("julia/Window/keyboard.jl")
+include("julia/Window/joystick.jl")
 
 include("exports.jl")
 

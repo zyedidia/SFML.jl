@@ -29,8 +29,6 @@ function mkdir_if_necessary(dir)
     end
 end
 
-bitsize = Int == Int64 ? 64 : 32
-
 deps = Pkg.dir("SFML")*"/deps"
 cd(deps)
 
@@ -69,8 +67,8 @@ cd(deps)
 end
 
 @linux_only begin
-    sfml = "http://www.sfml-dev.org/files/SFML-2.2-linux-gcc-$bitsize-bit.tar.gz"
-    csfml = "http://www.sfml-dev.org/files/CSFML-2.2-linux-gcc-$bitsize-bit.tar.bz2"
+    sfml = "http://www.sfml-dev.org/files/SFML-2.2-linux-gcc-$WORD_SIZE-bit.tar.gz"
+    csfml = "http://www.sfml-dev.org/files/CSFML-2.2-linux-gcc-$WORD_SIZE-bit.tar.bz2"
 
     if !isfile("sfml.tar.gz")
         println("Downloading SFML...")
@@ -119,8 +117,8 @@ end
     println("Downloading SFML and CSFML")
     run(`git clone https://github.com/zyedidia/sfml-binaries.git`)
 
-    mv("sfml-binaries/sfml/sfml-$bitsize", "sfml")
-    mv("sfml-binaries/csfml/csfml-$bitsize", "csfml")
+    mv("sfml-binaries/sfml/sfml-$WORD_SIZE", "sfml")
+    mv("sfml-binaries/csfml/csfml-$WORD_SIZE", "csfml")
 
     copy_libs("$deps/sfml/bin", deps)
     copy_libs("$deps/csfml/bin", deps)
