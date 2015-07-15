@@ -37,3 +37,19 @@ sfMouseButtonEvent sjEvent_eventMouseButton(sfEvent* pEvent) {
 sfMouseWheelEvent sjEvent_eventMouseWheel(sfEvent* pEvent) {
     return pEvent->mouseWheel;
 }
+
+sfMouseWheelScrollEvent sjEvent_eventMouseScroll(sfEvent* pEvent) {
+    return pEvent->mouseWheelScroll;
+}
+
+sfJoystickMoveEvent sjEvent_eventJoystickMove(sfEvent* pEvent) {
+    return pEvent->joystickMove;
+}
+
+sfJoystickButtonEvent sjEvent_eventJoystickButton(sfEvent* pEvent) {
+    return pEvent->joystickButton;
+}
+
+sfJoystickConnectEvent sjEvent_eventJoystickConnect(sfEvent* pEvent) {
+    return pEvent->joystickConnect;
+}

@@ -42,6 +42,32 @@ type MouseWheelEvent
     y::Cint
 end
 
+type MouseWheelScrollEvent
+    etype::Cint
+    wheel::Cint
+    delta::Cfloat
+    x::Cint
+    y::Cint
+end
+
+type JoystickMoveEvent
+    etype::Cint
+    joystick_id::Uint32
+    axis::JoystickAxis
+    position::Cfloat
+end
+
+type JoystickButtonEvent
+    etype::Cint
+    joystick_id::Uint32
+    button::Uint32
+end
+
+type JoystickConnectEvent
+    etype::Cint
+    joystick_id::Uint32;
+end
+
 type SizeEvent
     etype::Cint
     width::Uint32

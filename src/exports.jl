@@ -1,4 +1,8 @@
 export BlendMode
+export MouseWheelScrollEvent
+export JoystickMoveEvent
+export JoystickConnectEvent
+export JoystickButtonEvent
 export JoystickAxis
 export joystickX
 export joystickY

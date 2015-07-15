@@ -82,6 +82,7 @@ include("julia/Graphics/vertexArray.jl")
 include("julia/Graphics/circleShape.jl")
 include("julia/Graphics/renderTexture.jl")
 
+include("julia/Window/joystick.jl")
 include("julia/Window/event.jl")
 
 include("julia/Graphics/renderWindow.jl")
@@ -89,7 +90,6 @@ include("julia/Graphics/line.jl")
 
 include("julia/Window/mouse.jl")
 include("julia/Window/keyboard.jl")
-include("julia/Window/joystick.jl")
 
 include("exports.jl")
 
