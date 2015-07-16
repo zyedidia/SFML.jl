@@ -9,7 +9,7 @@ type SocketUDP
 end
 
 function SocketUDP()
-    SocketUDP(ccall((:sfUdpSocket_create, "libcsfml-network"), Ptr{Void} ()))
+    SocketUDP(ccall((:sfUdpSocket_create, "libcsfml-network"), Ptr{Void}, ()))
 end
 
 function destroy(socket::SocketUDP)
