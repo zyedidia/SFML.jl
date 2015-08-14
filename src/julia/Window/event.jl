@@ -42,14 +42,6 @@ type MouseWheelEvent
     y::Cint
 end
 
-type MouseWheelScrollEvent
-    etype::Cint
-    wheel::Cint
-    delta::Cfloat
-    x::Cint
-    y::Cint
-end
-
 type JoystickMoveEvent
     etype::Cint
     joystick_id::Uint32
