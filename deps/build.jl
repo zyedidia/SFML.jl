@@ -122,8 +122,14 @@ end
 
     copy_libs("$deps/sfml/bin", deps)
     copy_libs("$deps/csfml/bin", deps)
+end
 
-    cd(deps)
+cd("$(Pkg.dir("SFML"))/src/c")
+run(`julia createlib.jl`)
+
+cd(deps)
+
+@windows_only begin
     # Rename all the dlls to have unix-like names
     mv("sfml-window-2.dll", "libsfml-window.dll")
     mv("sfml-graphics-2.dll", "libsfml-graphics.dll")
@@ -137,11 +143,6 @@ end
     mv("csfml-audio-2.dll", "libcsfml-audio.dll")
     mv("csfml-system-2.dll", "libcsfml-system.dll")
 end
-
-cd("$(Pkg.dir("SFML"))/src/c")
-run(`julia createlib.jl`)
-
-cd(deps)
 
 rm("sfml", recursive=true)
 rm("csfml", recursive=true)
