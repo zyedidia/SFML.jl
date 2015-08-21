@@ -1,7 +1,8 @@
 module SFML
 
 import Base: display, isopen, close, reset, copy, launch, start, listen,
-       accept, connect, write, send, bind, download, scale, contains
+       accept, connect, write, send, bind, download, scale, contains,
+       +, -, *, /
 
 function __init__()
     old = pwd()
