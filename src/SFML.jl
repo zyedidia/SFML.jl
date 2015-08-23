@@ -40,7 +40,9 @@ function __init__()
             global const libcsfml_graphics = "csfml-graphics-2"
         end
 
-        global const libjuliasfml_ptr = Libdl.dlopen("$deps/libjuliasfml")
+        @unix_only begin
+            global const libjuliasfml_ptr = Libdl.dlopen("$deps/libjuliasfml")
+        end
         global const libjuliasfml = "libjuliasfml"
         cd(old)
     catch exception
