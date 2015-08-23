@@ -129,21 +129,6 @@ run(`julia createlib.jl`)
 
 cd(deps)
 
-@windows_only begin
-    # Rename all the dlls to have unix-like names
-    mv("sfml-window-2.dll", "libsfml-window.dll")
-    mv("sfml-graphics-2.dll", "libsfml-graphics.dll")
-    mv("sfml-network-2.dll", "libsfml-network.dll")
-    mv("sfml-audio-2.dll", "libsfml-audio.dll")
-    mv("sfml-system-2.dll", "libsfml-system.dll")
-
-    mv("csfml-window-2.dll", "libcsfml-window.dll")
-    mv("csfml-graphics-2.dll", "libcsfml-graphics.dll")
-    mv("csfml-network-2.dll", "libcsfml-network.dll")
-    mv("csfml-audio-2.dll", "libcsfml-audio.dll")
-    mv("csfml-system-2.dll", "libcsfml-system.dll")
-end
-
 rm("sfml", recursive=true)
 rm("csfml", recursive=true)
 
