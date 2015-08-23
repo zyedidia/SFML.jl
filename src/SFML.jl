@@ -20,16 +20,32 @@ function __init__()
             Libdl.dlopen("$deps/libsfml-audio", Libdl.RTLD_GLOBAL)
             Libdl.dlopen("$deps/libsfml-window", Libdl.RTLD_GLOBAL)
             Libdl.dlopen("$deps/libsfml-graphics", Libdl.RTLD_GLOBAL)
-            global const libcsfml_system = Libdl.dlopen("$deps/libcsfml-system", Libdl.RTLD_GLOBAL)
-            global const libcsfml_network = Libdl.dlopen("$deps/libcsfml-network", Libdl.RTLD_GLOBAL)
-            global const libcsfml_audio = Libdl.dlopen("$deps/libcsfml-audio", Libdl.RTLD_GLOBAL)
-            global const libcsfml_window = Libdl.dlopen("$deps/libcsfml-window", Libdl.RTLD_GLOBAL)
-            global const libcsfml_graphics = Libdl.dlopen("$deps/libcsfml-graphics", Libdl.RTLD_GLOBAL)
+            # global const libcsfml_system = Libdl.dlopen("$deps/libcsfml-system", Libdl.RTLD_GLOBAL)
+            # global const libcsfml_network = Libdl.dlopen("$deps/libcsfml-network", Libdl.RTLD_GLOBAL)
+            # global const libcsfml_audio = Libdl.dlopen("$deps/libcsfml-audio", Libdl.RTLD_GLOBAL)
+            # global const libcsfml_window = Libdl.dlopen("$deps/libcsfml-window", Libdl.RTLD_GLOBAL)
+            # global const libcsfml_graphics = Libdl.dlopen("$deps/libcsfml-graphics", Libdl.RTLD_GLOBAL)
+            global const libcsfml_system = "libcsfml-system"
+            global const libcsfml_audio = "libcsfml-audio"
+            global const libcsfml_network = "libcsfml-network"
+            global const libcsfml_window = "libcsfml-window"
+            global const libcsfml_graphics = "libcsfml-graphics"
         end
-        global const libjuliasfml = Libdl.dlopen("$deps/libjuliasfml")
+
+        @windows_only begin
+            global const libcsfml_system = "csfml-system-2"
+            global const libcsfml_audio = "csfml-audio-2"
+            global const libcsfml_network = "csfml-network-2"
+            global const libcsfml_window = "csfml-window-2"
+            global const libcsfml_graphics = "csfml-graphics-2"
+        end
+
+        global const libjuliasfml_ptr = Libdl.dlopen("$deps/libjuliasfml")
+        global const libjuliasfml = "libjuliasfml"
         cd(old)
-    catch
+    catch exception
         println("Something has gone wrong with the SFML installation. Please rebuild.")
+        println(exception)
         cd(old)
     end
 end

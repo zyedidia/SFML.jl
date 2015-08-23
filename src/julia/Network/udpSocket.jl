@@ -9,43 +9,43 @@ type SocketUDP
 end
 
 function SocketUDP()
-    SocketUDP(ccall((:sfUdpSocket_create, "libcsfml-network"), Ptr{Void}, ()))
+    SocketUDP(ccall((:sfUdpSocket_create, libcsfml_network), Ptr{Void}, ()))
 end
 
 function destroy(socket::SocketUDP)
-    ccall((:sfUdpSocket_create, "libcsfml-network"), Void, (Ptr{Void},), socket.ptr)
+    ccall((:sfUdpSocket_create, libcsfml_network), Void, (Ptr{Void},), socket.ptr)
 end
 
 function set_blocking(socket::SocketUDP, blocking::Bool)
-    ccall((:sfUdpSocket_setBlocking, "libcsfml-network"), Void, (Ptr{Void}, Int32,), socket.ptr, blocking)
+    ccall((:sfUdpSocket_setBlocking, libcsfml_network), Void, (Ptr{Void}, Int32,), socket.ptr, blocking)
 end
 
 function is_blocking(socket::SocketUDP)
-    Bool(ccall((:sfUdpSocket_isBlocking, "libcsfml-network"), Int32, (Ptr{Void},), socket.ptr))
+    Bool(ccall((:sfUdpSocket_isBlocking, libcsfml_network), Int32, (Ptr{Void},), socket.ptr))
 end
 
 function get_localport(socket::SocketUDP)
-    Int(ccall((:sfUdpSocket_getLocalPort, "libcsfml-network"), Uint16, (Ptr{Void},), socket.ptr))
+    Int(ccall((:sfUdpSocket_getLocalPort, libcsfml_network), Uint16, (Ptr{Void},), socket.ptr))
 end
 
 function bind(socket::SocketUDP, port::Integer)
-    ccall((:sfUdpSocket_bind, "libcsfml-network"), Void, (Ptr{Void}, Uint16,), socket.ptr, port)
+    ccall((:sfUdpSocket_bind, libcsfml_network), Void, (Ptr{Void}, Uint16,), socket.ptr, port)
 end
 
 function unbind(socket::SocketUDP)
-    ccall((:sfUdpSocket_unbind, "libcsfml-network"), Void, (Ptr{Void},), socket.ptr)
+    ccall((:sfUdpSocket_unbind, libcsfml_network), Void, (Ptr{Void},), socket.ptr)
 end
 
 function send(socket::SocketUDP, packet::Packet, ipaddress::IpAddress, port::Integer)
-    SocketStatus(ccall((:sfUdpSocket_sendPacket, "libcsfml-network"), Int32, (Ptr{Void}, Ptr{Void}, IpAddress, Uint16,), socket.ptr, packet.ptr, ipaddress, port))
+    SocketStatus(ccall((:sfUdpSocket_sendPacket, libcsfml_network), Int32, (Ptr{Void}, Ptr{Void}, IpAddress, Uint16,), socket.ptr, packet.ptr, ipaddress, port))
 end
 
 function receive(socket::SocketUDP, packet::Packet, ipaddress::IpAddress, port::Uint16)
     ipaddress_ptr = pointer_from_objref(ipaddress)
-    status = SocketStatus(ccall((:sfUdpSocket_receivePacket, "libcsfml-network"), Int32, (Ptr{Void}, Ptr{Void}, Ptr{IpAddress}, Ref{Uint16},), socket.ptr, packet.ptr, ipaddress_ptr, Ref(port)))
+    status = SocketStatus(ccall((:sfUdpSocket_receivePacket, libcsfml_network), Int32, (Ptr{Void}, Ptr{Void}, Ptr{IpAddress}, Ref{Uint16},), socket.ptr, packet.ptr, ipaddress_ptr, Ref(port)))
     status
 end
 
 function max_datagram_size()
-    ccall((:sfUdpSocket_maxDatagramSize, "libcsfml-network"), Uint32, ())
+    ccall((:sfUdpSocket_maxDatagramSize, libcsfml_network), Uint32, ())
 end

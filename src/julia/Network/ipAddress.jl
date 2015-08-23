@@ -18,7 +18,7 @@ type IpAddress
 end
 
 function IpAddress(address::String)
-    return ccall((:sfIpAddress_fromString, "libcsfml-network"), IpAddress, (Ptr{Cchar},), address)
+    return ccall((:sfIpAddress_fromString, libcsfml_network), IpAddress, (Ptr{Cchar},), address)
 end
 
 function to_string(a::IpAddress)

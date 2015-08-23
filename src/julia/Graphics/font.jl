@@ -9,13 +9,13 @@ type Font
 end
 
 function Font(filename::String)
-    Font(ccall((:sfFont_createFromFile, "libcsfml-graphics"), Ptr{Void}, (Ptr{Cchar},), filename))
+    Font(ccall((:sfFont_createFromFile, libcsfml_graphics), Ptr{Void}, (Ptr{Cchar},), filename))
 end
 
 function copy(font::Font)
-    Font(ccall((:sfFont_createFromFile, "libcsfml-graphics"), Ptr{Void}, (Ptr{Void},), font.ptr))
+    Font(ccall((:sfFont_createFromFile, libcsfml_graphics), Ptr{Void}, (Ptr{Void},), font.ptr))
 end
 
 function destroy(font::Font)
-    ccall((:sfFont_destroy, "libcsfml-graphics"), Void, (Ptr{Void},), font.ptr)
+    ccall((:sfFont_destroy, libcsfml_graphics), Void, (Ptr{Void},), font.ptr)
 end
