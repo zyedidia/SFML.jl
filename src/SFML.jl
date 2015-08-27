@@ -20,11 +20,11 @@ function __init__()
             Libdl.dlopen("$deps/libsfml-audio", Libdl.RTLD_GLOBAL)
             Libdl.dlopen("$deps/libsfml-window", Libdl.RTLD_GLOBAL)
             Libdl.dlopen("$deps/libsfml-graphics", Libdl.RTLD_GLOBAL)
-            # global const libcsfml_system = Libdl.dlopen("$deps/libcsfml-system", Libdl.RTLD_GLOBAL)
-            # global const libcsfml_network = Libdl.dlopen("$deps/libcsfml-network", Libdl.RTLD_GLOBAL)
-            # global const libcsfml_audio = Libdl.dlopen("$deps/libcsfml-audio", Libdl.RTLD_GLOBAL)
-            # global const libcsfml_window = Libdl.dlopen("$deps/libcsfml-window", Libdl.RTLD_GLOBAL)
-            # global const libcsfml_graphics = Libdl.dlopen("$deps/libcsfml-graphics", Libdl.RTLD_GLOBAL)
+            Libdl.dlopen("$deps/libcsfml-system", Libdl.RTLD_GLOBAL)
+            Libdl.dlopen("$deps/libcsfml-network", Libdl.RTLD_GLOBAL)
+            Libdl.dlopen("$deps/libcsfml-audio", Libdl.RTLD_GLOBAL)
+            Libdl.dlopen("$deps/libcsfml-window", Libdl.RTLD_GLOBAL)
+            Libdl.dlopen("$deps/libcsfml-graphics", Libdl.RTLD_GLOBAL)
             global const libcsfml_system = "libcsfml-system"
             global const libcsfml_audio = "libcsfml-audio"
             global const libcsfml_network = "libcsfml-network"
