@@ -21,8 +21,6 @@ Make sure that your version 0.4 is fairly recent. If building fails because `fol
 
 ### Linux
 Please make sure you have Glibc 2.14 installed, and let me know if there are any build problems on Linux (I don't use Linux very much).
-If things aren't working, try installing the `libsfml-dev` package.
-<!---
 The Linux binaries don't come with any of the dependencies so you have to install them yourself. Here is the list:
 
 *    pthread
@@ -35,7 +33,7 @@ The Linux binaries don't come with any of the dependencies so you have to instal
 *    sndfile
 *    openal
 
-On Debian you can install the package `libsfml-dev` which will also install all dependencies. You can also run the commands [here] (https://gist.github.com/NoobsArePeople2/8086528)
+On Debian you can install the package `libsfml-dev` which will also install all dependencies. You can also run the commands [here] (https://gist.github.com/NoobsArePeople2/8086528) (you don't need to install cmake-gui).
 -->
 ---
 
