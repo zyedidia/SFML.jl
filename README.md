@@ -34,7 +34,6 @@ The Linux binaries don't come with any of the dependencies so you have to instal
 *    openal
 
 On Debian you can install the package `libsfml-dev` which will also install all dependencies. You can also run the commands [here] (https://gist.github.com/NoobsArePeople2/8086528) (you don't need to install cmake-gui).
--->
 ---
 
 To install on any OS, run:
