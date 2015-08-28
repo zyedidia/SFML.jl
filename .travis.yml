@@ -1,12 +1,18 @@
+before_install:
+    - sudo apt-get update -qq
+    - sudo apt-get install -y libopenal-dev
+    - sudo apt-get install -y libudev-dev
+    - sudo apt-get install -y libglew1.5-dev
 language: julia
 os:
-  - linux
-  - osx
+    - linux
+    - osx
 julia:
-  - nightly
+    - nightly
 notifications:
-  email: false
-# uncomment the following lines to override the default test script
-#script:
-#  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-#  - julia --check-bounds=yes -e 'Pkg.clone(pwd()); Pkg.build("SFML"); Pkg.test("SFML"; coverage=true)'
+    email: false
+        # uncomment the following lines to override the default test script
+        #script:
+        #  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+        #  - julia --check-bounds=yes -e 'Pkg.clone(pwd()); Pkg.build("SFML"); Pkg.test("SFML"; coverage=true)'
+
