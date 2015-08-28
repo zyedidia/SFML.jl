@@ -4,6 +4,14 @@ import Base: display, isopen, close, reset, copy, launch, start, listen,
        accept, connect, write, send, bind, download, scale, contains,
        +, -, *, /
 
+function check_deps(ldd_result)
+    for line in split(ldd_result, "\n")
+        if contains(line, "not found") && !contains(line, "libsfml")
+            println(line)
+        end
+    end
+end
+
 function __init__()
     old = pwd()
     deps = Pkg.dir("SFML")*"/deps"
@@ -12,19 +20,33 @@ function __init__()
         @unix_only begin
             cd(deps)
             @osx_only begin
-                Libdl.dlopen("$deps/freetype.framework/freetype")
-                Libdl.dlopen("$deps/sndfile.framework/sndfile")
+                Libdl.dlopen("freetype.framework/freetype")
+                Libdl.dlopen("sndfile.framework/sndfile")
             end
-            Libdl.dlopen("$deps/libsfml-system", Libdl.RTLD_GLOBAL)
-            Libdl.dlopen("$deps/libsfml-network", Libdl.RTLD_GLOBAL)
-            Libdl.dlopen("$deps/libsfml-audio", Libdl.RTLD_GLOBAL)
-            Libdl.dlopen("$deps/libsfml-window", Libdl.RTLD_GLOBAL)
-            Libdl.dlopen("$deps/libsfml-graphics", Libdl.RTLD_GLOBAL)
-            Libdl.dlopen("$deps/libcsfml-system", Libdl.RTLD_GLOBAL)
-            Libdl.dlopen("$deps/libcsfml-network", Libdl.RTLD_GLOBAL)
-            Libdl.dlopen("$deps/libcsfml-audio", Libdl.RTLD_GLOBAL)
-            Libdl.dlopen("$deps/libcsfml-window", Libdl.RTLD_GLOBAL)
-            Libdl.dlopen("$deps/libcsfml-graphics", Libdl.RTLD_GLOBAL)
+
+            @linux_only begin
+                system_deps = run(`ldd libsfml-system.so`)
+                check_deps(system_deps)
+                network_deps = run(`ldd libsfml-network.so`)
+                check_deps(network_deps)
+                graphics_deps = run(`ldd libsfml-graphics.so`)
+                check_deps(graphics_deps)
+                audio_deps = run(`ldd libsfml-audio.so`)
+                check_deps(audio_deps)
+                window_deps = run(`ldd libsfml-window.so`)
+                check_deps(window_deps)
+            end
+
+            Libdl.dlopen("libsfml-system", Libdl.RTLD_GLOBAL)
+            Libdl.dlopen("libsfml-network", Libdl.RTLD_GLOBAL)
+            Libdl.dlopen("libsfml-audio", Libdl.RTLD_GLOBAL)
+            Libdl.dlopen("libsfml-window", Libdl.RTLD_GLOBAL)
+            Libdl.dlopen("libsfml-graphics", Libdl.RTLD_GLOBAL)
+            Libdl.dlopen("libcsfml-system", Libdl.RTLD_GLOBAL)
+            Libdl.dlopen("libcsfml-network", Libdl.RTLD_GLOBAL)
+            Libdl.dlopen("libcsfml-audio", Libdl.RTLD_GLOBAL)
+            Libdl.dlopen("libcsfml-window", Libdl.RTLD_GLOBAL)
+            Libdl.dlopen("libcsfml-graphics", Libdl.RTLD_GLOBAL)
             global const libcsfml_system = "libcsfml-system"
             global const libcsfml_audio = "libcsfml-audio"
             global const libcsfml_network = "libcsfml-network"
