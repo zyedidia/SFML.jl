@@ -5,8 +5,13 @@ import Base: display, isopen, close, reset, copy, launch, start, listen,
        +, -, *, /
 
 function check_deps(ldd_result)
+    i = 0
     for line in split(ldd_result, "\n")
         if contains(line, "not found") && !contains(line, "libsfml")
+            i += 1
+            if i == 1
+                println("Could not resolve dependencies:")
+            end
             println(line)
         end
     end
@@ -25,15 +30,15 @@ function __init__()
             end
 
             @linux_only begin
-                system_deps = run(`ldd libsfml-system.so`)
+                system_deps = readall(`ldd libsfml-system.so`)
                 check_deps(system_deps)
-                network_deps = run(`ldd libsfml-network.so`)
+                network_deps = readall(`ldd libsfml-network.so`)
                 check_deps(network_deps)
-                graphics_deps = run(`ldd libsfml-graphics.so`)
+                graphics_deps = readall(`ldd libsfml-graphics.so`)
                 check_deps(graphics_deps)
-                audio_deps = run(`ldd libsfml-audio.so`)
+                audio_deps = readall(`ldd libsfml-audio.so`)
                 check_deps(audio_deps)
-                window_deps = run(`ldd libsfml-window.so`)
+                window_deps = readall(`ldd libsfml-window.so`)
                 check_deps(window_deps)
             end
 
@@ -68,9 +73,9 @@ function __init__()
         global const libjuliasfml = "libjuliasfml"
         cd(old)
     catch exception
-        println("Something has gone wrong with the SFML installation. Please rebuild.")
+        println("Something has gone wrong with the SFML installation.")
         println(exception)
-        cd(old)
+        exit(1)
     end
 end
 
