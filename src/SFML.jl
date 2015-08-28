@@ -75,7 +75,7 @@ function __init__()
     catch exception
         println("Something has gone wrong with the SFML installation.")
         println(exception)
-        exit(1)
+        cd(old)
     end
 end
 
