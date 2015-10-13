@@ -21,7 +21,7 @@ function RenderText()
     r
 end
 
-function RenderText(value::String)
+function RenderText(value::AbstractString)
     r = RenderText()
     set_string(r, value)
     r
@@ -79,7 +79,7 @@ function scale(text::RenderText, factors::Vector2f)
     ccall((:sfText_scale, libcsfml_graphics), Void, (Ptr{Void}, Vector2f,), text.ptr, factors)
 end
 
-function set_string(text::RenderText, string::String)
+function set_string(text::RenderText, string::AbstractString)
     ccall((:sfText_setString, libcsfml_graphics), Void, (Ptr{Void}, Ptr{Cchar},), text.ptr, string)
 end
 
@@ -89,19 +89,19 @@ function set_font(text::RenderText, font::Font)
 end
 
 function set_charactersize(text::RenderText, size::Integer)
-    ccall((:sfText_setCharacterSize, libcsfml_graphics), Void, (Ptr{Void}, Uint32,), text.ptr, size)
+    ccall((:sfText_setCharacterSize, libcsfml_graphics), Void, (Ptr{Void}, UInt32,), text.ptr, size)
 end
 
 function set_style(text::RenderText, style::Integer)
-    ccall((:sfText_setStyle, libcsfml_graphics), Void, (Ptr{Void}, Uint32,), text.ptr, style)
+    ccall((:sfText_setStyle, libcsfml_graphics), Void, (Ptr{Void}, UInt32,), text.ptr, style)
 end
 
 function set_color(text::RenderText, color::Color)
     ccall((:sfText_setColor, libcsfml_graphics), Void, (Ptr{Void}, Color,), text.ptr, color)
 end
 
-function set_style(text::RenderText, style::Uint32)
-    ccall((:sfText_setStyle, libcsfml_graphics), Void, (Ptr{Void}, Uint32,), text.ptr, style)
+function set_style(text::RenderText, style::UInt32)
+    ccall((:sfText_setStyle, libcsfml_graphics), Void, (Ptr{Void}, UInt32,), text.ptr, style)
 end
 
 function get_string(text::RenderText)
@@ -113,11 +113,11 @@ function get_font(text::RenderText)
 end
 
 function get_charactersize(text::RenderText)
-    Int(ccall((:sfText_getCharacterSize, libcsfml_graphics), Uint32, (Ptr{Void},), text.ptr))
+    Int(ccall((:sfText_getCharacterSize, libcsfml_graphics), UInt32, (Ptr{Void},), text.ptr))
 end
 
 function get_style(text::RenderText)
-    Int(ccall((:sfText_getStyle, libcsfml_graphics), Uint32, (Ptr{Void},), text.ptr))
+    Int(ccall((:sfText_getStyle, libcsfml_graphics), UInt32, (Ptr{Void},), text.ptr))
 end
 
 function get_color(text::RenderText)

@@ -25,11 +25,11 @@ function is_blocking(listener::TcpListener)
 end
 
 function get_localport(listener::TcpListener)
-    return ccall((:sfTcpListener_getLocalPort, libcsfml_network), Uint16, (Ptr{Void},), listener.ptr)
+    return ccall((:sfTcpListener_getLocalPort, libcsfml_network), UInt16, (Ptr{Void},), listener.ptr)
 end
 
 function listen(listener::TcpListener, port::Integer)
-    SocketStatus(ccall((:sfTcpListener_listen, libcsfml_network), Int32, (Ptr{Void}, Uint16,), listener.ptr, port))
+    SocketStatus(ccall((:sfTcpListener_listen, libcsfml_network), Int32, (Ptr{Void}, UInt16,), listener.ptr, port))
 end
 
 function accept(listener::TcpListener, socket::SocketTCP)

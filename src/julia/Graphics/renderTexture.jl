@@ -10,7 +10,7 @@ type RenderTexture
 end
 
 function RenderTexture(width::Integer, height::Integer, depth_buffer::Bool=false)
-    RenderTexture(ccall((:sfRenderTexture_create, libcsfml_graphics), Ptr{Void}, (Uint32, Uint32, Int32,), width, height, depth_buffer))
+    RenderTexture(ccall((:sfRenderTexture_create, libcsfml_graphics), Ptr{Void}, (UInt32, UInt32, Int32,), width, height, depth_buffer))
 end
 
 function destroy(texture::RenderTexture)

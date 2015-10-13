@@ -8,7 +8,7 @@ type Music
     end
 end
 
-function Music(filename::String)
+function Music(filename::AbstractString)
     Music(ccall((:sfMusic_createFromFile, libcsfml_audio), Ptr{Void}, (Ptr{Cchar},), filename))
 end
 
@@ -41,11 +41,11 @@ function get_duration(music::Music)
 end
 
 function get_channelcount(music::Music)
-    return Real(ccall((:sfMusic_getChannelCount, libcsfml_audio), Uint32, (Ptr{Void},), music.ptr))
+    return Real(ccall((:sfMusic_getChannelCount, libcsfml_audio), UInt32, (Ptr{Void},), music.ptr))
 end
 
 function get_samplerate(music::Music)
-    return Real(ccall((:sfMusic_getSampleRate, libcsfml_audio), Uint32, (Ptr{Void},), music.ptr))
+    return Real(ccall((:sfMusic_getSampleRate, libcsfml_audio), UInt32, (Ptr{Void},), music.ptr))
 end
 
 function set_pitch(music::Music, pitch::Real)

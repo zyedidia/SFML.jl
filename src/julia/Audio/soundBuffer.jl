@@ -8,7 +8,7 @@ type SoundBuffer
     end
 end
 
-function SoundBuffer(filename::String)
+function SoundBuffer(filename::AbstractString)
     SoundBuffer(ccall((:sfSoundBuffer_createFromFile, libcsfml_audio), Ptr{Void}, (Ptr{Cchar},), filename))
 end
 
@@ -21,7 +21,7 @@ function destroy(buffer::SoundBuffer)
 end
 
 function get_samplecount(buffer::SoundBuffer)
-    ccall((:sfSoundBuffer_getSampleCount), Uint64, (Ptr{Void},), buffer.ptr)
+    ccall((:sfSoundBuffer_getSampleCount), UInt64, (Ptr{Void},), buffer.ptr)
 end
 
 function get_samples(buffer::SoundBuffer)
@@ -29,10 +29,10 @@ function get_samples(buffer::SoundBuffer)
 end
 
 function get_samplerate(buffer::SoundBuffer)
-    ccall((:sfSoundBuffer_getSampleRate, libcsfml_audio), Uint32, (Ptr{Void},), buffer.ptr)
+    ccall((:sfSoundBuffer_getSampleRate, libcsfml_audio), UInt32, (Ptr{Void},), buffer.ptr)
 end
 
-function save_to_file(buffer::SoundBuffer, filename::String)
+function save_to_file(buffer::SoundBuffer, filename::AbstractString)
     ccall((:sfSoundBuffer_saveToFile, libcsfml_audio), Void, (Ptr{Void}, Ptr{Cchar},), buffer.ptr, filename)
 end
 

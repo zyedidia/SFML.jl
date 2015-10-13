@@ -107,19 +107,19 @@ function get_outline_thickness(shape::ConvexShape)
 end
 
 function get_pointcount(shape::ConvexShape)
-    return Int(ccall((:sfConvexShape_getPointCount, libcsfml_graphics), Uint32, (Ptr{Void},), shape.ptr))
+    return Int(ccall((:sfConvexShape_getPointCount, libcsfml_graphics), UInt32, (Ptr{Void},), shape.ptr))
 end
 
 function get_point(shape::ConvexShape, index::Integer)
-    return ccall((:sfConvexShape_getPoint, libcsfml_graphics), Vector2f, (Ptr{Void}, Uint32,), shape.ptr, index)
+    return ccall((:sfConvexShape_getPoint, libcsfml_graphics), Vector2f, (Ptr{Void}, UInt32,), shape.ptr, index)
 end
 
 function set_pointcount(shape::ConvexShape, count::Integer)
-    ccall((:sfConvexShape_setPointCount, libcsfml_graphics), Void, (Ptr{Void}, Uint32,), shape.ptr, count)
+    ccall((:sfConvexShape_setPointCount, libcsfml_graphics), Void, (Ptr{Void}, UInt32,), shape.ptr, count)
 end
 
 function set_point(shape::ConvexShape, index::Integer, point::Vector2f)
-    ccall((:sfConvexShape_setPoint, libcsfml_graphics), Void, (Ptr{Void}, Uint32, Vector2f,), shape.ptr, index, point)
+    ccall((:sfConvexShape_setPoint, libcsfml_graphics), Void, (Ptr{Void}, UInt32, Vector2f,), shape.ptr, index, point)
 end
 
 function get_localbounds(shape::ConvexShape)

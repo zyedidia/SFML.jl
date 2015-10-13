@@ -58,7 +58,7 @@ function destroy(request::HttpRequest)
     ccall((:sfHttpRequest_destroy, libcsfml_network), Void, (Ptr{Void},), request.ptr)
 end
 
-function set_field(request::HttpRequest, field::String, value::String)
+function set_field(request::HttpRequest, field::AbstractString, value::AbstractString)
     ccall((:sfHttpRequest_setField, libcsfml_network), Void, (Ptr{Void}, Ptr{Cchar}, Ptr{Cchar},), request.ptr, field, value)
 end
 
@@ -66,7 +66,7 @@ function set_method(request::HttpRequest, method::HttpMethod)
     ccall((:sfHttpRequest_setMethod, libcsfml_network), Void, (Ptr{Void}, Int32,), request.ptr, Int32(method))
 end
 
-function set_uri(request::HttpRequest, uri::String)
+function set_uri(request::HttpRequest, uri::AbstractString)
     ccall((:sfHttpRequest_setUri, libcsfml_network), Void, (Ptr{Void}, Ptr{Cchar},), request.ptr, uri)
 end
 
@@ -74,7 +74,7 @@ function set_http_version(request::HttpRequest, major::Integer, minor::Integer)
     ccall((:sfHttpRequest_setHttpVersion, libcsfml_network), Void, (Ptr{Void}, Int32, Int32,), request.ptr, major, minor)
 end
 
-function set_body(request::HttpRequest, body::String)
+function set_body(request::HttpRequest, body::AbstractString)
     ccall((:sfHttpRequest_setBody, libcsfml_network), Void, (Ptr{Void}, Ptr{Cchar},), request.ptr, body)
 end
 
@@ -92,7 +92,7 @@ function destroy(response::HttpResponse)
     ccall((:sfHttpResponse_destroy, libcsfml_network), Void, (Ptr{Void},), response.ptr)
 end
 
-function get_field(response::HttpResponse, field::String)
+function get_field(response::HttpResponse, field::AbstractString)
     bytestring(ccall((:sfHttpResponse_getField, libcsfml_network), Ptr{Cchar}, (Ptr{Void}, Ptr{Cchar},), response.ptr, field))
 end
 
@@ -101,11 +101,11 @@ function get_status(response::HttpResponse)
 end
 
 function get_major_version(response::HttpResponse)
-    ccall((:sfHttpResponse_getMajorVersion, libcsfml_network), Uint32, (Ptr{Void},), response.ptr)
+    ccall((:sfHttpResponse_getMajorVersion, libcsfml_network), UInt32, (Ptr{Void},), response.ptr)
 end
 
 function get_minor_version(response::HttpResponse)
-    ccall((:sfHttpResponse_getMinorVersion, libcsfml_network), Uint32, (Ptr{Void},), response.ptr)
+    ccall((:sfHttpResponse_getMinorVersion, libcsfml_network), UInt32, (Ptr{Void},), response.ptr)
 end
 
 function get_body(response::HttpResponse)
@@ -130,8 +130,8 @@ function destroy(http::Http)
     ccall((:sfHttp_destroy, libcsfml_network), Void, (Ptr{Void},), http.ptr)
 end
 
-function set_host(http::Http, host::String, port::Integer=0)
-    ccall((:sfHttp_setHost, libcsfml_network), Void, (Ptr{Void}, Ptr{Cchar}, Uint16), http.ptr, host, port)
+function set_host(http::Http, host::AbstractString, port::Integer=0)
+    ccall((:sfHttp_setHost, libcsfml_network), Void, (Ptr{Void}, Ptr{Cchar}, UInt16), http.ptr, host, port)
 end
 
 function send_request(http::Http, request::HttpRequest, timeout::Time=Time(0))

@@ -19,7 +19,7 @@ end
 
 type TextEvent
     etype::Cint
-    unicode::Uint32
+    unicode::UInt32
 end
 
 type MouseMoveEvent
@@ -44,26 +44,26 @@ end
 
 type JoystickMoveEvent
     etype::Cint
-    joystick_id::Uint32
+    joystick_id::UInt32
     axis::JoystickAxis
     position::Cfloat
 end
 
 type JoystickButtonEvent
     etype::Cint
-    joystick_id::Uint32
-    button::Uint32
+    joystick_id::UInt32
+    button::UInt32
 end
 
 type JoystickConnectEvent
     etype::Cint
-    joystick_id::Uint32;
+    joystick_id::UInt32;
 end
 
 type SizeEvent
     etype::Cint
-    width::Uint32
-    height::Uint32
+    width::UInt32
+    height::UInt32
 end
 
 baremodule EventType

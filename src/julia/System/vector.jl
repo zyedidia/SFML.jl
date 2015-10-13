@@ -10,8 +10,8 @@ type Vector2i <: Vector2
     y::Cint
 end
 type Vector2u <: Vector2
-    x::Uint32
-    y::Uint32
+    x::UInt32
+    y::UInt32
 end
 type Vector2f <: Vector2
     x::Cfloat
@@ -31,7 +31,7 @@ end
 
 function to_vec2u(vec::Vector2)
     if typeof(vec) != Vector2u
-        return Vector2u(Uint32(vec.x), Uint32(vec.y))
+        return Vector2u(UInt32(vec.x), UInt32(vec.y))
     else
         vec
     end

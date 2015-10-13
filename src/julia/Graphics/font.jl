@@ -8,7 +8,7 @@ type Font
     end
 end
 
-function Font(filename::String)
+function Font(filename::AbstractString)
     Font(ccall((:sfFont_createFromFile, libcsfml_graphics), Ptr{Void}, (Ptr{Cchar},), filename))
 end
 

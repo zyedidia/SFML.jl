@@ -74,7 +74,7 @@ function get_radius(shape::CircleShape)
 end
 
 function set_pointcount(shape::CircleShape, count::Int)
-    ccall((:sfCircleShape_setPointCount, libcsfml_graphics), Void, (Ptr{Void}, Uint32,), shape.ptr, count)
+    ccall((:sfCircleShape_setPointCount, libcsfml_graphics), Void, (Ptr{Void}, UInt32,), shape.ptr, count)
 end
 
 function get_fillcolor(shape::CircleShape)

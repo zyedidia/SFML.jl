@@ -18,7 +18,7 @@ function destroy(recorder::SoundBufferRecorder)
 end
 
 function start(recorder::SoundBufferRecorder, sample_rate::Integer = 44100)
-    ccall((:sfSoundBufferRecorder_start, libcsfml_audio), Void, (Ptr{Void}, Uint32), recorder.ptr, sample_rate)
+    ccall((:sfSoundBufferRecorder_start, libcsfml_audio), Void, (Ptr{Void}, UInt32), recorder.ptr, sample_rate)
 end
 
 function stop(recorder::SoundBufferRecorder)
@@ -26,7 +26,7 @@ function stop(recorder::SoundBufferRecorder)
 end
 
 function get_sample_rate(recorder::SoundBufferRecorder)
-    return Int(ccall((:sfSoundBufferRecorder_getSampleRate, libcsfml_audio), Uint32, (Ptr{Void},), recorder.ptr))
+    return Int(ccall((:sfSoundBufferRecorder_getSampleRate, libcsfml_audio), UInt32, (Ptr{Void},), recorder.ptr))
 end
 
 function get_buffer(recorder::SoundBufferRecorder)

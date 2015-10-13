@@ -25,7 +25,7 @@ function is_blocking(socket::SocketTCP)
 end
 
 function get_localport(socket::SocketTCP)
-    return ccall((:sfTcpSocket_getLocalPort, libcsfml_network), Uint16, (Ptr{Void},), socket.ptr)
+    return ccall((:sfTcpSocket_getLocalPort, libcsfml_network), UInt16, (Ptr{Void},), socket.ptr)
 end
 
 function get_remoteaddress(socket::SocketTCP)
@@ -33,13 +33,13 @@ function get_remoteaddress(socket::SocketTCP)
 end
 
 function get_remoteport(socket::SocketTCP)
-    ccall((:sfTcpSocket_getRemotePort, libcsfml_network), Uint16, (Ptr{Void},), socket.ptr)
+    ccall((:sfTcpSocket_getRemotePort, libcsfml_network), UInt16, (Ptr{Void},), socket.ptr)
 end
 
-function connect(socket::SocketTCP, host::String, port::Integer, timeoutlen::Int64)
+function connect(socket::SocketTCP, host::AbstractString, port::Integer, timeoutlen::Int64)
     timeout = Time(timeoutlen)
     host_ip = IpAddress(host)
-    SocketStatus(ccall((:sfTcpSocket_connect, libcsfml_network), Int32, (Ptr{Void}, IpAddress, Uint16, Time,), socket.ptr, host_ip, port, timeout))
+    SocketStatus(ccall((:sfTcpSocket_connect, libcsfml_network), Int32, (Ptr{Void}, IpAddress, UInt16, Time,), socket.ptr, host_ip, port, timeout))
 end
 
 function disconnect(socket::SocketTCP)

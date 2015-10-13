@@ -7,12 +7,12 @@ window_fullscreen = 1 << 3,
 window_defaultstyle = (1 << 0) | (1 << 1) | (1 << 2))
 
 type ContextSettings
-    depth_bits::Uint32
-    stencil_bits::Uint32
-    antialiasing_level::Uint32
-    major_version::Uint32
-    minor_version::Uint32
-    attribute_flags::Uint32
+    depth_bits::UInt32
+    stencil_bits::UInt32
+    antialiasing_level::UInt32
+    major_version::UInt32
+    minor_version::UInt32
+    attribute_flags::UInt32
 
     function ContextSettings(depth_bits::Integer, stencil_bits::Integer, antialiasing_level::Integer, major_version::Integer, minor_version::Integer)
         new(depth_bits, stencil_bits, antialiasing_level, major_version, minor_version, 0)
@@ -22,29 +22,29 @@ type ContextSettings
     end
 end
 
-function RenderWindow(mode::VideoMode, title::String, settings::ContextSettings, style::WindowStyle...)
+function RenderWindow(mode::VideoMode, title::AbstractString, settings::ContextSettings, style::WindowStyle...)
     style_int = 0
     for i = 1:length(style)
         style_int |= Int(style[i])
     end
     settings_ptr = Ref(settings)
     icon = Image("$(Pkg.dir("SFML"))/assets/sfmljl_icon.png")
-    window = RenderWindow(ccall((:sfRenderWindow_create, libcsfml_graphics), Ptr{Void}, (VideoMode, Ptr{Cchar}, Uint32, Ref{ContextSettings},), mode, title, style_int, settings_ptr))
+    window = RenderWindow(ccall((:sfRenderWindow_create, libcsfml_graphics), Ptr{Void}, (VideoMode, Ptr{Cchar}, UInt32, Ref{ContextSettings},), mode, title, style_int, settings_ptr))
     set_icon(window, icon, 64, 64)
     return window
 end
 
-function RenderWindow(mode::VideoMode, title::String, style::WindowStyle...)
+function RenderWindow(mode::VideoMode, title::AbstractString, style::WindowStyle...)
     return RenderWindow(mode, title, ContextSettings(), style[1])
 end
 
-function RenderWindow(title::String, width::Integer, height::Integer)
+function RenderWindow(title::AbstractString, width::Integer, height::Integer)
     mode = VideoMode(width, height)
     return RenderWindow(mode, title, window_defaultstyle)
 end
 
 function set_framerate_limit(window::RenderWindow, limit::Integer)
-    ccall((:sfRenderWindow_setFramerateLimit, libcsfml_graphics), Void, (Ptr{Void}, Uint,), window.ptr, limit)
+    ccall((:sfRenderWindow_setFramerateLimit, libcsfml_graphics), Void, (Ptr{Void}, UInt,), window.ptr, limit)
 end
 
 function set_vsync_enabled(window::RenderWindow, enabled::Bool)
@@ -81,12 +81,12 @@ function get_size(window::RenderWindow)
     return to_vec2i(ccall((:sfRenderWindow_getSize, libcsfml_graphics), Vector2u, (Ptr{Void},), window.ptr))
 end
 
-function set_title(window::RenderWindow, title::String)
+function set_title(window::RenderWindow, title::AbstractString)
     ccall((:sfRenderWindow_setTitle, libcsfml_graphics), Void, (Ptr{Void}, Ptr{Cchar},), window.ptr, title)
 end
 
-function set_icon(window::RenderWindow, pixels::Array{Uint8}, width=64, height=64)
-    ccall((:sfRenderWindow_setIcon, libcsfml_graphics), Void, (Ptr{Void}, Uint32, Uint32, Ptr{Uint8},), window.ptr, width, height, pointer(pixels))
+function set_icon(window::RenderWindow, pixels::Array{UInt8}, width=64, height=64)
+    ccall((:sfRenderWindow_setIcon, libcsfml_graphics), Void, (Ptr{Void}, UInt32, UInt32, Ptr{UInt8},), window.ptr, width, height, pointer(pixels))
 end
 
 function set_icon(window::RenderWindow, image::Image, width=64, height=64)

@@ -1,5 +1,7 @@
 module SFML
 
+VERSION >= v"0.4.0-dev+6521" && __precompile__()
+
 import Base: display, isopen, close, reset, copy, launch, start, listen,
        accept, connect, write, send, bind, download, scale, contains,
        +, -, *, /
@@ -187,7 +189,7 @@ function make_gif(images::Array{Image}, width, height, filename="plot.gif", dela
     println("Created gif $filename")
 end
 
-function screenshot(window::RenderWindow, filename::String)
+function screenshot(window::RenderWindow, filename::AbstractString)
     screenshot_img = capture(window)
     save_to_file(screenshot, filename)
 end

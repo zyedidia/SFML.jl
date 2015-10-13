@@ -29,7 +29,7 @@ function get_data_size(packet::Packet)
 end
 
 function read_bool(packet::Packet)
-    return Bool(ccall((:sfPacket_readBool, libcsfml_network), Uint8, (Ptr{Void},), packet.ptr))
+    return Bool(ccall((:sfPacket_readBool, libcsfml_network), UInt8, (Ptr{Void},), packet.ptr))
 end
 
 function read_string(packet::Packet)
@@ -66,6 +66,7 @@ function write(packet::Packet, val::Cdouble)
     ccall((:sfPacket_writeDouble, libcsfml_network), Void, (Ptr{Void}, Cdouble,), packet.ptr, val)
 end
 
-function write(packet::Packet, string::String)
+function write(packet::Packet, string::AbstractString)
     ccall((:sfPacket_writeString, libcsfml_network), Void, (Ptr{Void}, Ptr{Cchar},), packet.ptr, string)
 end
+

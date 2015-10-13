@@ -36,11 +36,11 @@ function destroy(arr::VertexArray)
 end
 
 function get_vertexcount(arr::VertexArray)
-    return Int(ccall((:sfVertexArray_getVertexCount, libcsfml_graphics), Uint32, (Ptr{Void},), arr.ptr))
+    return Int(ccall((:sfVertexArray_getVertexCount, libcsfml_graphics), UInt32, (Ptr{Void},), arr.ptr))
 end
 
 function get_vertex(arr::VertexArray, index::Integer)
-    ptr = ccall((:sfVertexArray_getVertex, libcsfml_graphics), Ptr{Vertex}, (Ptr{Void}, Uint32,), arr.ptr, index)
+    ptr = ccall((:sfVertexArray_getVertex, libcsfml_graphics), Ptr{Vertex}, (Ptr{Void}, UInt32,), arr.ptr, index)
     return unsafe_load(ptr)
 end
 
@@ -49,7 +49,7 @@ function clear(arr::VertexArray)
 end
 
 function resize(arr::VertexArray, vertex_count::Integer)
-    ccall((:sfVertexArray_resize, libcsfml_graphics), Void, (Ptr{Void}, Uint32,), arr.ptr, vertex_count)
+    ccall((:sfVertexArray_resize, libcsfml_graphics), Void, (Ptr{Void}, UInt32,), arr.ptr, vertex_count)
 end
 
 function append(arr::VertexArray, vertex::Vertex)
