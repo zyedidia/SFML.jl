@@ -61,7 +61,7 @@ function set_primitive_type(arr::VertexArray, primitive_type::PrimitiveType)
 end
 
 function get_primitive_type(arr::VertexArray)
-    return PrimitiveType(ccall(libcsfml_graphics, :sfVertexArray_getPrimitiveType), Int32, (Ptr{Void},), arr.ptr)
+    return PrimitiveType(ccall((:sfVertexArray_getPrimitiveType, libcsfml_graphics), Int32, (Ptr{Void},), arr.ptr))
 end
 
 function getbounds(arr::VertexArray)
