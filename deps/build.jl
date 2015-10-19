@@ -29,7 +29,7 @@ function mkdir_if_necessary(dir)
     end
 end
 
-deps = Pkg.dir("SFML")*"/deps"
+deps = joinpath(Pkg.dir("SFML"),"deps")
 cd(deps)
 
 @osx_only begin
@@ -124,8 +124,9 @@ end
     copy_libs("$deps/csfml/bin", deps)
 end
 
-cd("$(Pkg.dir("SFML"))/src/c")
-run(`julia createlib.jl`)
+cd(joinpath(Pkg.dir("SFML"),"src","c"))
+julia_exe = joinpath(JULIA_HOME, Base.julia_exename())
+run(`$(julia_exe) createlib.jl`)
 
 cd(deps)
 
