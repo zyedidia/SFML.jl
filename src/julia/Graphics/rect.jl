@@ -25,7 +25,7 @@ end
 function intersects(rect1::FloatRect, rect2::FloatRect)
     rect1Ptr = Ref{FloatRect}(rect1)
     rect2Ptr = Ref{FloatRect}(rect2)
-    return ccall((:sfFloatRect_intersects, libcsfml_graphics), Int32, (Ref{FloatRect}, Ref{FloatRect}, Ptr{FloatRect},), (rect1Ptr), (rect2Ptr), C_NULL) == 1
+    return Bool(ccall((:sfFloatRect_intersects, libcsfml_graphics), Int32, (Ref{FloatRect}, Ref{FloatRect}, Ptr{FloatRect},), (rect1Ptr), (rect2Ptr), C_NULL))
 end
 
 function intersects(rect1::IntRect, rect2::IntRect)

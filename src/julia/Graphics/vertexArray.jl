@@ -40,7 +40,7 @@ function get_vertexcount(arr::VertexArray)
 end
 
 function get_vertex(arr::VertexArray, index::Integer)
-    ptr = ccall((:sfVertexArray_getVertex, libcsfml_graphics), Ptr{Vertex}, (Ptr{Void}, UInt32,), arr.ptr, index)
+    ptr = ccall((:sfVertexArray_getVertex, libcsfml_graphics), Ptr{Vertex}, (Ptr{Void}, Csize_t,), arr.ptr, index)
     return unsafe_load(ptr)
 end
 

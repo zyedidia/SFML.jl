@@ -15,9 +15,22 @@ For much larger examples (games) see these two examples: [Jumping Game] (https:/
 
 You can view a talk I gave about SFML.jl at JuliaCon 2015 [here](https://www.youtube.com/watch?v=UKfM7EopMe0&feature=youtu.be&a). All the demos that I used in that talk are available in the [JuliaCon-SFML repository](https://github.com/zyedidia/JuliaCon-SFML).
 
-#Installation
-You need to have Julia version 0.4, which you can get [here](http://julialang.org/downloads/) under `Nightly Builds`.
-Make sure that your version 0.4 is fairly recent. If building fails because `follow_symlinks` is not found, update your version of Julia 0.4.
+# Installation
+
+To install on any OS, run:
+
+```
+julia> Pkg.add("SFML")
+```
+
+If you want to install the master version use:
+
+```
+julia> Pkg.clone("SFML")
+julia> Pkg.build("SFML")
+```
+
+---
 
 ### Linux
 Please make sure you have Glibc 2.14 installed, and let me know if there are any build problems on Linux (I don't use Linux very much).
@@ -34,21 +47,6 @@ The Linux binaries don't come with any of the dependencies so you have to instal
 *    openal
 
 On Debian you can install the package `libsfml-dev` which will also install all dependencies. You can also run the commands [here] (https://gist.github.com/NoobsArePeople2/8086528) (you don't need to install cmake-gui).
-
----
-
-To install on any OS, run:
-
-```
-julia> Pkg.add("SFML")
-```
-
-If you want to install the master version use:
-
-```
-julia> Pkg.clone("SFML")
-julia> Pkg.build("SFML")
-```
 
 # Screenshots and Gifs
 
