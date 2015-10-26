@@ -30,8 +30,6 @@ julia> Pkg.clone("SFML")
 julia> Pkg.build("SFML")
 ```
 
----
-
 ### Linux
 Please make sure you have Glibc 2.14 installed, and let me know if there are any build problems on Linux (I don't use Linux very much).
 The Linux binaries don't come with any of the dependencies so you have to install them yourself. Here is the list:
