@@ -54,7 +54,7 @@ function set_outline_thickness(shape::CircleShape, thickness::Real)
 end
 
 function get_origin(shape::CircleShape)
-    ccall((:sfCircleShape_getOrigin, libcsfml_graphics)), Vector2f, (Ptr{Void},), shape.ptr
+    ccall((:sfCircleShape_getOrigin, libcsfml_graphics), Vector2f, (Ptr{Void},), shape.ptr)
 end
 
 function get_scale(shape::CircleShape)
