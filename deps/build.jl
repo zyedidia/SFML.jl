@@ -67,33 +67,51 @@ cd(deps)
 end
 
 @linux_only begin
-    sfml = "http://www.sfml-dev.org/files/SFML-2.2-linux-gcc-$WORD_SIZE-bit.tar.gz"
-    csfml = "http://www.sfml-dev.org/files/CSFML-2.2-linux-gcc-$WORD_SIZE-bit.tar.bz2"
 
-    if !isfile("sfml.tar.gz")
-        println("Downloading SFML...")
-        download(sfml, "sfml.tar.gz")
-    end
-    if !isfile("csfml.tar.bz2")
-        println("Downloading CSFML...")
-        download(csfml, "csfml.tar.bz2")
-    end
-
-    mkdir_if_necessary("sfml")
-    run(`tar -xzf sfml.tar.gz -C sfml --strip-components=1`)
-
-    mkdir_if_necessary("csfml")
-    run(`tar -xjf csfml.tar.bz2 -C csfml --strip-components=1`)
-
-    symlink_files("$deps/csfml/lib", "so.2.2.0")
-
-    copy_libs("$deps/sfml/lib", deps)
-    copy_libs("$deps/csfml/lib", deps)
-
-    cd(deps)
     modules = ["system", "network", "audio", "window", "graphics"]
-    for i = 1:length(modules)
-        run(`ln -sf libcsfml-$(modules[i]).so libcsfml-$(modules[i]).so.2.2`)
+
+    # check if SFML is installed in the system
+    useSystemSFML = false
+    systemLibPath = "/usr/lib"
+    if isfile("$(systemLibPath)/libcsfml-system.so")
+        useSystemSFML = true
+    end
+
+    if !useSystemSFML  # get our own, but may not work on some platforms [deps]
+        sfml = "http://www.sfml-dev.org/files/SFML-2.2-linux-gcc-$WORD_SIZE-bit.tar.gz"
+        csfml = "http://www.sfml-dev.org/files/CSFML-2.2-linux-gcc-$WORD_SIZE-bit.tar.bz2"
+
+        if !isfile("sfml.tar.gz")
+            println("Downloading SFML...")
+            download(sfml, "sfml.tar.gz")
+        end
+        if !isfile("csfml.tar.bz2")
+            println("Downloading CSFML...")
+            download(csfml, "csfml.tar.bz2")
+        end
+
+        mkdir_if_necessary("sfml")
+        run(`tar -xzf sfml.tar.gz -C sfml --strip-components=1`)
+
+        mkdir_if_necessary("csfml")
+        run(`tar -xjf csfml.tar.bz2 -C csfml --strip-components=1`)
+
+        symlink_files("$deps/csfml/lib", "so.2.2.0")
+
+        copy_libs("$deps/sfml/lib", deps)
+        copy_libs("$deps/csfml/lib", deps)
+
+        cd(deps)
+        for i = 1:length(modules)
+            run(`ln -sf libcsfml-$(modules[i]).so libcsfml-$(modules[i]).so.2.2`)
+        end
+    else
+        # use system SFML/CSFML
+        for i = 1:length(modules)
+            cd(deps)
+            run(`ln -sf $(systemLibPath)/libcsfml-$(modules[i]).so libcsfml-$(modules[i]).so.2.2`)
+            run(`ln -sf $(systemLibPath)/libsfml-$(modules[i]).so libsfml-$(modules[i]).so`)
+        end
     end
 end
 
@@ -130,8 +148,12 @@ run(`$(julia_exe) createlib.jl`)
 
 cd(deps)
 
-rm("sfml", recursive=true)
-rm("csfml", recursive=true)
+if isfile("sfml")
+    rm("sfml", recursive=true)
+end
+if isfile("csfml")
+    rm("csfml", recursive=true)
+end
 
 if isfile("libjuliasfml.dylib") || isfile("libjuliasfml.so") || isfile("libjuliasfml.dll")
     println("Successfully built SFML.jl!")
