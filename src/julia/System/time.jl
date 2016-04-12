@@ -15,13 +15,13 @@ function as_microseconds(time::Time)
 end
 
 function seconds(amount::Real)
-    return ccall((:sfTime_sfSeconds, libcsfml_system), Time, (Cfloat,), amount)
+    return ccall((:sfSeconds, libcsfml_system), Time, (Cfloat,), amount)
 end
 
 function milliseconds(amount::Integer)
-    return ccall((:sfTime_sfSeconds, libcsfml_system), Time, (Int32,), amount)
+    return ccall((:sfMilliseconds, libcsfml_system), Time, (Int32,), amount)
 end
 
 function microseconds(amount::Int64)
-    return ccall((:sfTime_sfSeconds, libcsfml_system), Time, (Int64,), amount)
+    return ccall((:sfMicroseconds, libcsfml_system), Time, (Int64,), amount)
 end
