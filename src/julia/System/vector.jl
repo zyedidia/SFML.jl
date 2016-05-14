@@ -20,7 +20,7 @@ end
 
 function Vector2(x::Real, y::Real)
     typex = typeof(x); typey = typeof(y)
-    if typex <: FloatingPoint || typey <: FloatingPoint
+    if typex <: AbstractFloat || typey <: AbstractFloat
         Vector2f(x, y)
     elseif typex <: Unsigned || typey <: Unsigned
         Vector2u(x, y)
