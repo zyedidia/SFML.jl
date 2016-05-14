@@ -116,8 +116,8 @@ end
 end
 
 @windows_only begin
-    RPMbindir = Pkg.dir("WinRPM","deps","usr","$(Sys.ARCH)-w64-mingw32","sys-root","mingw","bin")
-    if !isdir(RPMbindir)
+    GCCPath = Pkg.dir("WinRPM","deps","usr","$(Sys.ARCH)-w64-mingw32","sys-root","mingw","bin","gcc.exe")
+    if !isfile(GCCPath)
         println("Installing gcc...")
         WinRPM.install("gcc")
     end
