@@ -119,7 +119,7 @@ end
     GCCPath = Pkg.dir("WinRPM","deps","usr","$(Sys.ARCH)-w64-mingw32","sys-root","mingw","bin","gcc.exe")
     if !isfile(GCCPath)
         println("Installing gcc...")
-        WinRPM.install("gcc")
+        WinRPM.install("gcc",yes=true)
     end
 
     cd(deps)
