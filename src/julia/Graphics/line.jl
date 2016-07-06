@@ -19,6 +19,7 @@ end
 function set_points(l::Line, p1::Vector2, p2::Vector2)
     set_position(l.rect, to_vec2f(p1))
     set_rotation(l.rect, rad2deg(atan2(p2.y - p1.y, p2.x - p1.x)))
+    set_size(l.rect, Vector2f(distance(p1, p2), get_thickness(l)))
 end
 
 function get_points(l::Line)
