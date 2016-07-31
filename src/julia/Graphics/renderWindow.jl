@@ -28,7 +28,7 @@ function RenderWindow(mode::VideoMode, title::AbstractString, settings::ContextS
         style_int |= Int(style[i])
     end
     settings_ptr = Ref(settings)
-    icon = Image("$(Pkg.dir("SFML"))/assets/sfmljl_icon.png")
+    icon = Image(joinpath(dirname(@__FILE__),"..","..","..","assets","sfmljl_icon.png"))
     window = RenderWindow(ccall((:sfRenderWindow_create, libcsfml_graphics), Ptr{Void}, (VideoMode, Ptr{Cchar}, UInt32, Ref{ContextSettings},), mode, title, style_int, settings_ptr))
     set_icon(window, icon, 64, 64)
     return window

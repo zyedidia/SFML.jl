@@ -1,6 +1,6 @@
 using SFML
 
-music = Music("$(Pkg.dir("SFML"))/examples/Audio/music.ogg")
+music = Music(joinpath(dirname(@__FILE__),"music.ogg"))
 
 set_loop(music, true)
 play(music)

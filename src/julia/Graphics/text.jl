@@ -17,7 +17,7 @@ const TextStrikeThrough = 1 << 3
 
 function RenderText()
     r = RenderText(ccall((:sfText_create, libcsfml_graphics), Ptr{Void}, ()))
-    set_font(r, Font("$(Pkg.dir("SFML"))/assets/arial.ttf"))
+    set_font(r, Font(joinpath(dirname(@__FILE__),"..","..","..","assets","arial.ttf")))
     r
 end
 

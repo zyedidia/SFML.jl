@@ -7,7 +7,7 @@ set_framerate_limit(window, 60)
 event = Event()
 
 # Load the texture for the image
-texture = Texture(Pkg.dir("SFML")*"/assets/sfmljl_logo.png")
+texture = Texture(joinpath(dirname(@__FILE__),"..","..","assets","sfmljl_logo.png"))
 set_smooth(texture, true)
 texture_size = get_size(texture)
 
