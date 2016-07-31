@@ -21,7 +21,7 @@ end
 
 function __init__()
     old = pwd()
-    deps = Pkg.dir("SFML")*"/deps"
+    deps = joinpath(dirname(@__FILE__),"..","deps")
     push!(Libdl.DL_LOAD_PATH, deps)
     try
         @unix_only begin

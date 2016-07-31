@@ -6,7 +6,7 @@ window = RenderWindow("Shader Test", 800, 600)
 
 event = Event()
 
-texture = Texture(Pkg.dir("SFML")*"/assets/sfmljl_logo.png")
+texture = Texture(joinpath(dirname(@__FILE__),"..","..","assets","sfmljl_logo.png"))
 sprite = Sprite()
 set_texture(sprite, texture)
 set_position(sprite, Vector2f(400, 300))

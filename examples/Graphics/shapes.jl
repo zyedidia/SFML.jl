@@ -3,7 +3,7 @@ using SFML
 window = RenderWindow("Shapes", 800, 600)
 event = Event()
 
-texture = Texture("$(Pkg.dir("SFML"))/examples/Graphics/wood-texture.jpg")
+texture = Texture(joinpath(dirname(@__FILE__),"wood-texture.jpg"))
 
 triangle = CircleShape()
 set_radius(triangle, 100)
