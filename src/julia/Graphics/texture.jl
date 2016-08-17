@@ -20,10 +20,6 @@ function Texture(image::Image)
     Texture(ccall((:sfTexture_createFromImage, libcsfml_graphics), Ptr{Void}, (Ptr{Void}, Ptr{Void},), image.ptr, C_NULL))
 end
 
-function Texture(width::Integer, height::Integer)
-    Texture(ccall((:sfTexture_create, libcsfml_graphics), Ptr{Void}, (UInt32, UInt32,), width, height))
-end
-
 function copy(texture::Texture)
     return Texture(ccall((:sfTexture_copy, libcsfml_graphics), Ptr{Void}, (Ptr{Void},), texture.ptr))
 end
