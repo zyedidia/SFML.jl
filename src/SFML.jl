@@ -26,14 +26,14 @@ function __init__()
     deps = joinpath(dirname(@__FILE__),"..","deps")
     push!(Libdl.DL_LOAD_PATH, deps)
     try
-        @unix_only begin
+        @compat @static if is_unix()
             cd(deps)
-            @osx_only begin
+            @compat @static if is_apple()
                 Libdl.dlopen("freetype.framework/freetype")
                 Libdl.dlopen("sndfile.framework/sndfile")
             end
 
-            @linux_only begin
+            @compat @static if is_linux()
                 system_deps = @compat readstring(`ldd libsfml-system.so`)
                 check_deps(system_deps)
                 network_deps = @compat readstring(`ldd libsfml-network.so`)
@@ -63,7 +63,7 @@ function __init__()
             global const libcsfml_graphics = "libcsfml-graphics"
         end
 
-        @windows_only begin
+        @compat @static if is_windows()
             global const libcsfml_system = "csfml-system-2"
             global const libcsfml_audio = "csfml-audio-2"
             global const libcsfml_network = "csfml-network-2"
@@ -71,7 +71,7 @@ function __init__()
             global const libcsfml_graphics = "csfml-graphics-2"
         end
 
-        @unix_only begin
+        @compat @static if is_unix()
             global const libjuliasfml_ptr = Libdl.dlopen("$deps/libjuliasfml")
         end
         global const libjuliasfml = "libjuliasfml"
