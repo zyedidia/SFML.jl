@@ -26,7 +26,7 @@ end
 
 function get_samples(buffer::SoundBuffer)
     ptr = ccall((:sfSoundBuffer_getSamples, libcsfml_audio), Ptr{Int16}, (Ptr{Void},), buffer.ptr)
-    unsafe_wrap(Vector{Int16}, ptr, get_samplecount(buffer), true)
+    @compat unsafe_wrap(Vector{Int16}, ptr, get_samplecount(buffer), true)
 end
 
 function get_samplerate(buffer::SoundBuffer)

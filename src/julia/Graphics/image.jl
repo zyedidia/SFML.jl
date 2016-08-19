@@ -39,7 +39,7 @@ end
 function get_pixels(image::Image)
     imgsize = get_size(image)
     ptr = ccall((:sfImage_getPixelsPtr, libcsfml_graphics), Ptr{UInt8}, (Ptr{Void},), image.ptr)
-    unsafe_wrap(Vector{UInt8}, ptr, imgsize.x * imgsize.y)
+    @compat unsafe_wrap(Vector{UInt8}, ptr, imgsize.x * imgsize.y)
 end
 
 function get_size(image::Image)
