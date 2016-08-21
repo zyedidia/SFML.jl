@@ -2,6 +2,8 @@ module SFML
 
 VERSION >= v"0.4.0-dev+6521" && __precompile__()
 
+using Compat
+
 import Base: display, isopen, close, reset, copy, launch, start, listen,
        accept, connect, write, send, bind, download, scale, contains,
        +, -, *, /
@@ -24,23 +26,23 @@ function __init__()
     deps = joinpath(dirname(@__FILE__),"..","deps")
     push!(Libdl.DL_LOAD_PATH, deps)
     try
-        @unix_only begin
+        @compat @static if is_unix()
             cd(deps)
-            @osx_only begin
+            @compat @static if is_apple()
                 Libdl.dlopen("freetype.framework/freetype")
                 Libdl.dlopen("sndfile.framework/sndfile")
             end
 
-            @linux_only begin
-                system_deps = readall(`ldd libsfml-system.so`)
+            @compat @static if is_linux()
+                system_deps = @compat readstring(`ldd libsfml-system.so`)
                 check_deps(system_deps)
-                network_deps = readall(`ldd libsfml-network.so`)
+                network_deps = @compat readstring(`ldd libsfml-network.so`)
                 check_deps(network_deps)
-                graphics_deps = readall(`ldd libsfml-graphics.so`)
+                graphics_deps = @compat readstring(`ldd libsfml-graphics.so`)
                 check_deps(graphics_deps)
-                audio_deps = readall(`ldd libsfml-audio.so`)
+                audio_deps = @compat readstring(`ldd libsfml-audio.so`)
                 check_deps(audio_deps)
-                window_deps = readall(`ldd libsfml-window.so`)
+                window_deps = @compat readstring(`ldd libsfml-window.so`)
                 check_deps(window_deps)
             end
 
@@ -61,7 +63,7 @@ function __init__()
             global const libcsfml_graphics = "libcsfml-graphics"
         end
 
-        @windows_only begin
+        @compat @static if is_windows()
             global const libcsfml_system = "csfml-system-2"
             global const libcsfml_audio = "csfml-audio-2"
             global const libcsfml_network = "csfml-network-2"
@@ -69,7 +71,7 @@ function __init__()
             global const libcsfml_graphics = "csfml-graphics-2"
         end
 
-        @unix_only begin
+        @compat @static if is_unix()
             global const libjuliasfml_ptr = Libdl.dlopen("$deps/libjuliasfml")
         end
         global const libjuliasfml = "libjuliasfml"

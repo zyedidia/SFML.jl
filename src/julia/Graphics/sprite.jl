@@ -15,7 +15,7 @@ end
 
 function Sprite(texture::Texture)
     s = Sprite()
-    set_texture(sprite, texture)
+    set_texture(s, texture)
     s
 end
 

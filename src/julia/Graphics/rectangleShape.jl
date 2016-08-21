@@ -37,9 +37,7 @@ function set_origin(shape::RectangleShape, origin::Vector2f)
     ccall((:sfRectangleShape_setOrigin, libcsfml_graphics), Void, (Ptr{Void}, Vector2f,), shape.ptr, origin)
 end
 
-function set_texture(shape::RectangleShape, texture::Texture)
-    ccall((:sfRectangleShape_setTexture, libcsfml_graphics), Void, (Ptr{Void}, Ptr{Void}), shape.ptr, texture.ptr)
-end
+
 
 function set_size(shape::RectangleShape, size::Vector2f)
     ccall((:sfRectangleShape_setSize, libcsfml_graphics), Void, (Ptr{Void}, Vector2f,), shape.ptr, size)
