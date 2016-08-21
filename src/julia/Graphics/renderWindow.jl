@@ -1,9 +1,9 @@
-@enum(WindowStyle, 
-window_none = 0, 
-window_titlebar = 1 << 0, 
-window_resize = 1 << 1, 
-window_close = 1 << 2, 
-window_fullscreen = 1 << 3, 
+@enum(WindowStyle,
+window_none = 0,
+window_titlebar = 1 << 0,
+window_resize = 1 << 1,
+window_close = 1 << 2,
+window_fullscreen = 1 << 3,
 window_defaultstyle = (1 << 0) | (1 << 1) | (1 << 2))
 
 type ContextSettings
@@ -34,7 +34,7 @@ function RenderWindow(mode::VideoMode, title::AbstractString, settings::ContextS
     return window
 end
 
-function RenderWindow(mode::VideoMode, title::AbstractString, style::WindowStyle...)
+function RenderWindow(mode::VideoMode, title::AbstractString, style::WindowStyle...=window_defaultstyle)
     return RenderWindow(mode, title, ContextSettings(), style[1])
 end
 
