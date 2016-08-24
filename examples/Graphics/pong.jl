@@ -46,21 +46,21 @@ function update(ball::Ball, score::Score)
     radius = get_radius(ball.shape)
 
     if x - radius < 0
-        ball.velocity.x = ballmaxvelocity;
+        ball.velocity = Vector2f(ballmaxvelocity, ball.velocity.y)
     elseif x + radius > window_width
-        ball.velocity.x = -ballmaxvelocity;
+        ball.velocity = Vector2f(-ballmaxvelocity, ball.velocity.y)
     end
 
     if y - radius < 0
         score.paddle2 += 1
         # reset(ball)
         # sleep(1)
-        ball.velocity.y = ballmaxvelocity;
+        ball.velocity = Vector2f(ball.velocity.x, ballmaxvelocity)
     elseif y + radius > window_height
         score.paddle1 += 1
         # reset(ball)
         # sleep(1)
-        ball.velocity.y = -ballmaxvelocity;
+        ball.velocity = Vector2f(ball.velocity.x, -ballmaxvelocity)
     end
 end
 
@@ -87,13 +87,13 @@ function update(paddle::Paddle)
 
     position = get_position(paddle.shape)
     x = position.x; y = position.y
-
+    vy = paddle.velocity.y
     if (is_key_pressed(paddle.left))
-        paddle.velocity.x = -paddle_velocity
+        paddle.velocity = Vector2f(-paddle_velocity, vy)
     elseif (is_key_pressed(paddle.right))
-        paddle.velocity.x = paddle_velocity
+        paddle.velocity = Vector2f(paddle_velocity, vy)
     else
-        paddle.velocity.x = 0
+        paddle.velocity = Vector2f(0, vy)
     end
 end
 
@@ -139,7 +139,7 @@ function main()
         clear(window, SFML.white)
 
         if collides(ball, paddle1) || collides(ball, paddle2)
-            ball.velocity.y = -ball.velocity.y
+            ball.velocity = Vector2f(ball.velocity.x, -ball.velocity.y)
         end
 
         update(ball, score)

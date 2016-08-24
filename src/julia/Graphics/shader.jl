@@ -13,6 +13,7 @@ function Shader(vertex_shader::AbstractString, frag_shader::AbstractString)
     frag = isempty(frag_shader) ? C_NULL : frag_shader
     Shader(ccall((:sfShader_createFromFile, libcsfml_graphics), Ptr{Void}, (Ptr{Cchar}, Ptr{Cchar},), vert, frag))
 end
+Shader() = Shader("", "")
 
 function ShaderFromMemory(vertex_shader::AbstractString, frag_shader::AbstractString)
     vert = isempty(vertex_shader) ? C_NULL : vertex_shader

@@ -6,7 +6,7 @@ window_close = 1 << 2,
 window_fullscreen = 1 << 3,
 window_defaultstyle = (1 << 0) | (1 << 1) | (1 << 2))
 
-immutable ContextSettings
+type ContextSettings
     depth_bits::UInt32
     stencil_bits::UInt32
     antialiasing_level::UInt32
