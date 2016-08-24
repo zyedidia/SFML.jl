@@ -8,6 +8,7 @@ type Texture
     end
 end
 
+Texture() = Texture(C_NULL)
 function Texture(width::Integer, height::Integer)
     Texture(ccall((:sfTexture_create, libcsfml_graphics), Ptr{Void}, (UInt32, UInt32,), width, height))
 end

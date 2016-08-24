@@ -8,11 +8,11 @@ type RenderStates
     end
 end
 
-function RenderStates(blendmode::BlendMode=blend_alpha, shader::Shader=Shader(), texture::Texture=Texture(C_NULL))
+function RenderStates(blendmode::BlendMode=blend_alpha, shader::Shader=Shader(), texture::Texture=Texture())
     RenderStates(ccall((:sjRenderStates_create, "libjuliasfml"), Ptr{Void}, (BlendMode, Ptr{Void}, Ptr{Void}), blendmode, shader.ptr, texture.ptr))
 end
 
-RenderStates(s::Shader) = RenderStates(blend_alpha, s, Texture(C_NULL))
+RenderStates(s::Shader) = RenderStates(blend_alpha, s, Texture())
 RenderStates(t::Texture) = RenderStates(blend_alpha, Shader(), t)
 
 
