@@ -7,7 +7,7 @@ trianglesStrip,
 triangleFan,
 quads)
 
-type Vertex
+immutable Vertex
     position::Vector2f
     color::Color
     texCoords::Vector2f

@@ -1,11 +1,11 @@
-type FloatRect
+immutable FloatRect
     left::Cfloat
     top::Cfloat
     width::Cfloat
     height::Cfloat
 end
 
-type IntRect
+immutable IntRect
     left::Cint
     top::Cint
     width::Cint

@@ -14,3 +14,7 @@ sfRenderStates* sjRenderStates_create(sfBlendMode blendMode, sfShader* shader) {
 void sjRenderStates_destroy(sfRenderStates* states) {
     free(states);
 }
+
+void sjRenderStates_setTexture(sfRenderStates* states, sfTexture* texture) {
+    states->texture = texture;
+}

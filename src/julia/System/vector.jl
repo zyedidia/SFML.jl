@@ -1,19 +1,19 @@
-type Vector3f
+immutable Vector3f
     x::Cfloat
     y::Cfloat
     z::Cfloat
 end
 
 abstract Vector2
-type Vector2i <: Vector2
+immutable Vector2i <: Vector2
     x::Cint
     y::Cint
 end
-type Vector2u <: Vector2
+immutable Vector2u <: Vector2
     x::UInt32
     y::UInt32
 end
-type Vector2f <: Vector2
+immutable Vector2f <: Vector2
     x::Cfloat
     y::Cfloat
 end

@@ -1,4 +1,4 @@
-type BlendMode
+immutable BlendMode
     color_src_factor::Cint
     color_dst_factor::Cint
     color_equation::Cint
