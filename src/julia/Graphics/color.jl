@@ -1,4 +1,4 @@
-type Color
+immutable Color
     r::UInt8
     g::UInt8
     b::UInt8

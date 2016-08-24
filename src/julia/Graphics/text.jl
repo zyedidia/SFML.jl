@@ -105,7 +105,7 @@ function set_style(text::RenderText, style::UInt32)
 end
 
 function get_string(text::RenderText)
-    bytestring(ccall((:sfText_getString, libcsfml_graphics), Ptr{Cchar}, (Ptr{Void},), text.ptr))
+    unsafe_string(ccall((:sfText_getString, libcsfml_graphics), Ptr{Cchar}, (Ptr{Void},), text.ptr))
 end
 
 function get_font(text::RenderText)

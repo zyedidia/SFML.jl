@@ -8,7 +8,7 @@ type Event
     end
 end
 
-type KeyEvent
+immutable KeyEvent
     etype::Cint
     key_code::Cint
     alt::Cint
@@ -17,50 +17,50 @@ type KeyEvent
     system::Cint
 end
 
-type TextEvent
+immutable TextEvent
     etype::Cint
     unicode::UInt32
 end
 
-type MouseMoveEvent
+immutable MouseMoveEvent
     etype::Cint
     x::Cint
     y::Cint
 end
 
-type MouseButtonEvent
+immutable MouseButtonEvent
     etype::Cint
     button::Cint
     x::Cint
     y::Cint
 end
 
-type MouseWheelEvent
+immutable MouseWheelEvent
     etype::Cint
     delta::Cint
     x::Cint
     y::Cint
 end
 
-type JoystickMoveEvent
+immutable JoystickMoveEvent
     etype::Cint
     joystick_id::UInt32
     axis::JoystickAxis
     position::Cfloat
 end
 
-type JoystickButtonEvent
+immutable JoystickButtonEvent
     etype::Cint
     joystick_id::UInt32
     button::UInt32
 end
 
-type JoystickConnectEvent
+immutable JoystickConnectEvent
     etype::Cint
     joystick_id::UInt32;
 end
 
-type SizeEvent
+immutable SizeEvent
     etype::Cint
     width::UInt32
     height::UInt32
