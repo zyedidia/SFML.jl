@@ -44,5 +44,5 @@ function save_to_file(buffer::SoundBuffer, filename::AbstractString)
 end
 
 function get_duration(buffer::SoundBuffer)
-    return ccall((:sfSoundBUffer_getDuration, libcsfml_audio), Time, (Ptr{Void},), buffer.ptr)
+    return ccall((:sfSoundBuffer_getDuration, libcsfml_audio), Time, (Ptr{Void},), buffer.ptr)
 end
