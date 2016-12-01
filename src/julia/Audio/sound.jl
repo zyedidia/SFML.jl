@@ -75,3 +75,9 @@ end
 function get_volume(sound::Sound)
     return Real(ccall((:sfSound_getVolume, libcsfml_audio), Cfloat, (Ptr{Void},), sound.ptr))
 end
+
+function get_playing_offset(sound::Sound)
+  return ccall((:sfSound_getPlayingOffset, libcsfml_audio), Time,
+                    (Ptr{Void},), sound.ptr)
+end
+
