@@ -49,7 +49,7 @@ function set_buffer(sound::Sound, sound_buffer::SoundBuffer)
 end
 
 function get_buffer(sound::Sound)
-    return SoundBuffer(ccall((:sfSound_getBuffer, libcsfml_audio), Void, (Ptr{Void},), sound.ptr))
+    return SoundBuffer(ccall((:sfSound_getBuffer, libcsfml_audio), Ptr{Void}, (Ptr{Void},), sound.ptr))
 end
 
 function set_loop(sound::Sound, loop::Bool)
