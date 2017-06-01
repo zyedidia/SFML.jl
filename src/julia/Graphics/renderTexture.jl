@@ -57,7 +57,7 @@ end
 
 function coords2pixel(texture::RenderTexture, point::Vector2, targetview=get_view(texture))
     point = to_vec2f(point)
-    ccall((:sfRenderTexture_mapCoordsToPixel, libcsfml_graphics), Vector2i, (ptr{Void}, Vector2f, Ptr{Void},), texture.ptr, point, targetview.ptr)
+    ccall((:sfRenderTexture_mapCoordsToPixel, libcsfml_graphics), Vector2i, (Ptr{Void}, Vector2f, Ptr{Void},), texture.ptr, point, targetview.ptr)
 end
 
 function draw(texture::RenderTexture, object::Drawable, shader::Shader)
