@@ -4,7 +4,7 @@ immutable Vector3f
     z::Cfloat
 end
 
-abstract Vector2
+abstract type Vector2 end
 immutable Vector2i <: Vector2
     x::Cint
     y::Cint
