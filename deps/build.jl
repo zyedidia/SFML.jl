@@ -1,4 +1,6 @@
-@windows_only using WinRPM
+@static if is_windows()
+    using WinRPM
+end
 
 function copy_libs(src, dst)
     files = readdir(src)
@@ -32,7 +34,7 @@ end
 deps = dirname(@__FILE__)
 cd(deps)
 
-@osx_only begin
+@static if is_apple()
     sfml = "http://www.sfml-dev.org/files/SFML-2.2-osx-clang-universal.tar.gz"
     csfml = "http://www.sfml-dev.org/files/CSFML-2.2-osx-clang-universal.tar.gz"
 
@@ -66,7 +68,7 @@ cd(deps)
     end
 end
 
-@linux_only begin
+@static if is_linux()
 
     modules = ["system", "network", "audio", "window", "graphics"]
 
@@ -115,7 +117,7 @@ end
     end
 end
 
-@windows_only begin
+@static if is_windows()
     GCCPath = Pkg.dir("WinRPM","deps","usr","$(Sys.ARCH)-w64-mingw32","sys-root","mingw","bin","gcc.exe")
     if !isfile(GCCPath)
         println("Installing gcc...")
