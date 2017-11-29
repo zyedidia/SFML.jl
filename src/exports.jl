@@ -188,6 +188,7 @@ export SoundBufferRecorder
 export start
 export get_sample_rate
 export get_buffer
+export get_playing_offset
 export SoundStatus
 export upload
 export download

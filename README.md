@@ -11,7 +11,7 @@ SFML.jl works on Mac OS X, Linux, and Windows.
 
 Take a look at the `examples` folder to see some usage examples.
 
-For much larger examples (games) see these two examples: [Jumping Game] (https://github.com/zyedidia/julia-jump-game) and [Space Shooter] (https://github.com/zyedidia/SpaceShooter.jl) (this one is more complex).
+For much larger examples (games) see these two examples: [Jumping Game](https://github.com/zyedidia/julia-jump-game) and [Space Shooter](https://github.com/zyedidia/SpaceShooter.jl) (this one is more complex).
 
 You can view a talk I gave about SFML.jl at JuliaCon 2015 [here](https://www.youtube.com/watch?v=UKfM7EopMe0&feature=youtu.be&a). All the demos that I used in that talk are available in the [JuliaCon-SFML repository](https://github.com/zyedidia/JuliaCon-SFML).
 
@@ -44,7 +44,7 @@ The Linux binaries don't come with any of the dependencies so you have to instal
 *    sndfile
 *    openal
 
-On Debian you can install the package `libsfml-dev` which will also install all dependencies. You can also run the commands [here] (https://gist.github.com/NoobsArePeople2/8086528) (you don't need to install cmake-gui).
+On Debian you can install the package `libsfml-dev` which will also install all dependencies. You can also run the commands [here](https://gist.github.com/NoobsArePeople2/8086528) (you don't need to install cmake-gui).
 
 # Screenshots and Gifs
 
@@ -54,7 +54,7 @@ You can also take a screenshot and store it in an `Image` object without saving 
 
 ---
 
-To create a gif, you must have [imagemagick] (http://www.imagemagick.org/script/index.php) installed.
+To create a gif, you must have [imagemagick](http://www.imagemagick.org/script/index.php) installed.
 
 Making gifs is only slightly more complicated. You can use the `make_gif(window, width, height, duration, filename, delay)` function (duration and delay are in seconds). 
 

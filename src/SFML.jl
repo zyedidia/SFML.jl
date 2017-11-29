@@ -5,7 +5,7 @@ VERSION >= v"0.4.0-dev+6521" && __precompile__()
 using Compat
 
 import Base: display, isopen, close, reset, copy, launch, start, listen,
-       accept, connect, write, send, bind, download, scale, contains,
+       accept, connect, write, send, bind, download, contains,
        +, -, *, /
 
 function check_deps(ldd_result)
@@ -104,6 +104,7 @@ include("julia/Audio/soundBuffer.jl")
 include("julia/Audio/sound.jl")
 include("julia/Audio/soundBufferRecorder.jl")
 
+include("julia/Graphics/rect.jl")
 include("julia/Graphics/drawable.jl")
 include("julia/Graphics/transform.jl")
 include("julia/Graphics/blendMode.jl")

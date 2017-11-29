@@ -1,1 +1,1 @@
-abstract Drawable
+abstract type Drawable end
