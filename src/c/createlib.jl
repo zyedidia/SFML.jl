@@ -2,16 +2,16 @@ ext = ""
 
 deps = joinpath(dirname(@__FILE__),"..","..","deps")
 
-is_unix() && begin
-    is_linux() && (ext = "so")
-    is_apple() && (ext = "dylib")
+@static if is_unix()
+    @static if is_linux() ext = "so" end
+    @static if is_apple() ext = "dylib" end
 
     run(`gcc -fPIC -I$deps/csfml/include -c Window/event.c Network/Network.c Graphics/shader.c`)
     run(`gcc -L$deps -lcsfml-system -lcsfml-graphics -lcsfml-window -lcsfml-audio -lcsfml-network -shared -o $deps/libjuliasfml.$ext event.o Network.o shader.o`)
     run(`rm event.o shader.o Network.o`)
 end
 
-is_windows() && begin
+@static if is_windows()
     if isdir(Pkg.dir("WinRPM"))
         RPMbindir = Pkg.dir("WinRPM","deps","usr","$(Sys.ARCH)-w64-mingw32","sys-root","mingw","bin")
         ENV["PATH"]=ENV["PATH"]*";"*RPMbindir
