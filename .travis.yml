@@ -1,14 +1,16 @@
 language: julia
 os:
-    - osx
+  - linux
+  - osx
 julia:
-    - 0.4
-    - 0.5
-    - nightly
+  - 0.6
+  - nightly
+matrix:
+  allow_failures:
+  - julia: nightly
 notifications:
     email: false
         # uncomment the following lines to override the default test script
         #script:
         #  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
         #  - julia --check-bounds=yes -e 'Pkg.clone(pwd()); Pkg.build("SFML"); Pkg.test("SFML"; coverage=true)'
-
