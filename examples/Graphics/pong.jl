@@ -10,12 +10,12 @@ paddle_velocity = 6.0
 window_width = 800
 window_height = 600
 
-type Score
+mutable struct Score
     paddle1::Int
     paddle2::Int
 end
 
-type Ball
+mutable struct Ball
     shape::CircleShape
     velocity::Vector2f
     starting_pos::Vector2f
@@ -64,7 +64,7 @@ function update(ball::Ball, score::Score)
     end
 end
 
-type Paddle
+mutable struct Paddle
     shape::RectangleShape
     velocity::Vector2f
     left::Int

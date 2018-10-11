@@ -1,4 +1,4 @@
-immutable Color
+struct Color
     r::UInt8
     g::UInt8
     b::UInt8

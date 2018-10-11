@@ -30,5 +30,5 @@ function get_axis_position(joystick::Integer, axis::JoystickAxis)
 end
 
 function joystick_update()
-    ccall((:sfJoystick_update, libcsfml_window), Void, ())
+    ccall((:sfJoystick_update, libcsfml_window), Nothing, ())
 end

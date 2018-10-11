@@ -1,7 +1,7 @@
-type RenderStates
-    ptr::Ptr{Void}
+mutable struct RenderStates
+    ptr::Ptr{Nothing}
 
-    function RenderStates(ptr::Ptr{Void})
+    function RenderStates(ptr::Ptr{Nothing})
         self = new(ptr)
         finalizer(self, destroy)
         self
@@ -9,7 +9,7 @@ type RenderStates
 end
 
 function RenderStates(blendmode::BlendMode=blend_alpha, shader::Shader=Shader(), texture::Texture=Texture())
-    RenderStates(ccall((:sjRenderStates_create, "libjuliasfml"), Ptr{Void}, (BlendMode, Ptr{Void}, Ptr{Void}), blendmode, shader.ptr, texture.ptr))
+    RenderStates(ccall((:sjRenderStates_create, "libjuliasfml"), Ptr{Nothing}, (BlendMode, Ptr{Nothing}, Ptr{Nothing}), blendmode, shader.ptr, texture.ptr))
 end
 
 RenderStates(s::Shader) = RenderStates(blend_alpha, s, Texture())
@@ -17,9 +17,9 @@ RenderStates(t::Texture) = RenderStates(blend_alpha, Shader(), t)
 
 
 function set_texture(states::RenderStates, texture::Texture)
-    ccall((:sjRenderStates_setTexture, "libjuliasfml"), Ptr{Void}, (Ptr{Void}, Ptr{Void}), states.ptr, texture.ptr)
+    ccall((:sjRenderStates_setTexture, "libjuliasfml"), Ptr{Nothing}, (Ptr{Nothing}, Ptr{Nothing}), states.ptr, texture.ptr)
 end
 
 function destroy(states::RenderStates)
-    ccall((:sjRenderStates_destroy, "libjuliasfml"), Void, (Ptr{Void},), states.ptr)
+    ccall((:sjRenderStates_destroy, "libjuliasfml"), Nothing, (Ptr{Nothing},), states.ptr)
 end

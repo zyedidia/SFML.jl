@@ -1,4 +1,4 @@
-type VideoMode
+mutable struct VideoMode
     width::UInt32
     height::UInt32
     bits_per_pixel::UInt32

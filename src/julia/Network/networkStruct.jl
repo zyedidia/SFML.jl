@@ -1,4 +1,4 @@
-type NetworkStruct
+mutable struct NetworkStruct
     status::Cint
-    ptr::Ptr{Void}
+    ptr::Ptr{Nothing}
 end

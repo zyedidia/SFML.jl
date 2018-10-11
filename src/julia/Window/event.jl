@@ -1,14 +1,14 @@
-type Event
-    ptr::Ptr{Void}
+mutable struct Event
+    ptr::Ptr{Nothing}
 
-    function Event(ptr::Ptr{Void})
+    function Event(ptr::Ptr{Nothing})
         event = new(ptr)
         finalizer(event, destroy)
         event
     end
 end
 
-immutable KeyEvent
+struct KeyEvent
     etype::Cint
     key_code::Cint
     alt::Cint
@@ -17,50 +17,50 @@ immutable KeyEvent
     system::Cint
 end
 
-immutable TextEvent
+struct TextEvent
     etype::Cint
     unicode::UInt32
 end
 
-immutable MouseMoveEvent
+struct MouseMoveEvent
     etype::Cint
     x::Cint
     y::Cint
 end
 
-immutable MouseButtonEvent
+struct MouseButtonEvent
     etype::Cint
     button::Cint
     x::Cint
     y::Cint
 end
 
-immutable MouseWheelEvent
+struct MouseWheelEvent
     etype::Cint
     delta::Cint
     x::Cint
     y::Cint
 end
 
-immutable JoystickMoveEvent
+struct JoystickMoveEvent
     etype::Cint
     joystick_id::UInt32
     axis::JoystickAxis
     position::Cfloat
 end
 
-immutable JoystickButtonEvent
+struct JoystickButtonEvent
     etype::Cint
     joystick_id::UInt32
     button::UInt32
 end
 
-immutable JoystickConnectEvent
+struct JoystickConnectEvent
     etype::Cint
     joystick_id::UInt32;
 end
 
-immutable SizeEvent
+struct SizeEvent
     etype::Cint
     width::UInt32
     height::UInt32
@@ -92,37 +92,37 @@ baremodule EventType
 end
 
 function Event()
-    Event(ccall((:new_sjEvent, "libjuliasfml"), Ptr{Void}, ()))
+    Event(ccall((:new_sjEvent, "libjuliasfml"), Ptr{Nothing}, ()))
 end
 
 function destroy(event::Event)
-    ccall((:sjEvent_destroy, "libjuliasfml"), Void, (Ptr{Void},), event.ptr)
+    ccall((:sjEvent_destroy, "libjuliasfml"), Nothing, (Ptr{Nothing},), event.ptr)
 end
 
 function get_type(event::Event)
-    return ccall((:sjEvent_eventType, "libjuliasfml"), Int32, (Ptr{Void},), event.ptr)
+    return ccall((:sjEvent_eventType, "libjuliasfml"), Int32, (Ptr{Nothing},), event.ptr)
 end
 
 function get_size(event::Event)
-    return ccall((:sjEvent_eventSize, "libjuliasfml"), SizeEvent, (Ptr{Void},), event.ptr)
+    return ccall((:sjEvent_eventSize, "libjuliasfml"), SizeEvent, (Ptr{Nothing},), event.ptr)
 end
 
 function get_key(event::Event)
-    return ccall((:sjEvent_eventKey, "libjuliasfml"), KeyEvent, (Ptr{Void},), event.ptr)
+    return ccall((:sjEvent_eventKey, "libjuliasfml"), KeyEvent, (Ptr{Nothing},), event.ptr)
 end
 
 function get_text(event::Event)
-    return ccall((:sjEvent_eventText, "libjuliasfml"), TextEvent, (Ptr{Void},), event.ptr)
+    return ccall((:sjEvent_eventText, "libjuliasfml"), TextEvent, (Ptr{Nothing},), event.ptr)
 end
 
 function get_mousebutton(event::Event)
-    return ccall((:sjEvent_eventMouseButton, "libjuliasfml"), MouseButtonEvent, (Ptr{Void},), event.ptr)
+    return ccall((:sjEvent_eventMouseButton, "libjuliasfml"), MouseButtonEvent, (Ptr{Nothing},), event.ptr)
 end
 
 function get_mousemove(event::Event)
-    return ccall((:sjEvent_eventMouseMove, "libjuliasfml"), MouseMoveEvent, (Ptr{Void},), event.ptr)
+    return ccall((:sjEvent_eventMouseMove, "libjuliasfml"), MouseMoveEvent, (Ptr{Nothing},), event.ptr)
 end
 
 function get_mousewheel(event::Event)
-    return ccall((:sjEvent_eventMouseWheel, "libjuliasfml"), MouseWheelEvent, (Ptr{Void},), event.ptr)
+    return ccall((:sjEvent_eventMouseWheel, "libjuliasfml"), MouseWheelEvent, (Ptr{Nothing},), event.ptr)
 end

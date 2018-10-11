@@ -34,7 +34,7 @@ end
 deps = dirname(@__FILE__)
 cd(deps)
 
-@static if is_apple()
+@static if Sys.isapple()
     sfml = "http://www.sfml-dev.org/files/SFML-2.2-osx-clang-universal.tar.gz"
     csfml = "http://www.sfml-dev.org/files/CSFML-2.2-osx-clang-universal.tar.gz"
 
@@ -68,7 +68,7 @@ cd(deps)
     end
 end
 
-@static if is_linux()
+@static if Sys.islinux()
 
     modules = ["system", "network", "audio", "window", "graphics"]
 

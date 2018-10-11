@@ -1,4 +1,4 @@
-type IpAddress
+mutable struct IpAddress
     a_0::Cchar
     a_1::Cchar
     a_2::Cchar

@@ -1,5 +1,5 @@
 function set_global_volume(volume::Real)
-    ccall((:sfListener_setGlobalVolume, libcsfml_audio), Void, (Cfloat,), volume)
+    ccall((:sfListener_setGlobalVolume, libcsfml_audio), Nothing, (Cfloat,), volume)
 end
 
 function get_global_volume()
@@ -7,7 +7,7 @@ function get_global_volume()
 end
 
 function set_listener_position(pos::Vector3f)
-    ccall((:sfListener_setPosition, libcsfml_audio), Void, (Vector3f,), pos)
+    ccall((:sfListener_setPosition, libcsfml_audio), Nothing, (Vector3f,), pos)
 end
 
 function get_listener_position()
@@ -15,7 +15,7 @@ function get_listener_position()
 end
 
 function set_listener_direction(direction::Vector3f)
-    ccall((:sfListener_setDirection, libcsfml_audio), Void, (Vector3f,), direction)
+    ccall((:sfListener_setDirection, libcsfml_audio), Nothing, (Vector3f,), direction)
 end
 
 function get_listener_direction(direction::Vector3f)
@@ -23,7 +23,7 @@ function get_listener_direction(direction::Vector3f)
 end
 
 function set_listener_upvector(vect::Vector3f)
-    ccall((:sfListener_setUpVector, libcsfml_audio), Void, (Vector3f,), vect)
+    ccall((:sfListener_setUpVector, libcsfml_audio), Nothing, (Vector3f,), vect)
 end
 
 function get_listener_upvector()

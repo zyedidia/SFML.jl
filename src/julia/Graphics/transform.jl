@@ -1,4 +1,4 @@
-immutable _Transform
+struct _Transform
     a_1::Cfloat
     a_2::Cfloat
     a_3::Cfloat
@@ -10,7 +10,7 @@ immutable _Transform
     a_9::Cfloat
 end
 
-type Transform
+mutable struct Transform
     matrix::Array{Real, 1}
 end
 

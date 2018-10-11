@@ -64,10 +64,10 @@ FtpEbcdic)
     FtpInvalidFile      = 1003  # Invalid file to upload / download
 )
 
-type FtpListingResponse
-    ptr::Ptr{Void}
+mutable struct FtpListingResponse
+    ptr::Ptr{Nothing}
 
-    function FtpListingResponse(ptr::Ptr{Void})
+    function FtpListingResponse(ptr::Ptr{Nothing})
         self = new(ptr)
         finalizer(self, destroy)
         self
@@ -75,33 +75,33 @@ type FtpListingResponse
 end
 
 function destroy(response::FtpListingResponse)
-    ccall((:sfFtpListingResponse_destroy, libcsfml_network), Void, (Ptr{Void},), response.ptr)
+    ccall((:sfFtpListingResponse_destroy, libcsfml_network), Nothing, (Ptr{Nothing},), response.ptr)
 end
 
 function isok(response::FtpListingResponse)
-    ccall((:sfFtpListingResponse_isOk, libcsfml_network), Bool, (Ptr{Void},), response.ptr)
+    ccall((:sfFtpListingResponse_isOk, libcsfml_network), Bool, (Ptr{Nothing},), response.ptr)
 end
 
 function get_status(response::FtpListingResponse)
-    FtpStatus(ccall((:sfFtpListingResponse_getStatus, libcsfml_network), Int32, (Ptr{Void},), response.ptr))
+    FtpStatus(ccall((:sfFtpListingResponse_getStatus, libcsfml_network), Int32, (Ptr{Nothing},), response.ptr))
 end
 
 function get_message(response::FtpListingResponse)
-    bytestring(ccall((:sfFtpListingResponse_getMessage, libcsfml_network), Ptr{Cchar}, (Ptr{Void},), response.ptr))
+    bytestring(ccall((:sfFtpListingResponse_getMessage, libcsfml_network), Ptr{Cchar}, (Ptr{Nothing},), response.ptr))
 end
 
 function get_count(response::FtpListingResponse)
-    ccall((:sfFtpListingResponse_getCount, libcsfml_network), Csize_t, (Ptr{Void},), response.ptr)
+    ccall((:sfFtpListingResponse_getCount, libcsfml_network), Csize_t, (Ptr{Nothing},), response.ptr)
 end
 
 function get_name(response::FtpListingResponse, index::Integer)
-    bytestring(ccall((:sfFtpListingResponse_getName, libcsfml_network), Ptr{Cchar}, (Ptr{Void}, Csize_t,), response.ptr, index))
+    bytestring(ccall((:sfFtpListingResponse_getName, libcsfml_network), Ptr{Cchar}, (Ptr{Nothing}, Csize_t,), response.ptr, index))
 end
 
-type FtpDirectoryResponse
-    ptr::Ptr{Void}
+mutable struct FtpDirectoryResponse
+    ptr::Ptr{Nothing}
 
-    function FtpDirectoryResponse(ptr::Ptr{Void})
+    function FtpDirectoryResponse(ptr::Ptr{Nothing})
         self = new(ptr)
         finalizer(self, destroy)
         self
@@ -109,29 +109,29 @@ type FtpDirectoryResponse
 end
 
 function destroy(response::FtpDirectoryResponse)
-    ccall((:sfFtpDirectoryResponse_destroy, libcsfml_network), Void, (Ptr{Void},), response.ptr)
+    ccall((:sfFtpDirectoryResponse_destroy, libcsfml_network), Nothing, (Ptr{Nothing},), response.ptr)
 end
 
 function isok(response::FtpDirectoryResponse)
-    ccall((:sfFtpDirectoryResponse_isOk, libcsfml_network), Bool, (Ptr{Void},), response.ptr)
+    ccall((:sfFtpDirectoryResponse_isOk, libcsfml_network), Bool, (Ptr{Nothing},), response.ptr)
 end
 
 function get_status(response::FtpDirectoryResponse)
-    FtpStatus(ccall((:sfFtpDirectoryResponse_getStatus, libcsfml_network), Int32, (Ptr{Void},), response.ptr))
+    FtpStatus(ccall((:sfFtpDirectoryResponse_getStatus, libcsfml_network), Int32, (Ptr{Nothing},), response.ptr))
 end
 
 function get_message(response::FtpDirectoryResponse)
-    bytestring(ccall((:sfFtpDirectoryResponse_getMessage, libcsfml_network), Ptr{Cchar}, (Ptr{Void},), response.ptr))
+    bytestring(ccall((:sfFtpDirectoryResponse_getMessage, libcsfml_network), Ptr{Cchar}, (Ptr{Nothing},), response.ptr))
 end
 
 function get_directory(response::FtpDirectoryResponse)
-    bytestring(ccall((:sfFtpDirectoryResponse_getDirectory, libcsfml_network), Ptr{Cchar}, (Ptr{Void},), response.ptr))
+    bytestring(ccall((:sfFtpDirectoryResponse_getDirectory, libcsfml_network), Ptr{Cchar}, (Ptr{Nothing},), response.ptr))
 end
 
-type FtpResponse
-    ptr::Ptr{Void}
+mutable struct FtpResponse
+    ptr::Ptr{Nothing}
 
-    function FtpResponse(ptr::Ptr{Void})
+    function FtpResponse(ptr::Ptr{Nothing})
         self = new(ptr)
         finalizer(self, destroy)
         self
@@ -139,25 +139,25 @@ type FtpResponse
 end
 
 function destroy(response::FtpResponse)
-    ccall((:sfFtpResponse_destroy, libcsfml_network), Void, (Ptr{Void},), response.ptr)
+    ccall((:sfFtpResponse_destroy, libcsfml_network), Nothing, (Ptr{Nothing},), response.ptr)
 end
 
 function isok(response::FtpResponse)
-    ccall((:sfFtpResponse_isOk, libcsfml_network), Bool, (Ptr{Void},), response.ptr)
+    ccall((:sfFtpResponse_isOk, libcsfml_network), Bool, (Ptr{Nothing},), response.ptr)
 end
 
 function get_status(response::FtpResponse)
-    FtpStatus(ccall((:sfFtpResponse_getStatus, libcsfml_network), Int32, (Ptr{Void},), response.ptr))
+    FtpStatus(ccall((:sfFtpResponse_getStatus, libcsfml_network), Int32, (Ptr{Nothing},), response.ptr))
 end
 
 function get_message(response::FtpResponse)
-    bytestring(ccall((:sfFtpResponse_getMessage, libcsfml_network), Ptr{Cchar}, (Ptr{Void},), response.ptr))
+    bytestring(ccall((:sfFtpResponse_getMessage, libcsfml_network), Ptr{Cchar}, (Ptr{Nothing},), response.ptr))
 end
 
-type Ftp
-    ptr::Ptr{Void}
+mutable struct Ftp
+    ptr::Ptr{Nothing}
 
-    function Ftp(ptr::Ptr{Void})
+    function Ftp(ptr::Ptr{Nothing})
         self = new(ptr)
         finalizer(self, destroy)
         self
@@ -165,71 +165,71 @@ type Ftp
 end
 
 function Ftp()
-    Ftp(ccall((:sfFtp_create, libcsfml_network), Ptr{Void}, ()))
+    Ftp(ccall((:sfFtp_create, libcsfml_network), Ptr{Nothing}, ()))
 end
 
 function destroy(ftp::Ftp)
-    ccall((:sfFtp_destroy, libcsfml_network), Void, (Ptr{Void},), ftp.ptr)
+    ccall((:sfFtp_destroy, libcsfml_network), Nothing, (Ptr{Nothing},), ftp.ptr)
 end
 
 function connect(ftp::Ftp, server::IpAddress, port::Integer=21, timeout::Time=Time(0))
-    FtpResponse(ccall((:sfFtp_connect, libcsfml_network), Ptr{Void}, (Ptr{Void}, IpAddress, UInt16, Time), ftp.ptr, server, port, timeout))
+    FtpResponse(ccall((:sfFtp_connect, libcsfml_network), Ptr{Nothing}, (Ptr{Nothing}, IpAddress, UInt16, Time), ftp.ptr, server, port, timeout))
 end
 
 function login_anonymous(ftp::Ftp)
-    FtpResponse(ccall((:sfFtp_loginAnonymous, libcsfml_network), Ptr{Void}, (Ptr{Void},), ftp.ptr))
+    FtpResponse(ccall((:sfFtp_loginAnonymous, libcsfml_network), Ptr{Nothing}, (Ptr{Nothing},), ftp.ptr))
 end
 
 function login(ftp::Ftp, username::AbstractString, password::AbstractString)
-    FtpResponse(ccall((:sfFtp_login, libcsfml_network), Ptr{Void}, (Ptr{Void}, Ptr{Cchar}, Ptr{Cchar}), ftp.ptr, username, password))
+    FtpResponse(ccall((:sfFtp_login, libcsfml_network), Ptr{Nothing}, (Ptr{Nothing}, Ptr{Cchar}, Ptr{Cchar}), ftp.ptr, username, password))
 end
 
 function disconnect(ftp::Ftp)
-    FtpResponse(ccall((:sfFtp_disconnect, libcsfml_network), Ptr{Void}, (Ptr{Void},), ftp.ptr))
+    FtpResponse(ccall((:sfFtp_disconnect, libcsfml_network), Ptr{Nothing}, (Ptr{Nothing},), ftp.ptr))
 end
 
 function keep_alive(ftp::Ftp)
-    FtpResponse(ccall((:sfFtp_keepAlive, libcsfml_network), Ptr{Void}, (Ptr{Void},), ftp.ptr))
+    FtpResponse(ccall((:sfFtp_keepAlive, libcsfml_network), Ptr{Nothing}, (Ptr{Nothing},), ftp.ptr))
 end
 
 function get_working_directory(ftp::Ftp)
-    FtpDirectoryResponse(ccall((:sfFtp_getWorkingDirectory, libcsfml_network), Ptr{Void}, (Ptr{Void},), ftp.ptr))
+    FtpDirectoryResponse(ccall((:sfFtp_getWorkingDirectory, libcsfml_network), Ptr{Nothing}, (Ptr{Nothing},), ftp.ptr))
 end
 
 function get_directory_listing(ftp::Ftp, directory::AbstractString)
-    FtpListingResponse(ccall((:sfFtp_getDirectoryListing, libcsfml_network), Ptr{Void}, (Ptr{Void}, Ptr{Cchar}), ftp.ptr, directory))
+    FtpListingResponse(ccall((:sfFtp_getDirectoryListing, libcsfml_network), Ptr{Nothing}, (Ptr{Nothing}, Ptr{Cchar}), ftp.ptr, directory))
 end
 
 function change_directory(ftp::Ftp, dir::AbstractString)
-    FtpResponse(ccall((:sfFtp_changeDirectory, libcsfml_network), Ptr{Void}, (Ptr{Void}, Ptr{Cchar},), ftp.ptr, dir))
+    FtpResponse(ccall((:sfFtp_changeDirectory, libcsfml_network), Ptr{Nothing}, (Ptr{Nothing}, Ptr{Cchar},), ftp.ptr, dir))
 end
 
 # Go to the parent directory
 function parent_directory(ftp::Ftp)
-    FtpResponse(ccall((:sfFtp_parentDirectory, libcsfml_network), Ptr{Void}, (Ptr{Void},), ftp.ptr))
+    FtpResponse(ccall((:sfFtp_parentDirectory, libcsfml_network), Ptr{Nothing}, (Ptr{Nothing},), ftp.ptr))
 end
 
 function create_directory(ftp::Ftp, name::AbstractString)
-    FtpResponse(ccall((:sfFtp_createDirectory, libcsfml_network), Ptr{Void}, (Ptr{Void}, Ptr{Cchar},), ftp.ptr, name))
+    FtpResponse(ccall((:sfFtp_createDirectory, libcsfml_network), Ptr{Nothing}, (Ptr{Nothing}, Ptr{Cchar},), ftp.ptr, name))
 end
 
 function delete_directory(ftp::Ftp, name::AbstractString)
-    FtpResponse(ccall((:sfFtp_deleteDirectory, libcsfml_network), Ptr{Void}, (Ptr{Void}, Ptr{Cchar},), ftp.ptr, name))
+    FtpResponse(ccall((:sfFtp_deleteDirectory, libcsfml_network), Ptr{Nothing}, (Ptr{Nothing}, Ptr{Cchar},), ftp.ptr, name))
 end
 
 function rename_file(ftp::Ftp, file::AbstractString, newname::AbstractString)
-    FtpResponse(ccall((:sfFtp_renameFile, libcsfml_network), Ptr{Void}, (Ptr{Void}, Ptr{Cchar}, Ptr{Cchar}), ftp.ptr, file, newname))
+    FtpResponse(ccall((:sfFtp_renameFile, libcsfml_network), Ptr{Nothing}, (Ptr{Nothing}, Ptr{Cchar}, Ptr{Cchar}), ftp.ptr, file, newname))
 end
 
 function delete_file(ftp::Ftp, name::AbstractString)
-    FtpResponse(ccall((:sfFtp_deleteFile, libcsfml_network), Ptr{Void}, (Ptr{Void}, Ptr{Cchar},), ftp.ptr, name))
+    FtpResponse(ccall((:sfFtp_deleteFile, libcsfml_network), Ptr{Nothing}, (Ptr{Nothing}, Ptr{Cchar},), ftp.ptr, name))
 end
 
 function download(ftp::Ftp, distantfile::AbstractString, destpath::AbstractString, mode::FtpTransferMode)
-    FtpResponse(ccall((:sfFtp_download, libcsfml_network), Ptr{Void}, (Ptr{Void}, Ptr{Cchar}, Ptr{Cchar}, Int32), ftp.ptr, distantfile, destpath, Int32(mode)))
+    FtpResponse(ccall((:sfFtp_download, libcsfml_network), Ptr{Nothing}, (Ptr{Nothing}, Ptr{Cchar}, Ptr{Cchar}, Int32), ftp.ptr, distantfile, destpath, Int32(mode)))
 end
 
 function upload(ftp::Ftp, localfile::AbstractString, destpath::AbstractString, mode::FtpTransferMode)
-    FtpResponse(ccall((:sfFtp_upload, libcsfml_network), Ptr{Void}, (Ptr{Void}, Ptr{Cchar}, Ptr{Cchar}, Int32), ftp.ptr, localfile, destpath, Int32(mode)))
+    FtpResponse(ccall((:sfFtp_upload, libcsfml_network), Ptr{Nothing}, (Ptr{Nothing}, Ptr{Cchar}, Ptr{Cchar}, Int32), ftp.ptr, localfile, destpath, Int32(mode)))
 end
 
