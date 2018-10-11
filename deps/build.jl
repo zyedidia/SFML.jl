@@ -1,4 +1,4 @@
-@static if is_windows()
+@static if Sys.iswindows()
     using WinRPM
 end
 
@@ -117,7 +117,7 @@ end
     end
 end
 
-@static if is_windows()
+@static if Sys.iswindows()
     GCCPath = Pkg.dir("WinRPM","deps","usr","$(Sys.ARCH)-w64-mingw32","sys-root","mingw","bin","gcc.exe")
     if !isfile(GCCPath)
         println("Installing gcc...")

@@ -65,7 +65,7 @@ function __init__()
             global const libcsfml_graphics = "libcsfml-graphics"
         end
 
-        @compat @static if is_windows()
+        @compat @static if Sys.iswindows()
             global const libcsfml_system = "csfml-system-2"
             global const libcsfml_audio = "csfml-audio-2"
             global const libcsfml_network = "csfml-network-2"

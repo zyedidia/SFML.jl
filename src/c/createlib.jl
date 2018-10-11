@@ -11,7 +11,7 @@ deps = joinpath(dirname(@__FILE__),"..","..","deps")
     run(`rm event.o shader.o Network.o`)
 end
 
-@static if is_windows()
+@static if Sys.iswindows()
     if isdir(Pkg.dir("WinRPM"))
         RPMbindir = Pkg.dir("WinRPM","deps","usr","$(Sys.ARCH)-w64-mingw32","sys-root","mingw","bin")
         ENV["PATH"]=ENV["PATH"]*";"*RPMbindir
