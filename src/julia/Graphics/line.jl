@@ -1,4 +1,4 @@
-type Line
+mutable struct Line
     rect::RectangleShape
 end
 

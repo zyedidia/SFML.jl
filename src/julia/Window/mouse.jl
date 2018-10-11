@@ -11,10 +11,10 @@ function is_mouse_pressed(button::Int)
 end
 
 function get_mousepos(window::RenderWindow)
-    return ccall((:sfMouse_getPosition, libcsfml_window), Vector2i, (Ptr{Void},), window.ptr)
+    return ccall((:sfMouse_getPosition, libcsfml_window), Vector2i, (Ptr{Nothing},), window.ptr)
 end
 
 function set_mousepos(pos::Vector2, window::RenderWindow)
     pos = to_vec2i(pos)
-    ccall((:sfMouse_setPosition, libcsfml_window), Void, (Vector2i, Ptr{Void},), pos, window.ptr)
+    ccall((:sfMouse_setPosition, libcsfml_window), Nothing, (Vector2i, Ptr{Nothing},), pos, window.ptr)
 end

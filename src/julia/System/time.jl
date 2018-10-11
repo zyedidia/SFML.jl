@@ -1,4 +1,4 @@
-immutable Time
+struct Time
     microseconds::Int64
 end
 

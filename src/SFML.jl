@@ -8,6 +8,8 @@ import Base: display, isopen, close, reset, copy, launch, start, listen,
        accept, connect, write, send, bind, download, contains,
        +, -, *, /
 
+using Libdl
+
 function check_deps(ldd_result)
     i = 0
     for line in split(ldd_result, "\n")
@@ -26,14 +28,14 @@ function __init__()
     deps = joinpath(dirname(@__FILE__),"..","deps")
     push!(Libdl.DL_LOAD_PATH, deps)
     try
-        @compat @static if is_unix()
+        @compat @static if Sys.isunix()
             cd(deps)
-            @compat @static if is_apple()
+            @compat @static if Sys.isapple()
                 Libdl.dlopen("freetype.framework/freetype")
                 Libdl.dlopen("sndfile.framework/sndfile")
             end
 
-            @compat @static if is_linux()
+            @compat @static if Sys.islinux()
                 system_deps = @compat readstring(`ldd libsfml-system.so`)
                 check_deps(system_deps)
                 network_deps = @compat readstring(`ldd libsfml-network.so`)
@@ -63,7 +65,7 @@ function __init__()
             global const libcsfml_graphics = "libcsfml-graphics"
         end
 
-        @compat @static if is_windows()
+        @compat @static if Sys.iswindows()
             global const libcsfml_system = "csfml-system-2"
             global const libcsfml_audio = "csfml-audio-2"
             global const libcsfml_network = "csfml-network-2"
@@ -71,7 +73,7 @@ function __init__()
             global const libcsfml_graphics = "csfml-graphics-2"
         end
 
-        @compat @static if is_unix()
+        @compat @static if Sys.isunix()
             global const libjuliasfml_ptr = Libdl.dlopen("$deps/libjuliasfml")
         end
         global const libjuliasfml = "libjuliasfml"

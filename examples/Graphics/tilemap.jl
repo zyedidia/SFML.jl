@@ -3,7 +3,7 @@ using SFML
 """
 Interface to image file containing tiles.
 """
-type TileSet
+mutable struct TileSet
     texture::Texture
     size::Tuple{Int, Int}  # number of tiles in each direction
     tilesize::Vector2i # in pixel
@@ -31,7 +31,7 @@ function TileSet(filename::String, size_, tilesize)
     TileSet(Texture(filename), size_, tilesize)
 end
 
-immutable Tile
+struct Tile
     corners::NTuple{4, Vector2f} # pixel coords of corners of tile in TileSet
 end
 
@@ -49,7 +49,7 @@ function Base.convert(::Type{VertexArray}, t::Tile)
     va
 end
 
-type TileMap
+mutable struct TileMap
     tilemat::Matrix{Tile}
     globalbounds::FloatRect
     ts::TileSet
